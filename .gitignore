@@ -1,0 +1,8 @@
+# Don't track content of these folders
+CURE-TSR/
+env/
+
+# Don't track content of these files
+*.mat
+*.png
+*.pyc
