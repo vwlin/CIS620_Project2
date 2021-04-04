@@ -1,5 +1,5 @@
 # Don't track content of these folders
-CURE-TSR/
+gradual_domain_adaptation/CURE-TSR/
 env/
 
 # Don't track content of these files
