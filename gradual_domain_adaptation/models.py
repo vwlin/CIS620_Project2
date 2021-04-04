@@ -5,6 +5,37 @@ import tensorflow.keras as keras
 from tensorflow.keras import regularizers
 from tensorflow.keras import losses
 
+# Added models for project 2
+def resnet50(num_labels, input_shape):
+    resnet50 = keras.applications.ResNet50(
+        include_top=True,
+        weights=None,
+        input_shape=input_shape,
+        pooling=None,
+        classes=num_labels
+    )
+    return resnet50
+)
+
+# https://medium.com/@mgazar/lenet-5-in-9-lines-of-code-using-keras-ac99294c8086
+def lenet5(num_labels, input_shape)
+    lenet5 = keras.Sequential()
+
+    lenet5.add(layers.Conv2D(filters=6, kernel_size=(3, 3), activation='relu', input_shape=input_shape))
+    lenet5.add(layers.AveragePooling2D())
+
+    lenet5.add(layers.Conv2D(filters=16, kernel_size=(3, 3), activation='relu'))
+    lenet5.add(layers.AveragePooling2D())
+
+    lenet5.add(layers.Flatten())
+
+    lenet5.add(layers.Dense(units=120, activation='relu'))
+
+    lenet5.add(layers.Dense(units=84, activation='relu'))
+
+    lenet5.add(layers.Dense(units=num_labels, activation = 'softmax'))
+
+    return lenet5
 
 # Models.
 
