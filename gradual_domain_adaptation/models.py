@@ -2,38 +2,37 @@
 import numpy as np
 import tensorflow as tf
 import tensorflow.keras as keras
-from tensorflow.keras import regularizers
+from tensorflow.keras import regularizers, layers
 from tensorflow.keras import losses
 
 # Added models for project 2
 def resnet50(num_labels, input_shape):
     resnet50 = keras.applications.ResNet50(
         include_top=True,
-        weights=None,
+        weights='imagenet',
         input_shape=input_shape,
         pooling=None,
         classes=num_labels
     )
     return resnet50
-)
 
 # https://medium.com/@mgazar/lenet-5-in-9-lines-of-code-using-keras-ac99294c8086
-def lenet5(num_labels, input_shape)
+def lenet5(num_labels, input_shape):
     lenet5 = keras.Sequential()
 
-    lenet5.add(layers.Conv2D(filters=6, kernel_size=(3, 3), activation='relu', input_shape=input_shape))
-    lenet5.add(layers.AveragePooling2D())
+    lenet5.add(layers.Conv2D(filters=6, kernel_size=(3, 3), activation='relu', input_shape=input_shape)) # (28 - 3)/1 + 1 = 26 # input_shape should be channel last, e.g. (B, 28, 28, 3)
+    lenet5.add(layers.AveragePooling2D()) # (26 - 2)/2 + 1 = 13
 
-    lenet5.add(layers.Conv2D(filters=16, kernel_size=(3, 3), activation='relu'))
-    lenet5.add(layers.AveragePooling2D())
+    lenet5.add(layers.Conv2D(filters=16, kernel_size=(2, 2), activation='relu')) # (13 - 2)/1 + 1 = 12
+    lenet5.add(layers.AveragePooling2D()) # (12 - 2)/2 + 1 = 6 ######### !
 
     lenet5.add(layers.Flatten())
 
-    lenet5.add(layers.Dense(units=120, activation='relu'))
+    lenet5.add(layers.Dense(units=16*6*6, activation='relu')) # 16*6*6
 
     lenet5.add(layers.Dense(units=84, activation='relu'))
 
-    lenet5.add(layers.Dense(units=num_labels, activation = 'softmax'))
+    lenet5.add(layers.Dense(units=num_labels, activation = 'softmax')) # num_labels = 14 for CURE-TSR
 
     return lenet5
 

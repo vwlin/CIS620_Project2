@@ -8,11 +8,8 @@ import scipy.io
 from scipy import ndimage
 from scipy.stats import ortho_group
 import sklearn.preprocessing
-import pandas
 import pickle
-import utils as utils
-import models as models
-from PIL import Image,ImageFilter
+import utils
 
 Dataset = collections.namedtuple('Dataset',
     'get_data n_src_train n_src_valid n_target_unsup n_target_val n_target_test target_end '
@@ -25,8 +22,8 @@ SplitData = collections.namedtuple('SplitData',
 
 image_options = {
     'batch_size': 100,
-    'class_mode': 'categorical',
-    'color_mode': 'rgb',
+    'class_mode': 'binary',
+    'color_mode': 'grayscale',
 }
 
 
@@ -439,30 +436,9 @@ def load_portraits_data(load_file='dataset_32x32.mat'):
     return data['Xs'], data['Ys'][0]
 
 
-def load_covtype_data(load_file, normalize=True):
-    df = pandas.read_csv(load_file)
-    data = df.to_numpy()
-    xs = data[:, :54]
-    if normalize:
-        xs = (xs - np.mean(xs, axis=0)) / np.std(xs, axis=0)
-    ys = data[:, 54] - 1
-
-    # Keep the first 2 types of crops, these comprise majority of the dataset.
-    keep = (ys <= 1)
-    print(len(xs))
-    xs = xs[keep]
-    ys = ys[keep]
-    print(len(xs))
-
-    # Sort by (horizontal) distance to water body.
-    dist_to_water = xs[:, 3]
-    indices = np.argsort(dist_to_water, axis=0)
-    xs = xs[indices]
-    ys = ys[indices]
-    return xs, ys
-
-
-def make_data(n_src_tr, n_src_val, n_inter, n_target_unsup, n_trg_val, n_trg_tst, xs, ys):
+def make_portraits_data(n_src_tr, n_src_val, n_inter, n_target_unsup, n_trg_val, n_trg_tst,
+                        load_file='dataset_32x32.mat'):
+    xs, ys = load_portraits_data(load_file)
     src_end = n_src_tr + n_src_val
     inter_end = src_end + n_inter
     trg_end = inter_end + n_trg_val + n_trg_tst
@@ -476,132 +452,6 @@ def make_data(n_src_tr, n_src_val, n_inter, n_target_unsup, n_trg_val, n_trg_tst
     dir_inter_x, dir_inter_y = inter_x[-n_target_unsup:], inter_y[-n_target_unsup:]
     return (src_tr_x, src_tr_y, src_val_x, src_val_y, inter_x, inter_y,
             dir_inter_x, dir_inter_y, trg_val_x, trg_val_y, trg_test_x, trg_test_y)
-
-def make_portraits_data(n_src_tr, n_src_val, n_inter, n_target_unsup, n_trg_val, n_trg_tst,
-                        load_file='dataset_32x32.mat'):
-    xs, ys = load_portraits_data(load_file)
-    return make_data(n_src_tr, n_src_val, n_inter, n_target_unsup, n_trg_val, n_trg_tst, xs, ys)
-
-#Gaussian blur to images
-def make_portraits_data_larger_distance(n_src_tr, n_src_val, n_inter, n_target_unsup, n_trg_val, n_trg_tst,
-                        load_file='dataset_32x32.mat'):
-    xs, ys = load_portraits_data(load_file)
-    src_end = n_src_tr + n_src_val
-    inter_end = src_end + n_inter
-    trg_end = inter_end + n_trg_val + n_trg_tst
-    src_x, src_y = shuffle(xs[:src_end], ys[:src_end])
-    trg_x, trg_y = shuffle(xs[inter_end:trg_end], ys[inter_end:trg_end])
-    [src_tr_x, src_val_x] = split_sizes(src_x, [n_src_tr])
-    [src_tr_y, src_val_y] = split_sizes(src_y, [n_src_tr])
-    [trg_val_x, trg_test_x] = split_sizes(trg_x, [n_trg_val])
-    [trg_val_y, trg_test_y] = split_sizes(trg_y, [n_trg_val])
-    inter_x = xs[src_end:src_end+2000]
-    inter_y = ys[src_end:src_end+2000]
-    idx_x = src_end+4000
-    ind_y = src_end+4000
-    
-    for j in range(3):
-        inter_x, inter_y = np.concatenate((inter_x,xs[idx_x:idx_x+2000]),axis=0), np.concatenate((inter_y,ys[idx_x:idx_x+2000]),axis=0)
-        idx_x = idx_x + 4000
-    dir_inter_x, dir_inter_y = inter_x[-n_target_unsup:], inter_y[-n_target_unsup:]
-    print("inter x", inter_x.shape[0])
-    return (src_tr_x, src_tr_y, src_val_x, src_val_y, inter_x, inter_y,
-            dir_inter_x, dir_inter_y, trg_val_x, trg_val_y, trg_test_x, trg_test_y)
-
-#EDIT
-def make_reverse_portrait_data():
-    xs, ys = load_portraits_data(load_file)
-    temp_tr_x, temp_val_x = src_tr_x, src_val_x
-    temp_tr_y, temp_val_y = src_tr_y, src_val_y
-    src_tr_x, src_val_x = trg_test_x, trg_val_x
-    src_tr_y, src_val_y = trg_test_y, trg_val_y
-    trg_test_x, trg_val_x = temp_tr_x, temp_val_x
-    trg_test_y, trg_val_y = temp_tr_y, temp_val_y
-    inter_x, inter_y = np.flipud(inter_x), np.flipud(inter_y)
-    dir_inter_x, dir_inter_y = np.flipud(dir_inter_x),np.flipud(dir_inter_y)
-    return (src_tr_x, src_tr_y, src_val_x, src_val_y, inter_x, inter_y,
-            dir_inter_x, dir_inter_y, trg_val_x, trg_val_y, trg_test_x, trg_test_y)
-
-def make_portraits_data_blur(n_src_tr, n_src_val, n_inter, n_target_unsup, n_trg_val, n_trg_tst,
-                        load_file='dataset_32x32.mat'):
-    xs, ys = load_portraits_data(load_file)
-    src_end = n_src_tr + n_src_val
-    inter_end = src_end + n_inter
-    trg_end = inter_end + n_trg_val + n_trg_tst
-    temp_x, temp_y = shuffle(xs[:trg_end], ys[:trg_end])
-    src_x, src_y = temp_x[:src_end], temp_y[:src_end]
-    [src_tr_x, src_val_x] = split_sizes(src_x, [n_src_tr])
-    [src_tr_y, src_val_y] = split_sizes(src_y, [n_src_tr])
-    inter_x, inter_y = temp_x[src_end:inter_end], temp_y[src_end:inter_end]
-    trg_x, trg_y = temp_x[inter_end:trg_end], temp_y[inter_end:trg_end]
-    rad = 0.1
-    for j in range(7):
-        for i in range(2000):
-            a = (inter_x[2000*j+i]*255).astype(np.uint8)
-            temp_img = Image.fromarray(a[:,:,0]).filter(ImageFilter.GaussianBlur(radius = rad))
-            inter_x[2000*j+i] = np.asarray(temp_img).reshape((32,32,1))
-        rad+=0.1
-    print("rad: ",rad)
-
-    for i in range(len(trg_x)):
-        a = (trg_x[i]*255).astype(np.uint8)
-        temp_img = Image.fromarray(a[:,:,0]).filter(ImageFilter.GaussianBlur(radius = rad-0.25))
-        trg_x[i] = np.asarray(temp_img).reshape((32,32,1))
-
-    [trg_val_x, trg_test_x] = split_sizes(trg_x, [n_trg_val])
-    [trg_val_y, trg_test_y] = split_sizes(trg_y, [n_trg_val])
-    dir_inter_x, dir_inter_y = inter_x[-n_target_unsup:], inter_y[-n_target_unsup:]
-    return (src_tr_x, src_tr_y, src_val_x, src_val_y, inter_x, inter_y,
-            dir_inter_x, dir_inter_y, trg_val_x, trg_val_y, trg_test_x, trg_test_y)
-
-def make_blur_mnist_dataset(n_src_tr, n_src_val, n_inter, n_target_unsup, n_trg_val, n_trg_tst):
-    (train_x, train_y), (test_x, test_y) = get_preprocessed_mnist()
-    src_end = n_src_tr + n_src_val
-    inter_end = src_end + n_inter
-    trg_end = inter_end + n_trg_val + n_trg_tst
-    temp_x, temp_y = shuffle(train_x[:trg_end], train_y[:trg_end])
-    src_x, src_y = temp_x[:src_end], temp_y[:src_end]
-    [src_tr_x, src_val_x] = split_sizes(src_x, [n_src_tr])
-    [src_tr_y, src_val_y] = split_sizes(src_y, [n_src_tr])
-    inter_x, inter_y = temp_x[src_end:inter_end], temp_y[src_end:inter_end]
-    trg_x, trg_y = temp_x[inter_end:trg_end], temp_y[inter_end:trg_end]
-    rad = 0.1
-    for j in range(7):
-        for i in range(2000):
-            a = (inter_x[2000*j+i]*255).astype(np.uint8)
-            temp_img = Image.fromarray(a[:,:,0]).filter(ImageFilter.GaussianBlur(radius = rad))
-            temp_img.save(str(j)+".jpg")
-            inter_x[2000*j+i] = np.asarray(temp_img).reshape((28,28,1))
-        rad+=0.1
-    print("rad: ",rad)
-
-    for i in range(len(trg_x)):
-        a = (trg_x[i]*255).astype(np.uint8)
-        temp_img = Image.fromarray(a[:,:,0]).filter(ImageFilter.GaussianBlur(radius = rad-0.1))
-        trg_x[i] = np.asarray(temp_img).reshape((28,28,1))
-
-    [trg_val_x, trg_test_x] = split_sizes(trg_x, [n_trg_val])
-    [trg_val_y, trg_test_y] = split_sizes(trg_y, [n_trg_val])
-    dir_inter_x, dir_inter_y = inter_x[-n_target_unsup:], inter_y[-n_target_unsup:]
-
-    return (src_tr_x, src_tr_y, src_val_x, src_val_y, inter_x, inter_y,
-            dir_inter_x, dir_inter_y, trg_val_x, trg_val_y, trg_test_x, trg_test_y)
-
-
-def make_cov_data(n_src_tr, n_src_val, n_inter, n_target_unsup, n_trg_val, n_trg_tst,
-                  load_file="data/covtype.data.csv", normalize=True):
-    xs, ys = load_covtype_data(load_file)
-    return make_data(n_src_tr, n_src_val, n_inter, n_target_unsup, n_trg_val, n_trg_tst, xs, ys)
-
-
-def cov_data_func():
-    return make_cov_data(40000, 10000, 400000, 50000, 25000, 20000)
-
-def cov_data_small_func():
-    return make_cov_data(10000, 40000, 400000, 50000, 25000, 20000)
-
-def cov_data_func_no_normalize():
-    return make_cov_data(40000, 10000, 400000, 50000, 25000, 20000, normalize=False)
 
 
 def rotated_mnist_60_data_func():
@@ -621,14 +471,6 @@ def rotated_mnist_60_dialing_ratios_data_func():
 def portraits_data_func():
     return make_portraits_data(1000, 1000, 14000, 2000, 1000, 1000)
 
-def portraits_data_func_blur():
-    return make_portraits_data_blur(1000, 1000, 14000, 2000, 1000, 1000)
-
-def portraits_data_func_larger():
-    return make_portraits_data_larger_distance(1000, 1000, 14000, 2000, 1000, 1000)
-
-def mnist_data_func_blur():
-    return make_blur_mnist_dataset(1000, 1000, 14000, 2000, 1000, 1000)
 
 def portraits_data_func_more():
     return make_portraits_data(1000, 1000, 20000, 2000, 1000, 1000)
@@ -644,59 +486,5 @@ def gaussian_data_func(d):
         source_alphas=[0.0, 0.0], inter_alphas=[0.0, 1.0], target_alphas=[1.0, 1.0],
         n_src_tr=500, n_src_val=1000, n_inter=5000, n_trg_val=1000, n_trg_tst=1000)
 
-def make_cure_data(n_src_tr, n_src_val, n_target_unsup, n_trg_val, n_trg_test, natural_type="Snow"):
-    Xs = []
-    Ys = []
-    Xs_src =[]
-    Ys_src = []
-    datagen = ImageDataGenerator(rescale=1./255)
-    data_generator = datagen.flow_from_directory(
-        "./CURE_TSR/Real_Train/ChallengeFree/", shuffle=False, target_size=(28,28), **image_options)
-    while True:
-        next_x, next_y = data_generator.next()
-        Xs_src.append(next_x)
-        Ys_src.append(next_y)
-        if data_generator.batch_index == 0:
-            break
-    
-    for i in range(5):
-        data_generator = datagen.flow_from_directory(
-        "./CURE_TSR/Real_Train/"+natural_type+"-"+str(i+1), shuffle=False, target_size=(28,28), **image_options)
-        while True:
-            next_x, next_y = data_generator.next()
-            Xs.append(next_x)
-            Ys.append(next_y)
-            if data_generator.batch_index == 0:
-                break
 
-    Xs = np.concatenate(Xs)
-    Ys = np.concatenate(Ys) 
-    label_Ys = np.where(Ys==1)[1]
-    label_Ys = np.asarray(label_Ys)
-    Xs_src = np.concatenate(Xs_src)
-    Ys_src = np.concatenate(Ys_src)
-    label_Ys_src = np.where(Ys_src==1)[1]
-    label_Ys_src=np.asarray(label_Ys_src)
-    xs = Xs
-    ys = label_Ys
-    xs_src = Xs_src
-    ys_src = label_Ys_src
-    print(xs_src.shape)
 
-    #7292*4
-    src_end = n_src_tr + n_src_val
-    inter_end = 7292*4
-    src_x, src_y = shuffle(xs_src,ys_src)
-    trg_x, trg_y = shuffle(xs[inter_end:], ys[inter_end:])
-    [src_tr_x, src_val_x] = split_sizes(src_x, [n_src_tr])
-    [src_tr_y, src_val_y] = split_sizes(src_y, [n_src_tr])
-    [trg_val_x, trg_test_x] = split_sizes(trg_x, [n_trg_val])
-    [trg_val_y, trg_test_y] = split_sizes(trg_y, [n_trg_val])
-    inter_x, inter_y = xs[0:inter_end], ys[0:inter_end]
-    dir_inter_x, dir_inter_y = inter_x[-n_target_unsup:], inter_y[-n_target_unsup:]
-    return (src_tr_x, src_tr_y, src_val_x, src_val_y, inter_x, inter_y, dir_inter_x, dir_inter_y, trg_val_x, trg_val_y, trg_test_x, trg_test_y)
-
-def cure_data_func():
-    n_big = int(0.8*7292)
-    n_small = 7292 - n_big
-    return make_cure_data(n_big, n_small, 7292, n_big, n_small)
