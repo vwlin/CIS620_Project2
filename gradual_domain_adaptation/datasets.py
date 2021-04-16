@@ -644,7 +644,7 @@ def gaussian_data_func(d):
         source_alphas=[0.0, 0.0], inter_alphas=[0.0, 1.0], target_alphas=[1.0, 1.0],
         n_src_tr=500, n_src_val=1000, n_inter=5000, n_trg_val=1000, n_trg_tst=1000)
 
-def make_cure_data(n_src_tr, n_src_val, n_target_unsup, n_trg_val, n_trg_test, natural_type="Snow"):
+def make_cure_data(n_src_tr, n_src_val, n_target_unsup, n_trg_val, n_trg_test, natural_type="LensBlur"):
     Xs = []
     Ys = []
     Xs_src =[]

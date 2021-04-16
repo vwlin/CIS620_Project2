@@ -55,6 +55,12 @@ def run_experiment(
         source_model.fit(src_tr_x, src_tr_y, epochs=epochs, verbose=False)
         _, src_acc = source_model.evaluate(src_val_x, src_val_y)
         _, target_acc = source_model.evaluate(trg_eval_x, trg_eval_y)
+        # Train oracle target accuracy.
+        oracle_model = new_model()
+        oracle_model.fit(inter_x[-interval:], inter_y[-interval:], epochs=epochs,verbose=False)
+        _, oracle_acc = oracle_model.evaluate(trg_eval_x, trg_eval_y, verbose=False)
+        print("\n\n Oracle model:")
+        print("accuracy on target: ", oracle_acc)
         # Gradual self-training.
         print("\n\n Gradual self-training:")
         teacher = new_model()

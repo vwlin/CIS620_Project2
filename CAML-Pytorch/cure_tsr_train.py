@@ -1,28 +1,23 @@
 """
-    [1] https://github.com/learnables/learn2learn/blob/master/examples/vision/maml_miniimagenet.py
+    [1] https://github.com/learnables/learn2learn/blob/master/examples/vision/maml_omniglot.py
 """
 
 """
 Demonstrates how to:
     * use the MAML wrapper for fast-adaptation,
-    * use the benchmark interface to load mini-ImageNet, and
+    * use the benchmark interface to load CURE TSR, and
     * sample tasks and split them in adaptation and evaluation sets.
-To contrast the use of the benchmark interface with directly instantiating mini-ImageNet datasets and tasks, compare with `protonet_miniimagenet.py`.
 """
 
 import random
 import numpy as np
-
 import torch
+import learn2learn as l2l
 from torch import nn, optim
 
-import learn2learn as l2l
-from learn2learn.data.transforms import (NWays,
-                                         KShots,
-                                         LoadData,
-                                         RemapLabels,
-                                         ConsecutiveLabels)
-
+# my custom imports
+from CURE_TSR_tasksets import get_cure_tsr_tasksets
+from models import LeNet5
 
 def accuracy(predictions, targets):
     predictions = predictions.argmax(dim=1).view(targets.shape)
@@ -33,7 +28,7 @@ def fast_adapt(batch, learner, loss, adaptation_steps, shots, ways, device):
     data, labels = batch
     data, labels = data.to(device), labels.to(device)
 
-    # Separate data into adaptation/evalutation sets
+    # Separate data into adaptation/evalutation (a.k.a., support / query) sets
     adaptation_indices = np.zeros(data.size(0), dtype=bool)
     adaptation_indices[np.arange(shots*ways) * 2] = True
     evaluation_indices = torch.from_numpy(~adaptation_indices)
@@ -43,24 +38,24 @@ def fast_adapt(batch, learner, loss, adaptation_steps, shots, ways, device):
 
     # Adapt the model
     for step in range(adaptation_steps):
-        adaptation_error = loss(learner(adaptation_data), adaptation_labels)
-        learner.adapt(adaptation_error)
+        train_error = loss(learner(adaptation_data), adaptation_labels)
+        learner.adapt(train_error)
 
     # Evaluate the adapted model
     predictions = learner(evaluation_data)
-    evaluation_error = loss(predictions, evaluation_labels)
-    evaluation_accuracy = accuracy(predictions, evaluation_labels)
-    return evaluation_error, evaluation_accuracy
+    valid_error = loss(predictions, evaluation_labels)
+    valid_accuracy = accuracy(predictions, evaluation_labels)
+    return valid_error, valid_accuracy
 
 
 def main(
         ways=5,
-        shots=5,
+        shots=1,
         meta_lr=0.003,
         fast_lr=0.5,
         meta_batch_size=32,
         adaptation_steps=1,
-        num_iterations=60000,
+        num_iterations=51, # originally, 60000
         cuda=True,
         seed=42,
 ):
@@ -68,26 +63,25 @@ def main(
     np.random.seed(seed)
     torch.manual_seed(seed)
     device = torch.device('cpu')
-    if cuda and torch.cuda.device_count():
+    if cuda:
         torch.cuda.manual_seed(seed)
         device = torch.device('cuda')
 
-    # Create Tasksets using the benchmark interface
-    tasksets = l2l.vision.benchmarks.get_tasksets('mini-imagenet',
+    # Load train/validation/test tasksets using the benchmark interface
+    tasksets = get_cure_tsr_tasksets(train_ways=ways,
                                                   train_samples=2*shots,
-                                                  train_ways=ways,
-                                                  test_samples=2*shots,
                                                   test_ways=ways,
-                                                  root='~/data',
+                                                  test_samples=2*shots,
+                                                  num_tasks=10000, # originally, 20000
     )
 
     # Create model
-    model = l2l.vision.models.MiniImagenetCNN(ways)
+    model = LeNet5(num_labels = 14)
     model.to(device)
     maml = l2l.algorithms.MAML(model, lr=fast_lr, first_order=False)
     opt = optim.Adam(maml.parameters(), meta_lr)
     loss = nn.CrossEntropyLoss(reduction='mean')
-
+    check_int = 1
     for iteration in range(num_iterations):
         opt.zero_grad()
         meta_train_error = 0.0
@@ -98,6 +92,8 @@ def main(
             # Compute meta-training loss
             learner = maml.clone()
             batch = tasksets.train.sample()
+            if check_int:
+                print("==> Training: batch shape X={}, Y={} and dataset length {}".format(batch[0].shape, batch[1].shape, len(tasksets.train)))
             evaluation_error, evaluation_accuracy = fast_adapt(batch,
                                                                learner,
                                                                loss,
@@ -112,6 +108,9 @@ def main(
             # Compute meta-validation loss
             learner = maml.clone()
             batch = tasksets.validation.sample()
+            if check_int:
+                print("==> Validation: batch shape X={}, Y={} and dataset length {}".format(batch[0].shape, batch[1].shape, len(tasksets.validation)))
+                check_int = 0
             evaluation_error, evaluation_accuracy = fast_adapt(batch,
                                                                learner,
                                                                loss,
