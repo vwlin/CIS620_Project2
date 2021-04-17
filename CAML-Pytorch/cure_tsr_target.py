@@ -71,7 +71,7 @@ def fast_adapt_generate_label(batch, learner, adaptation_data, evaluation_data, 
     predictions = learner(evaluation_data)
     evaluation_pseudo_labels = predictions.argmax(dim=1).view(evaluation_labels.shape)
     #print("evaulation labels",evaluation_pseudo_labels)
-    return adaptation_pseudo_labels, evaluation_pseudo_label
+    return adaptation_pseudo_labels, evaluation_pseudo_labels
 
 def fast_adapt_with_pseudo_label(batch, learner, loss, adaptation_steps, shots, ways, device,adaptation_data, evaluation_data,adaptation_labels, evaluation_labels):
     adaptation_data, adaptation_labels = adaptation_data.to(device), adaptation_labels.to(device)
@@ -178,8 +178,8 @@ def main(
         opt.step()
 
     # get pseudo-labels for level 4 and meta-train level 0 model on level 4 with pseudo-labels
-    print('meta-training level 0 model on level 4 data and pseudolabels')
-    inter_dir = './CURE_TSR_OG/Real_Train/Snow-4/'
+    print('\n\nmeta-training level 0 model on level 4 data and pseudolabels')
+    inter_dir = './CURE_TSR_Yahan_Shortcut/Real_Train/Snow-4/'#'./CURE_TSR_OG/Real_Train/Snow-4/'
     lvl4_taskset = get_cure_tsr_inter_tasksets( inter_dir = inter_dir,
                                                   train_ways=ways,
                                                   train_samples=2*shots,
@@ -243,7 +243,7 @@ def main(
         opt.step()
     
     # meta-test on level 5 (target domain)
-    print("meta-testing on level 5")
+    print("\n\nmeta-testing on level 5\n\n")
     meta_test_error = 0.0
     meta_test_accuracy = 0.0
     for task in range(meta_batch_size):
