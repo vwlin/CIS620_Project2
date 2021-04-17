@@ -1,8 +1,13 @@
 # Don't track content of these folders
-gradual_domain_adaptation/CURE-TSR/
+gradual_domain_adaptation/CURE_TSR/
+CAML-Pytorch/CURE_TSR/
+*/CURE_TSR/
+*/CURE-TSR/
+*/CURE_TSR*/
 env/
 
 # Don't track content of these files
 *.mat
 *.png
 *.pyc
+*.dat
