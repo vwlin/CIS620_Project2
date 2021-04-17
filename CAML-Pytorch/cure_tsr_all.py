@@ -217,7 +217,7 @@ def main(
 
             # Compute meta-validation loss
             learner = maml.clone()
-            batch = lvl4_taskset.validation.sample()
+            batch = multilevel_taskset.validation.sample()
             if check_int:
                 print("==> Intermediate Validation: batch shape X={}, Y={} and dataset length {}".format(batch[0].shape, batch[1].shape, len(tasksets.validation)))
                 check_int = 0

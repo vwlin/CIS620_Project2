@@ -30,7 +30,7 @@ def cure_tsr_multilevel_intermediate_tasksets(
     #curetsr_lvl0 = utils.CURETSRDataset(lvl0_train_dir, data_transforms)
     #curetsr_lvl5 = utils.CURETSRDataset(lvl5_test_dir, data_transforms)
 
-    levels = []*len(inter_dir_list)
+    levels = [None]*len(inter_dir_list)
     for i in range(len(levels)):
         train_dir = inter_dir_list[i]
         curetsr_data = datasets.ImageFolder(train_dir, transform=data_transforms)
