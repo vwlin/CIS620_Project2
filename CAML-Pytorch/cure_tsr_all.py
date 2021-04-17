@@ -124,58 +124,58 @@ def main(
     check_int = 1
 
     # meta-train on level 0 (source domain)
-    print("meta-training on level 0\n")
-    for iteration in range(num_iterations):
-        opt.zero_grad()
-        meta_train_error = 0.0
-        meta_train_accuracy = 0.0
-        meta_valid_error = 0.0
-        meta_valid_accuracy = 0.0
-        for task in range(meta_batch_size):
-            # Compute meta-training loss
-            learner = maml.clone()
-            batch = tasksets.train.sample()
-            if check_int:
-                print("==> Training: batch shape X={}, Y={} and dataset length {}".format(batch[0].shape, batch[1].shape, len(tasksets.train)))
-            evaluation_error, evaluation_accuracy = fast_adapt(batch,
-                                                               learner,
-                                                               loss,
-                                                               adaptation_steps,
-                                                               shots,
-                                                               ways,
-                                                               device)
-            evaluation_error.backward()
-            meta_train_error += evaluation_error.item()
-            meta_train_accuracy += evaluation_accuracy.item()
+    # print("meta-training on level 0\n")
+    # for iteration in range(num_iterations):
+    #     opt.zero_grad()
+    #     meta_train_error = 0.0
+    #     meta_train_accuracy = 0.0
+    #     meta_valid_error = 0.0
+    #     meta_valid_accuracy = 0.0
+    #     for task in range(meta_batch_size):
+    #         # Compute meta-training loss
+    #         learner = maml.clone()
+    #         batch = tasksets.train.sample()
+    #         if check_int:
+    #             print("==> Training: batch shape X={}, Y={} and dataset length {}".format(batch[0].shape, batch[1].shape, len(tasksets.train)))
+    #         evaluation_error, evaluation_accuracy = fast_adapt(batch,
+    #                                                            learner,
+    #                                                            loss,
+    #                                                            adaptation_steps,
+    #                                                            shots,
+    #                                                            ways,
+    #                                                            device)
+    #         evaluation_error.backward()
+    #         meta_train_error += evaluation_error.item()
+    #         meta_train_accuracy += evaluation_accuracy.item()
 
-            # Compute meta-validation loss
-            learner = maml.clone()
-            batch = tasksets.validation.sample()
-            if check_int:
-                print("==> Validation: batch shape X={}, Y={} and dataset length {}".format(batch[0].shape, batch[1].shape, len(tasksets.validation)))
-                check_int = 0
-            evaluation_error, evaluation_accuracy = fast_adapt(batch,
-                                                               learner,
-                                                               loss,
-                                                               adaptation_steps,
-                                                               shots,
-                                                               ways,
-                                                               device)
-            meta_valid_error += evaluation_error.item()
-            meta_valid_accuracy += evaluation_accuracy.item()
+    #         # Compute meta-validation loss
+    #         learner = maml.clone()
+    #         batch = tasksets.validation.sample()
+    #         if check_int:
+    #             print("==> Validation: batch shape X={}, Y={} and dataset length {}".format(batch[0].shape, batch[1].shape, len(tasksets.validation)))
+    #             check_int = 0
+    #         evaluation_error, evaluation_accuracy = fast_adapt(batch,
+    #                                                            learner,
+    #                                                            loss,
+    #                                                            adaptation_steps,
+    #                                                            shots,
+    #                                                            ways,
+    #                                                            device)
+    #         meta_valid_error += evaluation_error.item()
+    #         meta_valid_accuracy += evaluation_accuracy.item()
 
-        # Print some metrics
-        print('\n')
-        print('Iteration', iteration)
-        print('Meta Train Error', meta_train_error / meta_batch_size)
-        print('Meta Train Accuracy', meta_train_accuracy / meta_batch_size)
-        print('Meta Valid Error', meta_valid_error / meta_batch_size)
-        print('Meta Valid Accuracy', meta_valid_accuracy / meta_batch_size)
+    #     # Print some metrics
+    #     print('\n')
+    #     print('Iteration', iteration)
+    #     print('Meta Train Error', meta_train_error / meta_batch_size)
+    #     print('Meta Train Accuracy', meta_train_accuracy / meta_batch_size)
+    #     print('Meta Valid Error', meta_valid_error / meta_batch_size)
+    #     print('Meta Valid Accuracy', meta_valid_accuracy / meta_batch_size)
 
-        # Average the accumulated gradients and optimize
-        for p in maml.parameters():
-            p.grad.data.mul_(1.0 / meta_batch_size)
-        opt.step()
+    #     # Average the accumulated gradients and optimize
+    #     for p in maml.parameters():
+    #         p.grad.data.mul_(1.0 / meta_batch_size)
+    #     opt.step()
 
     # get pseudo-labels for level 1-4 and meta-train level 0 model on level 1-4 with pseudo-labels
     print('\n\nmeta-training level 0 model on level 1-4 data and pseudolabels')
