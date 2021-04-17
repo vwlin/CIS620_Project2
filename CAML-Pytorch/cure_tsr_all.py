@@ -181,8 +181,8 @@ def main(
     print('\n\nmeta-training level 0 model on level 1-4 data and pseudolabels')
     inter_dir_list = ['']*4 # directories of data for levels 1-4
     for level in range(1,5):
-        inter_dir[level] = './CURE_TSR_Yahan_Shortcut/Real_Train/Snow-' + str(level)+'/'
-    multilevel_taskset = get_cure_tsr_multilevel_inter_tasksets(inter_dir = inter_dir_list,
+        inter_dir_list[level-1] = './CURE_TSR_Yahan_Shortcut/Real_Train/Snow-' + str(level)+'/'
+    multilevel_taskset = get_cure_tsr_multilevel_inter_tasksets(inter_dir_list = inter_dir_list,
                                                                 train_ways=ways,
                                                                 train_samples=2*shots,
                                                                 test_ways=ways,

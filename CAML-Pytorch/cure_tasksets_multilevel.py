@@ -6,7 +6,6 @@
 """
 import random
 import learn2learn as l2l
-from learn2learn import UnionMetaDataset
 
 from torchvision import transforms, datasets
 from PIL.Image import LANCZOS
@@ -31,12 +30,12 @@ def cure_tsr_multilevel_intermediate_tasksets(
     #curetsr_lvl0 = utils.CURETSRDataset(lvl0_train_dir, data_transforms)
     #curetsr_lvl5 = utils.CURETSRDataset(lvl5_test_dir, data_transforms)
 
-    datasets = []*len(inter_dir_list)
-    for i in range(len(inter_dir_list)):
+    levels = []*len(inter_dir_list)
+    for i in range(len(levels)):
         train_dir = inter_dir_list[i]
         curetsr_data = datasets.ImageFolder(train_dir, transform=data_transforms)
-        datasets[i] = l2l.data.MetaDataset(curetsr_data)
-    meta_curetsr_multilevel = UnionMetaDataset(datasets)
+        levels[i] = l2l.data.MetaDataset(curetsr_data)
+    meta_curetsr_multilevel = l2l.data.UnionMetaDataset(levels)
 
     train_dataset = meta_curetsr_multilevel
     validation_dataset = meta_curetsr_multilevel
