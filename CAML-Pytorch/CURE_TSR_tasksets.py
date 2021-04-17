@@ -24,16 +24,16 @@ def cure_tsr_tasksets(
     """
     data_transforms = transforms.Compose([transforms.Resize([28, 28]), transforms.ToTensor(), utils.l2normalize, utils.standardization])
 
-    #lvl0_train_dir = './CURE_TSR_OG/Real_Train/ChallengeFree/'
-    #lvl5_test_dir = './CURE_TSR_OG/Real_Train/Snow-5/'
-    #curetsr_lvl0 = utils.CURETSRDataset(lvl0_train_dir, data_transforms)
-    #curetsr_lvl5 = utils.CURETSRDataset(lvl5_test_dir, data_transforms)
+    lvl0_train_dir = './CURE_TSR_OG/Real_Train/ChallengeFree/'
+    lvl5_test_dir = './CURE_TSR_OG/Real_Train/Snow-5/'
+    curetsr_lvl0 = utils.CURETSRDataset(lvl0_train_dir, data_transforms)
+    curetsr_lvl5 = utils.CURETSRDataset(lvl5_test_dir, data_transforms)
 
-    lvl0_train_dir = './CURE_TSR_Yahan_Shortcut/Real_Train/ChallengeFree/'
-    lvl5_test_dir = './CURE_TSR_Yahan_Shortcut/Real_Train/Snow-5/'
-    curetsr_lvl0 = datasets.ImageFolder(lvl0_train_dir, transform=data_transforms)
-    print("first image, label is ", curetsr_lvl0[0])
-    curetsr_lvl5 = datasets.ImageFolder(lvl5_test_dir, transform=data_transforms)
+    # lvl0_train_dir = './CURE_TSR_Yahan_Shortcut/Real_Train/ChallengeFree/'
+    # lvl5_test_dir = './CURE_TSR_Yahan_Shortcut/Real_Train/Snow-5/'
+    # curetsr_lvl0 = datasets.ImageFolder(lvl0_train_dir, transform=data_transforms)
+    # print("first image, label is ", curetsr_lvl0[0])
+    # curetsr_lvl5 = datasets.ImageFolder(lvl5_test_dir, transform=data_transforms)
 
     meta_curetsr_lvl0 = l2l.data.MetaDataset(curetsr_lvl0)
     meta_curetsr_lvl5 = l2l.data.MetaDataset(curetsr_lvl5)
