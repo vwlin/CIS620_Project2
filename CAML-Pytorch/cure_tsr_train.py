@@ -8,16 +8,23 @@ Demonstrates how to:
     * use the benchmark interface to load CURE TSR, and
     * sample tasks and split them in adaptation and evaluation sets.
 """
+import argparse
+parser = argparse.ArgumentParser(description='CIS 620 Project')
+parser.add_argument('-m', '--model', default='vgg16', type=str)
+parser.add_argument('--gpu', default=0, type=int)
+args = parser.parse_args()
 
 import random
 import numpy as np
 import torch
 import learn2learn as l2l
+import torchvision
 from torch import nn, optim
-
+torch.autograd.set_detect_anomaly(True) # to check for NaN's and other anomalies
 # my custom imports
 from CURE_TSR_tasksets import get_cure_tsr_tasksets
 from models import LeNet5
+import densenet
 
 def accuracy(predictions, targets):
     predictions = predictions.argmax(dim=1).view(targets.shape)
@@ -55,7 +62,7 @@ def main(
         fast_lr=0.5,
         meta_batch_size=32,
         adaptation_steps=1,
-        num_iterations=51, # originally, 60000
+        num_iterations=101, # originally, 60000
         cuda=True,
         seed=42,
 ):
@@ -65,7 +72,7 @@ def main(
     device = torch.device('cpu')
     if cuda:
         torch.cuda.manual_seed(seed)
-        device = torch.device('cuda')
+        device = torch.device('cuda:{}'.format(args.gpu))
 
     # Load train/validation/test tasksets using the benchmark interface
     tasksets = get_cure_tsr_tasksets(train_ways=ways,
@@ -76,7 +83,23 @@ def main(
     )
 
     # Create model
-    model = LeNet5(num_labels = 14)
+    if 'vgg16' in args.model:
+        model = torchvision.models.vgg16(pretrained=True)
+        num_ftrs = model.classifier[6].in_features
+        model.classifier[6] = nn.Linear(num_ftrs, 14) 
+        print(model)
+    elif 'densenet' in args.model:
+        model = torchvision.models.densenet121(pretrained=True)
+        num_ftrs = model.classifier.in_features
+        model.classifier = nn.Linear(num_ftrs, 14) 
+        print(model) 
+    elif 'resnet' in args.model:
+        model = torchvision.models.resnet18(pretrained=True)
+        num_ftrs = model.fc.in_features
+        model.fc = nn.Linear(num_ftrs, 14) 
+        print(model)
+     
+
     model.to(device)
     maml = l2l.algorithms.MAML(model, lr=fast_lr, first_order=False)
     opt = optim.Adam(maml.parameters(), meta_lr)
@@ -92,6 +115,8 @@ def main(
             # Compute meta-training loss
             learner = maml.clone()
             batch = tasksets.train.sample()
+            # print(batch[0].shape)
+            # print(batch[0][0], torch.max(batch[0][0]), torch.min(batch[0][0]))
             if check_int:
                 print("==> Training: batch shape X={}, Y={} and dataset length {}".format(batch[0].shape, batch[1].shape, len(tasksets.train)))
             evaluation_error, evaluation_accuracy = fast_adapt(batch,

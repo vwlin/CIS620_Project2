@@ -23,7 +23,7 @@ def cure_tsr_multilevel_intermediate_tasksets(
     """
     Benchmark definition for CURE TSR.
     """
-    data_transforms = transforms.Compose([transforms.Resize([28, 28]), transforms.ToTensor(), utils.l2normalize, utils.standardization])
+    data_transforms = transforms.Compose([transforms.Resize([28, 28]), transforms.ToTensor()])#, utils.l2normalize, utils.standardization])
 
     #lvl0_train_dir = './CURE_TSR_OG/Real_Train/ChallengeFree/'
     #lvl5_test_dir = './CURE_TSR_OG/Real_Train/Snow-5/'

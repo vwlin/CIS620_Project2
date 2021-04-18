@@ -116,7 +116,11 @@ def main(
     )
 
     # Create model
-    model = LeNet5(num_labels = 14)
+    #model = LeNet5(num_labels = 14)
+    model = torchvision.models.resnet18(pretrained=True)
+    num_ftrs = model.fc.in_features
+    model.fc = nn.Linear(num_ftrs, 14) 
+    
     model.to(device)
     maml = l2l.algorithms.MAML(model, lr=fast_lr, first_order=False)
     opt = optim.Adam(maml.parameters(), meta_lr)

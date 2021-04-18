@@ -12,6 +12,7 @@ Demonstrates how to:
 import random
 import numpy as np
 import torch
+import torchvision
 import learn2learn as l2l
 from torch import nn, optim
 
@@ -126,7 +127,7 @@ def main(
         ways=5,
         shots=1,
         meta_lr=0.003,
-        fast_lr=0.5,
+        fast_lr=0.1,
         meta_batch_size=32,
         adaptation_steps=1,
         num_iterations=51, # originally, 60000
@@ -150,7 +151,11 @@ def main(
     )
 
     # Create model
-    model = LeNet5(num_labels = 14)
+    #model = LeNet5(num_labels = 14)
+    model = torchvision.models.resnet18(pretrained=True)
+    num_ftrs = model.fc.in_features
+    model.fc = nn.Linear(num_ftrs, 14)  
+
     model.to(device)
     maml = l2l.algorithms.MAML(model, lr=fast_lr, first_order=False)
     opt = optim.Adam(maml.parameters(), meta_lr)
@@ -265,6 +270,8 @@ def main(
 
             # Print some metrics
             print('\n')
+            print('BIG ISSUE --> valida error is Nan? {}'.format(np.isnan(meta_valid_error)))
+            
             print('Intermediate Iteration', iteration)
             print('Intermediate Meta Train Error', meta_train_error / meta_batch_size)
             print('Intermediate Meta Train Accuracy', meta_train_accuracy / meta_batch_size)
