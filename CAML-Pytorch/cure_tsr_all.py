@@ -8,6 +8,11 @@ Demonstrates how to:
     * use the benchmark interface to load CURE TSR, and
     * sample tasks and split them in adaptation and evaluation sets.
 """
+import argparse
+parser = argparse.ArgumentParser(description='CIS 620 Project')
+parser.add_argument('-m', '--model', default='vgg16', type=str)
+parser.add_argument('--gpu', default=0, type=int)
+args = parser.parse_args()
 
 import random
 import numpy as np
@@ -105,7 +110,7 @@ def main(
     device = torch.device('cpu')
     if cuda:
         torch.cuda.manual_seed(seed)
-        device = torch.device('cuda')
+        device = torch.device('cuda:{}'.format(args.gpu))
 
     # Load train/validation/test tasksets using the benchmark interface
     tasksets = get_cure_tsr_tasksets(train_ways=ways,
@@ -116,10 +121,22 @@ def main(
     )
 
     # Create model
-    #model = LeNet5(num_labels = 14)
-    model = torchvision.models.resnet18(pretrained=True)
-    num_ftrs = model.fc.in_features
-    model.fc = nn.Linear(num_ftrs, 14) 
+    # Create model
+    if 'vgg16' in args.model:
+        model = torchvision.models.vgg16(pretrained=True)
+        num_ftrs = model.classifier[6].in_features
+        model.classifier[6] = nn.Linear(num_ftrs, 14) 
+        print(model)
+    elif 'densenet' in args.model:
+        model = torchvision.models.densenet121(pretrained=True)
+        num_ftrs = model.classifier.in_features
+        model.classifier = nn.Linear(num_ftrs, 14) 
+        print(model) 
+    elif 'resnet' in args.model:
+        model = torchvision.models.resnet18(pretrained=True)
+        num_ftrs = model.fc.in_features
+        model.fc = nn.Linear(num_ftrs, 14) 
+        print(model)
     
     model.to(device)
     maml = l2l.algorithms.MAML(model, lr=fast_lr, first_order=False)
