@@ -17,6 +17,8 @@ args = parser.parse_args()
 import random
 import numpy as np
 import torch
+import torchvision
+torch.autograd.set_detect_anomaly(True) # to check for Nan's and other anomalies
 import learn2learn as l2l
 from torch import nn, optim
 

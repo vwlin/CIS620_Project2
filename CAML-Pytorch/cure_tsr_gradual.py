@@ -127,10 +127,10 @@ def main(
         ways=5,
         shots=1,
         meta_lr=0.003,
-        fast_lr=0.1,
+        fast_lr=0.5,
         meta_batch_size=32,
         adaptation_steps=1,
-        num_iterations=51, # originally, 60000
+        num_iterations=151, # originally, 60000
         cuda=True,
         seed=42,
 ):
