@@ -5,6 +5,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from torch.utils.data import DataLoader
+import torchvision
 from torchvision import transforms
 import utils
 
@@ -77,6 +78,7 @@ def fast_adapt(model, batch, ways, shot, query_num, metric=None, device=None):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
+    parser.add_argument('--model', type=str, default='Convnet')
     parser.add_argument('--max-epoch', type=int, default=250) # previously, 250
     parser.add_argument('--train-way', type=int, default=5) # 30
     parser.add_argument('--shot', type=int, default=1)
@@ -96,7 +98,35 @@ if __name__ == '__main__':
         torch.cuda.manual_seed(43)
         device = torch.device('cuda')
 
-    model = Convnet()
+    
+    # Create model
+    if 'Convnet' in args.model:
+        model = Convnet()
+    elif 'vgg' in args.model:
+        model = torchvision.models.vgg11(pretrained=True)
+        num_ftrs = model.classifier[6].in_features
+        model.classifier[6] = nn.Identity() # gives us penultimate layer (a.k.a., embeddings)
+        print(model)
+    elif 'densenet' in args.model:
+        model = densenet(
+                num_classes=14,
+                depth=40,
+                growthRate=12,
+                compressionRate=2,
+                dropRate=0,
+            )
+        print(model)
+    elif 'resnet18' in args.model:
+        model = torchvision.models.resnet18(pretrained=True)
+        num_ftrs = model.fc.in_features
+        model.fc = nn.Identity()
+        print(model)
+    elif 'resnet50' in args.model:
+        model = torchvision.models.resnet50(pretrained=True)
+        num_ftrs = model.fc.in_features
+        model.fc = nn.Identity()
+        print(model)
+
     model.to(device)
 
     # path_data = '~/data'
