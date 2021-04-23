@@ -175,7 +175,7 @@ def main(
             )
         print(model)
     elif 'resnet' in args.model:
-        model = torchvision.models.resnet50(pretrained=True)
+        model = torchvision.models.resnet18(pretrained=True)
         num_ftrs = model.fc.in_features
         model.fc = nn.Linear(num_ftrs, 14) 
         print(model)

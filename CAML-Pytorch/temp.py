@@ -132,10 +132,10 @@ def fast_adapt_with_pseudo_label(batch, learner, loss, adaptation_steps, shots, 
     return valid_error, valid_accuracy
 
 def main(
-        ways=3,
-        shots=2,
+        ways=5,
+        shots=1,
         meta_lr=0.003,
-        fast_lr=0.1,
+        fast_lr=0.5,
         meta_batch_size=32,
         adaptation_steps=1,
         num_iterations=101, # originally, 60000

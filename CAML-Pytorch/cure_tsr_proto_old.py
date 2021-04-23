@@ -5,11 +5,14 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from torch.utils.data import DataLoader
-from torchvision import transforms
-import utils
 
 import learn2learn as l2l
 from learn2learn.data.transforms import NWays, KShots, LoadData, RemapLabels
+
+parser = argparse.ArgumentParser(description='CIS 620 Project')
+parser.add_argument('-m', '--model', default='vgg16', type=str)
+parser.add_argument('--gpu', default=0, type=int)
+args = parser.parse_args()
 
 
 def pairwise_distances_logits(a, b):
@@ -74,22 +77,15 @@ def fast_adapt(model, batch, ways, shot, query_num, metric=None, device=None):
     acc = accuracy(logits, labels)
     return loss, acc
 
-
-if __name__ == '__main__':
-    parser = argparse.ArgumentParser()
-    parser.add_argument('--max-epoch', type=int, default=250) # previously, 250
-    parser.add_argument('--train-way', type=int, default=5) # 30
-    parser.add_argument('--shot', type=int, default=1)
-    parser.add_argument('--train-query', type=int, default=1) # 15
-
-    parser.add_argument('--test-way', type=int, default=5)
-    parser.add_argument('--test-shot', type=int, default=1)
-    parser.add_argument('--test-query', type=int, default=1) # 1
-
-    parser.add_argument('--gpu', default=0)
-    args = parser.parse_args()
-    print(args)
-
+def main(ways=5,
+        shots=1,
+        meta_lr=0.003,
+        fast_lr=0.1,
+        meta_batch_size=32,
+        adaptation_steps=1,
+        num_iterations=101, # originally, 60000
+        cuda=True,
+        seed=42,):
     device = torch.device('cpu')
     if args.gpu and torch.cuda.device_count():
         print("Using gpu")
@@ -99,76 +95,19 @@ if __name__ == '__main__':
     model = Convnet()
     model.to(device)
 
-    # path_data = '~/data'
-    # train_dataset = l2l.vision.datasets.MiniImagenet(
-    #     root=path_data, mode='train')
-    # valid_dataset = l2l.vision.datasets.MiniImagenet(
-    #     root=path_data, mode='validation')
-    # test_dataset = l2l.vision.datasets.MiniImagenet(
-    #     root=path_data, mode='test')
-
-    # Hello, CURE_TSR_OG
-    data_transforms = transforms.Compose([transforms.Resize([32, 32]), transforms.ToTensor()])#, utils.l2normalize, utils.standardization])
-
-    lvl0_train_dir = './CURE_TSR_OG/Real_Train/ChallengeFree/'
-    lvl5_test_dir = './CURE_TSR_OG/Real_Train/Snow-5/'
-    curetsr_lvl0 = utils.CURETSRDataset(lvl0_train_dir, data_transforms)
-    curetsr_lvl5 = utils.CURETSRDataset(lvl5_test_dir, data_transforms)
-
-    # lvl0_train_dir = './CURE_TSR_Yahan_Shortcut/Real_Train/ChallengeFree/'
-    # lvl5_test_dir = './CURE_TSR_Yahan_Shortcut/Real_Train/Snow-5/'
-    # curetsr_lvl0 = datasets.ImageFolder(lvl0_train_dir, transform=data_transforms)
-    # print("first image, label is ", curetsr_lvl0[0])
-    # curetsr_lvl5 = datasets.ImageFolder(lvl5_test_dir, transform=data_transforms)
-
-    meta_curetsr_lvl0 = l2l.data.MetaDataset(curetsr_lvl0)
-    meta_curetsr_lvl5 = l2l.data.MetaDataset(curetsr_lvl5)
-
-    train_dataset = meta_curetsr_lvl0
-    valid_dataset = meta_curetsr_lvl0
-    test_dataset = meta_curetsr_lvl5
-
-    # Changes, end!
-
-    train_dataset = l2l.data.MetaDataset(train_dataset)
-    train_transforms = [
-        NWays(train_dataset, args.train_way),
-        KShots(train_dataset, args.train_query + args.shot),
-        LoadData(train_dataset),
-        RemapLabels(train_dataset),
-    ]
-    train_tasks = l2l.data.TaskDataset(train_dataset, task_transforms=train_transforms)
-    train_loader = DataLoader(train_tasks, pin_memory=True, shuffle=True)
-
-    valid_dataset = l2l.data.MetaDataset(valid_dataset)
-    valid_transforms = [
-        NWays(valid_dataset, args.test_way),
-        KShots(valid_dataset, args.test_query + args.test_shot),
-        LoadData(valid_dataset),
-        RemapLabels(valid_dataset),
-    ]
-    valid_tasks = l2l.data.TaskDataset(valid_dataset,
-                                       task_transforms=valid_transforms,
-                                       num_tasks=200)
-    valid_loader = DataLoader(valid_tasks, pin_memory=True, shuffle=True)
-
-    test_dataset = l2l.data.MetaDataset(test_dataset)
-    test_transforms = [
-        NWays(test_dataset, args.test_way),
-        KShots(test_dataset, args.test_query + args.test_shot),
-        LoadData(test_dataset),
-        RemapLabels(test_dataset),
-    ]
-    test_tasks = l2l.data.TaskDataset(test_dataset,
-                                      task_transforms=test_transforms,
-                                      num_tasks=2000)
-    test_loader = DataLoader(test_tasks, pin_memory=True, shuffle=True)
+    # Load train/validation/test tasksets using the benchmark interface
+    tasksets = get_cure_tsr_tasksets(train_ways=ways,
+                                                  train_samples=2*shots,
+                                                  test_ways=ways,
+                                                  test_samples=2*shots,
+                                                  num_tasks=10000, # originally, 20000
+    )
 
     optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
     lr_scheduler = torch.optim.lr_scheduler.StepLR(
         optimizer, step_size=20, gamma=0.5)
 
-    for epoch in range(1, args.max_epoch + 1):
+    for epoch in range(1, num_iterations):
         model.train()
 
         loss_ctr = 0
@@ -180,8 +119,8 @@ if __name__ == '__main__':
 
             loss, acc = fast_adapt(model,
                                    batch,
-                                   args.train_way,
-                                   args.shot,
+                                   train_way=ways,
+                                   shot=shots,
                                    args.train_query,
                                    metric=pairwise_distances_logits,
                                    device=device)
@@ -206,8 +145,8 @@ if __name__ == '__main__':
         for i, batch in enumerate(valid_loader):
             loss, acc = fast_adapt(model,
                                    batch,
-                                   args.test_way,
-                                   args.test_shot,
+                                   test_way=ways,
+                                   test_shot=shots,
                                    args.test_query,
                                    metric=pairwise_distances_logits,
                                    device=device)
@@ -234,3 +173,8 @@ if __name__ == '__main__':
         n_acc += acc
         print('batch {}: {:.2f}({:.2f})'.format(
             i, n_acc/loss_ctr * 100, acc * 100))
+
+
+if __name__ == '__main__':
+    main()
+        
