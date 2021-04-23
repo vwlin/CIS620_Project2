@@ -24,7 +24,7 @@ torch.autograd.set_detect_anomaly(True) # to check for NaN's and other anomalies
 # my custom imports
 from CURE_TSR_tasksets import get_cure_tsr_tasksets
 from models import LeNet5
-import densenet
+from densenet import densenet
 
 def accuracy(predictions, targets):
     predictions = predictions.argmax(dim=1).view(targets.shape)
@@ -59,7 +59,7 @@ def main(
         ways=5,
         shots=1,
         meta_lr=0.003,
-        fast_lr=0.5,
+        fast_lr=0.1,
         meta_batch_size=32,
         adaptation_steps=1,
         num_iterations=101, # originally, 60000
@@ -83,20 +83,29 @@ def main(
     )
 
     # Create model
-    if 'vgg16' in args.model:
-        model = torchvision.models.vgg16(pretrained=True)
+    if 'vgg' in args.model:
+        model = torchvision.models.vgg11(pretrained=True)
         num_ftrs = model.classifier[6].in_features
         model.classifier[6] = nn.Linear(num_ftrs, 14) 
         print(model)
     elif 'densenet' in args.model:
-        model = torchvision.models.densenet121(pretrained=True)
-        num_ftrs = model.classifier.in_features
-        model.classifier = nn.Linear(num_ftrs, 14) 
-        print(model) 
+        model = densenet(
+                num_classes=14,
+                depth=40,
+                growthRate=12,
+                compressionRate=2,
+                dropRate=0,
+            )
+        print(model)
     elif 'resnet' in args.model:
         model = torchvision.models.resnet18(pretrained=True)
         num_ftrs = model.fc.in_features
         model.fc = nn.Linear(num_ftrs, 14) 
+        print(model)
+    elif 'resnet50' in args.model:
+        model = torchvision.models.resnet50(pretrained=True)
+        num_ftrs = model.fc.in_features
+        model.fc = nn.Linear(num_ftrs, 14)
         print(model)
      
 

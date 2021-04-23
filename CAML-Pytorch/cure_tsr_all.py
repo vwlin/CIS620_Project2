@@ -99,10 +99,10 @@ def main(
         ways=5,
         shots=1,
         meta_lr=0.003,
-        fast_lr=0.5,
+        fast_lr=0.1,
         meta_batch_size=32,
         adaptation_steps=1,
-        num_iterations=51, # originally, 60000
+        num_iterations=101, # originally, 60000
         cuda=True,
         seed=42,
 ):
@@ -138,6 +138,11 @@ def main(
         model = torchvision.models.resnet18(pretrained=True)
         num_ftrs = model.fc.in_features
         model.fc = nn.Linear(num_ftrs, 14) 
+        print(model)
+    elif 'resnet50' in args.model:
+        model = torchvision.models.resnet50(pretrained=True)
+        num_ftrs = model.fc.in_features
+        model.fc = nn.Linear(num_ftrs, 14)
         print(model)
     
     model.to(device)

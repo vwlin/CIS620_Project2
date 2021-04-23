@@ -8,7 +8,7 @@ Demonstrates how to:
     * use the benchmark interface to load CURE TSR, and
     * sample tasks and split them in adaptation and evaluation sets.
 """
-
+#resnet 50 temp file
 import argparse
 parser = argparse.ArgumentParser(description='CIS 620 Project')
 parser.add_argument('-m', '--model', default='densenet', type=str)
@@ -132,10 +132,10 @@ def fast_adapt_with_pseudo_label(batch, learner, loss, adaptation_steps, shots, 
     return valid_error, valid_accuracy
 
 def main(
-        ways=5,
-        shots=1,
+        ways=3,
+        shots=2,
         meta_lr=0.003,
-        fast_lr=0.5,
+        fast_lr=0.1,
         meta_batch_size=32,
         adaptation_steps=1,
         num_iterations=101, # originally, 60000

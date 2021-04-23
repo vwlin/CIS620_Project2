@@ -44,7 +44,7 @@ def fast_adapt(batch, learner, loss, adaptation_steps, shots, ways, device):
     adaptation_data, adaptation_labels = data[adaptation_indices], labels[adaptation_indices]
     evaluation_data, evaluation_labels = data[evaluation_indices], labels[evaluation_indices]
 
-    # Adapt the model
+    # Adapt ihe model
     for step in range(adaptation_steps):
         train_error = loss(learner(adaptation_data), adaptation_labels)
         learner.adapt(train_error)
@@ -102,7 +102,7 @@ def main(
         fast_lr=0.5,
         meta_batch_size=32,
         adaptation_steps=1,
-        num_iterations=51, # originally, 60000
+        num_iterations=101, # originally, 60000
         cuda=True,
         seed=42,
 ):
@@ -137,6 +137,11 @@ def main(
         model = torchvision.models.resnet18(pretrained=True)
         num_ftrs = model.fc.in_features
         model.fc = nn.Linear(num_ftrs, 14) 
+        print(model)
+    elif 'resnet50' in args.model:
+        model = torchvision.models.resnet50(pretrained=True)
+        num_ftrs = model.fc.in_features
+        model.fc = nn.Linear(num_ftrs, 14)
         print(model)
     
     model.to(device)

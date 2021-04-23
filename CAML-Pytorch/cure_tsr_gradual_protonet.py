@@ -7,12 +7,11 @@ Demonstrates how to:
     * use the MAML wrapper for fast-adaptation,
     * use the benchmark interface to load CURE TSR, and
     * sample tasks and split them in adaptation and evaluation sets.
-"""
+"""'
 
 import argparse
 parser = argparse.ArgumentParser(description='CIS 620 Project')
-parser.add_argument('-m', '--model', default='densenet', type=str)
-parser.add_argument('-lr', '--lr', default='0.1', type=str)
+parser.add_argument('-m', '--model', default='vgg16', type=str)
 parser.add_argument('--gpu', default=0, type=int)
 args = parser.parse_args()
 
@@ -22,6 +21,7 @@ import torch
 import torchvision
 import learn2learn as l2l
 from torch import nn, optim
+import torch.nn.functional as F
 
 # my custom imports
 from CURE_TSR_tasksets import get_cure_tsr_tasksets
@@ -29,6 +29,14 @@ from cure_tasksets_bp import get_cure_tsr_inter_tasksets
 from models import LeNet5
 from densenet import densenet
 
+
+def pairwise_distances_logits(a, b):
+    n = a.shape[0]
+    m = b.shape[0]
+    logits = -((a.unsqueeze(1).expand(n, m, -1) -
+                b.unsqueeze(0).expand(n, m, -1))**2).sum(dim=2)
+    return logits
+    
 def student_func(teacher):
     return teacher
 
@@ -68,6 +76,7 @@ def accuracy(predictions, targets):
     predictions = predictions.argmax(dim=1).view(targets.shape)
     return (predictions == targets).sum().float() / targets.size(0)
 
+
 def training_data(batch, shots, ways, device):
     data, labels = batch
     data, labels = data.to(device), labels.to(device)
@@ -82,28 +91,55 @@ def training_data(batch, shots, ways, device):
 
     return adaptation_data,evaluation_data,adaptation_labels,evaluation_labels
 
-def fast_adapt(batch, learner, loss, adaptation_steps, shots, ways, device):
+class Convnet(nn.Module):
+
+    def __init__(self, x_dim=3, hid_dim=64, z_dim=64):
+        super().__init__()
+        self.encoder = l2l.vision.models.ConvBase(output_size=z_dim,
+                                                  hidden=hid_dim,
+                                                  channels=x_dim,
+                                                  max_pool=True)
+        self.out_channels = 1600
+
+    def forward(self, x):
+        x = self.encoder(x)
+        return x.view(x.size(0), -1)
+
+
+def fast_adapt(model, batch, ways, shot, query_num, metric=None, device=None):
+    if metric is None:
+        metric = pairwise_distances_logits
+    if device is None:
+        device = model.device()
     data, labels = batch
-    data, labels = data.to(device), labels.to(device)
+    data = data.to(device)
+    labels = labels.to(device)
+    n_items = shot * ways
 
-    # Separate data into adaptation/evalutation (a.k.a., support / query) sets
-    adaptation_indices = np.zeros(data.size(0), dtype=bool)
-    adaptation_indices[np.arange(shots*ways) * 2] = True
-    evaluation_indices = torch.from_numpy(~adaptation_indices)
-    adaptation_indices = torch.from_numpy(adaptation_indices)
-    adaptation_data, adaptation_labels = data[adaptation_indices], labels[adaptation_indices]
-    evaluation_data, evaluation_labels = data[evaluation_indices], labels[evaluation_indices]
+    # Sort data samples by labels
+    # TODO: Can this be replaced by ConsecutiveLabels ?
+    sort = torch.sort(labels)
+    data = data.squeeze(0)[sort.indices].squeeze(0)
+    labels = labels.squeeze(0)[sort.indices].squeeze(0)
 
-    # Adapt the model
-    for step in range(adaptation_steps):
-        train_error = loss(learner(adaptation_data), adaptation_labels)
-        learner.adapt(train_error)
+    # Compute support and query embeddings
+    embeddings = model(data)
+    support_indices = np.zeros(data.size(0), dtype=bool)
+    selection = np.arange(ways) * (shot + query_num)
+    for offset in range(shot):
+        support_indices[selection + offset] = True
+    query_indices = torch.from_numpy(~support_indices)
+    support_indices = torch.from_numpy(support_indices)
+    support = embeddings[support_indices]
+    support = support.reshape(ways, shot, -1).mean(dim=1)
+    query = embeddings[query_indices]
+    labels = labels[query_indices].long()
 
-    # Evaluate the adapted model
-    predictions = learner(evaluation_data)
-    valid_error = loss(predictions, evaluation_labels)
-    valid_accuracy = accuracy(predictions, evaluation_labels)
-    return valid_error, valid_accuracy
+    logits = pairwise_distances_logits(query, support)
+    loss = F.cross_entropy(logits, labels)
+    acc = accuracy(logits, labels)
+    return loss, acc
+
 
 def fast_adapt_generate_label(batch, learner, adaptation_data, evaluation_data, adaptation_labels,evaluation_labels, shots, ways, device):
     # Evaluate the adapted model
@@ -135,7 +171,7 @@ def main(
         ways=5,
         shots=1,
         meta_lr=0.003,
-        fast_lr=0.5,
+        fast_lr=0.1,
         meta_batch_size=32,
         adaptation_steps=1,
         num_iterations=101, # originally, 60000
