@@ -8,9 +8,11 @@ from torch.utils.data import DataLoader
 import torchvision
 from torchvision import transforms
 import utils
+import random
+from densenet import densenet
 
 import learn2learn as l2l
-from learn2learn.data.transforms import NWays, KShots, LoadData, RemapLabels
+from learn2learn.data.transforms import NWays, KShots, LoadData, RemapLabels, FilterLabels
 
 
 def pairwise_distances_logits(a, b):
@@ -115,6 +117,7 @@ if __name__ == '__main__':
                 compressionRate=2,
                 dropRate=0,
             )
+        model.fc = nn.Identity() # add this!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         print(model)
     elif 'resnet18' in args.model:
         model = torchvision.models.resnet18(pretrained=True)
@@ -158,10 +161,13 @@ if __name__ == '__main__':
     valid_dataset = meta_curetsr_lvl0
     test_dataset = meta_curetsr_lvl5
 
+    classes = list(range(14)) # 14 classes of stop signs
+    random.shuffle(classes)
     # Changes, end!
 
     train_dataset = l2l.data.MetaDataset(train_dataset)
     train_transforms = [
+        FilterLabels(train_dataset, classes[:8]),
         NWays(train_dataset, args.train_way),
         KShots(train_dataset, args.train_query + args.shot),
         LoadData(train_dataset),
@@ -172,6 +178,7 @@ if __name__ == '__main__':
 
     valid_dataset = l2l.data.MetaDataset(valid_dataset)
     valid_transforms = [
+        FilterLabels(valid_dataset, classes[8:14]),
         NWays(valid_dataset, args.test_way),
         KShots(valid_dataset, args.test_query + args.test_shot),
         LoadData(valid_dataset),
@@ -184,6 +191,7 @@ if __name__ == '__main__':
 
     test_dataset = l2l.data.MetaDataset(test_dataset)
     test_transforms = [
+        FilterLabels(test_dataset, classes[8:14]),
         NWays(test_dataset, args.test_way),
         KShots(test_dataset, args.test_query + args.test_shot),
         LoadData(test_dataset),

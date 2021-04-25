@@ -1,33 +1,18 @@
-"""
-    [1] https://github.com/learnables/learn2learn/blob/master/examples/vision/maml_omniglot.py
-"""
-
-"""
-Demonstrates how to:
-    * use the MAML wrapper for fast-adaptation,
-    * use the benchmark interface to load CURE TSR, and
-    * sample tasks and split them in adaptation and evaluation sets.
-"""'
-
 import argparse
-parser = argparse.ArgumentParser(description='CIS 620 Project')
-parser.add_argument('-m', '--model', default='vgg16', type=str)
-parser.add_argument('--gpu', default=0, type=int)
-args = parser.parse_args()
-
-import random
 import numpy as np
-import torch
-import torchvision
-import learn2learn as l2l
-from torch import nn, optim
-import torch.nn.functional as F
 
-# my custom imports
-from CURE_TSR_tasksets import get_cure_tsr_tasksets
-from cure_tasksets_bp import get_cure_tsr_inter_tasksets
-from models import LeNet5
+import torch
+import torch.nn as nn
+import torch.nn.functional as F
+from torch.utils.data import DataLoader
+import torchvision
+from torchvision import transforms
+import utils
+import random
 from densenet import densenet
+
+import learn2learn as l2l
+from learn2learn.data.transforms import NWays, KShots, LoadData, RemapLabels, FilterLabels
 
 
 def pairwise_distances_logits(a, b):
@@ -36,60 +21,12 @@ def pairwise_distances_logits(a, b):
     logits = -((a.unsqueeze(1).expand(n, m, -1) -
                 b.unsqueeze(0).expand(n, m, -1))**2).sum(dim=2)
     return logits
-    
-def student_func(teacher):
-    return teacher
-
-def self_train_once(student, teacher, unsup_x, confidence_q=0.1, epochs=20):
-    # Do one bootstrapping step on unsup_x, where pred_model is used to make predictions,
-    # and we use these predictions to update model.
-    logits = teacher.predict(np.concatenate([unsup_x]))
-    confidence = np.amax(logits, axis=1) - np.amin(logits, axis=1)
-    alpha = np.quantile(confidence, confidence_q)
-    indices = np.argwhere(confidence >= alpha)[:, 0]
-    preds = np.argmax(logits, axis=1)
-    student.fit(unsup_x[indices], preds[indices], epochs=epochs, verbose=False)
-
-def soft_self_train_once(student, teacher, unsup_x, epochs=20):
-    probs = teacher.predict(np.concatenate([unsup_x]))
-    student.fit(unsup_x, probs, epochs=epochs, verbose=False)
-
-def gradual_self_train(student_func, teacher, unsup_x, debug_y, interval, confidence_q=0.1,
-                       epochs=20, soft=False):
-    upper_idx = int(unsup_x.shape[0] / interval)
-    accuracies = []
-    for i in range(upper_idx):
-        student = student_func(teacher)
-        cur_xs = unsup_x[interval*i:interval*(i+1)]
-        cur_ys = debug_y[interval*i:interval*(i+1)]
-        if soft:
-            soft_self_train_once(student, teacher, cur_xs, epochs)
-        else:
-            self_train_once(student, teacher, cur_xs, confidence_q, epochs)
-        _, accuracy = student.evaluate(cur_xs, cur_ys)
-        accuracies.append(accuracy)
-        teacher = student
-    return accuracies, student
 
 
 def accuracy(predictions, targets):
     predictions = predictions.argmax(dim=1).view(targets.shape)
     return (predictions == targets).sum().float() / targets.size(0)
 
-
-def training_data(batch, shots, ways, device):
-    data, labels = batch
-    data, labels = data.to(device), labels.to(device)
-
-    # Separate data into adaptation/evalutation (a.k.a., support / query) sets
-    adaptation_indices = np.zeros(data.size(0), dtype=bool)
-    adaptation_indices[np.arange(shots*ways) * 2] = True
-    evaluation_indices = torch.from_numpy(~adaptation_indices)
-    adaptation_indices = torch.from_numpy(adaptation_indices)
-    adaptation_data, adaptation_labels = data[adaptation_indices], labels[adaptation_indices]
-    evaluation_data, evaluation_labels = data[evaluation_indices], labels[evaluation_indices]
-
-    return adaptation_data,evaluation_data,adaptation_labels,evaluation_labels
 
 class Convnet(nn.Module):
 
@@ -140,66 +77,95 @@ def fast_adapt(model, batch, ways, shot, query_num, metric=None, device=None):
     acc = accuracy(logits, labels)
     return loss, acc
 
+def fast_adapt_generate_label(model, batch, ways, shot, query_num, metric=None, device=None):
+    if metric is None:
+        metric = pairwise_distances_logits
+    if device is None:
+        device = model.device()
 
-def fast_adapt_generate_label(batch, learner, adaptation_data, evaluation_data, adaptation_labels,evaluation_labels, shots, ways, device):
-    # Evaluate the adapted model
-    predictions = learner(adaptation_data)
-    adaptation_pseudo_labels = predictions.argmax(dim=1).view(adaptation_labels.shape)
-    #print("adaptation labels",adaptation_pseudo_labels)
-    # Evaluate the adapted model
-    predictions = learner(evaluation_data)
-    evaluation_pseudo_labels = predictions.argmax(dim=1).view(evaluation_labels.shape)
-    #print("evaulation labels",evaluation_pseudo_labels)
-    return adaptation_pseudo_labels, evaluation_pseudo_labels
+    data, labels = batch
+    data = data.to(device)
+    labels = labels.to(device)
+    n_items = shot * ways
 
-def fast_adapt_with_pseudo_label(batch, learner, loss, adaptation_steps, shots, ways, device,adaptation_data, evaluation_data,adaptation_labels, evaluation_labels):
-    adaptation_data, adaptation_labels = adaptation_data.to(device), adaptation_labels.to(device)
-    evaluation_data, evaluation_labels = evaluation_data.to(device), evaluation_labels.to(device)
+    # Sort data samples by labels
+    # TODO: Can this be replaced by ConsecutiveLabels ?
+    sort = torch.sort(labels)
+    data = data.squeeze(0)[sort.indices].squeeze(0)
+    labels = labels.squeeze(0)[sort.indices].squeeze(0)
 
-    # Adapt the model
-    for step in range(adaptation_steps):
-        train_error = loss(learner(adaptation_data), adaptation_labels)
-        learner.adapt(train_error)
+    # Compute support and query embeddings
+    embeddings = model(data)
+    support_indices = np.zeros(data.size(0), dtype=bool)
+    selection = np.arange(ways) * (shot + query_num)
+    for offset in range(shot):
+        support_indices[selection + offset] = True
+    query_indices = torch.from_numpy(~support_indices)
+    support_indices = torch.from_numpy(support_indices)
+    support = embeddings[support_indices]
+    support = support.reshape(ways, shot, -1).mean(dim=1)
+    query = embeddings[query_indices]
+    labels = labels[query_indices].long()
 
-    # Evaluate the adapted model
-    predictions = learner(evaluation_data)
-    valid_error = loss(predictions, evaluation_labels)
-    valid_accuracy = accuracy(predictions, evaluation_labels)
-    return valid_error, valid_accuracy
+    logits = pairwise_distances_logits(query, support)
+    pseudo_labels = logits.argmax(dim=1).view(labels.shape)
+    return data,pseudo_labels
 
-def main(
-        ways=5,
-        shots=1,
-        meta_lr=0.003,
-        fast_lr=0.1,
-        meta_batch_size=32,
-        adaptation_steps=1,
-        num_iterations=101, # originally, 60000
-        cuda=True,
-        seed=42,
-):
-    random.seed(seed)
-    np.random.seed(seed)
-    torch.manual_seed(seed)
+def fast_adapt_gradual(model, data,labels, ways, shot, query_num, metric=None, device=None):
+    if metric is None:
+        metric = pairwise_distances_logits
+    if device is None:
+        device = model.device()
+    n_items = shot * ways
+
+    # Compute support and query embeddings
+    embeddings = model(data)
+    support_indices = np.zeros(data.size(0), dtype=bool)
+    selection = np.arange(ways) * (shot + query_num)
+    for offset in range(shot):
+        support_indices[selection + offset] = True
+    query_indices = torch.from_numpy(~support_indices)
+    support_indices = torch.from_numpy(support_indices)
+    support = embeddings[support_indices]
+    support = support.reshape(ways, shot, -1).mean(dim=1)
+    query = embeddings[query_indices]
+
+    logits = pairwise_distances_logits(query, support)
+    loss = F.cross_entropy(logits, labels)
+    acc = accuracy(logits, labels)
+    return loss, acc
+
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--model', type=str, default='Convnet')
+    parser.add_argument('--max-epoch', type=int, default=250) # previously, 250
+    parser.add_argument('--train-way', type=int, default=5) # 30
+    parser.add_argument('--shot', type=int, default=1)
+    parser.add_argument('--train-query', type=int, default=1) # 15
+
+    parser.add_argument('--test-way', type=int, default=5)
+    parser.add_argument('--test-shot', type=int, default=1)
+    parser.add_argument('--test-query', type=int, default=1) # 1
+
+    parser.add_argument('--gpu', default=0)
+    args = parser.parse_args()
+    print(args)
+
     device = torch.device('cpu')
-    if cuda:
-        torch.cuda.manual_seed(seed)
+    if args.gpu and torch.cuda.device_count():
+        print("Using gpu")
+        torch.cuda.manual_seed(43)
         device = torch.device('cuda')
 
-    # Load train/validation/test tasksets using the benchmark interface
-    tasksets = get_cure_tsr_tasksets(train_ways=ways,
-                                                  train_samples=2*shots,
-                                                  test_ways=ways,
-                                                  test_samples=2*shots,
-                                                  num_tasks=10000, # originally, 20000
-    )
-
+    
     # Create model
-     # Create model
-    if 'vgg' in args.model:
+    if 'Convnet' in args.model:
+        model = Convnet()
+    elif 'vgg' in args.model:
         model = torchvision.models.vgg11(pretrained=True)
         num_ftrs = model.classifier[6].in_features
-        model.classifier[6] = nn.Linear(num_ftrs, 14) 
+        model.classifier[6] = nn.Identity() # gives us penultimate layer (a.k.a., embeddings)
         print(model)
     elif 'densenet' in args.model:
         model = densenet(
@@ -209,162 +175,248 @@ def main(
                 compressionRate=2,
                 dropRate=0,
             )
+        model.fc = nn.Identity() # add this!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         print(model)
-    elif 'resnet' in args.model:
+    elif 'resnet18' in args.model:
+        model = torchvision.models.resnet18(pretrained=True)
+        num_ftrs = model.fc.in_features
+        model.fc = nn.Identity()
+        print(model)
+    elif 'resnet50' in args.model:
         model = torchvision.models.resnet50(pretrained=True)
         num_ftrs = model.fc.in_features
-        model.fc = nn.Linear(num_ftrs, 14) 
+        model.fc = nn.Identity()
         print(model)
-    #model = LeNet5(num_labels = 14)
-    #model = torchvision.models.resnet18(pretrained=True)
-    #num_ftrs = model.fc.in_features
-    #model.fc = nn.Linear(num_ftrs, 14)  
 
     model.to(device)
-    maml = l2l.algorithms.MAML(model, lr=fast_lr, first_order=False)
-    opt = optim.Adam(maml.parameters(), meta_lr)
-    loss = nn.CrossEntropyLoss(reduction='mean')
-    check_int = 1
-    levels = 5
 
-    for iteration in range(num_iterations):
-        opt.zero_grad()
-        meta_train_error = 0.0
-        meta_train_accuracy = 0.0
-        meta_valid_error = 0.0
-        meta_valid_accuracy = 0.0
-        for task in range(meta_batch_size):
-            # Compute meta-training loss
-            learner = maml.clone()
-            batch = tasksets.train.sample()
-            if check_int:
-                print("==> Training: batch shape X={}, Y={} and dataset length {}".format(batch[0].shape, batch[1].shape, len(tasksets.train)))
-            evaluation_error, evaluation_accuracy = fast_adapt(batch,
-                                                               learner,
-                                                               loss,
-                                                               adaptation_steps,
-                                                               shots,
-                                                               ways,
-                                                               device)
-            evaluation_error.backward()
-            meta_train_error += evaluation_error.item()
-            meta_train_accuracy += evaluation_accuracy.item()
+    # path_data = '~/data'
+    # train_dataset = l2l.vision.datasets.MiniImagenet(
+    #     root=path_data, mode='train')
+    # valid_dataset = l2l.vision.datasets.MiniImagenet(
+    #     root=path_data, mode='validation')
+    # test_dataset = l2l.vision.datasets.MiniImagenet(
+    #     root=path_data, mode='test')
 
-            # Compute meta-validation loss
-            learner = maml.clone()
-            batch = tasksets.validation.sample()
-            if check_int:
-                print("==> Validation: batch shape X={}, Y={} and dataset length {}".format(batch[0].shape, batch[1].shape, len(tasksets.validation)))
-                check_int = 0
-            evaluation_error, evaluation_accuracy = fast_adapt(batch,
-                                                               learner,
-                                                               loss,
-                                                               adaptation_steps,
-                                                               shots,
-                                                               ways,
-                                                               device)
-            meta_valid_error += evaluation_error.item()
-            meta_valid_accuracy += evaluation_accuracy.item()
+    # Hello, CURE_TSR_OG
+    data_transforms = transforms.Compose([transforms.Resize([32, 32]), transforms.ToTensor()])#, utils.l2normalize, utils.standardization])
 
-        # Print some metrics
-        print('\n')
-        print('Iteration', iteration)
-        print('Meta Train Error', meta_train_error / meta_batch_size)
-        print('Meta Train Accuracy', meta_train_accuracy / meta_batch_size)
-        print('Meta Valid Error', meta_valid_error / meta_batch_size)
-        print('Meta Valid Accuracy', meta_valid_accuracy / meta_batch_size)
+    lvl0_train_dir = './CURE_TSR_OG/Real_Train/ChallengeFree/'
+    lvl5_test_dir = './CURE_TSR_OG/Real_Train/Snow-5/'
+    curetsr_lvl0 = utils.CURETSRDataset(lvl0_train_dir, data_transforms)
+    curetsr_lvl5 = utils.CURETSRDataset(lvl5_test_dir, data_transforms)
 
-        # Average the accumulated gradients and optimize
-        for p in maml.parameters():
-            p.grad.data.mul_(1.0 / meta_batch_size)
-        opt.step()
+    # lvl0_train_dir = './CURE_TSR_Yahan_Shortcut/Real_Train/ChallengeFree/'
+    # lvl5_test_dir = './CURE_TSR_Yahan_Shortcut/Real_Train/Snow-5/'
+    # curetsr_lvl0 = datasets.ImageFolder(lvl0_train_dir, transform=data_transforms)
+    # print("first image, label is ", curetsr_lvl0[0])
+    # curetsr_lvl5 = datasets.ImageFolder(lvl5_test_dir, transform=data_transforms)
 
+    meta_curetsr_lvl0 = l2l.data.MetaDataset(curetsr_lvl0)
+    meta_curetsr_lvl5 = l2l.data.MetaDataset(curetsr_lvl5)
 
-    for level in range(1,levels):
-        inter_dir = './CURE_TSR_Yahan_Shortcut/Real_Train/Snow-' + str(level)+'/'
-        print("level :", level, inter_dir)
-        intermediate_tasksets = get_cure_tsr_inter_tasksets( inter_dir = inter_dir,
-                                                  train_ways=ways,
-                                                  train_samples=2*shots,
-                                                  test_ways=ways,
-                                                  test_samples=2*shots,
-                                                  num_tasks=10000, # originally, 20000
-    )
-        for iteration in range(num_iterations):
-            opt.zero_grad()
-            meta_train_error = 0.0
-            meta_train_accuracy = 0.0
-            meta_valid_error = 0.0
-            meta_valid_accuracy = 0.0
-            for task in range(meta_batch_size):
-                # Compute meta-training loss
-                learner = maml.clone()
-                batch = intermediate_tasksets.train.sample()
-                if check_int:
-                    print("==> Intermediate Training: batch shape X={}, Y={} and dataset length {}".format(batch[0].shape, batch[1].shape, len(tasksets.train)))
-                adaptation_data,evaluation_data,adaptation_labels,evaluation_labels = training_data(batch, shots, ways, device)
-                adaptation_pseudo_labels, evaluation_pseudo_labels = fast_adapt_generate_label(batch, learner, adaptation_data, evaluation_data, adaptation_labels,evaluation_labels,shots, ways, device)
-                evaluation_error, evaluation_accuracy = fast_adapt_with_pseudo_label(batch,
-                                                                learner,
-                                                                loss,
-                                                                adaptation_steps,
-                                                                shots,
-                                                                ways,
-                                                                device,
-                                                                adaptation_data, evaluation_data,adaptation_pseudo_labels, evaluation_pseudo_labels)
-                evaluation_error.backward()
-                meta_train_error += evaluation_error.item()
-                meta_train_accuracy += evaluation_accuracy.item()
+    train_dataset = meta_curetsr_lvl0
+    valid_dataset = meta_curetsr_lvl0
+    test_dataset = meta_curetsr_lvl5
 
-                # Compute meta-validation loss
-                learner = maml.clone()
-                batch = intermediate_tasksets.validation.sample()
-                if check_int:
-                    print("==> Intermediate Validation: batch shape X={}, Y={} and dataset length {}".format(batch[0].shape, batch[1].shape, len(tasksets.validation)))
-                    check_int = 0
-                evaluation_error, evaluation_accuracy = fast_adapt(batch,
-                                                                learner,
-                                                                loss,
-                                                                adaptation_steps,
-                                                                shots,
-                                                                ways,
-                                                                device)
-                meta_valid_error += evaluation_error.item()
-                meta_valid_accuracy += evaluation_accuracy.item()
+    classes = list(range(14)) # 14 classes of stop signs
+    random.shuffle(classes)
+    # Changes, end!
 
-            # Print some metrics
-            print('\n')
-            print('BIG ISSUE --> valida error is Nan? {}'.format(np.isnan(meta_valid_error)))
-            
-            print('Intermediate Iteration', iteration)
-            print('Intermediate Meta Train Error', meta_train_error / meta_batch_size)
-            print('Intermediate Meta Train Accuracy', meta_train_accuracy / meta_batch_size)
-            print('Intermediate Meta Valid Error', meta_valid_error / meta_batch_size)
-            print('Intermediate Meta Valid Accuracy', meta_valid_accuracy / meta_batch_size)
+    train_dataset = l2l.data.MetaDataset(train_dataset)
+    train_transforms = [
+        FilterLabels(train_dataset, classes[:8]),
+        NWays(train_dataset, args.train_way),
+        KShots(train_dataset, args.train_query + args.shot),
+        LoadData(train_dataset),
+        RemapLabels(train_dataset),
+    ]
+    train_tasks = l2l.data.TaskDataset(train_dataset, task_transforms=train_transforms)
+    train_loader = DataLoader(train_tasks, pin_memory=True, shuffle=True)
 
-            # Average the accumulated gradients and optimize
-            for p in maml.parameters():
-                p.grad.data.mul_(1.0 / meta_batch_size)
-            opt.step()
+    valid_dataset = l2l.data.MetaDataset(valid_dataset)
+    valid_transforms = [
+        FilterLabels(valid_dataset, classes[8:14]),
+        NWays(valid_dataset, args.test_way),
+        KShots(valid_dataset, args.test_query + args.test_shot),
+        LoadData(valid_dataset),
+        RemapLabels(valid_dataset),
+    ]
+    valid_tasks = l2l.data.TaskDataset(valid_dataset,
+                                       task_transforms=valid_transforms,
+                                       num_tasks=200)
+    valid_loader = DataLoader(valid_tasks, pin_memory=True, shuffle=True)
 
-    meta_test_error = 0.0
-    meta_test_accuracy = 0.0
-    for task in range(meta_batch_size):
-        # Compute meta-testing loss
-        learner = maml.clone()
-        batch = tasksets.test.sample()
-        evaluation_error, evaluation_accuracy = fast_adapt(batch,
-                                                           learner,
-                                                           loss,
-                                                           adaptation_steps,
-                                                           shots,
-                                                           ways,
-                                                           device)
-        meta_test_error += evaluation_error.item()
-        meta_test_accuracy += evaluation_accuracy.item()
-    print('Meta Test Error', meta_test_error / meta_batch_size)
-    print('Meta Test Accuracy', meta_test_accuracy / meta_batch_size)
+    test_dataset = l2l.data.MetaDataset(test_dataset)
+    test_transforms = [
+        FilterLabels(test_dataset, classes[8:14]),
+        NWays(test_dataset, args.test_way),
+        KShots(test_dataset, args.test_query + args.test_shot),
+        LoadData(test_dataset),
+        RemapLabels(test_dataset),
+    ]
+    test_tasks = l2l.data.TaskDataset(test_dataset,
+                                      task_transforms=test_transforms,
+                                      num_tasks=2000)
+    test_loader = DataLoader(test_tasks, pin_memory=True, shuffle=True)
 
+    optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
+    lr_scheduler = torch.optim.lr_scheduler.StepLR(
+        optimizer, step_size=20, gamma=0.5)
 
-if __name__ == '__main__':
-    main()
+    for epoch in range(1, args.max_epoch + 1):
+        model.train()
+
+        loss_ctr = 0
+        n_loss = 0
+        n_acc = 0
+
+        for i in range(100):
+            batch = next(iter(train_loader))
+            loss, acc = fast_adapt(model,
+                                   batch,
+                                   args.train_way,
+                                   args.shot,
+                                   args.train_query,
+                                   metric=pairwise_distances_logits,
+                                   device=device)
+
+            loss_ctr += 1
+            n_loss += loss.item()
+            n_acc += acc
+
+            optimizer.zero_grad()
+            loss.backward()
+            optimizer.step()
+        lr_scheduler.step()
+
+        print('epoch {}, train, loss={:.4f} acc={:.4f}'.format(
+            epoch, n_loss/loss_ctr, n_acc/loss_ctr))
+
+        model.eval()
+
+        loss_ctr = 0
+        n_loss = 0
+        n_acc = 0
+        for i, batch in enumerate(valid_loader):
+            loss, acc = fast_adapt(model,
+                                   batch,
+                                   args.test_way,
+                                   args.test_shot,
+                                   args.test_query,
+                                   metric=pairwise_distances_logits,
+                                   device=device)
+
+            loss_ctr += 1
+            n_loss += loss.item()
+            n_acc += acc
+
+        print('epoch {}, val, loss={:.4f} acc={:.4f}'.format(
+            epoch, n_loss/loss_ctr, n_acc/loss_ctr))
+
+    for m in range(1,5,1):
+        lvl_train_dir = './CURE_TSR_OG/Real_Train/Snow-'+str(m)+"/"
+        curetsr_lvl = utils.CURETSRDataset(lvl_train_dir, data_transforms)
+        print("level ",m)
+        meta_curetsr_lvl = l2l.data.MetaDataset(curetsr_lvl)
+        train_level_dataset = meta_curetsr_lvl
+        valid_level_dataset = meta_curetsr_lvl
+
+        train_level_dataset = l2l.data.MetaDataset(train_level_dataset)
+        train_level_transforms = [
+            FilterLabels(train_level_dataset, classes[:8]),
+            NWays(train_level_dataset, args.train_way),
+            KShots(train_level_dataset, args.train_query + args.shot),
+            LoadData(train_level_dataset),
+            RemapLabels(train_level_dataset),
+        ]
+        train_level_tasks = l2l.data.TaskDataset(train_level_dataset, task_transforms=train_level_transforms)
+        train_level_loader = DataLoader(train_level_tasks, pin_memory=True, shuffle=True)
+
+        valid_level_dataset = l2l.data.MetaDataset(valid_level_dataset)
+        valid_level_transforms = [
+            FilterLabels(valid_level_dataset, classes[8:14]),
+            NWays(valid_level_dataset, args.test_way),
+            KShots(valid_level_dataset, args.test_query + args.test_shot),
+            LoadData(valid_level_dataset),
+            RemapLabels(valid_level_dataset),
+        ]
+        valid_level_tasks = l2l.data.TaskDataset(valid_level_dataset,
+                                       task_transforms=valid_level_transforms,
+                                       num_tasks=200)
+        valid_level_loader = DataLoader(valid_level_tasks, pin_memory=True, shuffle=True)
+
+        optimizer_l = torch.optim.Adam(model.parameters(), lr=0.001)
+        lr_scheduler_l = torch.optim.lr_scheduler.StepLR(
+        optimizer_l, step_size=20, gamma=0.5)
+        
+        for epoch in range(1, args.max_epoch + 1): 
+            loss_ctr = 0
+            n_loss = 0
+            n_acc = 0
+
+            for i in range(100):
+                batch = next(iter(train_level_loader))
+                model.eval()
+                data, pseudo_labels = fast_adapt_generate_label(model,
+                                    batch,
+                                    args.train_way,
+                                    args.shot,
+                                    args.train_query,
+                                    metric=pairwise_distances_logits,
+                                    device=device)
+                
+                model.train()
+                loss, acc = fast_adapt_gradual(model, data,pseudo_labels, 
+                                args.train_way,
+                                args.shot,
+                                args.train_query, metric=pairwise_distances_logits,
+                                device=device)
+                loss_ctr += 1
+                n_loss += loss.item()
+                n_acc += acc
+
+                optimizer.zero_grad()
+                loss.backward()
+                optimizer.step()
+            #lr_scheduler_l.step()
+
+            print('epoch {}, train, loss={:.4f} acc={:.4f}'.format(
+                epoch, n_loss/loss_ctr, n_acc/loss_ctr))
+
+            model.eval()
+
+            loss_ctr = 0
+            n_loss = 0
+            n_acc = 0
+            for i, batch in enumerate(valid_level_loader):
+                loss, acc = fast_adapt(model,
+                                    batch,
+                                    args.test_way,
+                                    args.test_shot,
+                                    args.test_query,
+                                    metric=pairwise_distances_logits,
+                                    device=device)
+
+                loss_ctr += 1
+                n_loss += loss.item()
+                n_acc += acc
+
+            print('epoch {}, val, loss={:.4f} acc={:.4f}'.format(
+                epoch, n_loss/loss_ctr, n_acc/loss_ctr))
+    
+    loss_ctr = 0
+    n_acc = 0
+    
+    for i, batch in enumerate(test_loader, 1):
+        loss, acc = fast_adapt(model,
+                               batch,
+                               args.test_way,
+                               args.test_shot,
+                               args.test_query,
+                               metric=pairwise_distances_logits,
+                               device=device)
+        loss_ctr += 1
+        n_acc += acc
+        print('batch {}: {:.2f}({:.2f})'.format(
+            i, n_acc/loss_ctr * 100, acc * 100))

@@ -12,7 +12,7 @@ Demonstrates how to:
 import argparse
 parser = argparse.ArgumentParser(description='CIS 620 Project')
 parser.add_argument('-m', '--model', default='densenet', type=str)
-parser.add_argument('-lr', '--lr', default='0.1', type=str)
+parser.add_argument('-lr', default='0.1', type=float)
 parser.add_argument('--gpu', default=0, type=int)
 args = parser.parse_args()
 
@@ -132,8 +132,8 @@ def fast_adapt_with_pseudo_label(batch, learner, loss, adaptation_steps, shots, 
     return valid_error, valid_accuracy
 
 def main(
-        ways=5,
-        shots=1,
+        ways=3,
+        shots=2,
         meta_lr=0.003,
         fast_lr=0.5,
         meta_batch_size=32,
@@ -157,7 +157,7 @@ def main(
                                                   test_samples=2*shots,
                                                   num_tasks=10000, # originally, 20000
     )
-
+    print("fast lr",fast_lr)
     # Create model
      # Create model
     if 'vgg' in args.model:
@@ -178,6 +178,11 @@ def main(
         model = torchvision.models.resnet18(pretrained=True)
         num_ftrs = model.fc.in_features
         model.fc = nn.Linear(num_ftrs, 14) 
+        print(model)
+    elif 'resnet50' in args.model:
+        model = torchvision.models.resnet50(pretrained=True)
+        num_ftrs = model.fc.in_features
+        model.fc = nn.Linear(num_ftrs, 14)
         print(model)
     #model = LeNet5(num_labels = 14)
     #model = torchvision.models.resnet18(pretrained=True)
@@ -331,4 +336,4 @@ def main(
 
 
 if __name__ == '__main__':
-    main()
+    main(fast_lr=args.lr)

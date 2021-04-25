@@ -99,7 +99,7 @@ def main(
         ways=3,
         shots=2,
         meta_lr=0.003,
-        fast_lr=0.1,
+        fast_lr=0.5,
         meta_batch_size=32,
         adaptation_steps=1,
         num_iterations=101, # originally, 60000
