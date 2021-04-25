@@ -156,7 +156,7 @@ if __name__ == '__main__':
     if args.gpu and torch.cuda.device_count():
         print("Using gpu")
         torch.cuda.manual_seed(43)
-        device = torch.device('cuda')
+        device = torch.device('cuda:{}'.format(args.gpu))
 
     
     # Create model
