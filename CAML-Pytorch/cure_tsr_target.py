@@ -133,7 +133,7 @@ def main(
         num_ftrs = model.classifier.in_features
         model.classifier = nn.Linear(num_ftrs, 14) 
         print(model) 
-    elif 'resnet' in args.model:
+    elif 'resnet18' in args.model:
         model = torchvision.models.resnet18(pretrained=True)
         num_ftrs = model.fc.in_features
         model.fc = nn.Linear(num_ftrs, 14) 
