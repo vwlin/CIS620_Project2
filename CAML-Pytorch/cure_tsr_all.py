@@ -130,10 +130,14 @@ def main(
         model.classifier[6] = nn.Linear(num_ftrs, 14) 
         print(model)
     elif 'densenet' in args.model:
-        model = torchvision.models.densenet121(pretrained=True)
-        num_ftrs = model.classifier.in_features
-        model.classifier = nn.Linear(num_ftrs, 14) 
-        print(model) 
+        model = densenet(
+                num_classes=14,
+                depth=40,
+                growthRate=12,
+                compressionRate=2,
+                dropRate=0,
+            )
+        print(model)
     elif 'resnet18' in args.model:
         model = torchvision.models.resnet18(pretrained=True)
         num_ftrs = model.fc.in_features
