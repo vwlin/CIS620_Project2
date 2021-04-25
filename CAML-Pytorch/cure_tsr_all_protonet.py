@@ -322,7 +322,7 @@ if __name__ == '__main__':
     for level in range(1,5):
         inter_dir = './CURE_TSR_OG/Real_Train/Snow-' + str(level)+'/'
         curetsr_data = utils.CURETSRDataset(inter_dir, data_transforms)
-        levels[i] = l2l.data.MetaDataset(curetsr_data)
+        levels[i-1] = l2l.data.MetaDataset(curetsr_data)
     meta_curetsr_multilevel = l2l.data.UnionMetaDataset(levels)
 
     train_level_dataset = meta_curetsr_multilevel
