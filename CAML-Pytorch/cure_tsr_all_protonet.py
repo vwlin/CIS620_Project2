@@ -320,7 +320,7 @@ if __name__ == '__main__':
     print('\n\nmeta-training level 0 model on level 4 data and pseudolabels')
     levels = [None]*4
     for level in range(1,5):
-        inter_dir = './CURE_TSR_OG/Real_Train/Snow-/' + str(level)+'/'
+        inter_dir = './CURE_TSR_OG/Real_Train/Snow-' + str(level)+'/'
         curetsr_data = utils.CURETSRDataset(inter_dir, data_transforms)
         levels[i] = l2l.data.MetaDataset(curetsr_data)
     meta_curetsr_multilevel = l2l.data.UnionMetaDataset(levels)
