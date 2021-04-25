@@ -1,0 +1,487 @@
+Namespace(gpu='0', max_epoch=150, model='resnet18', shot=2, test_query=2, test_shot=2, test_way=3, train_query=2, train_way=3)
+Using gpu
+ResNet(
+  (conv1): Conv2d(3, 64, kernel_size=(7, 7), stride=(2, 2), padding=(3, 3), bias=False)
+  (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  (relu): ReLU(inplace=True)
+  (maxpool): MaxPool2d(kernel_size=3, stride=2, padding=1, dilation=1, ceil_mode=False)
+  (layer1): Sequential(
+    (0): BasicBlock(
+      (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+    (1): BasicBlock(
+      (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (layer2): Sequential(
+    (0): BasicBlock(
+      (conv1): Conv2d(64, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (downsample): Sequential(
+        (0): Conv2d(64, 128, kernel_size=(1, 1), stride=(2, 2), bias=False)
+        (1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1): BasicBlock(
+      (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (layer3): Sequential(
+    (0): BasicBlock(
+      (conv1): Conv2d(128, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (downsample): Sequential(
+        (0): Conv2d(128, 256, kernel_size=(1, 1), stride=(2, 2), bias=False)
+        (1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1): BasicBlock(
+      (conv1): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (layer4): Sequential(
+    (0): BasicBlock(
+      (conv1): Conv2d(256, 512, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (downsample): Sequential(
+        (0): Conv2d(256, 512, kernel_size=(1, 1), stride=(2, 2), bias=False)
+        (1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1): BasicBlock(
+      (conv1): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (avgpool): AdaptiveAvgPool2d(output_size=(1, 1))
+  (fc): Identity()
+)
+epoch 1, train, loss=62.5552 acc=0.6733
+epoch 1, val, loss=22.5166 acc=0.5758
+epoch 2, train, loss=31.4388 acc=0.6667
+epoch 2, val, loss=24.9301 acc=0.6267
+epoch 3, train, loss=22.5510 acc=0.7150
+epoch 3, val, loss=7.9256 acc=0.6708
+epoch 4, train, loss=20.1528 acc=0.6833
+epoch 4, val, loss=291.7869 acc=0.6775
+epoch 5, train, loss=22.8804 acc=0.6367
+epoch 5, val, loss=2.1317 acc=0.6467
+epoch 6, train, loss=17.3068 acc=0.6567
+epoch 6, val, loss=2628.6877 acc=0.5708
+epoch 7, train, loss=22.9106 acc=0.5983
+epoch 7, val, loss=5.3735 acc=0.4900
+epoch 8, train, loss=23.7564 acc=0.5950
+epoch 8, val, loss=2.3713 acc=0.5825
+epoch 9, train, loss=25.4166 acc=0.6250
+epoch 9, val, loss=1419.5265 acc=0.6283
+epoch 10, train, loss=23.4366 acc=0.6317
+epoch 10, val, loss=143.8896 acc=0.6500
+epoch 11, train, loss=19.7015 acc=0.6517
+epoch 11, val, loss=4.3642 acc=0.5942
+epoch 12, train, loss=13.5961 acc=0.7100
+epoch 12, val, loss=1.7826 acc=0.5867
+epoch 13, train, loss=9.5561 acc=0.7667
+epoch 13, val, loss=5.1283 acc=0.6050
+epoch 14, train, loss=9.5421 acc=0.7167
+epoch 14, val, loss=2.9064 acc=0.6367
+epoch 15, train, loss=7.6091 acc=0.7367
+epoch 15, val, loss=15.6867 acc=0.6117
+epoch 16, train, loss=7.2734 acc=0.7050
+epoch 16, val, loss=3.0880 acc=0.6033
+epoch 17, train, loss=9.5476 acc=0.7117
+epoch 17, val, loss=1.8086 acc=0.5942
+epoch 18, train, loss=9.5331 acc=0.7150
+epoch 18, val, loss=19.8230 acc=0.5717
+epoch 19, train, loss=7.4240 acc=0.7267
+epoch 19, val, loss=1.2413 acc=0.6192
+epoch 20, train, loss=7.1340 acc=0.7133
+epoch 20, val, loss=1.4327 acc=0.5775
+epoch 21, train, loss=3.8365 acc=0.7300
+epoch 21, val, loss=1.2668 acc=0.5833
+epoch 22, train, loss=4.4541 acc=0.7283
+epoch 22, val, loss=2.1677 acc=0.5542
+epoch 23, train, loss=3.4245 acc=0.7867
+epoch 23, val, loss=1.7988 acc=0.5900
+epoch 24, train, loss=2.6993 acc=0.7983
+epoch 24, val, loss=1.9932 acc=0.5858
+epoch 25, train, loss=2.6665 acc=0.8183
+epoch 25, val, loss=1.7152 acc=0.5867
+epoch 26, train, loss=3.2742 acc=0.7783
+epoch 26, val, loss=1.3128 acc=0.5925
+epoch 27, train, loss=1.7394 acc=0.8483
+epoch 27, val, loss=1.8996 acc=0.6192
+epoch 28, train, loss=2.0959 acc=0.8350
+epoch 28, val, loss=1.6555 acc=0.6158
+epoch 29, train, loss=2.1417 acc=0.8467
+epoch 29, val, loss=1.9370 acc=0.5917
+epoch 30, train, loss=1.6027 acc=0.8467
+epoch 30, val, loss=1.6473 acc=0.5858
+epoch 31, train, loss=1.8473 acc=0.8550
+epoch 31, val, loss=1.6631 acc=0.6533
+epoch 32, train, loss=1.8343 acc=0.8617
+epoch 32, val, loss=1.6851 acc=0.5925
+epoch 33, train, loss=1.8633 acc=0.8250
+epoch 33, val, loss=1.4572 acc=0.6708
+epoch 34, train, loss=1.5511 acc=0.8633
+epoch 34, val, loss=2.1289 acc=0.6400
+epoch 35, train, loss=1.1231 acc=0.8833
+epoch 35, val, loss=2.7083 acc=0.6367
+epoch 36, train, loss=1.3829 acc=0.8717
+epoch 36, val, loss=1.9938 acc=0.6783
+epoch 37, train, loss=1.2185 acc=0.8683
+epoch 37, val, loss=2.2659 acc=0.6808
+epoch 38, train, loss=2.1333 acc=0.8250
+epoch 38, val, loss=4.5786 acc=0.5933
+epoch 39, train, loss=0.9587 acc=0.9083
+epoch 39, val, loss=1.3484 acc=0.6950
+epoch 40, train, loss=1.3988 acc=0.8633
+epoch 40, val, loss=1.4409 acc=0.6583
+epoch 41, train, loss=1.2080 acc=0.8717
+epoch 41, val, loss=2.0774 acc=0.6400
+epoch 42, train, loss=0.7859 acc=0.9183
+epoch 42, val, loss=2.0054 acc=0.6667
+epoch 43, train, loss=1.1206 acc=0.8933
+epoch 43, val, loss=3.0799 acc=0.6508
+epoch 44, train, loss=0.6964 acc=0.9033
+epoch 44, val, loss=2.2766 acc=0.6767
+epoch 45, train, loss=0.8292 acc=0.9133
+epoch 45, val, loss=1.7092 acc=0.6975
+epoch 46, train, loss=0.6383 acc=0.9133
+epoch 46, val, loss=2.4034 acc=0.6433
+epoch 47, train, loss=0.3273 acc=0.9550
+epoch 47, val, loss=2.2614 acc=0.7050
+epoch 48, train, loss=0.4464 acc=0.9383
+epoch 48, val, loss=6.0403 acc=0.6767
+epoch 49, train, loss=0.6946 acc=0.9367
+epoch 49, val, loss=2.1514 acc=0.6708
+epoch 50, train, loss=0.4496 acc=0.9333
+epoch 50, val, loss=2.2963 acc=0.7033
+epoch 51, train, loss=0.4257 acc=0.9333
+epoch 51, val, loss=1.7241 acc=0.6933
+epoch 52, train, loss=0.4689 acc=0.9233
+epoch 52, val, loss=1.5287 acc=0.7058
+epoch 53, train, loss=0.2675 acc=0.9550
+epoch 53, val, loss=1.7242 acc=0.6408
+epoch 54, train, loss=0.2978 acc=0.9433
+epoch 54, val, loss=1.4844 acc=0.6975
+epoch 55, train, loss=0.2360 acc=0.9600
+epoch 55, val, loss=1.2771 acc=0.7058
+epoch 56, train, loss=0.1941 acc=0.9550
+epoch 56, val, loss=1.9902 acc=0.6492
+epoch 57, train, loss=0.1832 acc=0.9633
+epoch 57, val, loss=1.7041 acc=0.6683
+epoch 58, train, loss=0.1560 acc=0.9650
+epoch 58, val, loss=1.3574 acc=0.6992
+epoch 59, train, loss=0.2208 acc=0.9367
+epoch 59, val, loss=1.1400 acc=0.6775
+epoch 60, train, loss=0.1628 acc=0.9600
+epoch 60, val, loss=1.1613 acc=0.6608
+epoch 61, train, loss=0.2724 acc=0.9600
+epoch 61, val, loss=1.2636 acc=0.6875
+epoch 62, train, loss=0.1423 acc=0.9550
+epoch 62, val, loss=2.1280 acc=0.6983
+epoch 63, train, loss=0.2105 acc=0.9533
+epoch 63, val, loss=1.3413 acc=0.6925
+epoch 64, train, loss=0.1175 acc=0.9617
+epoch 64, val, loss=0.9282 acc=0.7117
+epoch 65, train, loss=0.1885 acc=0.9617
+epoch 65, val, loss=1.0440 acc=0.6992
+epoch 66, train, loss=0.1739 acc=0.9633
+epoch 66, val, loss=0.9046 acc=0.7092
+epoch 67, train, loss=0.0904 acc=0.9700
+epoch 67, val, loss=1.2579 acc=0.7083
+epoch 68, train, loss=0.1123 acc=0.9650
+epoch 68, val, loss=1.2142 acc=0.6867
+epoch 69, train, loss=0.1342 acc=0.9583
+epoch 69, val, loss=1.1869 acc=0.6967
+epoch 70, train, loss=0.1418 acc=0.9667
+epoch 70, val, loss=1.0215 acc=0.7100
+epoch 71, train, loss=0.2621 acc=0.9467
+epoch 71, val, loss=50.7908 acc=0.6858
+epoch 72, train, loss=0.2075 acc=0.9550
+epoch 72, val, loss=1.1231 acc=0.6517
+epoch 73, train, loss=0.1421 acc=0.9600
+epoch 73, val, loss=2.4800 acc=0.6725
+epoch 74, train, loss=0.0934 acc=0.9717
+epoch 74, val, loss=2.5348 acc=0.6700
+epoch 75, train, loss=0.0860 acc=0.9700
+epoch 75, val, loss=1.0085 acc=0.7183
+epoch 76, train, loss=0.1198 acc=0.9533
+epoch 76, val, loss=2.5782 acc=0.6467
+epoch 77, train, loss=0.1284 acc=0.9683
+epoch 77, val, loss=1.0733 acc=0.6658
+epoch 78, train, loss=0.0972 acc=0.9650
+epoch 78, val, loss=10.2559 acc=0.6375
+epoch 79, train, loss=0.1248 acc=0.9683
+epoch 79, val, loss=1.7616 acc=0.6458
+epoch 80, train, loss=0.0503 acc=0.9767
+epoch 80, val, loss=11.6404 acc=0.6508
+epoch 81, train, loss=0.0667 acc=0.9733
+epoch 81, val, loss=1.6319 acc=0.6475
+epoch 82, train, loss=0.0687 acc=0.9767
+epoch 82, val, loss=1.1217 acc=0.6783
+epoch 83, train, loss=0.0806 acc=0.9717
+epoch 83, val, loss=1.1108 acc=0.6767
+epoch 84, train, loss=0.1897 acc=0.9617
+epoch 84, val, loss=2.1946 acc=0.6767
+epoch 85, train, loss=0.0589 acc=0.9833
+epoch 85, val, loss=1.0121 acc=0.6775
+epoch 86, train, loss=0.0507 acc=0.9817
+epoch 86, val, loss=3.8666 acc=0.6858
+epoch 87, train, loss=0.0818 acc=0.9733
+epoch 87, val, loss=9.4802 acc=0.6750
+epoch 88, train, loss=0.0568 acc=0.9833
+epoch 88, val, loss=1.0467 acc=0.6992
+epoch 89, train, loss=0.0312 acc=0.9917
+epoch 89, val, loss=3.3250 acc=0.6892
+epoch 90, train, loss=0.0747 acc=0.9733
+epoch 90, val, loss=1.2521 acc=0.6708
+epoch 91, train, loss=0.0540 acc=0.9783
+epoch 91, val, loss=22.2318 acc=0.6808
+epoch 92, train, loss=0.1158 acc=0.9700
+epoch 92, val, loss=2.9176 acc=0.7108
+epoch 93, train, loss=0.0244 acc=0.9917
+epoch 93, val, loss=1.3207 acc=0.7192
+epoch 94, train, loss=0.0177 acc=0.9983
+epoch 94, val, loss=3.2852 acc=0.7142
+epoch 95, train, loss=0.0887 acc=0.9783
+epoch 95, val, loss=20.1177 acc=0.6842
+epoch 96, train, loss=0.1648 acc=0.9750
+epoch 96, val, loss=29.3345 acc=0.7033
+epoch 97, train, loss=0.0747 acc=0.9733
+epoch 97, val, loss=38.2854 acc=0.7133
+epoch 98, train, loss=0.0521 acc=0.9850
+epoch 98, val, loss=22.1554 acc=0.7000
+epoch 99, train, loss=0.0468 acc=0.9833
+epoch 99, val, loss=1.0695 acc=0.7133
+epoch 100, train, loss=0.0732 acc=0.9783
+epoch 100, val, loss=29.1960 acc=0.6800
+epoch 101, train, loss=0.0436 acc=0.9867
+epoch 101, val, loss=2.9429 acc=0.6992
+epoch 102, train, loss=0.1727 acc=0.9667
+epoch 102, val, loss=1.4456 acc=0.7408
+epoch 103, train, loss=0.1049 acc=0.9750
+epoch 103, val, loss=23.8104 acc=0.6925
+epoch 104, train, loss=0.1136 acc=0.9733
+epoch 104, val, loss=25.5314 acc=0.7192
+epoch 105, train, loss=0.1012 acc=0.9783
+epoch 105, val, loss=11.0036 acc=0.7250
+epoch 106, train, loss=0.0680 acc=0.9783
+epoch 106, val, loss=6.6293 acc=0.7000
+epoch 107, train, loss=0.0782 acc=0.9783
+epoch 107, val, loss=43.8619 acc=0.6850
+epoch 108, train, loss=0.0531 acc=0.9817
+epoch 108, val, loss=9.2867 acc=0.7075
+epoch 109, train, loss=0.0388 acc=0.9850
+epoch 109, val, loss=17.2570 acc=0.7067
+epoch 110, train, loss=0.0132 acc=0.9967
+epoch 110, val, loss=35.5619 acc=0.7092
+epoch 111, train, loss=0.0271 acc=0.9917
+epoch 111, val, loss=11.3258 acc=0.7158
+epoch 112, train, loss=0.0304 acc=0.9883
+epoch 112, val, loss=13.1165 acc=0.7050
+epoch 113, train, loss=0.0653 acc=0.9783
+epoch 113, val, loss=31.2791 acc=0.7050
+epoch 114, train, loss=0.0504 acc=0.9850
+epoch 114, val, loss=44.0628 acc=0.7117
+epoch 115, train, loss=0.0537 acc=0.9833
+epoch 115, val, loss=18.9829 acc=0.7133
+epoch 116, train, loss=0.1108 acc=0.9717
+epoch 116, val, loss=4.6760 acc=0.7083
+epoch 117, train, loss=0.0256 acc=0.9883
+epoch 117, val, loss=118.0801 acc=0.7108
+epoch 118, train, loss=0.0641 acc=0.9800
+epoch 118, val, loss=82.4812 acc=0.7067
+epoch 119, train, loss=0.0313 acc=0.9917
+epoch 119, val, loss=15.6586 acc=0.7275
+epoch 120, train, loss=0.2378 acc=0.9767
+epoch 120, val, loss=42.3195 acc=0.7017
+epoch 121, train, loss=0.0403 acc=0.9883
+epoch 121, val, loss=37.1935 acc=0.6958
+epoch 122, train, loss=0.0471 acc=0.9900
+epoch 122, val, loss=107.4696 acc=0.7158
+epoch 123, train, loss=0.0312 acc=0.9933
+epoch 123, val, loss=13.5309 acc=0.7142
+epoch 124, train, loss=0.0792 acc=0.9867
+epoch 124, val, loss=2.7500 acc=0.7075
+epoch 125, train, loss=0.0670 acc=0.9850
+epoch 125, val, loss=14.9601 acc=0.7183
+epoch 126, train, loss=0.0502 acc=0.9833
+epoch 126, val, loss=15.6962 acc=0.7075
+epoch 127, train, loss=0.0255 acc=0.9850
+epoch 127, val, loss=105.2297 acc=0.7083
+epoch 128, train, loss=0.0316 acc=0.9867
+epoch 128, val, loss=52.4835 acc=0.7150
+epoch 129, train, loss=0.0474 acc=0.9900
+epoch 129, val, loss=13.4853 acc=0.7225
+epoch 130, train, loss=0.0232 acc=0.9900
+epoch 130, val, loss=39.3374 acc=0.7292
+epoch 131, train, loss=0.0137 acc=0.9950
+epoch 131, val, loss=168.3493 acc=0.7250
+epoch 132, train, loss=0.0371 acc=0.9900
+epoch 132, val, loss=25.5036 acc=0.7250
+epoch 133, train, loss=0.0328 acc=0.9900
+epoch 133, val, loss=221.7228 acc=0.7267
+epoch 134, train, loss=0.1241 acc=0.9867
+epoch 134, val, loss=69.6213 acc=0.6992
+epoch 135, train, loss=0.1083 acc=0.9883
+epoch 135, val, loss=57.0873 acc=0.6933
+epoch 136, train, loss=0.0533 acc=0.9883
+epoch 136, val, loss=71.4882 acc=0.6900
+epoch 137, train, loss=0.0508 acc=0.9833
+epoch 137, val, loss=48.5780 acc=0.6875
+epoch 138, train, loss=0.0422 acc=0.9883
+epoch 138, val, loss=32.4609 acc=0.7092
+epoch 139, train, loss=0.0688 acc=0.9800
+epoch 139, val, loss=56.0400 acc=0.6950
+epoch 140, train, loss=0.0328 acc=0.9833
+epoch 140, val, loss=39.3942 acc=0.6942
+epoch 141, train, loss=0.0264 acc=0.9917
+epoch 141, val, loss=48.7934 acc=0.7050
+epoch 142, train, loss=0.0530 acc=0.9850
+epoch 142, val, loss=20.8217 acc=0.6992
+epoch 143, train, loss=0.0745 acc=0.9850
+epoch 143, val, loss=28.9324 acc=0.7008
+epoch 144, train, loss=0.0217 acc=0.9917
+epoch 144, val, loss=40.2235 acc=0.6825
+epoch 145, train, loss=0.0378 acc=0.9900
+epoch 145, val, loss=42.2148 acc=0.7067
+epoch 146, train, loss=0.0179 acc=0.9967
+epoch 146, val, loss=176.4583 acc=0.7083
+epoch 147, train, loss=0.0313 acc=0.9833
+epoch 147, val, loss=73.7208 acc=0.6933
+epoch 148, train, loss=0.0249 acc=0.9917
+epoch 148, val, loss=21.7291 acc=0.6925
+epoch 149, train, loss=0.0301 acc=0.9933
+epoch 149, val, loss=61.2423 acc=0.6983
+epoch 150, train, loss=0.0612 acc=0.9800
+epoch 150, val, loss=37.0526 acc=0.7000
+level  1
+epoch 1, train, loss=1.0524 acc=0.8350
+epoch 1, val, loss=705.2531 acc=0.7367
+epoch 2, train, loss=0.6077 acc=0.8600
+epoch 2, val, loss=1131.0882 acc=0.7317
+epoch 3, train, loss=0.4645 acc=0.8733
+epoch 3, val, loss=1343.8996 acc=0.7283
+epoch 4, train, loss=0.3849 acc=0.8867
+epoch 4, val, loss=779.1178 acc=0.7375
+epoch 5, train, loss=0.5163 acc=0.8517
+epoch 5, val, loss=1654.9040 acc=0.7317
+epoch 6, train, loss=0.4201 acc=0.8767
+epoch 6, val, loss=738.3677 acc=0.7400
+epoch 7, train, loss=0.3858 acc=0.8833
+epoch 7, val, loss=1218.1272 acc=0.7300
+epoch 8, train, loss=0.4587 acc=0.8367
+epoch 8, val, loss=521.1218 acc=0.7267
+epoch 9, train, loss=0.4175 acc=0.8833
+epoch 9, val, loss=598.8980 acc=0.7450
+epoch 10, train, loss=0.4862 acc=0.8633
+epoch 10, val, loss=1336.4464 acc=0.7350
+epoch 11, train, loss=0.3750 acc=0.8733
+epoch 11, val, loss=916.0425 acc=0.7342
+epoch 12, train, loss=0.4340 acc=0.8667
+epoch 12, val, loss=1452.6143 acc=0.7300
+epoch 13, train, loss=0.5221 acc=0.8467
+epoch 13, val, loss=1116.7133 acc=0.7367
+epoch 14, train, loss=0.3887 acc=0.8700
+epoch 14, val, loss=727.0342 acc=0.7425
+epoch 15, train, loss=0.3460 acc=0.8883
+epoch 15, val, loss=1313.5395 acc=0.7425
+epoch 16, train, loss=0.3411 acc=0.8867
+epoch 16, val, loss=573.4659 acc=0.7258
+epoch 17, train, loss=0.3271 acc=0.8933
+epoch 17, val, loss=1314.0388 acc=0.7167
+epoch 18, train, loss=0.3645 acc=0.8783
+epoch 18, val, loss=623.8355 acc=0.7417
+epoch 19, train, loss=0.3975 acc=0.8750
+epoch 19, val, loss=481.3258 acc=0.7458
+epoch 20, train, loss=0.4069 acc=0.8683
+epoch 20, val, loss=2307.8920 acc=0.7533
+epoch 21, train, loss=0.3436 acc=0.8883
+epoch 21, val, loss=556.8020 acc=0.7558
+epoch 22, train, loss=0.4963 acc=0.8400
+epoch 22, val, loss=1353.6090 acc=0.7542
+epoch 23, train, loss=0.4253 acc=0.8500
+epoch 23, val, loss=1407.5946 acc=0.7383
+epoch 24, train, loss=0.3889 acc=0.8700
+epoch 24, val, loss=1123.8622 acc=0.7250
+epoch 25, train, loss=0.3743 acc=0.8750
+epoch 25, val, loss=573.1602 acc=0.7225
+epoch 26, train, loss=0.3856 acc=0.8633
+epoch 26, val, loss=2180.8001 acc=0.7450
+epoch 27, train, loss=0.3135 acc=0.9017
+epoch 27, val, loss=594.5207 acc=0.7425
+epoch 28, train, loss=0.3536 acc=0.8767
+epoch 28, val, loss=1216.8729 acc=0.7358
+epoch 29, train, loss=0.3322 acc=0.8667
+epoch 29, val, loss=953.3460 acc=0.7467
+epoch 30, train, loss=0.4535 acc=0.8450
+epoch 30, val, loss=1396.9629 acc=0.7525
+epoch 31, train, loss=0.3775 acc=0.8683
+epoch 31, val, loss=2036.5940 acc=0.7325
+epoch 32, train, loss=0.4306 acc=0.8567
+epoch 32, val, loss=2164.5913 acc=0.7508
+epoch 33, train, loss=0.3927 acc=0.8550
+epoch 33, val, loss=812.6413 acc=0.7383
+epoch 34, train, loss=0.3363 acc=0.8833
+epoch 34, val, loss=1238.5820 acc=0.7375
+epoch 35, train, loss=0.3323 acc=0.8850
+epoch 35, val, loss=1169.4829 acc=0.7200
+epoch 36, train, loss=0.3808 acc=0.8683
+epoch 36, val, loss=1408.8339 acc=0.7433
+epoch 37, train, loss=0.3366 acc=0.8900
+epoch 37, val, loss=734.1562 acc=0.7342
+epoch 38, train, loss=0.4268 acc=0.8583
+epoch 38, val, loss=984.7741 acc=0.7467
+epoch 39, train, loss=0.3637 acc=0.8733
+epoch 39, val, loss=1275.7010 acc=0.7233
+epoch 40, train, loss=0.3625 acc=0.8667
+epoch 40, val, loss=682.2806 acc=0.7608
+epoch 41, train, loss=0.3165 acc=0.8933
+epoch 41, val, loss=1531.7563 acc=0.7375
+epoch 42, train, loss=0.3605 acc=0.8717
+epoch 42, val, loss=1754.9538 acc=0.7375
+epoch 43, train, loss=0.3093 acc=0.8883
+epoch 43, val, loss=822.5013 acc=0.7342
+epoch 44, train, loss=0.4072 acc=0.8700
+epoch 44, val, loss=2565.0200 acc=0.7325
+epoch 45, train, loss=0.3799 acc=0.8750
+epoch 45, val, loss=1931.9325 acc=0.7342
+epoch 46, train, loss=0.3472 acc=0.8700
+epoch 46, val, loss=1649.8683 acc=0.7425
+epoch 47, train, loss=0.3455 acc=0.8767
+epoch 47, val, loss=2490.1949 acc=0.7333
+epoch 48, train, loss=0.2940 acc=0.9100
+epoch 48, val, loss=1594.9528 acc=0.7408
+epoch 49, train, loss=0.4281 acc=0.8817
+epoch 49, val, loss=994.2735 acc=0.7467
+epoch 50, train, loss=0.3580 acc=0.8783
+epoch 50, val, loss=817.7732 acc=0.7308

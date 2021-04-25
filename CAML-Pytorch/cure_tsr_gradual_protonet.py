@@ -140,13 +140,13 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--model', type=str, default='Convnet')
     parser.add_argument('--max-epoch', type=int, default=250) # previously, 250
-    parser.add_argument('--train-way', type=int, default=5) # 30
-    parser.add_argument('--shot', type=int, default=1)
-    parser.add_argument('--train-query', type=int, default=1) # 15
+    parser.add_argument('--train-way', type=int, default=3) # 30
+    parser.add_argument('--shot', type=int, default=2)
+    parser.add_argument('--train-query', type=int, default=2) # 15
 
-    parser.add_argument('--test-way', type=int, default=5)
-    parser.add_argument('--test-shot', type=int, default=1)
-    parser.add_argument('--test-query', type=int, default=1) # 1
+    parser.add_argument('--test-way', type=int, default=3)
+    parser.add_argument('--test-shot', type=int, default=2)
+    parser.add_argument('--test-query', type=int, default=2) # 1
 
     parser.add_argument('--gpu', default=0)
     args = parser.parse_args()
