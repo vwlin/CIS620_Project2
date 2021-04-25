@@ -318,7 +318,7 @@ if __name__ == '__main__':
 
     # get pseudo-labels for level 4 and meta-train level 0 model on level 4 with pseudo-labels
     print('\n\nmeta-training level 0 model on level 4 data and pseudolabels')
-    inter_dir = './CURE_TSR_Yahan_Shortcut/Real_Train/Snow-4/'#'./CURE_TSR_OG/Real_Train/Snow-4/'
+    inter_dir = './CURE_TSR_OG/Real_Train/Snow-4/'
     curetsr_lvl4 = utils.CURETSRDataset(inter_dir, data_transforms)
 
     meta_curetsr_lvl4 = l2l.data.MetaDataset(curetsr_lvl4)
