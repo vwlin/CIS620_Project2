@@ -26,6 +26,7 @@ from torch import nn, optim
 from CURE_TSR_tasksets import get_cure_tsr_tasksets
 from cure_tasksets_bp import get_cure_tsr_inter_tasksets
 from models import LeNet5
+from densenet import densenet
 
 def accuracy(predictions, targets):
     predictions = predictions.argmax(dim=1).view(targets.shape)
@@ -210,7 +211,7 @@ def main(
 
     # get pseudo-labels for level 4 and meta-train level 0 model on level 4 with pseudo-labels
     print('\n\nmeta-training level 0 model on level 4 data and pseudolabels')
-    inter_dir = './CURE_TSR_Yahan_Shortcut/Real_Train/Snow-4/'#'./CURE_TSR_OG/Real_Train/Snow-4/'
+    inter_dir = './CURE_TSR_Yahan_Shortcut/Real_Train/LensBlur-4/'#'./CURE_TSR_OG/Real_Train/Snow-4/'
     lvl4_taskset = get_cure_tsr_inter_tasksets( inter_dir = inter_dir,
                                                   train_ways=ways,
                                                   train_samples=2*shots,

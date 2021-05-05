@@ -8,8 +8,8 @@ from torch.utils.data import DataLoader
 import torchvision
 from torchvision import transforms
 import utils
-import random
 from densenet import densenet
+import random
 
 import learn2learn as l2l
 from learn2learn.data.transforms import NWays, KShots, LoadData, RemapLabels, FilterLabels
@@ -81,7 +81,7 @@ def fast_adapt(model, batch, ways, shot, query_num, metric=None, device=None):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--model', type=str, default='Convnet')
-    parser.add_argument('--max-epoch', type=int, default=250) # previously, 250
+    parser.add_argument('--max-epoch', type=int, default=150) # previously, 250
     parser.add_argument('--train-way', type=int, default=5) # 30
     parser.add_argument('--shot', type=int, default=1)
     parser.add_argument('--train-query', type=int, default=1) # 15
@@ -90,7 +90,8 @@ if __name__ == '__main__':
     parser.add_argument('--test-shot', type=int, default=1)
     parser.add_argument('--test-query', type=int, default=1) # 1
 
-    parser.add_argument('--gpu', default=0)
+    parser.add_argument('--gpu', default=1)
+    parser.add_argument('--gpu-id', default=0)
     args = parser.parse_args()
     print(args)
 
@@ -98,7 +99,7 @@ if __name__ == '__main__':
     if args.gpu and torch.cuda.device_count():
         print("Using gpu")
         torch.cuda.manual_seed(43)
-        device = torch.device('cuda')
+        device = torch.device('cuda:{}'.format(args.gpu_id))
 
     
     # Create model
@@ -144,7 +145,7 @@ if __name__ == '__main__':
     data_transforms = transforms.Compose([transforms.Resize([32, 32]), transforms.ToTensor()])#, utils.l2normalize, utils.standardization])
 
     lvl0_train_dir = './CURE_TSR_OG/Real_Train/ChallengeFree/'
-    lvl5_test_dir = './CURE_TSR_OG/Real_Train/Snow-5/'
+    lvl5_test_dir = './CURE_TSR_OG/Real_Train/LensBlur-5/'
     curetsr_lvl0 = utils.CURETSRDataset(lvl0_train_dir, data_transforms)
     curetsr_lvl5 = utils.CURETSRDataset(lvl5_test_dir, data_transforms)
 

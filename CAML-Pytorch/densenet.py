@@ -137,7 +137,7 @@ class DenseNet(nn.Module):
 
         x = self.avgpool(x)
         x = x.view(x.size(0), -1)
-        x = self.fc(x)
+        x = self.fc(x) # commented out to get enultimate layer (a.k.a., embeddings)
 
         return x
 

@@ -1,0 +1,4032 @@
+fast lr 0.5
+ResNet(
+  (conv1): Conv2d(3, 64, kernel_size=(7, 7), stride=(2, 2), padding=(3, 3), bias=False)
+  (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  (relu): ReLU(inplace=True)
+  (maxpool): MaxPool2d(kernel_size=3, stride=2, padding=1, dilation=1, ceil_mode=False)
+  (layer1): Sequential(
+    (0): BasicBlock(
+      (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+    (1): BasicBlock(
+      (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (layer2): Sequential(
+    (0): BasicBlock(
+      (conv1): Conv2d(64, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (downsample): Sequential(
+        (0): Conv2d(64, 128, kernel_size=(1, 1), stride=(2, 2), bias=False)
+        (1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1): BasicBlock(
+      (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (layer3): Sequential(
+    (0): BasicBlock(
+      (conv1): Conv2d(128, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (downsample): Sequential(
+        (0): Conv2d(128, 256, kernel_size=(1, 1), stride=(2, 2), bias=False)
+        (1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1): BasicBlock(
+      (conv1): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (layer4): Sequential(
+    (0): BasicBlock(
+      (conv1): Conv2d(256, 512, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (downsample): Sequential(
+        (0): Conv2d(256, 512, kernel_size=(1, 1), stride=(2, 2), bias=False)
+        (1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1): BasicBlock(
+      (conv1): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (avgpool): AdaptiveAvgPool2d(output_size=(1, 1))
+  (fc): Linear(in_features=512, out_features=14, bias=True)
+)
+==> Training: batch shape X=torch.Size([12, 3, 32, 32]), Y=torch.Size([12]) and dataset length 10000
+==> Validation: batch shape X=torch.Size([12, 3, 32, 32]), Y=torch.Size([12]) and dataset length 10000
+
+
+Iteration 0
+Meta Train Error 16.700010623782873
+Meta Train Accuracy 0.3802083432674408
+Meta Valid Error 21.1353839635849
+Meta Valid Accuracy 0.34895834093913436
+
+
+Iteration 1
+Meta Train Error 13.865130744874477
+Meta Train Accuracy 0.39583334140479565
+Meta Valid Error 14.360067326866556
+Meta Valid Accuracy 0.3697916744276881
+
+
+Iteration 2
+Meta Train Error 14.516817289404571
+Meta Train Accuracy 0.45312500977888703
+Meta Valid Error 14.381176181137562
+Meta Valid Accuracy 0.35416667303070426
+
+
+Iteration 3
+Meta Train Error 12.432297758758068
+Meta Train Accuracy 0.42187500977888703
+Meta Valid Error 19.873887449502945
+Meta Valid Accuracy 0.34375000838190317
+
+
+Iteration 4
+Meta Train Error 12.035069402307272
+Meta Train Accuracy 0.4427083423361182
+Meta Valid Error 14.631923250854015
+Meta Valid Accuracy 0.3802083423361182
+
+
+Iteration 5
+Meta Train Error 13.520322784781456
+Meta Train Accuracy 0.3854166748933494
+Meta Valid Error 16.272652186453342
+Meta Valid Accuracy 0.35416667629033327
+
+
+Iteration 6
+Meta Train Error 12.642708744853735
+Meta Train Accuracy 0.45833334419876337
+Meta Valid Error 14.205713838338852
+Meta Valid Accuracy 0.4479166748933494
+
+
+Iteration 7
+Meta Train Error 10.529998861253262
+Meta Train Accuracy 0.5052083441987634
+Meta Valid Error 17.447727526538074
+Meta Valid Accuracy 0.3437500074505806
+
+
+Iteration 8
+Meta Train Error 14.640054661780596
+Meta Train Accuracy 0.41666667675599456
+Meta Valid Error 16.863485887646675
+Meta Valid Accuracy 0.33854167349636555
+
+
+Iteration 9
+Meta Train Error 13.265098009258509
+Meta Train Accuracy 0.3906250074505806
+Meta Valid Error 15.253388023469597
+Meta Valid Accuracy 0.33333334140479565
+
+
+Iteration 10
+Meta Train Error 17.330461584031582
+Meta Train Accuracy 0.33854167396202683
+Meta Valid Error 14.509844993241131
+Meta Valid Accuracy 0.37500000977888703
+
+
+Iteration 11
+Meta Train Error 14.97509701224044
+Meta Train Accuracy 0.43229167675599456
+Meta Valid Error 13.819735588505864
+Meta Valid Accuracy 0.3697916748933494
+
+
+Iteration 12
+Meta Train Error 14.873320966959
+Meta Train Accuracy 0.3593750074505806
+Meta Valid Error 15.617469698539935
+Meta Valid Accuracy 0.401041675824672
+
+
+Iteration 13
+Meta Train Error 16.068584540858865
+Meta Train Accuracy 0.36458334187045693
+Meta Valid Error 16.41916761919856
+Meta Valid Accuracy 0.3593750079162419
+
+
+Iteration 14
+Meta Train Error 15.260552535454432
+Meta Train Accuracy 0.3802083428017795
+Meta Valid Error 15.541266065090895
+Meta Valid Accuracy 0.432291675824672
+
+
+Iteration 15
+Meta Train Error 17.038617683574557
+Meta Train Accuracy 0.31770834140479565
+Meta Valid Error 13.960779710207134
+Meta Valid Accuracy 0.42187500884756446
+
+
+Iteration 16
+Meta Train Error 16.301269836723804
+Meta Train Accuracy 0.42708334466442466
+Meta Valid Error 15.500918013975024
+Meta Valid Accuracy 0.42708334419876337
+
+
+Iteration 17
+Meta Train Error 15.010236319154501
+Meta Train Accuracy 0.43750001210719347
+Meta Valid Error 15.980686108814552
+Meta Valid Accuracy 0.4166666748933494
+
+
+Iteration 18
+Meta Train Error 18.56910702586174
+Meta Train Accuracy 0.4270833428017795
+Meta Valid Error 15.301160879433155
+Meta Valid Accuracy 0.43229168001562357
+
+
+Iteration 19
+Meta Train Error 12.730040648076852
+Meta Train Accuracy 0.47916667722165585
+Meta Valid Error 15.068328219866203
+Meta Valid Accuracy 0.4427083423361182
+
+
+Iteration 20
+Meta Train Error 13.006324024019705
+Meta Train Accuracy 0.510416679084301
+Meta Valid Error 14.091350233182311
+Meta Valid Accuracy 0.46875001257285476
+
+
+Iteration 21
+Meta Train Error 12.869185496121645
+Meta Train Accuracy 0.5000000149011612
+Meta Valid Error 17.25602923426777
+Meta Valid Accuracy 0.3593750074505806
+
+
+Iteration 22
+Meta Train Error 11.034840552756556
+Meta Train Accuracy 0.5416666800156236
+Meta Valid Error 16.55636651689713
+Meta Valid Accuracy 0.42708334047347307
+
+
+Iteration 23
+Meta Train Error 15.62261723913252
+Meta Train Accuracy 0.45833334419876337
+Meta Valid Error 16.38539669290185
+Meta Valid Accuracy 0.4062500079162419
+
+
+Iteration 24
+Meta Train Error 12.117519004189099
+Meta Train Accuracy 0.5312500125728548
+Meta Valid Error 13.169045194983482
+Meta Valid Accuracy 0.4739583460614085
+
+
+Iteration 25
+Meta Train Error 11.269866369521765
+Meta Train Accuracy 0.5364583469927311
+Meta Valid Error 14.00411682203412
+Meta Valid Accuracy 0.42708334093913436
+
+
+Iteration 26
+Meta Train Error 10.27404369047781
+Meta Train Accuracy 0.5781250135041773
+Meta Valid Error 13.003958023618907
+Meta Valid Accuracy 0.4843750149011612
+
+
+Iteration 27
+Meta Train Error 15.291154323481905
+Meta Train Accuracy 0.49479168048128486
+Meta Valid Error 13.27249201095924
+Meta Valid Accuracy 0.46875000838190317
+
+
+Iteration 28
+Meta Train Error 13.46868955375976
+Meta Train Accuracy 0.43750000977888703
+Meta Valid Error 12.562097514009585
+Meta Valid Accuracy 0.42708334187045693
+
+
+Iteration 29
+Meta Train Error 12.626619447983103
+Meta Train Accuracy 0.5156250144354999
+Meta Valid Error 13.043846680782735
+Meta Valid Accuracy 0.4635416786186397
+
+
+Iteration 30
+Meta Train Error 10.297392238474728
+Meta Train Accuracy 0.5260416804812849
+Meta Valid Error 11.916288189589977
+Meta Valid Accuracy 0.5052083488553762
+
+
+Iteration 31
+Meta Train Error 11.692348726093769
+Meta Train Accuracy 0.5104166795499623
+Meta Valid Error 12.771577115481099
+Meta Valid Accuracy 0.5156250107102096
+
+
+Iteration 32
+Meta Train Error 13.747541415126761
+Meta Train Accuracy 0.4531250079162419
+Meta Valid Error 14.836957724416607
+Meta Valid Accuracy 0.4635416781529784
+
+
+Iteration 33
+Meta Train Error 14.561518991366029
+Meta Train Accuracy 0.46354168001562357
+Meta Valid Error 16.21936208754778
+Meta Valid Accuracy 0.463541675824672
+
+
+Iteration 34
+Meta Train Error 12.280424917815253
+Meta Train Accuracy 0.5208333460614085
+Meta Valid Error 10.572717359885871
+Meta Valid Accuracy 0.5156250111758709
+
+
+Iteration 35
+Meta Train Error 10.377514059655368
+Meta Train Accuracy 0.48437501257285476
+Meta Valid Error 12.270254688002751
+Meta Valid Accuracy 0.5000000135041773
+
+
+Iteration 36
+Meta Train Error 11.483428062638268
+Meta Train Accuracy 0.5520833460614085
+Meta Valid Error 8.638116016052663
+Meta Valid Accuracy 0.541666679084301
+
+
+Iteration 37
+Meta Train Error 13.680163900833577
+Meta Train Accuracy 0.40625000931322575
+Meta Valid Error 12.729301634361036
+Meta Valid Accuracy 0.46354167629033327
+
+
+Iteration 38
+Meta Train Error 11.606344294297742
+Meta Train Accuracy 0.47395834140479565
+Meta Valid Error 9.585276759908467
+Meta Valid Accuracy 0.5885416767559946
+
+
+Iteration 39
+Meta Train Error 13.7888541277498
+Meta Train Accuracy 0.40104167768731713
+Meta Valid Error 11.959241546690464
+Meta Valid Accuracy 0.4375000102445483
+
+
+Iteration 40
+Meta Train Error 14.121331319212914
+Meta Train Accuracy 0.4010416744276881
+Meta Valid Error 11.875747710457745
+Meta Valid Accuracy 0.46875000977888703
+
+
+Iteration 41
+Meta Train Error 12.565666077076457
+Meta Train Accuracy 0.43750000931322575
+Meta Valid Error 10.374575701542199
+Meta Valid Accuracy 0.4739583428017795
+
+
+Iteration 42
+Meta Train Error 13.407354548573494
+Meta Train Accuracy 0.4114583437331021
+Meta Valid Error 9.97065469622612
+Meta Valid Accuracy 0.48437501303851604
+
+
+Iteration 43
+Meta Train Error 9.564168697223067
+Meta Train Accuracy 0.47916668048128486
+Meta Valid Error 9.095418853064196
+Meta Valid Accuracy 0.5364583437331021
+
+
+Iteration 44
+Meta Train Error 14.54943815432489
+Meta Train Accuracy 0.4114583423361182
+Meta Valid Error 9.32817364600487
+Meta Valid Accuracy 0.5260416762903333
+
+
+Iteration 45
+Meta Train Error 14.08983558230102
+Meta Train Accuracy 0.43229167629033327
+Meta Valid Error 8.76629371009767
+Meta Valid Accuracy 0.4687500107102096
+
+
+Iteration 46
+Meta Train Error 9.767555091530085
+Meta Train Accuracy 0.510416679084301
+Meta Valid Error 10.707460902941602
+Meta Valid Accuracy 0.5000000102445483
+
+
+Iteration 47
+Meta Train Error 9.801486546872184
+Meta Train Accuracy 0.5416666814126074
+Meta Valid Error 10.577991794794798
+Meta Valid Accuracy 0.4947916795499623
+
+
+Iteration 48
+Meta Train Error 12.296863397263223
+Meta Train Accuracy 0.494791679084301
+Meta Valid Error 6.778893656747869
+Meta Valid Accuracy 0.6250000144354999
+
+
+Iteration 49
+Meta Train Error 11.716603158653015
+Meta Train Accuracy 0.46354168141260743
+Meta Valid Error 7.8314068811014295
+Meta Valid Accuracy 0.536458348389715
+
+
+Iteration 50
+Meta Train Error 9.69186321273446
+Meta Train Accuracy 0.5208333460614085
+Meta Valid Error 6.764402756467462
+Meta Valid Accuracy 0.5416666781529784
+
+
+Iteration 51
+Meta Train Error 8.241343334317207
+Meta Train Accuracy 0.4739583432674408
+Meta Valid Error 7.737418341588295
+Meta Valid Accuracy 0.5000000093132257
+
+
+Iteration 52
+Meta Train Error 9.277655978687108
+Meta Train Accuracy 0.5364583507180214
+Meta Valid Error 4.917535781234619
+Meta Valid Accuracy 0.5520833446644247
+
+
+Iteration 53
+Meta Train Error 7.783213093643974
+Meta Train Accuracy 0.5416666804812849
+Meta Valid Error 6.619982349453494
+Meta Valid Accuracy 0.5052083409391344
+
+
+Iteration 54
+Meta Train Error 8.07438188764354
+Meta Train Accuracy 0.47916667722165585
+Meta Valid Error 5.956895479932427
+Meta Valid Accuracy 0.552083348389715
+
+
+Iteration 55
+Meta Train Error 8.219676870852709
+Meta Train Accuracy 0.48437501210719347
+Meta Valid Error 8.749532304912766
+Meta Valid Accuracy 0.4895833437331021
+
+
+Iteration 56
+Meta Train Error 6.930899550410686
+Meta Train Accuracy 0.5364583414047956
+Meta Valid Error 5.626084725372493
+Meta Valid Accuracy 0.5416666776873171
+
+
+Iteration 57
+Meta Train Error 7.3147237384691834
+Meta Train Accuracy 0.4739583428017795
+Meta Valid Error 5.524872309528291
+Meta Valid Accuracy 0.49479168048128486
+
+
+Iteration 58
+Meta Train Error 6.68743183122326
+Meta Train Accuracy 0.46875000931322575
+Meta Valid Error 7.025503359735012
+Meta Valid Accuracy 0.45833334559574723
+
+
+Iteration 59
+Meta Train Error 5.111055728048086
+Meta Train Accuracy 0.43750000884756446
+Meta Valid Error 6.524103611707687
+Meta Valid Accuracy 0.48958334559574723
+
+
+Iteration 60
+Meta Train Error 4.367301279678941
+Meta Train Accuracy 0.5000000074505806
+Meta Valid Error 5.038239099085331
+Meta Valid Accuracy 0.5468750121071935
+
+
+Iteration 61
+Meta Train Error 9.171232590451837
+Meta Train Accuracy 0.43229167629033327
+Meta Valid Error 4.270543891005218
+Meta Valid Accuracy 0.47395834093913436
+
+
+Iteration 62
+Meta Train Error 6.927151063457131
+Meta Train Accuracy 0.41145834187045693
+Meta Valid Error 7.022869147360325
+Meta Valid Accuracy 0.4947916786186397
+
+
+Iteration 63
+Meta Train Error 5.307240945912781
+Meta Train Accuracy 0.5052083432674408
+Meta Valid Error 4.035791936097667
+Meta Valid Accuracy 0.5156250093132257
+
+
+Iteration 64
+Meta Train Error 4.028912585363287
+Meta Train Accuracy 0.5208333446644247
+Meta Valid Error 4.3104727528989315
+Meta Valid Accuracy 0.49479167768731713
+
+
+Iteration 65
+Meta Train Error 6.575267195701599
+Meta Train Accuracy 0.4427083423361182
+Meta Valid Error 3.776854601688683
+Meta Valid Accuracy 0.5052083441987634
+
+
+Iteration 66
+Meta Train Error 5.02892507033539
+Meta Train Accuracy 0.4791666744276881
+Meta Valid Error 5.742392752319574
+Meta Valid Accuracy 0.5572916818782687
+
+
+Iteration 67
+Meta Train Error 4.587243442945692
+Meta Train Accuracy 0.5104166767559946
+Meta Valid Error 4.115686627352261
+Meta Valid Accuracy 0.5677083469927311
+
+
+Iteration 68
+Meta Train Error 5.1867635381895525
+Meta Train Accuracy 0.49479167722165585
+Meta Valid Error 4.701036769896746
+Meta Valid Accuracy 0.5260416786186397
+
+
+Iteration 69
+Meta Train Error 5.473097885824245
+Meta Train Accuracy 0.5052083460614085
+Meta Valid Error 6.12966257892549
+Meta Valid Accuracy 0.4895833469927311
+
+
+Iteration 70
+Meta Train Error 5.957016441971064
+Meta Train Accuracy 0.4947916795499623
+Meta Valid Error 5.796737129014218
+Meta Valid Accuracy 0.5000000116415322
+
+
+Iteration 71
+Meta Train Error 4.374082610011101
+Meta Train Accuracy 0.5000000135041773
+Meta Valid Error 3.2763472562655807
+Meta Valid Accuracy 0.5729166795499623
+
+
+Iteration 72
+Meta Train Error 4.517794569954276
+Meta Train Accuracy 0.45833334140479565
+Meta Valid Error 5.334139410406351
+Meta Valid Accuracy 0.5156250102445483
+
+
+Iteration 73
+Meta Train Error 3.479723896831274
+Meta Train Accuracy 0.5052083432674408
+Meta Valid Error 3.302655571140349
+Meta Valid Accuracy 0.48958334187045693
+
+
+Iteration 74
+Meta Train Error 3.9733852595090866
+Meta Train Accuracy 0.45312500838190317
+Meta Valid Error 4.261129379272461
+Meta Valid Accuracy 0.4843750069849193
+
+
+Iteration 75
+Meta Train Error 4.3205037247389555
+Meta Train Accuracy 0.44791667303070426
+Meta Valid Error 5.041502919164486
+Meta Valid Accuracy 0.4739583432674408
+
+
+Iteration 76
+Meta Train Error 3.4496528171002865
+Meta Train Accuracy 0.43750000884756446
+Meta Valid Error 2.818818833678961
+Meta Valid Accuracy 0.5156250093132257
+
+
+Iteration 77
+Meta Train Error 2.896402871236205
+Meta Train Accuracy 0.520833345130086
+Meta Valid Error 6.664588360399648
+Meta Valid Accuracy 0.43229167349636555
+
+
+Iteration 78
+Meta Train Error 2.8836349453777075
+Meta Train Accuracy 0.484375006519258
+Meta Valid Error 5.305854060687125
+Meta Valid Accuracy 0.4531250111758709
+
+
+Iteration 79
+Meta Train Error 3.553016026504338
+Meta Train Accuracy 0.4322916753590107
+Meta Valid Error 6.563397343270481
+Meta Valid Accuracy 0.40625000977888703
+
+
+Iteration 80
+Meta Train Error 3.0857292683795094
+Meta Train Accuracy 0.4427083432674408
+Meta Valid Error 5.8492335975170135
+Meta Valid Accuracy 0.32812500605359674
+
+
+Iteration 81
+Meta Train Error 4.020982402376831
+Meta Train Accuracy 0.47395834419876337
+Meta Valid Error 4.916315076872706
+Meta Valid Accuracy 0.416666672565043
+
+
+Iteration 82
+Meta Train Error 3.977910957299173
+Meta Train Accuracy 0.48437501210719347
+Meta Valid Error 3.9810142209753394
+Meta Valid Accuracy 0.45833334187045693
+
+
+Iteration 83
+Meta Train Error 5.263524264097214
+Meta Train Accuracy 0.5572916846722364
+Meta Valid Error 6.108110833913088
+Meta Valid Accuracy 0.4895833465270698
+
+
+Iteration 84
+Meta Train Error 6.0631282357499
+Meta Train Accuracy 0.5208333493210375
+Meta Valid Error 7.140932263340801
+Meta Valid Accuracy 0.43229167396202683
+
+
+Iteration 85
+Meta Train Error 5.249223065096885
+Meta Train Accuracy 0.5364583493210375
+Meta Valid Error 5.113357069902122
+Meta Valid Accuracy 0.5364583469927311
+
+
+Iteration 86
+Meta Train Error 6.25106474198401
+Meta Train Accuracy 0.5000000125728548
+Meta Valid Error 5.22113186866045
+Meta Valid Accuracy 0.49479168048128486
+
+
+Iteration 87
+Meta Train Error 3.4171967838774435
+Meta Train Accuracy 0.6354166874662042
+Meta Valid Error 5.483865093439817
+Meta Valid Accuracy 0.4687500102445483
+
+
+Iteration 88
+Meta Train Error 6.140778129920363
+Meta Train Accuracy 0.4895833474583924
+Meta Valid Error 4.320761159993708
+Meta Valid Accuracy 0.5104166772216558
+
+
+Iteration 89
+Meta Train Error 6.055656881071627
+Meta Train Accuracy 0.5000000102445483
+Meta Valid Error 4.311074657831341
+Meta Valid Accuracy 0.5104166767559946
+
+
+Iteration 90
+Meta Train Error 6.433827331289649
+Meta Train Accuracy 0.44791667768731713
+Meta Valid Error 5.461613889783621
+Meta Valid Accuracy 0.4687500111758709
+
+
+Iteration 91
+Meta Train Error 6.280790355056524
+Meta Train Accuracy 0.48437501303851604
+Meta Valid Error 4.239565910771489
+Meta Valid Accuracy 0.48437500977888703
+
+
+Iteration 92
+Meta Train Error 5.500592841301113
+Meta Train Accuracy 0.49479167768731713
+Meta Valid Error 4.875523425638676
+Meta Valid Accuracy 0.46354167629033327
+
+
+Iteration 93
+Meta Train Error 4.161739107221365
+Meta Train Accuracy 0.5260416818782687
+Meta Valid Error 4.786372287198901
+Meta Valid Accuracy 0.5000000107102096
+
+
+Iteration 94
+Meta Train Error 4.279864374548197
+Meta Train Accuracy 0.47916667722165585
+Meta Valid Error 4.6797840083017945
+Meta Valid Accuracy 0.45312501257285476
+
+
+Iteration 95
+Meta Train Error 4.370699991006404
+Meta Train Accuracy 0.47395834419876337
+Meta Valid Error 3.34850656054914
+Meta Valid Accuracy 0.4739583423361182
+
+
+Iteration 96
+Meta Train Error 3.239939642138779
+Meta Train Accuracy 0.5260416781529784
+Meta Valid Error 3.2027499563992023
+Meta Valid Accuracy 0.46875000558793545
+
+
+Iteration 97
+Meta Train Error 4.323753598146141
+Meta Train Accuracy 0.46875000884756446
+Meta Valid Error 2.2140652518719435
+Meta Valid Accuracy 0.5520833437331021
+
+
+Iteration 98
+Meta Train Error 3.443261153064668
+Meta Train Accuracy 0.44791667629033327
+Meta Valid Error 2.304931176826358
+Meta Valid Accuracy 0.5000000102445483
+
+
+Iteration 99
+Meta Train Error 2.856831052340567
+Meta Train Accuracy 0.5000000102445483
+Meta Valid Error 2.780557663179934
+Meta Valid Accuracy 0.437500006519258
+
+
+Iteration 100
+Meta Train Error 2.222808377817273
+Meta Train Accuracy 0.5000000125728548
+Meta Valid Error 2.557080994360149
+Meta Valid Accuracy 0.45312500838190317
+level : 1 ./CURE_TSR_Yahan_Shortcut/Real_Train/LensBlur-1/
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 0
+Intermediate Meta Train Error 0.05020460011019168
+Intermediate Meta Train Accuracy 0.9947916679084301
+Intermediate Meta Valid Error 3.3420364689081907
+Intermediate Meta Valid Accuracy 0.45312500977888703
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 1
+Intermediate Meta Train Error 0.7575470184137885
+Intermediate Meta Train Accuracy 0.9635416669771075
+Intermediate Meta Valid Error 2.8790380861610174
+Intermediate Meta Valid Accuracy 0.44270834140479565
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 2
+Intermediate Meta Train Error 0.48637451944068744
+Intermediate Meta Train Accuracy 0.9583333367481828
+Intermediate Meta Valid Error 3.6054301746189594
+Intermediate Meta Valid Accuracy 0.3854166716337204
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 3
+Intermediate Meta Train Error 0.8901715796932876
+Intermediate Meta Train Accuracy 0.937500003259629
+Intermediate Meta Valid Error 3.967538844794035
+Intermediate Meta Valid Accuracy 0.4322916716337204
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 4
+Intermediate Meta Train Error 2.26566636817779
+Intermediate Meta Train Accuracy 0.8906250027939677
+Intermediate Meta Valid Error 4.71018348261714
+Intermediate Meta Valid Accuracy 0.4166666707023978
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 5
+Intermediate Meta Train Error 1.6948597261684881
+Intermediate Meta Train Accuracy 0.9218750051222742
+Intermediate Meta Valid Error 5.346016208641231
+Intermediate Meta Valid Accuracy 0.3802083395421505
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 6
+Intermediate Meta Train Error 3.0053053436281516
+Intermediate Meta Train Accuracy 0.8645833367481828
+Intermediate Meta Valid Error 5.7747504115104675
+Intermediate Meta Valid Accuracy 0.41145833721384406
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 7
+Intermediate Meta Train Error 1.5886091905617832
+Intermediate Meta Train Accuracy 0.9166666711680591
+Intermediate Meta Valid Error 5.622168326750398
+Intermediate Meta Valid Accuracy 0.401041672565043
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 8
+Intermediate Meta Train Error 1.3319384913315844
+Intermediate Meta Train Accuracy 0.890625003259629
+Intermediate Meta Valid Error 7.243428450077772
+Intermediate Meta Valid Accuracy 0.38020833814516664
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 9
+Intermediate Meta Train Error 2.706215323873039
+Intermediate Meta Train Accuracy 0.8645833400078118
+Intermediate Meta Valid Error 7.006396290846169
+Intermediate Meta Valid Accuracy 0.4739583386108279
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 10
+Intermediate Meta Train Error 3.541025557953162
+Intermediate Meta Train Accuracy 0.8177083404734731
+Intermediate Meta Valid Error 4.973140109330416
+Intermediate Meta Valid Accuracy 0.4479166711680591
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 11
+Intermediate Meta Train Error 1.3196695264500704
+Intermediate Meta Train Accuracy 0.9062500093132257
+Intermediate Meta Valid Error 7.263844421133399
+Intermediate Meta Valid Accuracy 0.41666667303070426
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 12
+Intermediate Meta Train Error 3.1629150421407104
+Intermediate Meta Train Accuracy 0.8072916730307043
+Intermediate Meta Valid Error 9.56161517649889
+Intermediate Meta Valid Accuracy 0.41666667303070426
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 13
+Intermediate Meta Train Error 2.1820591754664633
+Intermediate Meta Train Accuracy 0.8906250037252903
+Intermediate Meta Valid Error 9.981071813032031
+Intermediate Meta Valid Accuracy 0.39062500558793545
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 14
+Intermediate Meta Train Error 2.3014553757103045
+Intermediate Meta Train Accuracy 0.875000003259629
+Intermediate Meta Valid Error 7.810788162052631
+Intermediate Meta Valid Accuracy 0.453125006519258
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 15
+Intermediate Meta Train Error 1.9525635570994382
+Intermediate Meta Train Accuracy 0.885416669305414
+Intermediate Meta Valid Error 7.34887845441699
+Intermediate Meta Valid Accuracy 0.4322916716337204
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 16
+Intermediate Meta Train Error 0.2874535569438592
+Intermediate Meta Train Accuracy 0.9791666697710752
+Intermediate Meta Valid Error 7.843035325407982
+Intermediate Meta Valid Accuracy 0.421875006519258
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 17
+Intermediate Meta Train Error 1.1223491313788827
+Intermediate Meta Train Accuracy 0.9218750004656613
+Intermediate Meta Valid Error 7.028212785720825
+Intermediate Meta Valid Accuracy 0.4218750046566129
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 18
+Intermediate Meta Train Error 0.49902802280297465
+Intermediate Meta Train Accuracy 0.973958333954215
+Intermediate Meta Valid Error 6.655981417745352
+Intermediate Meta Valid Accuracy 0.4270833390764892
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 19
+Intermediate Meta Train Error 0.7381406280804867
+Intermediate Meta Train Accuracy 0.9479166674427688
+Intermediate Meta Valid Error 6.889489371329546
+Intermediate Meta Valid Accuracy 0.4583333428017795
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 20
+Intermediate Meta Train Error 0.31578542757290506
+Intermediate Meta Train Accuracy 0.9739583334885538
+Intermediate Meta Valid Error 6.494272891432047
+Intermediate Meta Valid Accuracy 0.463541672565043
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 21
+Intermediate Meta Train Error 1.5125814209143869
+Intermediate Meta Train Accuracy 0.9218750018626451
+Intermediate Meta Valid Error 7.686353228986263
+Intermediate Meta Valid Accuracy 0.4947916748933494
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 22
+Intermediate Meta Train Error 1.290426280248198
+Intermediate Meta Train Accuracy 0.9427083353511989
+Intermediate Meta Valid Error 7.451692070811987
+Intermediate Meta Valid Accuracy 0.42708333767950535
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 23
+Intermediate Meta Train Error 0.7398925742176914
+Intermediate Meta Train Accuracy 0.958333333954215
+Intermediate Meta Valid Error 9.77987103536725
+Intermediate Meta Valid Accuracy 0.3958333367481828
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 24
+Intermediate Meta Train Error 1.6116821225743934
+Intermediate Meta Train Accuracy 0.9062500023283064
+Intermediate Meta Valid Error 8.610256139189005
+Intermediate Meta Valid Accuracy 0.43750000605359674
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 25
+Intermediate Meta Train Error 0.7469476225943055
+Intermediate Meta Train Accuracy 0.9479166707023978
+Intermediate Meta Valid Error 9.600839299149811
+Intermediate Meta Valid Accuracy 0.4270833395421505
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 26
+Intermediate Meta Train Error 0.5841539360156105
+Intermediate Meta Train Accuracy 0.9531250027939677
+Intermediate Meta Valid Error 10.7149977684021
+Intermediate Meta Valid Accuracy 0.463541675824672
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 27
+Intermediate Meta Train Error 1.2393655369667442
+Intermediate Meta Train Accuracy 0.9583333334885538
+Intermediate Meta Valid Error 7.4589299615472555
+Intermediate Meta Valid Accuracy 0.5208333469927311
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 28
+Intermediate Meta Train Error 0.9292894695194605
+Intermediate Meta Train Accuracy 0.947916669305414
+Intermediate Meta Valid Error 12.705935288220644
+Intermediate Meta Valid Accuracy 0.3906250074505806
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 29
+Intermediate Meta Train Error 0.7227333158159581
+Intermediate Meta Train Accuracy 0.9635416679084301
+Intermediate Meta Valid Error 8.162861686199903
+Intermediate Meta Valid Accuracy 0.49479167629033327
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 30
+Intermediate Meta Train Error 1.5611873953439854
+Intermediate Meta Train Accuracy 0.9218750037252903
+Intermediate Meta Valid Error 9.835793681442738
+Intermediate Meta Valid Accuracy 0.46354167722165585
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 31
+Intermediate Meta Train Error 1.9652468860323964
+Intermediate Meta Train Accuracy 0.9010416683740914
+Intermediate Meta Valid Error 9.96463992074132
+Intermediate Meta Valid Accuracy 0.4531250102445483
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 32
+Intermediate Meta Train Error 3.123217898181153
+Intermediate Meta Train Accuracy 0.8697916720993817
+Intermediate Meta Valid Error 13.307256232947111
+Intermediate Meta Valid Accuracy 0.4062500107102096
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 33
+Intermediate Meta Train Error 2.066912964330708
+Intermediate Meta Train Accuracy 0.8645833432674408
+Intermediate Meta Valid Error 9.283039301633835
+Intermediate Meta Valid Accuracy 0.49479167768731713
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 34
+Intermediate Meta Train Error 8.13599061986432
+Intermediate Meta Train Accuracy 0.8281250195577741
+Intermediate Meta Valid Error 11.681443959474564
+Intermediate Meta Valid Accuracy 0.4270833437331021
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 35
+Intermediate Meta Train Error 3.969942868640773
+Intermediate Meta Train Accuracy 0.8489583432674408
+Intermediate Meta Valid Error 10.368759922683239
+Intermediate Meta Valid Accuracy 0.43750000884756446
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 36
+Intermediate Meta Train Error 3.7181443339524023
+Intermediate Meta Train Accuracy 0.875000013038516
+Intermediate Meta Valid Error 8.70686624571681
+Intermediate Meta Valid Accuracy 0.5052083469927311
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 37
+Intermediate Meta Train Error 2.2131995395031083
+Intermediate Meta Train Accuracy 0.8958333404734731
+Intermediate Meta Valid Error 12.959368228912354
+Intermediate Meta Valid Accuracy 0.4375000116415322
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 38
+Intermediate Meta Train Error 2.3390196209752503
+Intermediate Meta Train Accuracy 0.8697916744276881
+Intermediate Meta Valid Error 10.509896351024508
+Intermediate Meta Valid Accuracy 0.4739583437331021
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 39
+Intermediate Meta Train Error 2.640079132314881
+Intermediate Meta Train Accuracy 0.8958333395421505
+Intermediate Meta Valid Error 10.06067780405283
+Intermediate Meta Valid Accuracy 0.49479168001562357
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 40
+Intermediate Meta Train Error 1.4698791265994942
+Intermediate Meta Train Accuracy 0.9322916716337204
+Intermediate Meta Valid Error 11.606425270438194
+Intermediate Meta Valid Accuracy 0.46354167722165585
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 41
+Intermediate Meta Train Error 1.5660682156027974
+Intermediate Meta Train Accuracy 0.8906250069849193
+Intermediate Meta Valid Error 9.213147088885307
+Intermediate Meta Valid Accuracy 0.47916667768731713
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 42
+Intermediate Meta Train Error 2.0752197647651087
+Intermediate Meta Train Accuracy 0.8802083428017795
+Intermediate Meta Valid Error 12.989130536094308
+Intermediate Meta Valid Accuracy 0.416666679084301
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 43
+Intermediate Meta Train Error 1.8437646064262765
+Intermediate Meta Train Accuracy 0.8854166716337204
+Intermediate Meta Valid Error 16.4060979783535
+Intermediate Meta Valid Accuracy 0.39062500977888703
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 44
+Intermediate Meta Train Error 1.4662311503367675
+Intermediate Meta Train Accuracy 0.9479166697710752
+Intermediate Meta Valid Error 14.419364757835865
+Intermediate Meta Valid Accuracy 0.41145834419876337
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 45
+Intermediate Meta Train Error 1.8934736594414119
+Intermediate Meta Train Accuracy 0.9062500027939677
+Intermediate Meta Valid Error 10.613137561827898
+Intermediate Meta Valid Accuracy 0.4687500079162419
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 46
+Intermediate Meta Train Error 2.6085497528617054
+Intermediate Meta Train Accuracy 0.8697916734963655
+Intermediate Meta Valid Error 13.053775295615196
+Intermediate Meta Valid Accuracy 0.4010416748933494
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 47
+Intermediate Meta Train Error 1.4476634864496987
+Intermediate Meta Train Accuracy 0.9062500111758709
+Intermediate Meta Valid Error 13.16411367803812
+Intermediate Meta Valid Accuracy 0.4062500107102096
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 48
+Intermediate Meta Train Error 1.545102076440628
+Intermediate Meta Train Accuracy 0.9218750055879354
+Intermediate Meta Valid Error 14.042491428554058
+Intermediate Meta Valid Accuracy 0.42708334187045693
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 49
+Intermediate Meta Train Error 2.910122317015123
+Intermediate Meta Train Accuracy 0.8750000046566129
+Intermediate Meta Valid Error 12.797614924609661
+Intermediate Meta Valid Accuracy 0.4739583423361182
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 50
+Intermediate Meta Train Error 2.87987806847309
+Intermediate Meta Train Accuracy 0.8333333362825215
+Intermediate Meta Valid Error 14.85510971210897
+Intermediate Meta Valid Accuracy 0.3750000079162419
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 51
+Intermediate Meta Train Error 3.378965357641505
+Intermediate Meta Train Accuracy 0.8333333381451666
+Intermediate Meta Valid Error 15.84708970785141
+Intermediate Meta Valid Accuracy 0.38541667396202683
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 52
+Intermediate Meta Train Error 0.6691929560225702
+Intermediate Meta Train Accuracy 0.9739583358168602
+Intermediate Meta Valid Error 12.14436398819089
+Intermediate Meta Valid Accuracy 0.4322916753590107
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 53
+Intermediate Meta Train Error 1.9478876945171066
+Intermediate Meta Train Accuracy 0.9062500018626451
+Intermediate Meta Valid Error 13.935975782573223
+Intermediate Meta Valid Accuracy 0.4479166753590107
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 54
+Intermediate Meta Train Error 1.5331492402398794
+Intermediate Meta Train Accuracy 0.916666669305414
+Intermediate Meta Valid Error 15.370617747306824
+Intermediate Meta Valid Accuracy 0.3958333432674408
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 55
+Intermediate Meta Train Error 1.2189189973977932
+Intermediate Meta Train Accuracy 0.9322916683740914
+Intermediate Meta Valid Error 17.758375592529774
+Intermediate Meta Valid Accuracy 0.4375000107102096
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 56
+Intermediate Meta Train Error 0.5290419343494523
+Intermediate Meta Train Accuracy 0.953125003259629
+Intermediate Meta Valid Error 20.66463513672352
+Intermediate Meta Valid Accuracy 0.43229167768731713
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 57
+Intermediate Meta Train Error 2.166209831939792
+Intermediate Meta Train Accuracy 0.9010416730307043
+Intermediate Meta Valid Error 20.95261559621713
+Intermediate Meta Valid Accuracy 0.42708334187045693
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 58
+Intermediate Meta Train Error 0.6495660110305295
+Intermediate Meta Train Accuracy 0.9687500009313226
+Intermediate Meta Valid Error 24.554658472537994
+Intermediate Meta Valid Accuracy 0.44791667768731713
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 59
+Intermediate Meta Train Error 0.7132110362575332
+Intermediate Meta Train Accuracy 0.9687500018626451
+Intermediate Meta Valid Error 24.638827222399414
+Intermediate Meta Valid Accuracy 0.4375000102445483
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 60
+Intermediate Meta Train Error 1.198268019167438
+Intermediate Meta Train Accuracy 0.9531250018626451
+Intermediate Meta Valid Error 18.00164247304201
+Intermediate Meta Valid Accuracy 0.5052083437331021
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 61
+Intermediate Meta Train Error 0.3718653203589284
+Intermediate Meta Train Accuracy 0.9895833358168602
+Intermediate Meta Valid Error 17.42901238799095
+Intermediate Meta Valid Accuracy 0.47395834419876337
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 62
+Intermediate Meta Train Error 0.4552890451662819
+Intermediate Meta Train Accuracy 0.9687500055879354
+Intermediate Meta Valid Error 15.768266141414642
+Intermediate Meta Valid Accuracy 0.45312500884756446
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 63
+Intermediate Meta Train Error 0.11116902939919626
+Intermediate Meta Train Accuracy 0.984375
+Intermediate Meta Valid Error 18.840365394949913
+Intermediate Meta Valid Accuracy 0.47395834140479565
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 64
+Intermediate Meta Train Error 0.3986259128465477
+Intermediate Meta Train Accuracy 0.9843750018626451
+Intermediate Meta Valid Error 26.47425915300846
+Intermediate Meta Valid Accuracy 0.32812500512227416
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 65
+Intermediate Meta Train Error 0.8057441472272817
+Intermediate Meta Train Accuracy 0.9531250013969839
+Intermediate Meta Valid Error 15.501936495304108
+Intermediate Meta Valid Accuracy 0.48958334093913436
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 66
+Intermediate Meta Train Error 0.30416537035704927
+Intermediate Meta Train Accuracy 0.9843750018626451
+Intermediate Meta Valid Error 21.4766036067158
+Intermediate Meta Valid Accuracy 0.416666672565043
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 67
+Intermediate Meta Train Error 0.792686758877462
+Intermediate Meta Train Accuracy 0.9479166707023978
+Intermediate Meta Valid Error 29.322957053780556
+Intermediate Meta Valid Accuracy 0.390625006519258
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 68
+Intermediate Meta Train Error 1.5336126556004146
+Intermediate Meta Train Accuracy 0.906250006519258
+Intermediate Meta Valid Error 27.56243694573641
+Intermediate Meta Valid Accuracy 0.36979167303070426
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 69
+Intermediate Meta Train Error 2.4382451882975023
+Intermediate Meta Train Accuracy 0.8906250027939677
+Intermediate Meta Valid Error 20.976293578743935
+Intermediate Meta Valid Accuracy 0.41666666977107525
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 70
+Intermediate Meta Train Error 2.882430014026127
+Intermediate Meta Train Accuracy 0.8541666720993817
+Intermediate Meta Valid Error 26.478167161345482
+Intermediate Meta Valid Accuracy 0.401041672565043
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 71
+Intermediate Meta Train Error 1.787881527889974
+Intermediate Meta Train Accuracy 0.8750000139698386
+Intermediate Meta Valid Error 29.614883109927177
+Intermediate Meta Valid Accuracy 0.36458333814516664
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 72
+Intermediate Meta Train Error 1.9833000971417185
+Intermediate Meta Train Accuracy 0.8854166772216558
+Intermediate Meta Valid Error 27.378364108502865
+Intermediate Meta Valid Accuracy 0.3697916720993817
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 73
+Intermediate Meta Train Error 3.078529125848096
+Intermediate Meta Train Accuracy 0.8489583432674408
+Intermediate Meta Valid Error 23.33904380723834
+Intermediate Meta Valid Accuracy 0.40625000558793545
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 74
+Intermediate Meta Train Error 1.9283963026524464
+Intermediate Meta Train Accuracy 0.8645833409391344
+Intermediate Meta Valid Error 24.969733806166914
+Intermediate Meta Valid Accuracy 0.39062500512227416
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 75
+Intermediate Meta Train Error 1.908845760039993
+Intermediate Meta Train Accuracy 0.8645833423361182
+Intermediate Meta Valid Error 27.496264554560184
+Intermediate Meta Valid Accuracy 0.3385416720993817
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 76
+Intermediate Meta Train Error 2.844042944562368
+Intermediate Meta Train Accuracy 0.8385416748933494
+Intermediate Meta Valid Error 31.299309071153402
+Intermediate Meta Valid Accuracy 0.3541666720993817
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 77
+Intermediate Meta Train Error 1.8699091679482551
+Intermediate Meta Train Accuracy 0.8802083428017795
+Intermediate Meta Valid Error 22.099428832530975
+Intermediate Meta Valid Accuracy 0.4010416711680591
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 78
+Intermediate Meta Train Error 1.8124919186376829
+Intermediate Meta Train Accuracy 0.8697916739620268
+Intermediate Meta Valid Error 25.94354907423258
+Intermediate Meta Valid Accuracy 0.3854166744276881
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 79
+Intermediate Meta Train Error 0.8766743195897071
+Intermediate Meta Train Accuracy 0.9427083367481828
+Intermediate Meta Valid Error 30.937759712338448
+Intermediate Meta Valid Accuracy 0.375000006519258
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 80
+Intermediate Meta Train Error 0.7766692276247102
+Intermediate Meta Train Accuracy 0.9427083432674408
+Intermediate Meta Valid Error 22.74430302903056
+Intermediate Meta Valid Accuracy 0.46875000884756446
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 81
+Intermediate Meta Train Error 1.8104847909348543
+Intermediate Meta Train Accuracy 0.8697916753590107
+Intermediate Meta Valid Error 28.412993663921952
+Intermediate Meta Valid Accuracy 0.3593750046566129
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 82
+Intermediate Meta Train Error 1.6061372003639018
+Intermediate Meta Train Accuracy 0.9218750051222742
+Intermediate Meta Valid Error 26.084631863981485
+Intermediate Meta Valid Accuracy 0.3958333395421505
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 83
+Intermediate Meta Train Error 1.3624673488052181
+Intermediate Meta Train Accuracy 0.9114583423361182
+Intermediate Meta Valid Error 28.121937796473503
+Intermediate Meta Valid Accuracy 0.37500000605359674
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 84
+Intermediate Meta Train Error 2.402909919030243
+Intermediate Meta Train Accuracy 0.8541666762903333
+Intermediate Meta Valid Error 25.273223772644997
+Intermediate Meta Valid Accuracy 0.40625000558793545
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 85
+Intermediate Meta Train Error 0.7661048352361384
+Intermediate Meta Train Accuracy 0.9270833414047956
+Intermediate Meta Valid Error 24.148311769822612
+Intermediate Meta Valid Accuracy 0.42708333767950535
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 86
+Intermediate Meta Train Error 1.1542106442075877
+Intermediate Meta Train Accuracy 0.9218750055879354
+Intermediate Meta Valid Error 34.940391302108765
+Intermediate Meta Valid Accuracy 0.343750006519258
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 87
+Intermediate Meta Train Error 2.9126490863953682
+Intermediate Meta Train Accuracy 0.8541666767559946
+Intermediate Meta Valid Error 29.469471022486687
+Intermediate Meta Valid Accuracy 0.38020834093913436
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 88
+Intermediate Meta Train Error 0.8164124425833368
+Intermediate Meta Train Accuracy 0.9427083348855376
+Intermediate Meta Valid Error 30.819916673004627
+Intermediate Meta Valid Accuracy 0.34895833767950535
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 89
+Intermediate Meta Train Error 1.3040264255050467
+Intermediate Meta Train Accuracy 0.9166666697710752
+Intermediate Meta Valid Error 32.67915193364024
+Intermediate Meta Valid Accuracy 0.35937500558793545
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 90
+Intermediate Meta Train Error 1.8143909444666377
+Intermediate Meta Train Accuracy 0.9010416716337204
+Intermediate Meta Valid Error 23.506872959434986
+Intermediate Meta Valid Accuracy 0.4322916711680591
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 91
+Intermediate Meta Train Error 0.6315287801284808
+Intermediate Meta Train Accuracy 0.9166666762903333
+Intermediate Meta Valid Error 30.694795928895473
+Intermediate Meta Valid Accuracy 0.3541666711680591
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 92
+Intermediate Meta Train Error 1.425579965738688
+Intermediate Meta Train Accuracy 0.9010416753590107
+Intermediate Meta Valid Error 29.6937109939754
+Intermediate Meta Valid Accuracy 0.3958333400078118
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 93
+Intermediate Meta Train Error 0.6542731429687976
+Intermediate Meta Train Accuracy 0.9375000055879354
+Intermediate Meta Valid Error 27.48151202313602
+Intermediate Meta Valid Accuracy 0.4062500069849193
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 94
+Intermediate Meta Train Error 2.185189399388215
+Intermediate Meta Train Accuracy 0.9010416711680591
+Intermediate Meta Valid Error 21.757452600635588
+Intermediate Meta Valid Accuracy 0.4166666707023978
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 95
+Intermediate Meta Train Error 2.5979592320713434
+Intermediate Meta Train Accuracy 0.8645833409391344
+Intermediate Meta Valid Error 30.332971153780818
+Intermediate Meta Valid Accuracy 0.3802083395421505
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 96
+Intermediate Meta Train Error 1.419014739932559
+Intermediate Meta Train Accuracy 0.9114583432674408
+Intermediate Meta Valid Error 25.545816514641047
+Intermediate Meta Valid Accuracy 0.39583333767950535
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 97
+Intermediate Meta Train Error 2.110356739349079
+Intermediate Meta Train Accuracy 0.8385416716337204
+Intermediate Meta Valid Error 28.80842006765306
+Intermediate Meta Valid Accuracy 0.3593750046566129
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 98
+Intermediate Meta Train Error 3.0086587764565587
+Intermediate Meta Train Accuracy 0.8802083367481828
+Intermediate Meta Valid Error 29.930136849172413
+Intermediate Meta Valid Accuracy 0.3802083395421505
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 99
+Intermediate Meta Train Error 2.436580279617882
+Intermediate Meta Train Accuracy 0.8645833414047956
+Intermediate Meta Valid Error 17.63187424838543
+Intermediate Meta Valid Accuracy 0.4635416711680591
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 100
+Intermediate Meta Train Error 2.9436932192321006
+Intermediate Meta Train Accuracy 0.8802083409391344
+Intermediate Meta Valid Error 24.650824511423707
+Intermediate Meta Valid Accuracy 0.4375000069849193
+level : 2 ./CURE_TSR_Yahan_Shortcut/Real_Train/LensBlur-2/
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 0
+Intermediate Meta Train Error 3.8350148813087293
+Intermediate Meta Train Accuracy 0.8177083432674408
+Intermediate Meta Valid Error 23.1154194008559
+Intermediate Meta Valid Accuracy 0.432291672565043
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 1
+Intermediate Meta Train Error 3.357081318329403
+Intermediate Meta Train Accuracy 0.828125006519258
+Intermediate Meta Valid Error 18.82635414134711
+Intermediate Meta Valid Accuracy 0.46354167303070426
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 2
+Intermediate Meta Train Error 1.8792523236084122
+Intermediate Meta Train Accuracy 0.8906250074505806
+Intermediate Meta Valid Error 19.485772443935275
+Intermediate Meta Valid Accuracy 0.4479166716337204
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 3
+Intermediate Meta Train Error 1.1941034612532357
+Intermediate Meta Train Accuracy 0.9062500074505806
+Intermediate Meta Valid Error 26.11442582309246
+Intermediate Meta Valid Accuracy 0.3802083367481828
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 4
+Intermediate Meta Train Error 0.8388037132409665
+Intermediate Meta Train Accuracy 0.9479166716337204
+Intermediate Meta Valid Error 20.71333535760641
+Intermediate Meta Valid Accuracy 0.4479166716337204
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 5
+Intermediate Meta Train Error 2.717077811227547
+Intermediate Meta Train Accuracy 0.8697916734963655
+Intermediate Meta Valid Error 20.051515195518732
+Intermediate Meta Valid Accuracy 0.44791666930541396
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 6
+Intermediate Meta Train Error 1.8923261244975205
+Intermediate Meta Train Accuracy 0.9270833376795053
+Intermediate Meta Valid Error 23.15836929436773
+Intermediate Meta Valid Accuracy 0.4531250074505806
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 7
+Intermediate Meta Train Error 2.2637959649050288
+Intermediate Meta Train Accuracy 0.8697916720993817
+Intermediate Meta Valid Error 19.23459802940488
+Intermediate Meta Valid Accuracy 0.45312500512227416
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 8
+Intermediate Meta Train Error 1.2362683405351702
+Intermediate Meta Train Accuracy 0.9166666744276881
+Intermediate Meta Valid Error 25.620134383440018
+Intermediate Meta Valid Accuracy 0.39583333814516664
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 9
+Intermediate Meta Train Error 1.525576801202721
+Intermediate Meta Train Accuracy 0.8854166762903333
+Intermediate Meta Valid Error 31.074946179986
+Intermediate Meta Valid Accuracy 0.4114583390764892
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 10
+Intermediate Meta Train Error 1.5592479692417136
+Intermediate Meta Train Accuracy 0.8854166767559946
+Intermediate Meta Valid Error 22.812515169382095
+Intermediate Meta Valid Accuracy 0.4270833386108279
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 11
+Intermediate Meta Train Error 2.032492896098489
+Intermediate Meta Train Accuracy 0.8958333386108279
+Intermediate Meta Valid Error 17.82941311597824
+Intermediate Meta Valid Accuracy 0.4479166688397527
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 12
+Intermediate Meta Train Error 2.9935325261896537
+Intermediate Meta Train Accuracy 0.8645833390764892
+Intermediate Meta Valid Error 19.845980608835816
+Intermediate Meta Valid Accuracy 0.43229166977107525
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 13
+Intermediate Meta Train Error 2.335282793118624
+Intermediate Meta Train Accuracy 0.8697916730307043
+Intermediate Meta Valid Error 22.892981007695198
+Intermediate Meta Valid Accuracy 0.4270833358168602
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 14
+Intermediate Meta Train Error 4.536803322466083
+Intermediate Meta Train Accuracy 0.8020833414047956
+Intermediate Meta Valid Error 23.327573239803314
+Intermediate Meta Valid Accuracy 0.4270833358168602
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 15
+Intermediate Meta Train Error 4.668426315038914
+Intermediate Meta Train Accuracy 0.7239583493210375
+Intermediate Meta Valid Error 19.10154862701893
+Intermediate Meta Valid Accuracy 0.43750000232830644
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 16
+Intermediate Meta Train Error 3.754599916812367
+Intermediate Meta Train Accuracy 0.7968750176951289
+Intermediate Meta Valid Error 18.94316106289625
+Intermediate Meta Valid Accuracy 0.4635416716337204
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 17
+Intermediate Meta Train Error 3.2974190628362976
+Intermediate Meta Train Accuracy 0.8593750158324838
+Intermediate Meta Valid Error 14.619446247816086
+Intermediate Meta Valid Accuracy 0.4635416688397527
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 18
+Intermediate Meta Train Error 2.2544394301161006
+Intermediate Meta Train Accuracy 0.8802083469927311
+Intermediate Meta Valid Error 18.10376278311014
+Intermediate Meta Valid Accuracy 0.45312500512227416
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 19
+Intermediate Meta Train Error 3.1333456972544473
+Intermediate Meta Train Accuracy 0.9010416762903333
+Intermediate Meta Valid Error 12.650570027530193
+Intermediate Meta Valid Accuracy 0.5052083390764892
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 20
+Intermediate Meta Train Error 2.822234461213448
+Intermediate Meta Train Accuracy 0.869791675824672
+Intermediate Meta Valid Error 13.945767886932202
+Intermediate Meta Valid Accuracy 0.5416666762903333
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 21
+Intermediate Meta Train Error 1.7910920631960556
+Intermediate Meta Train Accuracy 0.9270833372138441
+Intermediate Meta Valid Error 10.687938849296188
+Intermediate Meta Valid Accuracy 0.5885416776873171
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 22
+Intermediate Meta Train Error 1.4618758234576767
+Intermediate Meta Train Accuracy 0.9218750055879354
+Intermediate Meta Valid Error 15.504629546310753
+Intermediate Meta Valid Accuracy 0.5052083400078118
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 23
+Intermediate Meta Train Error 0.8191450599223554
+Intermediate Meta Train Accuracy 0.9479166716337204
+Intermediate Meta Valid Error 20.3775049659113
+Intermediate Meta Valid Accuracy 0.5208333479240537
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 24
+Intermediate Meta Train Error 1.5788217266740658
+Intermediate Meta Train Accuracy 0.9322916697710752
+Intermediate Meta Valid Error 22.197024293243885
+Intermediate Meta Valid Accuracy 0.4583333390764892
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 25
+Intermediate Meta Train Error 1.113636647592313
+Intermediate Meta Train Accuracy 0.9479166697710752
+Intermediate Meta Valid Error 19.92502058891114
+Intermediate Meta Valid Accuracy 0.49479167629033327
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 26
+Intermediate Meta Train Error 0.21613428195638795
+Intermediate Meta Train Accuracy 0.989583333954215
+Intermediate Meta Valid Error 16.99931673653191
+Intermediate Meta Valid Accuracy 0.5156250102445483
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 27
+Intermediate Meta Train Error 1.0191351997542029
+Intermediate Meta Train Accuracy 0.9635416679084301
+Intermediate Meta Valid Error 18.341798092704266
+Intermediate Meta Valid Accuracy 0.48958334419876337
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 28
+Intermediate Meta Train Error 0.21213682854439142
+Intermediate Meta Train Accuracy 0.989583333954215
+Intermediate Meta Valid Error 20.95360480993986
+Intermediate Meta Valid Accuracy 0.44791667303070426
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 29
+Intermediate Meta Train Error 0.29860685284130106
+Intermediate Meta Train Accuracy 0.989583333954215
+Intermediate Meta Valid Error 19.261751339305192
+Intermediate Meta Valid Accuracy 0.48437500838190317
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 30
+Intermediate Meta Train Error 0.49255835573607953
+Intermediate Meta Train Accuracy 0.9739583358168602
+Intermediate Meta Valid Error 23.8853294365108
+Intermediate Meta Valid Accuracy 0.4270833428017795
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 31
+Intermediate Meta Train Error 0.2302495241551804
+Intermediate Meta Train Accuracy 0.989583333954215
+Intermediate Meta Valid Error 25.130998633801937
+Intermediate Meta Valid Accuracy 0.4583333423361182
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 32
+Intermediate Meta Train Error 0.8408609610689866
+Intermediate Meta Train Accuracy 0.9687500018626451
+Intermediate Meta Valid Error 23.786220780573785
+Intermediate Meta Valid Accuracy 0.39062500605359674
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 33
+Intermediate Meta Train Error 0.9677717625463798
+Intermediate Meta Train Accuracy 0.9531250018626451
+Intermediate Meta Valid Error 21.769650260917842
+Intermediate Meta Valid Accuracy 0.4114583395421505
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 34
+Intermediate Meta Train Error 0.2125015742083669
+Intermediate Meta Train Accuracy 0.989583333954215
+Intermediate Meta Valid Error 26.827634565532207
+Intermediate Meta Valid Accuracy 0.4322916744276881
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 35
+Intermediate Meta Train Error 0.2883642532172308
+Intermediate Meta Train Accuracy 0.9843750018626451
+Intermediate Meta Valid Error 15.21341466717422
+Intermediate Meta Valid Accuracy 0.494791675824672
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 36
+Intermediate Meta Train Error 0.003597301073737569
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 17.87154465727508
+Intermediate Meta Valid Accuracy 0.45312500512227416
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 37
+Intermediate Meta Train Error 0.2745800316190037
+Intermediate Meta Train Accuracy 0.9791666679084301
+Intermediate Meta Valid Error 14.53712161257863
+Intermediate Meta Valid Accuracy 0.45833333721384406
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 38
+Intermediate Meta Train Error 0.38736798821101726
+Intermediate Meta Train Accuracy 0.984375
+Intermediate Meta Valid Error 16.916046921163797
+Intermediate Meta Valid Accuracy 0.4375000041909516
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 39
+Intermediate Meta Train Error 0.000873545337345405
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 15.905493593774736
+Intermediate Meta Valid Accuracy 0.4791666748933494
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 40
+Intermediate Meta Train Error 0.004307750357300577
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 18.872598509304225
+Intermediate Meta Valid Accuracy 0.4375000037252903
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 41
+Intermediate Meta Train Error 0.011973722486796845
+Intermediate Meta Train Accuracy 0.9947916679084301
+Intermediate Meta Valid Error 13.283541904762387
+Intermediate Meta Valid Accuracy 0.4531250069849193
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 42
+Intermediate Meta Train Error 0.48122084363621553
+Intermediate Meta Train Accuracy 0.9791666679084301
+Intermediate Meta Valid Error 11.687874879688025
+Intermediate Meta Valid Accuracy 0.4687500069849193
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 43
+Intermediate Meta Train Error 0.22150254176234085
+Intermediate Meta Train Accuracy 0.989583333954215
+Intermediate Meta Valid Error 17.643665181472898
+Intermediate Meta Valid Accuracy 0.4427083386108279
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 44
+Intermediate Meta Train Error 0.36457612817151386
+Intermediate Meta Train Accuracy 0.9791666679084301
+Intermediate Meta Valid Error 20.17024078592658
+Intermediate Meta Valid Accuracy 0.42708334047347307
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 45
+Intermediate Meta Train Error 0.47173464255730124
+Intermediate Meta Train Accuracy 0.9843750018626451
+Intermediate Meta Valid Error 21.45812325179577
+Intermediate Meta Valid Accuracy 0.43229166977107525
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 46
+Intermediate Meta Train Error 0.2063646729082933
+Intermediate Meta Train Accuracy 0.989583333954215
+Intermediate Meta Valid Error 16.025852913968265
+Intermediate Meta Valid Accuracy 0.4427083386108279
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 47
+Intermediate Meta Train Error 5.2072855680762586e-05
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 15.305586031638086
+Intermediate Meta Valid Accuracy 0.4739583390764892
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 48
+Intermediate Meta Train Error 0.0003297775318458207
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 19.169584080576897
+Intermediate Meta Valid Accuracy 0.42708334047347307
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 49
+Intermediate Meta Train Error 0.18079078597131115
+Intermediate Meta Train Accuracy 0.989583333954215
+Intermediate Meta Valid Error 6.184571390040219
+Intermediate Meta Valid Accuracy 0.5364583404734731
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 50
+Intermediate Meta Train Error 0.6561928430110129
+Intermediate Meta Train Accuracy 0.9791666679084301
+Intermediate Meta Valid Error 19.398503571748734
+Intermediate Meta Valid Accuracy 0.4427083386108279
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 51
+Intermediate Meta Train Error 7.266638874625642e-06
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 20.368287160992622
+Intermediate Meta Valid Accuracy 0.4166666688397527
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 52
+Intermediate Meta Train Error 1.0746473734002393e-05
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 31.56755143404007
+Intermediate Meta Valid Accuracy 0.3854166707023978
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 53
+Intermediate Meta Train Error 1.8339161783842428e-05
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 25.4577194750309
+Intermediate Meta Valid Accuracy 0.4010416707023978
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 54
+Intermediate Meta Train Error 1.4089683446627532e-05
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 31.56517623644322
+Intermediate Meta Valid Accuracy 0.41145834140479565
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 55
+Intermediate Meta Train Error 0.32779788178470426
+Intermediate Meta Train Accuracy 0.989583333954215
+Intermediate Meta Valid Error 26.6434661783278
+Intermediate Meta Valid Accuracy 0.40625000558793545
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 56
+Intermediate Meta Train Error 2.0808708995900815e-05
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 23.26266783475876
+Intermediate Meta Valid Accuracy 0.42708333814516664
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 57
+Intermediate Meta Train Error 7.096518061189272e-05
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 22.33436368405819
+Intermediate Meta Valid Accuracy 0.4114583367481828
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 58
+Intermediate Meta Train Error 0.2721831576899376
+Intermediate Meta Train Accuracy 0.989583333954215
+Intermediate Meta Valid Error 20.72676768153906
+Intermediate Meta Valid Accuracy 0.421875003259629
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 59
+Intermediate Meta Train Error 0.2328683879486988
+Intermediate Meta Train Accuracy 0.989583333954215
+Intermediate Meta Valid Error 21.62956292182207
+Intermediate Meta Valid Accuracy 0.406250003259629
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 60
+Intermediate Meta Train Error 0.23664468857663223
+Intermediate Meta Train Accuracy 0.989583333954215
+Intermediate Meta Valid Error 17.85112054273486
+Intermediate Meta Valid Accuracy 0.437500003259629
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 61
+Intermediate Meta Train Error 0.00031430750516392436
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 31.32143750693649
+Intermediate Meta Valid Accuracy 0.4062500074505806
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 62
+Intermediate Meta Train Error 3.042659858465413e-05
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 25.27124049514532
+Intermediate Meta Valid Accuracy 0.4166666716337204
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 63
+Intermediate Meta Train Error 0.003007853721499032
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 22.303325712680817
+Intermediate Meta Valid Accuracy 0.41666666930541396
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 64
+Intermediate Meta Train Error 2.8576060572049755e-05
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 29.413816455751657
+Intermediate Meta Valid Accuracy 0.36979167023673654
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 65
+Intermediate Meta Train Error 0.0018979643689931436
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 34.91597191989422
+Intermediate Meta Valid Accuracy 0.3593750046566129
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 66
+Intermediate Meta Train Error 2.636043718240444e-05
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 23.234374716877937
+Intermediate Meta Valid Accuracy 0.3906250027939677
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 67
+Intermediate Meta Train Error 0.2038572594531729
+Intermediate Meta Train Accuracy 0.9947916679084301
+Intermediate Meta Valid Error 27.75815712288022
+Intermediate Meta Valid Accuracy 0.4062500046566129
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 68
+Intermediate Meta Train Error 0.9626655154856962
+Intermediate Meta Train Accuracy 0.9739583358168602
+Intermediate Meta Valid Error 31.06364180147648
+Intermediate Meta Valid Accuracy 0.3697916716337204
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 69
+Intermediate Meta Train Error 2.34847835569596e-05
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 34.44929872453213
+Intermediate Meta Valid Accuracy 0.3645833395421505
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 70
+Intermediate Meta Train Error 0.0028679770908315305
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 23.31517841666937
+Intermediate Meta Valid Accuracy 0.3958333362825215
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 71
+Intermediate Meta Train Error 0.857912368323972
+Intermediate Meta Train Accuracy 0.9739583358168602
+Intermediate Meta Valid Error 31.746195808053017
+Intermediate Meta Valid Accuracy 0.3645833358168602
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 72
+Intermediate Meta Train Error 0.7904428561745274
+Intermediate Meta Train Accuracy 0.9739583358168602
+Intermediate Meta Valid Error 31.927617326378822
+Intermediate Meta Valid Accuracy 0.3593750041909516
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 73
+Intermediate Meta Train Error 0.0015227677614575441
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 24.140297736041248
+Intermediate Meta Valid Accuracy 0.3854166707023978
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 74
+Intermediate Meta Train Error 0.22958153615854826
+Intermediate Meta Train Accuracy 0.989583333954215
+Intermediate Meta Valid Error 31.80974543094635
+Intermediate Meta Valid Accuracy 0.33854167023673654
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 75
+Intermediate Meta Train Error 0.69647975524218
+Intermediate Meta Train Accuracy 0.973958333954215
+Intermediate Meta Valid Error 36.78401816636324
+Intermediate Meta Valid Accuracy 0.31770833721384406
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 76
+Intermediate Meta Train Error 9.116843152789933e-05
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 23.076660595834255
+Intermediate Meta Valid Accuracy 0.4270833362825215
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 77
+Intermediate Meta Train Error 0.9115955322992022
+Intermediate Meta Train Accuracy 0.9635416697710752
+Intermediate Meta Valid Error 22.677024826407433
+Intermediate Meta Valid Accuracy 0.4270833358168602
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 78
+Intermediate Meta Train Error 0.18975896975502593
+Intermediate Meta Train Accuracy 0.9947916679084301
+Intermediate Meta Valid Error 19.024570748209953
+Intermediate Meta Valid Accuracy 0.4270833358168602
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 79
+Intermediate Meta Train Error 0.7736841373885817
+Intermediate Meta Train Accuracy 0.989583333954215
+Intermediate Meta Valid Error 21.006065778434277
+Intermediate Meta Valid Accuracy 0.4218750027939677
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 80
+Intermediate Meta Train Error 0.4286284807583094
+Intermediate Meta Train Accuracy 0.989583333954215
+Intermediate Meta Valid Error 14.425604961812496
+Intermediate Meta Valid Accuracy 0.44270833441987634
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 81
+Intermediate Meta Train Error 3.764232119962685e-05
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 17.82005024049431
+Intermediate Meta Valid Accuracy 0.4479166707023978
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 82
+Intermediate Meta Train Error 1.6388618531593124e-05
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 21.5650775115937
+Intermediate Meta Valid Accuracy 0.437500003259629
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 83
+Intermediate Meta Train Error 0.33983934270386484
+Intermediate Meta Train Accuracy 0.989583333954215
+Intermediate Meta Valid Error 19.527389153838158
+Intermediate Meta Valid Accuracy 0.4375000027939677
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 84
+Intermediate Meta Train Error 8.145510682311397e-05
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 20.71941663324833
+Intermediate Meta Valid Accuracy 0.40104166930541396
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 85
+Intermediate Meta Train Error 9.786667595790277e-05
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 20.953837782144547
+Intermediate Meta Valid Accuracy 0.43229167023673654
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 86
+Intermediate Meta Train Error 9.619878171207574e-05
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 23.45242853462696
+Intermediate Meta Valid Accuracy 0.42708333721384406
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 87
+Intermediate Meta Train Error 0.7286628127653785
+Intermediate Meta Train Accuracy 0.9791666679084301
+Intermediate Meta Valid Error 17.094118401408195
+Intermediate Meta Valid Accuracy 0.44791667023673654
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 88
+Intermediate Meta Train Error 0.32408706057123027
+Intermediate Meta Train Accuracy 0.989583333954215
+Intermediate Meta Valid Error 21.71053460240364
+Intermediate Meta Valid Accuracy 0.406250003259629
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 89
+Intermediate Meta Train Error 0.0008546331353045389
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 19.586688458919525
+Intermediate Meta Valid Accuracy 0.4114583362825215
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 90
+Intermediate Meta Train Error 0.00019358511326572625
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 28.2254376411438
+Intermediate Meta Valid Accuracy 0.3854166707023978
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 91
+Intermediate Meta Train Error 0.00017615044976082572
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 24.186730340123177
+Intermediate Meta Valid Accuracy 0.40104166977107525
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 92
+Intermediate Meta Train Error 0.00015975852511473931
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 18.15174777433276
+Intermediate Meta Valid Accuracy 0.4270833358168602
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 93
+Intermediate Meta Train Error 0.00010256892592508393
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 25.534108504652977
+Intermediate Meta Valid Accuracy 0.416666672565043
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 94
+Intermediate Meta Train Error 0.27093258108106966
+Intermediate Meta Train Accuracy 0.989583333954215
+Intermediate Meta Valid Error 13.802180871367455
+Intermediate Meta Valid Accuracy 0.46354166977107525
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 95
+Intermediate Meta Train Error 9.808093034280319e-05
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 17.17782398313284
+Intermediate Meta Valid Accuracy 0.43229167023673654
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 96
+Intermediate Meta Train Error 9.380415463056124e-05
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 21.02249638736248
+Intermediate Meta Valid Accuracy 0.44791667023673654
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 97
+Intermediate Meta Train Error 8.530634559633654e-05
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 21.103301495313644
+Intermediate Meta Valid Accuracy 0.3958333362825215
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 98
+Intermediate Meta Train Error 7.527887134983757e-05
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 27.45827952027321
+Intermediate Meta Valid Accuracy 0.3854166707023978
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 99
+Intermediate Meta Train Error 0.0011793734140610468
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 18.30147860944271
+Intermediate Meta Valid Accuracy 0.44791667303070426
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 100
+Intermediate Meta Train Error 7.01378775147532e-05
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 25.464684539474547
+Intermediate Meta Valid Accuracy 0.4427083400078118
+level : 3 ./CURE_TSR_Yahan_Shortcut/Real_Train/LensBlur-3/
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 0
+Intermediate Meta Train Error 0.00013115000613572736
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 24.003855645656586
+Intermediate Meta Valid Accuracy 0.3906250041909516
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 1
+Intermediate Meta Train Error 0.0008045615537639605
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 22.557127222418785
+Intermediate Meta Valid Accuracy 0.421875003259629
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 2
+Intermediate Meta Train Error 0.00013853523637408216
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 19.86598637700081
+Intermediate Meta Valid Accuracy 0.4322916688397527
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 3
+Intermediate Meta Train Error 0.0008572026032425129
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 19.801442503929138
+Intermediate Meta Valid Accuracy 0.4479166707023978
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 4
+Intermediate Meta Train Error 0.0004323848709191225
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 31.1517551317811
+Intermediate Meta Valid Accuracy 0.3854166716337204
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 5
+Intermediate Meta Train Error 0.21358380067670169
+Intermediate Meta Train Accuracy 0.989583333954215
+Intermediate Meta Valid Error 27.279234275221825
+Intermediate Meta Valid Accuracy 0.4010416720993817
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 6
+Intermediate Meta Train Error 4.9867260145219916e-05
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 24.7183529837057
+Intermediate Meta Valid Accuracy 0.3854166716337204
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 7
+Intermediate Meta Train Error 4.882447041154592e-05
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 21.13888183236122
+Intermediate Meta Valid Accuracy 0.4010416688397527
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 8
+Intermediate Meta Train Error 4.725599069388409e-05
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 18.756638050079346
+Intermediate Meta Valid Accuracy 0.3958333358168602
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 9
+Intermediate Meta Train Error 4.819509763365204e-05
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 21.360955774784088
+Intermediate Meta Valid Accuracy 0.3906250027939677
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 10
+Intermediate Meta Train Error 0.2738143082383431
+Intermediate Meta Train Accuracy 0.989583333954215
+Intermediate Meta Valid Error 23.46200616657734
+Intermediate Meta Valid Accuracy 0.4166666716337204
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 11
+Intermediate Meta Train Error 4.4513518830058274e-05
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 13.769905522465706
+Intermediate Meta Valid Accuracy 0.45312500139698386
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 12
+Intermediate Meta Train Error 7.247737534044063e-05
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 24.26416750252247
+Intermediate Meta Valid Accuracy 0.4479166744276881
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 13
+Intermediate Meta Train Error 0.23746727336462925
+Intermediate Meta Train Accuracy 0.989583333954215
+Intermediate Meta Valid Error 22.200363028794527
+Intermediate Meta Valid Accuracy 0.421875003259629
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 14
+Intermediate Meta Train Error 3.7580128434910876e-05
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 19.91205096244812
+Intermediate Meta Valid Accuracy 0.4270833358168602
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 15
+Intermediate Meta Train Error 3.5432281890734885e-05
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 20.089138381183147
+Intermediate Meta Valid Accuracy 0.4166666688397527
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 16
+Intermediate Meta Train Error 3.5486185765876144e-05
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 24.080285519361496
+Intermediate Meta Valid Accuracy 0.41666667023673654
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 17
+Intermediate Meta Train Error 8.265530613016381e-05
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 21.205021113157272
+Intermediate Meta Valid Accuracy 0.36979166930541396
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 18
+Intermediate Meta Train Error 0.250883851730066
+Intermediate Meta Train Accuracy 0.989583333954215
+Intermediate Meta Valid Error 25.676818132400513
+Intermediate Meta Valid Accuracy 0.4062500041909516
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 19
+Intermediate Meta Train Error 2.993047720090125e-05
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 24.121051153168082
+Intermediate Meta Valid Accuracy 0.4166666716337204
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 20
+Intermediate Meta Train Error 0.00015240885426237583
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 16.836990103125572
+Intermediate Meta Valid Accuracy 0.47395833814516664
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 21
+Intermediate Meta Train Error 2.934768622253614e-05
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 19.91369031369686
+Intermediate Meta Valid Accuracy 0.437500003259629
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 22
+Intermediate Meta Train Error 6.469646831419595e-05
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 22.70292958430946
+Intermediate Meta Valid Accuracy 0.4114583362825215
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 23
+Intermediate Meta Train Error 0.00010472262016492095
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 23.609737008810043
+Intermediate Meta Valid Accuracy 0.4062500027939677
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 24
+Intermediate Meta Train Error 2.6668407144825323e-05
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 16.883768051862717
+Intermediate Meta Valid Accuracy 0.43750000186264515
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 25
+Intermediate Meta Train Error 2.525545512099825e-05
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 21.73687969148159
+Intermediate Meta Valid Accuracy 0.42187500232830644
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 26
+Intermediate Meta Train Error 0.0031053675791667956
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 26.900518745183945
+Intermediate Meta Valid Accuracy 0.3958333367481828
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 27
+Intermediate Meta Train Error 2.6096048344470546e-05
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 27.830930379219353
+Intermediate Meta Valid Accuracy 0.4010416711680591
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 28
+Intermediate Meta Train Error 2.5559055359281047e-05
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 27.056696459650993
+Intermediate Meta Valid Accuracy 0.4010416707023978
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 29
+Intermediate Meta Train Error 2.583718767823484e-05
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 24.777936168015003
+Intermediate Meta Valid Accuracy 0.40104167023673654
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 30
+Intermediate Meta Train Error 2.5095352270909643e-05
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 18.313080832362175
+Intermediate Meta Valid Accuracy 0.4375000027939677
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 31
+Intermediate Meta Train Error 2.429263427927708e-05
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 22.681012600660324
+Intermediate Meta Valid Accuracy 0.42708333721384406
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 32
+Intermediate Meta Train Error 2.5392100269527873e-05
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 28.578342631459236
+Intermediate Meta Valid Accuracy 0.36979167023673654
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 33
+Intermediate Meta Train Error 2.4757034623235086e-05
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 20.969698444008827
+Intermediate Meta Valid Accuracy 0.4218750027939677
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 34
+Intermediate Meta Train Error 0.2858190978643904
+Intermediate Meta Train Accuracy 0.989583333954215
+Intermediate Meta Valid Error 22.11597752571106
+Intermediate Meta Valid Accuracy 0.42187500512227416
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 35
+Intermediate Meta Train Error 2.198145809018115e-05
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 18.2035901453346
+Intermediate Meta Valid Accuracy 0.45833333767950535
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 36
+Intermediate Meta Train Error 1.9092194108338845e-05
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 26.14845521748066
+Intermediate Meta Valid Accuracy 0.390625003259629
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 37
+Intermediate Meta Train Error 0.21775864971891679
+Intermediate Meta Train Accuracy 0.989583333954215
+Intermediate Meta Valid Error 23.609960213303566
+Intermediate Meta Valid Accuracy 0.4010416707023978
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 38
+Intermediate Meta Train Error 1.803871508343491e-05
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 24.660130301490426
+Intermediate Meta Valid Accuracy 0.416666672565043
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 39
+Intermediate Meta Train Error 1.7227940730890623e-05
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 23.841415730305016
+Intermediate Meta Valid Accuracy 0.41145833767950535
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 40
+Intermediate Meta Train Error 1.6222201068671893e-05
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 24.136327035725117
+Intermediate Meta Valid Accuracy 0.40104167023673654
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 41
+Intermediate Meta Train Error 1.626194053017116e-05
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 20.989823132753372
+Intermediate Meta Valid Accuracy 0.40104166930541396
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 42
+Intermediate Meta Train Error 1.5264284996874267e-05
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 25.808262333273888
+Intermediate Meta Valid Accuracy 0.3854166711680591
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 43
+Intermediate Meta Train Error 1.5002296748556354e-05
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 20.14674210548401
+Intermediate Meta Valid Accuracy 0.42187500186264515
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 44
+Intermediate Meta Train Error 4.445413722464764e-05
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 17.09698156826198
+Intermediate Meta Valid Accuracy 0.44791667023673654
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 45
+Intermediate Meta Train Error 1.3764990086428952e-05
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 25.91548990830779
+Intermediate Meta Valid Accuracy 0.4114583367481828
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 46
+Intermediate Meta Train Error 1.3169609118790504e-05
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 21.70963752269745
+Intermediate Meta Valid Accuracy 0.3958333358168602
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 47
+Intermediate Meta Train Error 1.3031167128474408e-05
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 23.24640254676342
+Intermediate Meta Valid Accuracy 0.42708333721384406
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 48
+Intermediate Meta Train Error 1.274495699021827e-05
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 19.674509316682816
+Intermediate Meta Valid Accuracy 0.43750000232830644
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 49
+Intermediate Meta Train Error 0.2392730596386059
+Intermediate Meta Train Accuracy 0.989583333954215
+Intermediate Meta Valid Error 24.9638259857893
+Intermediate Meta Valid Accuracy 0.38541666977107525
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 50
+Intermediate Meta Train Error 0.002230700349159065
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 23.736898551229388
+Intermediate Meta Valid Accuracy 0.42187500512227416
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 51
+Intermediate Meta Train Error 1.1114633039710498e-05
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 28.81804220378399
+Intermediate Meta Valid Accuracy 0.39583333721384406
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 52
+Intermediate Meta Train Error 0.22149950354730663
+Intermediate Meta Train Accuracy 0.989583333954215
+Intermediate Meta Valid Error 31.609010636806488
+Intermediate Meta Valid Accuracy 0.3385416720993817
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 53
+Intermediate Meta Train Error 1.0210684362466083e-05
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 18.786375423893332
+Intermediate Meta Valid Accuracy 0.437500003259629
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 54
+Intermediate Meta Train Error 0.00021280470754447833
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 21.984929621219635
+Intermediate Meta Valid Accuracy 0.43229166977107525
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 55
+Intermediate Meta Train Error 1.0455936575226588e-05
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 20.807096123695374
+Intermediate Meta Valid Accuracy 0.43229166930541396
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 56
+Intermediate Meta Train Error 9.013703724747302e-06
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 30.781305193901062
+Intermediate Meta Valid Accuracy 0.36458333721384406
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 57
+Intermediate Meta Train Error 0.00015212584570178933
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 19.001413017511368
+Intermediate Meta Valid Accuracy 0.4218750027939677
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 58
+Intermediate Meta Train Error 9.165817061784765e-06
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 18.216775439679623
+Intermediate Meta Valid Accuracy 0.437500003259629
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 59
+Intermediate Meta Train Error 9.686710527034847e-06
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 24.143676641397178
+Intermediate Meta Valid Accuracy 0.41145833767950535
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 60
+Intermediate Meta Train Error 9.241562779038759e-06
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 22.728939831256866
+Intermediate Meta Valid Accuracy 0.40104166930541396
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 61
+Intermediate Meta Train Error 0.00044403987421048896
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 19.789981374517083
+Intermediate Meta Valid Accuracy 0.4375000037252903
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 62
+Intermediate Meta Train Error 9.251497075979387e-06
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 23.23212441802025
+Intermediate Meta Valid Accuracy 0.4114583367481828
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 63
+Intermediate Meta Train Error 8.667897425596038e-06
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 14.663502171635628
+Intermediate Meta Valid Accuracy 0.4427083358168602
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 64
+Intermediate Meta Train Error 8.703907937501754e-06
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 20.80320245027542
+Intermediate Meta Valid Accuracy 0.4218750041909516
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 65
+Intermediate Meta Train Error 7.825093905466929e-05
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 22.704418793320656
+Intermediate Meta Valid Accuracy 0.4114583367481828
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 66
+Intermediate Meta Train Error 8.785862121385435e-06
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 23.09683620929718
+Intermediate Meta Valid Accuracy 0.4218750037252903
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 67
+Intermediate Meta Train Error 0.1188171820288062
+Intermediate Meta Train Accuracy 0.9947916679084301
+Intermediate Meta Valid Error 22.841931477189064
+Intermediate Meta Valid Accuracy 0.4114583353511989
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 68
+Intermediate Meta Train Error 9.520338096535852e-05
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 27.589828670024872
+Intermediate Meta Valid Accuracy 0.390625003259629
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 69
+Intermediate Meta Train Error 0.7523715496063232
+Intermediate Meta Train Accuracy 0.989583333954215
+Intermediate Meta Valid Error 25.25604263599962
+Intermediate Meta Valid Accuracy 0.39583333721384406
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 70
+Intermediate Meta Train Error 0.0
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 28.993993915617466
+Intermediate Meta Valid Accuracy 0.3697916720993817
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 71
+Intermediate Meta Train Error 0.00034518784957526805
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 27.680811896920204
+Intermediate Meta Valid Accuracy 0.3750000037252903
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 72
+Intermediate Meta Train Error 2.452078223313947e-05
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 25.453415997326374
+Intermediate Meta Valid Accuracy 0.3906250041909516
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 73
+Intermediate Meta Train Error 3.830821665440354e-07
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 29.552885495126247
+Intermediate Meta Valid Accuracy 0.35416666930541396
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 74
+Intermediate Meta Train Error 1.465273812284451e-07
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 29.140974228270352
+Intermediate Meta Valid Accuracy 0.3906250041909516
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 75
+Intermediate Meta Train Error 2.7329284807753318e-05
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 31.275266853161156
+Intermediate Meta Valid Accuracy 0.3593750027939677
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 76
+Intermediate Meta Train Error 0.0005151934984395368
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 37.26348504424095
+Intermediate Meta Valid Accuracy 0.38020834093913436
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 77
+Intermediate Meta Train Error 5.469372379662829e-05
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 31.06861501932144
+Intermediate Meta Valid Accuracy 0.3593750046566129
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 78
+Intermediate Meta Train Error 6.125920107402649e-06
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 38.28461198695004
+Intermediate Meta Valid Accuracy 0.343750006519258
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 79
+Intermediate Meta Train Error 0.00010261842574577074
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 28.040901290252805
+Intermediate Meta Valid Accuracy 0.39062500558793545
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 80
+Intermediate Meta Train Error 1.3767399772768307e-05
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 21.402966417372227
+Intermediate Meta Valid Accuracy 0.3958333358168602
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 81
+Intermediate Meta Train Error 2.377878567849656e-05
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 30.693448834121227
+Intermediate Meta Valid Accuracy 0.3541666716337204
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 82
+Intermediate Meta Train Error 2.182444829068597e-05
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 25.83617176860571
+Intermediate Meta Valid Accuracy 0.41666667349636555
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 83
+Intermediate Meta Train Error 4.500327311585117e-06
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 29.1918527437374
+Intermediate Meta Valid Accuracy 0.3593750041909516
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 84
+Intermediate Meta Train Error 0.0002552433735877324
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 25.836902931332588
+Intermediate Meta Valid Accuracy 0.416666672565043
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 85
+Intermediate Meta Train Error 7.347599733742438e-05
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 38.84972105547786
+Intermediate Meta Valid Accuracy 0.3333333400078118
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 86
+Intermediate Meta Train Error 6.395064111597293e-08
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 26.773032607510686
+Intermediate Meta Valid Accuracy 0.44270833767950535
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 87
+Intermediate Meta Train Error 5.271032361697792e-07
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 30.74934609234333
+Intermediate Meta Valid Accuracy 0.4218750074505806
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 88
+Intermediate Meta Train Error 7.266427526708696e-05
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 30.08781658858061
+Intermediate Meta Valid Accuracy 0.3697916711680591
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 89
+Intermediate Meta Train Error 7.021425671138726e-05
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 27.57438731379807
+Intermediate Meta Valid Accuracy 0.4635416753590107
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 90
+Intermediate Meta Train Error 3.19782990233497e-05
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 29.505185628309846
+Intermediate Meta Valid Accuracy 0.39583334047347307
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 91
+Intermediate Meta Train Error 0.00025176126708192914
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 37.2365500330925
+Intermediate Meta Valid Accuracy 0.3489583395421505
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 92
+Intermediate Meta Train Error 3.446524770678305e-05
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 30.253947339951992
+Intermediate Meta Valid Accuracy 0.3906250046566129
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 93
+Intermediate Meta Train Error 3.137659156493555e-06
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 24.755795784294605
+Intermediate Meta Valid Accuracy 0.3906250037252903
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 94
+Intermediate Meta Train Error 9.700943545243312e-06
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 30.525266161188483
+Intermediate Meta Valid Accuracy 0.437500006519258
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 95
+Intermediate Meta Train Error 5.66800449125493e-05
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 40.788572534918785
+Intermediate Meta Valid Accuracy 0.35416667396202683
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 96
+Intermediate Meta Train Error 5.525835078401542e-08
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 24.76120327413082
+Intermediate Meta Valid Accuracy 0.43750000558793545
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 97
+Intermediate Meta Train Error 3.906089444349892e-05
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 28.568042427301407
+Intermediate Meta Valid Accuracy 0.3802083386108279
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 98
+Intermediate Meta Train Error 4.237829344577726e-05
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 23.755991384387016
+Intermediate Meta Valid Accuracy 0.4531250074505806
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 99
+Intermediate Meta Train Error 2.6686412501808476e-05
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 39.94361047446728
+Intermediate Meta Valid Accuracy 0.3489583395421505
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 100
+Intermediate Meta Train Error 0.00014823513220107998
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 38.53996925213869
+Intermediate Meta Valid Accuracy 0.3177083395421505
+level : 4 ./CURE_TSR_Yahan_Shortcut/Real_Train/LensBlur-4/
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 0
+Intermediate Meta Train Error 2.1041165673807427e-05
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 27.390869289636612
+Intermediate Meta Valid Accuracy 0.4114583400078118
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 1
+Intermediate Meta Train Error 2.8105058908378666e-05
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 38.25789756886661
+Intermediate Meta Valid Accuracy 0.3593750074505806
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 2
+Intermediate Meta Train Error 0.00038826047068318825
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 29.79640043526888
+Intermediate Meta Valid Accuracy 0.3958333395421505
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 3
+Intermediate Meta Train Error 4.424561016513895e-05
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 38.954617992043495
+Intermediate Meta Valid Accuracy 0.36979167396202683
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 4
+Intermediate Meta Train Error 1.2680360363281906e-05
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 29.629787668585777
+Intermediate Meta Valid Accuracy 0.4010416716337204
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 5
+Intermediate Meta Train Error 0.00012972209705586213
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 36.214654840528965
+Intermediate Meta Valid Accuracy 0.36458333814516664
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 6
+Intermediate Meta Train Error 0.0004325225572243685
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 39.61142495274544
+Intermediate Meta Valid Accuracy 0.36979167396202683
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 7
+Intermediate Meta Train Error 4.067454679246296e-05
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 32.18313978146762
+Intermediate Meta Valid Accuracy 0.42708334187045693
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 8
+Intermediate Meta Train Error 1.7824034114322096e-05
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 38.863848730921745
+Intermediate Meta Valid Accuracy 0.33333333814516664
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 9
+Intermediate Meta Train Error 1.327901964387479e-06
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 34.36458069086075
+Intermediate Meta Valid Accuracy 0.3854166744276881
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 10
+Intermediate Meta Train Error 4.2654380583484475e-05
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 34.58994258195162
+Intermediate Meta Valid Accuracy 0.3333333400078118
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 11
+Intermediate Meta Train Error 6.553673949860617e-06
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 31.482933994731866
+Intermediate Meta Valid Accuracy 0.4270833390764892
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 12
+Intermediate Meta Train Error 0.00012261193474627508
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 33.0104537740408
+Intermediate Meta Valid Accuracy 0.40625000558793545
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 13
+Intermediate Meta Train Error 0.00012848350257721464
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 32.72557497769594
+Intermediate Meta Valid Accuracy 0.38541667303070426
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 14
+Intermediate Meta Train Error 7.504317630535606e-05
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 26.107072092592716
+Intermediate Meta Valid Accuracy 0.47916667396202683
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 15
+Intermediate Meta Train Error 4.144010100626261e-06
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 32.926241729874164
+Intermediate Meta Valid Accuracy 0.40625000512227416
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 16
+Intermediate Meta Train Error 0.00014396689373075144
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 29.958722926676273
+Intermediate Meta Valid Accuracy 0.4114583395421505
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 17
+Intermediate Meta Train Error 0.00011319786391605913
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 39.99555892497301
+Intermediate Meta Valid Accuracy 0.35937500931322575
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 18
+Intermediate Meta Train Error 2.397532427256266e-06
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 44.285719975829124
+Intermediate Meta Valid Accuracy 0.3072916720993817
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 19
+Intermediate Meta Train Error 1.4497302822435998e-05
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 33.632975639775395
+Intermediate Meta Valid Accuracy 0.38020834047347307
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 20
+Intermediate Meta Train Error 0.00017509067389176458
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 26.94776713848114
+Intermediate Meta Valid Accuracy 0.38020833767950535
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 21
+Intermediate Meta Train Error 0.0004888224668915253
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 36.39868456160184
+Intermediate Meta Valid Accuracy 0.36979167303070426
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 22
+Intermediate Meta Train Error 1.007859015467183e-05
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 35.326184909790754
+Intermediate Meta Valid Accuracy 0.39062500605359674
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 23
+Intermediate Meta Train Error 0.00011884875355483437
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 35.40631211549044
+Intermediate Meta Valid Accuracy 0.3489583390764892
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 24
+Intermediate Meta Train Error 2.3176027362126206e-05
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 33.11507764086127
+Intermediate Meta Valid Accuracy 0.3697916716337204
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 25
+Intermediate Meta Train Error 0.00012414602843036082
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 44.25751954317093
+Intermediate Meta Valid Accuracy 0.3333333400078118
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 26
+Intermediate Meta Train Error 0.0004496662146515895
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 35.581096820533276
+Intermediate Meta Valid Accuracy 0.3750000069849193
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 27
+Intermediate Meta Train Error 2.4395307214319928e-06
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 36.06257100217044
+Intermediate Meta Valid Accuracy 0.34375000605359674
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 28
+Intermediate Meta Train Error 2.3685043715193643e-06
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 34.01615074276924
+Intermediate Meta Valid Accuracy 0.3854166716337204
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 29
+Intermediate Meta Train Error 2.4056944564532223e-05
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 37.77113122306764
+Intermediate Meta Valid Accuracy 0.3750000069849193
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 30
+Intermediate Meta Train Error 0.0003293537349249309
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 35.89452338218689
+Intermediate Meta Valid Accuracy 0.36458334187045693
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 31
+Intermediate Meta Train Error 5.761662165149062e-07
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 39.354495245963335
+Intermediate Meta Valid Accuracy 0.35937500931322575
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 32
+Intermediate Meta Train Error 3.797960895124408e-05
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 36.941767539829016
+Intermediate Meta Valid Accuracy 0.3750000079162419
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 33
+Intermediate Meta Train Error 4.153726008016001e-05
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 28.38798488676548
+Intermediate Meta Valid Accuracy 0.4479166753590107
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 34
+Intermediate Meta Train Error 1.298343832611959e-05
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 38.529185235500336
+Intermediate Meta Valid Accuracy 0.34375000512227416
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 35
+Intermediate Meta Train Error 0.0009316964246551818
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 39.269987819716334
+Intermediate Meta Valid Accuracy 0.3489583400078118
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 36
+Intermediate Meta Train Error 0.00039357181201449265
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 35.15762257575989
+Intermediate Meta Valid Accuracy 0.40104167349636555
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 37
+Intermediate Meta Train Error 2.35482048172031e-06
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 42.41853011818603
+Intermediate Meta Valid Accuracy 0.30208334047347307
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 38
+Intermediate Meta Train Error 8.433940225971437e-05
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 43.12332714535296
+Intermediate Meta Valid Accuracy 0.32291667349636555
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 39
+Intermediate Meta Train Error 2.557998191043964e-07
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 33.81557362526655
+Intermediate Meta Valid Accuracy 0.40104167349636555
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 40
+Intermediate Meta Train Error 0.0004146715942393575
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 29.896054515615106
+Intermediate Meta Valid Accuracy 0.4062500079162419
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 41
+Intermediate Meta Train Error 2.3821904091669843e-05
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 27.799050664529204
+Intermediate Meta Valid Accuracy 0.354166672565043
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 42
+Intermediate Meta Train Error 1.3800913548411842e-05
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 24.06805241946131
+Intermediate Meta Valid Accuracy 0.4375000069849193
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 43
+Intermediate Meta Train Error 0.0003789241431257917
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 32.328536972403526
+Intermediate Meta Valid Accuracy 0.4218750079162419
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 44
+Intermediate Meta Train Error 6.616329566111467e-06
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 29.44485130906105
+Intermediate Meta Valid Accuracy 0.3645833390764892
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 45
+Intermediate Meta Train Error 7.326384410255571e-08
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 35.290412992239
+Intermediate Meta Valid Accuracy 0.3229166716337204
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 46
+Intermediate Meta Train Error 4.151282509123888e-05
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 35.92594715952873
+Intermediate Meta Valid Accuracy 0.35937500558793545
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 47
+Intermediate Meta Train Error 6.677378165020897e-05
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 38.706887289881706
+Intermediate Meta Valid Accuracy 0.3437500046566129
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 48
+Intermediate Meta Train Error 0.0003765861122780878
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 30.553888518363237
+Intermediate Meta Valid Accuracy 0.4114583390764892
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 49
+Intermediate Meta Train Error 1.8803386477861395e-06
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 35.92285503074527
+Intermediate Meta Valid Accuracy 0.3697916716337204
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 50
+Intermediate Meta Train Error 1.9493724865427e-06
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 35.44019712507725
+Intermediate Meta Valid Accuracy 0.338541672565043
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 51
+Intermediate Meta Train Error 6.071559603959553e-05
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 34.12795462901704
+Intermediate Meta Valid Accuracy 0.36979167349636555
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 52
+Intermediate Meta Train Error 5.364338478974773e-07
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 35.854198737069964
+Intermediate Meta Valid Accuracy 0.35937500605359674
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 53
+Intermediate Meta Train Error 0.0005217256430055661
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 33.579305574297905
+Intermediate Meta Valid Accuracy 0.385416672565043
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 54
+Intermediate Meta Train Error 0.0002802918447630809
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 26.473182275891304
+Intermediate Meta Valid Accuracy 0.3750000046566129
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 55
+Intermediate Meta Train Error 6.180701825420076e-05
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 34.79035297781229
+Intermediate Meta Valid Accuracy 0.42187500884756446
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 56
+Intermediate Meta Train Error 0.00017568227212694243
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 34.005566749721766
+Intermediate Meta Valid Accuracy 0.3645833386108279
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 57
+Intermediate Meta Train Error 6.408594429907488e-06
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 39.66737353801727
+Intermediate Meta Valid Accuracy 0.3437500069849193
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 58
+Intermediate Meta Train Error 0.000534909473214995
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 39.688254836946726
+Intermediate Meta Valid Accuracy 0.296875006519258
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 59
+Intermediate Meta Train Error 0.00011465804736221497
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 36.229159131646156
+Intermediate Meta Valid Accuracy 0.39062500605359674
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 60
+Intermediate Meta Train Error 9.641975750040999e-07
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 37.08979364298284
+Intermediate Meta Valid Accuracy 0.3333333400078118
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 61
+Intermediate Meta Train Error 3.9937267674816646e-05
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 36.26491571217775
+Intermediate Meta Valid Accuracy 0.31770834047347307
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 62
+Intermediate Meta Train Error 3.353474385103805e-05
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 35.161391243338585
+Intermediate Meta Valid Accuracy 0.3854166720993817
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 63
+Intermediate Meta Train Error 0.0001853933650619588
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 34.70682752132416
+Intermediate Meta Valid Accuracy 0.37500000512227416
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 64
+Intermediate Meta Train Error 1.3245421083496467e-05
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 37.271862149238586
+Intermediate Meta Valid Accuracy 0.3541666711680591
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 65
+Intermediate Meta Train Error 0.0004913726593634982
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 23.66471867263317
+Intermediate Meta Valid Accuracy 0.4427083386108279
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 66
+Intermediate Meta Train Error 0.00040888390181281764
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 37.31686481833458
+Intermediate Meta Valid Accuracy 0.3750000079162419
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 67
+Intermediate Meta Train Error 0.00025109526972977303
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 29.23029835522175
+Intermediate Meta Valid Accuracy 0.4062500074505806
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 68
+Intermediate Meta Train Error 1.523770074762787e-05
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 37.98297165334225
+Intermediate Meta Valid Accuracy 0.3645833390764892
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 69
+Intermediate Meta Train Error 2.105023221177227e-06
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 38.41563042998314
+Intermediate Meta Valid Accuracy 0.36458334047347307
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 70
+Intermediate Meta Train Error 0.000155783938642573
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 34.160931184887886
+Intermediate Meta Valid Accuracy 0.42187500884756446
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 71
+Intermediate Meta Train Error 5.52219030314216e-06
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 31.131150778383017
+Intermediate Meta Valid Accuracy 0.40625000605359674
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 72
+Intermediate Meta Train Error 2.954640791141827e-05
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 33.484975850209594
+Intermediate Meta Valid Accuracy 0.3541666716337204
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 73
+Intermediate Meta Train Error 0.0001528530886599766
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 36.94340942054987
+Intermediate Meta Valid Accuracy 0.34375000838190317
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 74
+Intermediate Meta Train Error 0.00030603750861324386
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 41.28854914009571
+Intermediate Meta Valid Accuracy 0.34895834047347307
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 75
+Intermediate Meta Train Error 2.7561089613548084e-05
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 29.295890048146248
+Intermediate Meta Valid Accuracy 0.38020833814516664
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 76
+Intermediate Meta Train Error 6.7366687817038695e-06
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 38.91890039294958
+Intermediate Meta Valid Accuracy 0.3489583390764892
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 77
+Intermediate Meta Train Error 8.694766116201791e-05
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 30.20345854992047
+Intermediate Meta Valid Accuracy 0.38541667303070426
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 78
+Intermediate Meta Train Error 5.983160274891652e-06
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 30.135006581433117
+Intermediate Meta Valid Accuracy 0.4218750079162419
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 79
+Intermediate Meta Train Error 7.011860588379548e-05
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 31.500393849797547
+Intermediate Meta Valid Accuracy 0.42187500977888703
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 80
+Intermediate Meta Train Error 0.00021077145557468757
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 38.69978103786707
+Intermediate Meta Valid Accuracy 0.38541667303070426
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 81
+Intermediate Meta Train Error 4.312498738434645e-05
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 34.0361100807786
+Intermediate Meta Valid Accuracy 0.38020833767950535
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 82
+Intermediate Meta Train Error 0.00031167297905076996
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 33.71315038204193
+Intermediate Meta Valid Accuracy 0.3645833423361182
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 83
+Intermediate Meta Train Error 6.58616585569316e-06
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 30.163875453174114
+Intermediate Meta Valid Accuracy 0.41666667303070426
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 84
+Intermediate Meta Train Error 0.0004551960493394125
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 39.96453393995762
+Intermediate Meta Valid Accuracy 0.3645833390764892
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 85
+Intermediate Meta Train Error 0.00018446305592045853
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 40.14076381921768
+Intermediate Meta Valid Accuracy 0.3229166716337204
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 86
+Intermediate Meta Train Error 0.00016290585200595675
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 38.16583417542279
+Intermediate Meta Valid Accuracy 0.3437500069849193
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 87
+Intermediate Meta Train Error 0.0002259814838070362
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 37.3002821393311
+Intermediate Meta Valid Accuracy 0.37500000605359674
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 88
+Intermediate Meta Train Error 0.00031596213454865296
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 36.34618824720383
+Intermediate Meta Valid Accuracy 0.37500000838190317
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 89
+Intermediate Meta Train Error 0.00044070147562957906
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 39.81924492120743
+Intermediate Meta Valid Accuracy 0.3333333390764892
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 90
+Intermediate Meta Train Error 2.4214124183519203e-07
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 35.57087731361389
+Intermediate Meta Valid Accuracy 0.3645833386108279
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 91
+Intermediate Meta Train Error 0.00036047734035060675
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 34.52859726827592
+Intermediate Meta Valid Accuracy 0.4010416748933494
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 92
+Intermediate Meta Train Error 0.00028074679731326935
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 32.21528360247612
+Intermediate Meta Valid Accuracy 0.3697916720993817
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 93
+Intermediate Meta Train Error 0.0008189078169291708
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 34.39453849196434
+Intermediate Meta Valid Accuracy 0.38541667303070426
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 94
+Intermediate Meta Train Error 3.953736937289953e-06
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 34.57668897509575
+Intermediate Meta Valid Accuracy 0.3437500046566129
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 95
+Intermediate Meta Train Error 0.0001216878253335052
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 31.83929436467588
+Intermediate Meta Valid Accuracy 0.3854166716337204
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 96
+Intermediate Meta Train Error 0.000610837991224189
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 33.70779114216566
+Intermediate Meta Valid Accuracy 0.35937500884756446
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 97
+Intermediate Meta Train Error 1.8799996333696e-05
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 39.8525154851377
+Intermediate Meta Valid Accuracy 0.3593750079162419
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 98
+Intermediate Meta Train Error 0.0003819637698528888
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 38.85236989706755
+Intermediate Meta Valid Accuracy 0.34375000512227416
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 99
+Intermediate Meta Train Error 9.595523019256813e-05
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 35.98869990557432
+Intermediate Meta Valid Accuracy 0.35937500605359674
+
+
+BIG ISSUE --> valida error is Nan? False
+Intermediate Iteration 100
+Intermediate Meta Train Error 0.00021267082084530653
+Intermediate Meta Train Accuracy 1.0
+Intermediate Meta Valid Error 40.434361710213125
+Intermediate Meta Valid Accuracy 0.38020834093913436
+Meta Test Error 29.366346962749958
+Meta Test Accuracy 0.3906250046566129

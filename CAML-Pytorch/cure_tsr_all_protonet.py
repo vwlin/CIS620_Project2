@@ -202,7 +202,7 @@ if __name__ == '__main__':
     data_transforms = transforms.Compose([transforms.Resize([32, 32]), transforms.ToTensor()])#, utils.l2normalize, utils.standardization])
 
     lvl0_train_dir = './CURE_TSR_OG/Real_Train/ChallengeFree/'
-    lvl5_test_dir = './CURE_TSR_OG/Real_Train/Snow-5/'
+    lvl5_test_dir = './CURE_TSR_OG/Real_Train/LensBlur-5/'
     curetsr_lvl0 = utils.CURETSRDataset(lvl0_train_dir, data_transforms)
     curetsr_lvl5 = utils.CURETSRDataset(lvl5_test_dir, data_transforms)
 
@@ -320,7 +320,7 @@ if __name__ == '__main__':
     print('\n\nmeta-training level 0 model on level 4 data and pseudolabels')
     levels = [None]*4
     for level in range(1,5):
-        inter_dir = './CURE_TSR_OG/Real_Train/Snow-' + str(level)+'/'
+        inter_dir = './CURE_TSR_OG/Real_Train/LensBlur-' + str(level)+'/'
         curetsr_data = utils.CURETSRDataset(inter_dir, data_transforms)
         levels[level-1] = l2l.data.MetaDataset(curetsr_data)
     meta_curetsr_multilevel = l2l.data.UnionMetaDataset(levels)

@@ -1,0 +1,3682 @@
+Namespace(gpu='0', max_epoch=150, model='resnet50', shot=2, test_query=2, test_shot=2, test_way=3, train_query=2, train_way=3)
+Using gpu
+ResNet(
+  (conv1): Conv2d(3, 64, kernel_size=(7, 7), stride=(2, 2), padding=(3, 3), bias=False)
+  (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  (relu): ReLU(inplace=True)
+  (maxpool): MaxPool2d(kernel_size=3, stride=2, padding=1, dilation=1, ceil_mode=False)
+  (layer1): Sequential(
+    (0): Bottleneck(
+      (conv1): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv3): Conv2d(64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn3): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (downsample): Sequential(
+        (0): Conv2d(64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1): Bottleneck(
+      (conv1): Conv2d(256, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv3): Conv2d(64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn3): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+    )
+    (2): Bottleneck(
+      (conv1): Conv2d(256, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv3): Conv2d(64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn3): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+    )
+  )
+  (layer2): Sequential(
+    (0): Bottleneck(
+      (conv1): Conv2d(256, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv3): Conv2d(128, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn3): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (downsample): Sequential(
+        (0): Conv2d(256, 512, kernel_size=(1, 1), stride=(2, 2), bias=False)
+        (1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1): Bottleneck(
+      (conv1): Conv2d(512, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv3): Conv2d(128, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn3): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+    )
+    (2): Bottleneck(
+      (conv1): Conv2d(512, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv3): Conv2d(128, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn3): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+    )
+    (3): Bottleneck(
+      (conv1): Conv2d(512, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv3): Conv2d(128, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn3): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+    )
+  )
+  (layer3): Sequential(
+    (0): Bottleneck(
+      (conv1): Conv2d(512, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv3): Conv2d(256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn3): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (downsample): Sequential(
+        (0): Conv2d(512, 1024, kernel_size=(1, 1), stride=(2, 2), bias=False)
+        (1): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1): Bottleneck(
+      (conv1): Conv2d(1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv3): Conv2d(256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn3): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+    )
+    (2): Bottleneck(
+      (conv1): Conv2d(1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv3): Conv2d(256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn3): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+    )
+    (3): Bottleneck(
+      (conv1): Conv2d(1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv3): Conv2d(256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn3): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+    )
+    (4): Bottleneck(
+      (conv1): Conv2d(1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv3): Conv2d(256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn3): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+    )
+    (5): Bottleneck(
+      (conv1): Conv2d(1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv3): Conv2d(256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn3): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+    )
+  )
+  (layer4): Sequential(
+    (0): Bottleneck(
+      (conv1): Conv2d(1024, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv3): Conv2d(512, 2048, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn3): BatchNorm2d(2048, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (downsample): Sequential(
+        (0): Conv2d(1024, 2048, kernel_size=(1, 1), stride=(2, 2), bias=False)
+        (1): BatchNorm2d(2048, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1): Bottleneck(
+      (conv1): Conv2d(2048, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv3): Conv2d(512, 2048, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn3): BatchNorm2d(2048, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+    )
+    (2): Bottleneck(
+      (conv1): Conv2d(2048, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv3): Conv2d(512, 2048, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn3): BatchNorm2d(2048, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+    )
+  )
+  (avgpool): AdaptiveAvgPool2d(output_size=(1, 1))
+  (fc): Identity()
+)
+epoch 1, train, loss=37.7269 acc=0.6717
+epoch 1, val, loss=70.0231 acc=0.7308
+epoch 2, train, loss=21.5857 acc=0.6100
+epoch 2, val, loss=313.5057 acc=0.7708
+epoch 3, train, loss=11.4537 acc=0.6867
+epoch 3, val, loss=2.7145 acc=0.6567
+epoch 4, train, loss=17.3561 acc=0.5800
+epoch 4, val, loss=48.9128 acc=0.6292
+epoch 5, train, loss=13.8934 acc=0.5850
+epoch 5, val, loss=125.5799 acc=0.6708
+epoch 6, train, loss=12.2747 acc=0.6350
+epoch 6, val, loss=122.5340 acc=0.6475
+epoch 7, train, loss=6.3367 acc=0.6417
+epoch 7, val, loss=15.9959 acc=0.6683
+epoch 8, train, loss=5.8194 acc=0.5717
+epoch 8, val, loss=140.7887 acc=0.6775
+epoch 9, train, loss=3.2033 acc=0.5550
+epoch 9, val, loss=50.5243 acc=0.7067
+epoch 10, train, loss=2.2753 acc=0.5700
+epoch 10, val, loss=35.1897 acc=0.7033
+epoch 11, train, loss=1.8756 acc=0.6217
+epoch 11, val, loss=5.2124 acc=0.6642
+epoch 12, train, loss=2.7287 acc=0.5800
+epoch 12, val, loss=3.0219 acc=0.6475
+epoch 13, train, loss=1.3096 acc=0.6233
+epoch 13, val, loss=2.0468 acc=0.6275
+epoch 14, train, loss=0.9825 acc=0.6600
+epoch 14, val, loss=16.8310 acc=0.5192
+epoch 15, train, loss=0.8019 acc=0.7117
+epoch 15, val, loss=4.7210 acc=0.6767
+epoch 16, train, loss=0.8342 acc=0.6600
+epoch 16, val, loss=3.1194 acc=0.6400
+epoch 17, train, loss=0.7552 acc=0.7050
+epoch 17, val, loss=1.8905 acc=0.6933
+epoch 18, train, loss=0.8658 acc=0.6700
+epoch 18, val, loss=5.4125 acc=0.6408
+epoch 19, train, loss=0.7037 acc=0.7233
+epoch 19, val, loss=69.8704 acc=0.5875
+epoch 20, train, loss=0.6741 acc=0.7033
+epoch 20, val, loss=191.2535 acc=0.5833
+epoch 21, train, loss=0.6215 acc=0.7500
+epoch 21, val, loss=74.2597 acc=0.6117
+epoch 22, train, loss=0.9107 acc=0.6300
+epoch 22, val, loss=4.9501 acc=0.7350
+epoch 23, train, loss=0.8862 acc=0.6300
+epoch 23, val, loss=3.1216 acc=0.7383
+epoch 24, train, loss=0.8883 acc=0.6067
+epoch 24, val, loss=5.9849 acc=0.7625
+epoch 25, train, loss=0.7982 acc=0.6517
+epoch 25, val, loss=12.3787 acc=0.6925
+epoch 26, train, loss=0.8866 acc=0.6200
+epoch 26, val, loss=17.7828 acc=0.7533
+epoch 27, train, loss=0.7775 acc=0.6517
+epoch 27, val, loss=1.7223 acc=0.7983
+epoch 28, train, loss=0.7312 acc=0.6867
+epoch 28, val, loss=6.6605 acc=0.7708
+epoch 29, train, loss=0.6982 acc=0.7067
+epoch 29, val, loss=3.6969 acc=0.7708
+epoch 30, train, loss=0.8053 acc=0.6600
+epoch 30, val, loss=14.4981 acc=0.7258
+epoch 31, train, loss=0.7014 acc=0.6817
+epoch 31, val, loss=3.2919 acc=0.7250
+epoch 32, train, loss=0.6631 acc=0.7250
+epoch 32, val, loss=20.0763 acc=0.7333
+epoch 33, train, loss=0.6367 acc=0.7467
+epoch 33, val, loss=10.0766 acc=0.7683
+epoch 34, train, loss=0.6126 acc=0.7233
+epoch 34, val, loss=17.3446 acc=0.7817
+epoch 35, train, loss=0.6147 acc=0.7350
+epoch 35, val, loss=7.0473 acc=0.8467
+epoch 36, train, loss=0.6509 acc=0.7233
+epoch 36, val, loss=43.4749 acc=0.7900
+epoch 37, train, loss=0.5732 acc=0.7617
+epoch 37, val, loss=16.9738 acc=0.7483
+epoch 38, train, loss=0.5817 acc=0.7500
+epoch 38, val, loss=4.0177 acc=0.7717
+epoch 39, train, loss=0.6388 acc=0.7450
+epoch 39, val, loss=52.4620 acc=0.7150
+epoch 40, train, loss=0.5229 acc=0.7883
+epoch 40, val, loss=14.7598 acc=0.7275
+epoch 41, train, loss=0.5552 acc=0.7817
+epoch 41, val, loss=1.2887 acc=0.8542
+epoch 42, train, loss=0.4755 acc=0.8283
+epoch 42, val, loss=4.3190 acc=0.8367
+epoch 43, train, loss=0.4929 acc=0.8050
+epoch 43, val, loss=62.3051 acc=0.8292
+epoch 44, train, loss=0.4039 acc=0.8317
+epoch 44, val, loss=38.8351 acc=0.8267
+epoch 45, train, loss=0.4713 acc=0.8150
+epoch 45, val, loss=75.1028 acc=0.8167
+epoch 46, train, loss=0.3740 acc=0.8417
+epoch 46, val, loss=21.3514 acc=0.8583
+epoch 47, train, loss=0.3729 acc=0.8400
+epoch 47, val, loss=19.6472 acc=0.8150
+epoch 48, train, loss=0.4387 acc=0.8233
+epoch 48, val, loss=13.5387 acc=0.8117
+epoch 49, train, loss=0.4074 acc=0.8267
+epoch 49, val, loss=24.8008 acc=0.8267
+epoch 50, train, loss=0.3814 acc=0.8267
+epoch 50, val, loss=4.6423 acc=0.8650
+epoch 51, train, loss=0.3271 acc=0.8667
+epoch 51, val, loss=14.1869 acc=0.8925
+epoch 52, train, loss=0.3431 acc=0.8567
+epoch 52, val, loss=5.1804 acc=0.8392
+epoch 53, train, loss=0.3810 acc=0.8433
+epoch 53, val, loss=0.9934 acc=0.8917
+epoch 54, train, loss=0.3178 acc=0.8700
+epoch 54, val, loss=5.1719 acc=0.8300
+epoch 55, train, loss=0.2991 acc=0.8733
+epoch 55, val, loss=7916.4730 acc=0.6358
+epoch 56, train, loss=0.3904 acc=0.8617
+epoch 56, val, loss=120.4113 acc=0.7192
+epoch 57, train, loss=0.2809 acc=0.8850
+epoch 57, val, loss=5.5091 acc=0.8017
+epoch 58, train, loss=0.2486 acc=0.9000
+epoch 58, val, loss=25.5481 acc=0.7550
+epoch 59, train, loss=0.3187 acc=0.8733
+epoch 59, val, loss=9.0247 acc=0.7917
+epoch 60, train, loss=0.2971 acc=0.8833
+epoch 60, val, loss=212.5292 acc=0.6992
+epoch 61, train, loss=0.1758 acc=0.9433
+epoch 61, val, loss=62.6300 acc=0.7100
+epoch 62, train, loss=0.2033 acc=0.9283
+epoch 62, val, loss=17.2242 acc=0.8108
+epoch 63, train, loss=0.2064 acc=0.9200
+epoch 63, val, loss=68.4829 acc=0.7917
+epoch 64, train, loss=0.1484 acc=0.9450
+epoch 64, val, loss=117.2265 acc=0.7150
+epoch 65, train, loss=0.2835 acc=0.9050
+epoch 65, val, loss=167.9802 acc=0.6883
+epoch 66, train, loss=0.2144 acc=0.9233
+epoch 66, val, loss=508.2270 acc=0.7025
+epoch 67, train, loss=0.1876 acc=0.9283
+epoch 67, val, loss=1341.2556 acc=0.6558
+epoch 68, train, loss=0.1460 acc=0.9483
+epoch 68, val, loss=1069.0623 acc=0.7225
+epoch 69, train, loss=0.1549 acc=0.9350
+epoch 69, val, loss=1532.0112 acc=0.6617
+epoch 70, train, loss=0.1515 acc=0.9367
+epoch 70, val, loss=954.1542 acc=0.6758
+epoch 71, train, loss=0.2714 acc=0.8950
+epoch 71, val, loss=58.8108 acc=0.7383
+epoch 72, train, loss=0.2676 acc=0.9033
+epoch 72, val, loss=17.5924 acc=0.7300
+epoch 73, train, loss=0.1822 acc=0.9333
+epoch 73, val, loss=54.8006 acc=0.7858
+epoch 74, train, loss=0.2249 acc=0.9200
+epoch 74, val, loss=47.5756 acc=0.8633
+epoch 75, train, loss=0.1540 acc=0.9433
+epoch 75, val, loss=48.4654 acc=0.7958
+epoch 76, train, loss=0.2255 acc=0.9150
+epoch 76, val, loss=248.2910 acc=0.7433
+epoch 77, train, loss=0.1978 acc=0.9267
+epoch 77, val, loss=93.8600 acc=0.7533
+epoch 78, train, loss=0.1734 acc=0.9317
+epoch 78, val, loss=28.8187 acc=0.8050
+epoch 79, train, loss=0.1623 acc=0.9517
+epoch 79, val, loss=21319.3338 acc=0.7325
+epoch 80, train, loss=0.7632 acc=0.8033
+epoch 80, val, loss=2.1720 acc=0.7442
+epoch 81, train, loss=1.1552 acc=0.7183
+epoch 81, val, loss=0.9369 acc=0.7808
+epoch 82, train, loss=0.7754 acc=0.7800
+epoch 82, val, loss=109.7882 acc=0.6442
+epoch 83, train, loss=0.5893 acc=0.8017
+epoch 83, val, loss=1.9501 acc=0.6983
+epoch 84, train, loss=0.5218 acc=0.8350
+epoch 84, val, loss=0.8081 acc=0.7408
+epoch 85, train, loss=0.3990 acc=0.8617
+epoch 85, val, loss=0.7340 acc=0.7683
+epoch 86, train, loss=0.4502 acc=0.8250
+epoch 86, val, loss=1.6047 acc=0.7258
+epoch 87, train, loss=0.3904 acc=0.8583
+epoch 87, val, loss=3.3797 acc=0.7575
+epoch 88, train, loss=0.3731 acc=0.8567
+epoch 88, val, loss=2.8471 acc=0.7500
+epoch 89, train, loss=0.3173 acc=0.8817
+epoch 89, val, loss=1.2887 acc=0.7525
+epoch 90, train, loss=0.5271 acc=0.8017
+epoch 90, val, loss=11.3896 acc=0.7267
+epoch 91, train, loss=0.4447 acc=0.8317
+epoch 91, val, loss=52.8825 acc=0.6733
+epoch 92, train, loss=0.5038 acc=0.8100
+epoch 92, val, loss=12.7687 acc=0.7258
+epoch 93, train, loss=0.5198 acc=0.8067
+epoch 93, val, loss=9.5894 acc=0.7425
+epoch 94, train, loss=0.5167 acc=0.7883
+epoch 94, val, loss=4.4427 acc=0.7600
+epoch 95, train, loss=0.3838 acc=0.8550
+epoch 95, val, loss=1.6513 acc=0.8000
+epoch 96, train, loss=0.4515 acc=0.8267
+epoch 96, val, loss=2.3572 acc=0.7658
+epoch 97, train, loss=0.3473 acc=0.8700
+epoch 97, val, loss=5.9925 acc=0.7650
+epoch 98, train, loss=0.3309 acc=0.8650
+epoch 98, val, loss=3.5655 acc=0.7850
+epoch 99, train, loss=0.3452 acc=0.8550
+epoch 99, val, loss=32.5011 acc=0.7750
+epoch 100, train, loss=0.2671 acc=0.9083
+epoch 100, val, loss=5.2388 acc=0.7733
+epoch 101, train, loss=0.2891 acc=0.9083
+epoch 101, val, loss=1.7235 acc=0.7925
+epoch 102, train, loss=0.3085 acc=0.8817
+epoch 102, val, loss=1.2021 acc=0.8250
+epoch 103, train, loss=0.2545 acc=0.9167
+epoch 103, val, loss=1.8657 acc=0.7908
+epoch 104, train, loss=0.2166 acc=0.9150
+epoch 104, val, loss=3.3996 acc=0.7908
+epoch 105, train, loss=0.2325 acc=0.9183
+epoch 105, val, loss=7.2031 acc=0.8175
+epoch 106, train, loss=0.2327 acc=0.9117
+epoch 106, val, loss=2.5682 acc=0.8050
+epoch 107, train, loss=0.2347 acc=0.9100
+epoch 107, val, loss=3.6138 acc=0.7900
+epoch 108, train, loss=0.2208 acc=0.9067
+epoch 108, val, loss=1.5275 acc=0.8117
+epoch 109, train, loss=0.1790 acc=0.9317
+epoch 109, val, loss=2.9264 acc=0.8133
+epoch 110, train, loss=0.1667 acc=0.9317
+epoch 110, val, loss=2.3535 acc=0.7942
+epoch 111, train, loss=0.2048 acc=0.9167
+epoch 111, val, loss=1.2178 acc=0.8425
+epoch 112, train, loss=0.1940 acc=0.9250
+epoch 112, val, loss=6.0156 acc=0.8358
+epoch 113, train, loss=0.2284 acc=0.9317
+epoch 113, val, loss=3.2301 acc=0.8267
+epoch 114, train, loss=0.1289 acc=0.9517
+epoch 114, val, loss=9.9832 acc=0.8567
+epoch 115, train, loss=0.2126 acc=0.9317
+epoch 115, val, loss=6.8689 acc=0.8417
+epoch 116, train, loss=0.1261 acc=0.9483
+epoch 116, val, loss=4.0771 acc=0.8317
+epoch 117, train, loss=0.1377 acc=0.9500
+epoch 117, val, loss=6.9267 acc=0.8433
+epoch 118, train, loss=0.1305 acc=0.9617
+epoch 118, val, loss=10.6243 acc=0.8175
+epoch 119, train, loss=0.1807 acc=0.9300
+epoch 119, val, loss=6.3597 acc=0.8308
+epoch 120, train, loss=0.1556 acc=0.9400
+epoch 120, val, loss=2.6829 acc=0.8225
+epoch 121, train, loss=0.1652 acc=0.9383
+epoch 121, val, loss=7.7032 acc=0.8108
+epoch 122, train, loss=0.1533 acc=0.9567
+epoch 122, val, loss=6.9716 acc=0.7958
+epoch 123, train, loss=0.0996 acc=0.9667
+epoch 123, val, loss=4.0264 acc=0.8267
+epoch 124, train, loss=0.1507 acc=0.9483
+epoch 124, val, loss=6.6082 acc=0.8558
+epoch 125, train, loss=0.1437 acc=0.9450
+epoch 125, val, loss=4.7702 acc=0.8267
+epoch 126, train, loss=0.1047 acc=0.9667
+epoch 126, val, loss=2.2413 acc=0.8175
+epoch 127, train, loss=0.1901 acc=0.9450
+epoch 127, val, loss=3.8542 acc=0.8358
+epoch 128, train, loss=0.1227 acc=0.9600
+epoch 128, val, loss=1.5154 acc=0.8517
+epoch 129, train, loss=0.1037 acc=0.9583
+epoch 129, val, loss=1.8816 acc=0.8317
+epoch 130, train, loss=0.1201 acc=0.9550
+epoch 130, val, loss=4.5364 acc=0.8400
+epoch 131, train, loss=0.1041 acc=0.9567
+epoch 131, val, loss=6.7115 acc=0.8325
+epoch 132, train, loss=0.1140 acc=0.9517
+epoch 132, val, loss=2.0661 acc=0.8542
+epoch 133, train, loss=0.1483 acc=0.9617
+epoch 133, val, loss=3.0520 acc=0.8450
+epoch 134, train, loss=0.0824 acc=0.9717
+epoch 134, val, loss=0.7281 acc=0.8650
+epoch 135, train, loss=0.0921 acc=0.9750
+epoch 135, val, loss=4.6895 acc=0.8250
+epoch 136, train, loss=0.1249 acc=0.9600
+epoch 136, val, loss=0.6631 acc=0.8600
+epoch 137, train, loss=0.0970 acc=0.9617
+epoch 137, val, loss=3.8206 acc=0.8408
+epoch 138, train, loss=0.1022 acc=0.9600
+epoch 138, val, loss=1.5943 acc=0.8417
+epoch 139, train, loss=0.0933 acc=0.9683
+epoch 139, val, loss=4.0755 acc=0.8417
+epoch 140, train, loss=0.0890 acc=0.9650
+epoch 140, val, loss=3.8654 acc=0.8200
+epoch 141, train, loss=0.1214 acc=0.9633
+epoch 141, val, loss=2.9393 acc=0.8433
+epoch 142, train, loss=0.0850 acc=0.9717
+epoch 142, val, loss=1.2566 acc=0.8542
+epoch 143, train, loss=0.1140 acc=0.9650
+epoch 143, val, loss=10.8554 acc=0.8533
+epoch 144, train, loss=0.0864 acc=0.9683
+epoch 144, val, loss=4.5701 acc=0.8392
+epoch 145, train, loss=0.0771 acc=0.9817
+epoch 145, val, loss=14.9186 acc=0.8508
+epoch 146, train, loss=0.0890 acc=0.9633
+epoch 146, val, loss=13.8443 acc=0.8325
+epoch 147, train, loss=0.0948 acc=0.9717
+epoch 147, val, loss=4.7863 acc=0.8275
+epoch 148, train, loss=0.0875 acc=0.9700
+epoch 148, val, loss=3.7177 acc=0.8408
+epoch 149, train, loss=0.0881 acc=0.9700
+epoch 149, val, loss=13.1401 acc=0.8483
+epoch 150, train, loss=0.0968 acc=0.9633
+epoch 150, val, loss=4.4109 acc=0.8375
+level  1
+epoch 1, train, loss=0.7161 acc=0.8267
+epoch 1, val, loss=2.3004 acc=0.7758
+epoch 2, train, loss=0.4823 acc=0.8317
+epoch 2, val, loss=3.5866 acc=0.7650
+epoch 3, train, loss=0.4357 acc=0.8583
+epoch 3, val, loss=5.0486 acc=0.7458
+epoch 4, train, loss=0.3713 acc=0.8517
+epoch 4, val, loss=1.2022 acc=0.7658
+epoch 5, train, loss=0.3497 acc=0.8750
+epoch 5, val, loss=1.2053 acc=0.7775
+epoch 6, train, loss=0.3241 acc=0.8717
+epoch 6, val, loss=3.2295 acc=0.7625
+epoch 7, train, loss=0.3681 acc=0.8717
+epoch 7, val, loss=0.7088 acc=0.7842
+epoch 8, train, loss=0.3461 acc=0.8783
+epoch 8, val, loss=0.7125 acc=0.7858
+epoch 9, train, loss=0.3429 acc=0.8900
+epoch 9, val, loss=0.7797 acc=0.7883
+epoch 10, train, loss=0.3414 acc=0.8833
+epoch 10, val, loss=0.9620 acc=0.7758
+epoch 11, train, loss=0.3446 acc=0.8767
+epoch 11, val, loss=2.4525 acc=0.7608
+epoch 12, train, loss=0.3202 acc=0.8833
+epoch 12, val, loss=1.2511 acc=0.7575
+epoch 13, train, loss=0.3665 acc=0.8683
+epoch 13, val, loss=3.5175 acc=0.7592
+epoch 14, train, loss=0.3670 acc=0.8483
+epoch 14, val, loss=0.7674 acc=0.7933
+epoch 15, train, loss=0.3331 acc=0.8850
+epoch 15, val, loss=0.6505 acc=0.7775
+epoch 16, train, loss=0.3443 acc=0.8550
+epoch 16, val, loss=2.3041 acc=0.7683
+epoch 17, train, loss=0.3992 acc=0.8700
+epoch 17, val, loss=1.3897 acc=0.7492
+epoch 18, train, loss=0.4170 acc=0.8483
+epoch 18, val, loss=0.5229 acc=0.8175
+epoch 19, train, loss=0.3722 acc=0.8617
+epoch 19, val, loss=0.8563 acc=0.7917
+epoch 20, train, loss=0.2809 acc=0.9033
+epoch 20, val, loss=2.6897 acc=0.7275
+epoch 21, train, loss=0.3136 acc=0.8883
+epoch 21, val, loss=0.5003 acc=0.8233
+epoch 22, train, loss=0.3021 acc=0.8917
+epoch 22, val, loss=0.8801 acc=0.7775
+epoch 23, train, loss=0.3682 acc=0.8700
+epoch 23, val, loss=0.7379 acc=0.7825
+epoch 24, train, loss=0.3760 acc=0.8550
+epoch 24, val, loss=1.5457 acc=0.7542
+epoch 25, train, loss=0.3338 acc=0.8717
+epoch 25, val, loss=0.7519 acc=0.7767
+epoch 26, train, loss=0.3136 acc=0.8933
+epoch 26, val, loss=0.7247 acc=0.7842
+epoch 27, train, loss=0.3695 acc=0.8700
+epoch 27, val, loss=1.0056 acc=0.7750
+epoch 28, train, loss=0.3189 acc=0.8867
+epoch 28, val, loss=0.6755 acc=0.7983
+epoch 29, train, loss=0.3330 acc=0.8733
+epoch 29, val, loss=1.7264 acc=0.7475
+epoch 30, train, loss=0.3452 acc=0.8833
+epoch 30, val, loss=1.4235 acc=0.7942
+epoch 31, train, loss=0.3931 acc=0.8483
+epoch 31, val, loss=0.6082 acc=0.7842
+epoch 32, train, loss=0.3354 acc=0.8833
+epoch 32, val, loss=1.1520 acc=0.7475
+epoch 33, train, loss=0.2907 acc=0.8917
+epoch 33, val, loss=4.1893 acc=0.7400
+epoch 34, train, loss=0.2901 acc=0.8917
+epoch 34, val, loss=2.1564 acc=0.7450
+epoch 35, train, loss=0.2938 acc=0.9050
+epoch 35, val, loss=2.7637 acc=0.7625
+epoch 36, train, loss=0.3404 acc=0.8733
+epoch 36, val, loss=0.7941 acc=0.7858
+epoch 37, train, loss=0.3241 acc=0.8717
+epoch 37, val, loss=9.5969 acc=0.7458
+epoch 38, train, loss=0.3706 acc=0.8733
+epoch 38, val, loss=0.9143 acc=0.7850
+epoch 39, train, loss=0.3071 acc=0.8817
+epoch 39, val, loss=1.1119 acc=0.7633
+epoch 40, train, loss=0.2790 acc=0.8983
+epoch 40, val, loss=0.6164 acc=0.8108
+epoch 41, train, loss=0.2825 acc=0.9017
+epoch 41, val, loss=0.5751 acc=0.8150
+epoch 42, train, loss=0.2914 acc=0.9000
+epoch 42, val, loss=0.8911 acc=0.7850
+epoch 43, train, loss=0.3188 acc=0.8883
+epoch 43, val, loss=0.7395 acc=0.7933
+epoch 44, train, loss=0.2481 acc=0.9167
+epoch 44, val, loss=0.6377 acc=0.8167
+epoch 45, train, loss=0.2559 acc=0.9100
+epoch 45, val, loss=1.1990 acc=0.7625
+epoch 46, train, loss=0.3150 acc=0.8950
+epoch 46, val, loss=3.5973 acc=0.7367
+epoch 47, train, loss=0.3120 acc=0.8833
+epoch 47, val, loss=1.3845 acc=0.8100
+epoch 48, train, loss=0.4161 acc=0.8667
+epoch 48, val, loss=2.9768 acc=0.7692
+epoch 49, train, loss=0.3677 acc=0.8750
+epoch 49, val, loss=2.0014 acc=0.7708
+epoch 50, train, loss=0.3924 acc=0.8683
+epoch 50, val, loss=6.2418 acc=0.7833
+epoch 51, train, loss=0.3429 acc=0.8767
+epoch 51, val, loss=1.2474 acc=0.7958
+epoch 52, train, loss=0.2871 acc=0.8933
+epoch 52, val, loss=34.5118 acc=0.7625
+epoch 53, train, loss=0.2816 acc=0.8933
+epoch 53, val, loss=4.1137 acc=0.7975
+epoch 54, train, loss=0.3623 acc=0.8683
+epoch 54, val, loss=29.9493 acc=0.7650
+epoch 55, train, loss=0.3249 acc=0.8767
+epoch 55, val, loss=17.3113 acc=0.7358
+epoch 56, train, loss=0.3564 acc=0.8717
+epoch 56, val, loss=6.9487 acc=0.7483
+epoch 57, train, loss=0.3342 acc=0.8900
+epoch 57, val, loss=2.0817 acc=0.7883
+epoch 58, train, loss=0.3296 acc=0.8933
+epoch 58, val, loss=0.9899 acc=0.8325
+epoch 59, train, loss=0.3574 acc=0.8683
+epoch 59, val, loss=0.9706 acc=0.8300
+epoch 60, train, loss=0.3349 acc=0.8800
+epoch 60, val, loss=24.4250 acc=0.7667
+epoch 61, train, loss=0.3129 acc=0.8783
+epoch 61, val, loss=3.3378 acc=0.7608
+epoch 62, train, loss=0.3217 acc=0.8900
+epoch 62, val, loss=1.9671 acc=0.7967
+epoch 63, train, loss=0.3629 acc=0.8717
+epoch 63, val, loss=8.3310 acc=0.7400
+epoch 64, train, loss=0.2969 acc=0.8983
+epoch 64, val, loss=0.9437 acc=0.7700
+epoch 65, train, loss=0.2789 acc=0.8983
+epoch 65, val, loss=0.5348 acc=0.8108
+epoch 66, train, loss=0.3431 acc=0.8783
+epoch 66, val, loss=0.5206 acc=0.8183
+epoch 67, train, loss=0.3095 acc=0.8883
+epoch 67, val, loss=0.5463 acc=0.8192
+epoch 68, train, loss=0.2423 acc=0.9083
+epoch 68, val, loss=3.4832 acc=0.7792
+epoch 69, train, loss=0.2568 acc=0.9050
+epoch 69, val, loss=5.9460 acc=0.7450
+epoch 70, train, loss=0.2590 acc=0.9000
+epoch 70, val, loss=0.6337 acc=0.7925
+epoch 71, train, loss=0.2755 acc=0.9050
+epoch 71, val, loss=0.8335 acc=0.7900
+epoch 72, train, loss=0.2389 acc=0.9167
+epoch 72, val, loss=0.5220 acc=0.8067
+epoch 73, train, loss=0.2641 acc=0.9017
+epoch 73, val, loss=0.5220 acc=0.8283
+epoch 74, train, loss=0.2535 acc=0.9083
+epoch 74, val, loss=0.5471 acc=0.8167
+epoch 75, train, loss=0.3003 acc=0.8750
+epoch 75, val, loss=3.8530 acc=0.7667
+epoch 76, train, loss=0.3388 acc=0.8900
+epoch 76, val, loss=0.5784 acc=0.8108
+epoch 77, train, loss=0.2708 acc=0.9083
+epoch 77, val, loss=0.5789 acc=0.8083
+epoch 78, train, loss=0.2576 acc=0.9000
+epoch 78, val, loss=0.6426 acc=0.8008
+epoch 79, train, loss=0.3138 acc=0.8700
+epoch 79, val, loss=0.7797 acc=0.7867
+epoch 80, train, loss=0.2538 acc=0.9000
+epoch 80, val, loss=19.1727 acc=0.7542
+epoch 81, train, loss=0.2944 acc=0.8967
+epoch 81, val, loss=0.5389 acc=0.8075
+epoch 82, train, loss=0.2482 acc=0.9150
+epoch 82, val, loss=1.0789 acc=0.7925
+epoch 83, train, loss=0.2933 acc=0.9067
+epoch 83, val, loss=1.5652 acc=0.7583
+epoch 84, train, loss=0.2497 acc=0.9167
+epoch 84, val, loss=0.5845 acc=0.7867
+epoch 85, train, loss=0.2629 acc=0.8983
+epoch 85, val, loss=4.0502 acc=0.7750
+epoch 86, train, loss=0.2312 acc=0.9133
+epoch 86, val, loss=0.5855 acc=0.7833
+epoch 87, train, loss=0.2551 acc=0.9033
+epoch 87, val, loss=0.5111 acc=0.8108
+epoch 88, train, loss=0.2701 acc=0.9083
+epoch 88, val, loss=0.5061 acc=0.8033
+epoch 89, train, loss=0.2151 acc=0.9183
+epoch 89, val, loss=1.0103 acc=0.7650
+epoch 90, train, loss=0.3355 acc=0.8800
+epoch 90, val, loss=0.4853 acc=0.8300
+epoch 91, train, loss=0.2534 acc=0.9117
+epoch 91, val, loss=0.7876 acc=0.7633
+epoch 92, train, loss=0.2515 acc=0.9000
+epoch 92, val, loss=2.9626 acc=0.7375
+epoch 93, train, loss=0.2383 acc=0.9067
+epoch 93, val, loss=1.0144 acc=0.7950
+epoch 94, train, loss=0.2879 acc=0.9067
+epoch 94, val, loss=2.6252 acc=0.7775
+epoch 95, train, loss=0.2853 acc=0.8967
+epoch 95, val, loss=3.5106 acc=0.7458
+epoch 96, train, loss=0.2582 acc=0.9100
+epoch 96, val, loss=0.7837 acc=0.7750
+epoch 97, train, loss=0.2767 acc=0.9067
+epoch 97, val, loss=5.5804 acc=0.7525
+epoch 98, train, loss=0.2455 acc=0.9167
+epoch 98, val, loss=0.5909 acc=0.7958
+epoch 99, train, loss=0.3331 acc=0.8667
+epoch 99, val, loss=0.5088 acc=0.8092
+epoch 100, train, loss=0.2619 acc=0.9117
+epoch 100, val, loss=0.4715 acc=0.8167
+epoch 101, train, loss=0.2569 acc=0.9000
+epoch 101, val, loss=0.4739 acc=0.8217
+epoch 102, train, loss=0.2472 acc=0.9150
+epoch 102, val, loss=0.8510 acc=0.7708
+epoch 103, train, loss=0.2591 acc=0.9033
+epoch 103, val, loss=8.4018 acc=0.7733
+epoch 104, train, loss=0.2982 acc=0.8900
+epoch 104, val, loss=0.5695 acc=0.7875
+epoch 105, train, loss=0.3041 acc=0.8833
+epoch 105, val, loss=0.4752 acc=0.8175
+epoch 106, train, loss=0.3138 acc=0.8717
+epoch 106, val, loss=0.5243 acc=0.8008
+epoch 107, train, loss=0.2644 acc=0.9017
+epoch 107, val, loss=8.6643 acc=0.7533
+epoch 108, train, loss=0.3077 acc=0.8717
+epoch 108, val, loss=0.6591 acc=0.7817
+epoch 109, train, loss=0.2870 acc=0.8883
+epoch 109, val, loss=0.5194 acc=0.8033
+epoch 110, train, loss=0.2595 acc=0.8950
+epoch 110, val, loss=1.9445 acc=0.7600
+epoch 111, train, loss=0.3060 acc=0.8950
+epoch 111, val, loss=0.5421 acc=0.7967
+epoch 112, train, loss=0.2393 acc=0.9183
+epoch 112, val, loss=2.2291 acc=0.7400
+epoch 113, train, loss=0.2684 acc=0.9117
+epoch 113, val, loss=0.5775 acc=0.7842
+epoch 114, train, loss=0.2466 acc=0.9100
+epoch 114, val, loss=0.7472 acc=0.7817
+epoch 115, train, loss=0.2576 acc=0.9100
+epoch 115, val, loss=1.6902 acc=0.7542
+epoch 116, train, loss=0.3107 acc=0.8983
+epoch 116, val, loss=0.7239 acc=0.7642
+epoch 117, train, loss=0.2280 acc=0.9217
+epoch 117, val, loss=0.7376 acc=0.7758
+epoch 118, train, loss=0.2892 acc=0.8950
+epoch 118, val, loss=0.5816 acc=0.7933
+epoch 119, train, loss=0.2192 acc=0.9100
+epoch 119, val, loss=0.5776 acc=0.7983
+epoch 120, train, loss=0.2675 acc=0.8967
+epoch 120, val, loss=0.5376 acc=0.8083
+epoch 121, train, loss=0.2164 acc=0.9183
+epoch 121, val, loss=0.6340 acc=0.7808
+epoch 122, train, loss=0.3179 acc=0.8850
+epoch 122, val, loss=0.7632 acc=0.7433
+epoch 123, train, loss=0.3245 acc=0.8867
+epoch 123, val, loss=0.6963 acc=0.7742
+epoch 124, train, loss=0.3408 acc=0.8600
+epoch 124, val, loss=0.9915 acc=0.7458
+epoch 125, train, loss=0.2914 acc=0.9000
+epoch 125, val, loss=0.6053 acc=0.7925
+epoch 126, train, loss=0.2611 acc=0.8967
+epoch 126, val, loss=0.5265 acc=0.7983
+epoch 127, train, loss=0.3257 acc=0.8700
+epoch 127, val, loss=0.6674 acc=0.7667
+epoch 128, train, loss=0.3195 acc=0.8850
+epoch 128, val, loss=0.5805 acc=0.7867
+epoch 129, train, loss=0.2397 acc=0.9100
+epoch 129, val, loss=0.6168 acc=0.7875
+epoch 130, train, loss=0.2745 acc=0.9000
+epoch 130, val, loss=0.8775 acc=0.7283
+epoch 131, train, loss=0.3151 acc=0.8917
+epoch 131, val, loss=0.6213 acc=0.7717
+epoch 132, train, loss=0.3060 acc=0.8717
+epoch 132, val, loss=1.1019 acc=0.7450
+epoch 133, train, loss=0.2866 acc=0.9033
+epoch 133, val, loss=8.5276 acc=0.7292
+epoch 134, train, loss=0.3518 acc=0.8717
+epoch 134, val, loss=0.8548 acc=0.7508
+epoch 135, train, loss=0.3154 acc=0.8917
+epoch 135, val, loss=0.6332 acc=0.7808
+epoch 136, train, loss=0.3052 acc=0.8933
+epoch 136, val, loss=2.6390 acc=0.7208
+epoch 137, train, loss=0.3354 acc=0.8967
+epoch 137, val, loss=0.5563 acc=0.7958
+epoch 138, train, loss=0.2768 acc=0.8900
+epoch 138, val, loss=0.5693 acc=0.7892
+epoch 139, train, loss=0.2805 acc=0.9067
+epoch 139, val, loss=46.3457 acc=0.7208
+epoch 140, train, loss=0.3879 acc=0.8800
+epoch 140, val, loss=0.8805 acc=0.7683
+epoch 141, train, loss=0.2939 acc=0.8950
+epoch 141, val, loss=1.9589 acc=0.7525
+epoch 142, train, loss=0.2983 acc=0.9017
+epoch 142, val, loss=0.7767 acc=0.7633
+epoch 143, train, loss=0.2997 acc=0.8800
+epoch 143, val, loss=1.0465 acc=0.7658
+epoch 144, train, loss=0.3292 acc=0.8650
+epoch 144, val, loss=0.5900 acc=0.7908
+epoch 145, train, loss=0.2949 acc=0.8983
+epoch 145, val, loss=0.6144 acc=0.7808
+epoch 146, train, loss=0.3019 acc=0.8917
+epoch 146, val, loss=1.3515 acc=0.7575
+epoch 147, train, loss=0.2870 acc=0.8983
+epoch 147, val, loss=0.7537 acc=0.7867
+epoch 148, train, loss=0.3010 acc=0.8950
+epoch 148, val, loss=6.2412 acc=0.7567
+epoch 149, train, loss=0.3304 acc=0.8683
+epoch 149, val, loss=3.3634 acc=0.7667
+epoch 150, train, loss=0.3538 acc=0.8767
+epoch 150, val, loss=19.5052 acc=0.6983
+level  2
+epoch 1, train, loss=0.3532 acc=0.8683
+epoch 1, val, loss=0.8131 acc=0.7633
+epoch 2, train, loss=0.2873 acc=0.8867
+epoch 2, val, loss=0.5609 acc=0.8000
+epoch 3, train, loss=0.2753 acc=0.9050
+epoch 3, val, loss=0.5010 acc=0.8200
+epoch 4, train, loss=0.3152 acc=0.8933
+epoch 4, val, loss=0.7921 acc=0.7775
+epoch 5, train, loss=0.2758 acc=0.9000
+epoch 5, val, loss=0.6538 acc=0.7783
+epoch 6, train, loss=0.3086 acc=0.8883
+epoch 6, val, loss=0.5811 acc=0.8083
+epoch 7, train, loss=0.2748 acc=0.8917
+epoch 7, val, loss=2.8675 acc=0.7800
+epoch 8, train, loss=0.2482 acc=0.9083
+epoch 8, val, loss=0.5871 acc=0.8058
+epoch 9, train, loss=0.2538 acc=0.8967
+epoch 9, val, loss=1.0699 acc=0.7492
+epoch 10, train, loss=0.3099 acc=0.8833
+epoch 10, val, loss=4.8760 acc=0.7483
+epoch 11, train, loss=0.2270 acc=0.9117
+epoch 11, val, loss=1.0882 acc=0.7525
+epoch 12, train, loss=0.3196 acc=0.8900
+epoch 12, val, loss=0.4354 acc=0.8333
+epoch 13, train, loss=0.2329 acc=0.9033
+epoch 13, val, loss=0.7442 acc=0.7925
+epoch 14, train, loss=0.2799 acc=0.8950
+epoch 14, val, loss=0.6882 acc=0.8192
+epoch 15, train, loss=0.2352 acc=0.9100
+epoch 15, val, loss=0.7343 acc=0.8033
+epoch 16, train, loss=0.2845 acc=0.9050
+epoch 16, val, loss=0.4898 acc=0.8092
+epoch 17, train, loss=0.3167 acc=0.8850
+epoch 17, val, loss=0.4548 acc=0.8225
+epoch 18, train, loss=0.3695 acc=0.8583
+epoch 18, val, loss=0.6338 acc=0.7758
+epoch 19, train, loss=0.2732 acc=0.9050
+epoch 19, val, loss=0.4604 acc=0.8258
+epoch 20, train, loss=0.2621 acc=0.9083
+epoch 20, val, loss=0.5200 acc=0.8158
+epoch 21, train, loss=0.2507 acc=0.9133
+epoch 21, val, loss=0.5614 acc=0.8117
+epoch 22, train, loss=0.2758 acc=0.8933
+epoch 22, val, loss=0.8124 acc=0.7692
+epoch 23, train, loss=0.2997 acc=0.9017
+epoch 23, val, loss=4.2788 acc=0.7825
+epoch 24, train, loss=0.2023 acc=0.9183
+epoch 24, val, loss=0.6541 acc=0.7708
+epoch 25, train, loss=0.2806 acc=0.8900
+epoch 25, val, loss=0.6008 acc=0.8050
+epoch 26, train, loss=0.2471 acc=0.9150
+epoch 26, val, loss=0.5209 acc=0.8200
+epoch 27, train, loss=0.3106 acc=0.8817
+epoch 27, val, loss=0.4549 acc=0.8342
+epoch 28, train, loss=0.2001 acc=0.9267
+epoch 28, val, loss=0.5640 acc=0.8150
+epoch 29, train, loss=0.3159 acc=0.8833
+epoch 29, val, loss=1.1621 acc=0.7417
+epoch 30, train, loss=0.2845 acc=0.8967
+epoch 30, val, loss=0.7918 acc=0.7708
+epoch 31, train, loss=0.2809 acc=0.9000
+epoch 31, val, loss=0.9757 acc=0.7900
+epoch 32, train, loss=0.3674 acc=0.8617
+epoch 32, val, loss=8.0179 acc=0.7342
+epoch 33, train, loss=0.2835 acc=0.9050
+epoch 33, val, loss=1.4293 acc=0.7875
+epoch 34, train, loss=0.3029 acc=0.8833
+epoch 34, val, loss=0.5721 acc=0.8125
+epoch 35, train, loss=0.2701 acc=0.9200
+epoch 35, val, loss=9.1789 acc=0.7892
+epoch 36, train, loss=0.2600 acc=0.9033
+epoch 36, val, loss=0.6730 acc=0.7792
+epoch 37, train, loss=0.3147 acc=0.8733
+epoch 37, val, loss=0.8577 acc=0.7583
+epoch 38, train, loss=0.2963 acc=0.8883
+epoch 38, val, loss=0.8178 acc=0.7675
+epoch 39, train, loss=0.3782 acc=0.8700
+epoch 39, val, loss=0.4788 acc=0.8292
+epoch 40, train, loss=0.2820 acc=0.8917
+epoch 40, val, loss=0.5088 acc=0.8150
+epoch 41, train, loss=0.2822 acc=0.8967
+epoch 41, val, loss=1.1176 acc=0.8150
+epoch 42, train, loss=0.2609 acc=0.9033
+epoch 42, val, loss=0.6091 acc=0.7958
+epoch 43, train, loss=0.3525 acc=0.8783
+epoch 43, val, loss=0.5248 acc=0.7950
+epoch 44, train, loss=0.2831 acc=0.9033
+epoch 44, val, loss=1.0148 acc=0.7658
+epoch 45, train, loss=0.2216 acc=0.9183
+epoch 45, val, loss=0.4294 acc=0.8408
+epoch 46, train, loss=0.2571 acc=0.8967
+epoch 46, val, loss=0.4826 acc=0.8217
+epoch 47, train, loss=0.2291 acc=0.9117
+epoch 47, val, loss=0.6787 acc=0.7908
+epoch 48, train, loss=0.3346 acc=0.8733
+epoch 48, val, loss=0.5481 acc=0.8258
+epoch 49, train, loss=0.2752 acc=0.9117
+epoch 49, val, loss=0.6583 acc=0.7983
+epoch 50, train, loss=0.3037 acc=0.8917
+epoch 50, val, loss=0.4890 acc=0.8100
+epoch 51, train, loss=0.2903 acc=0.9000
+epoch 51, val, loss=0.5563 acc=0.8067
+epoch 52, train, loss=0.3381 acc=0.8750
+epoch 52, val, loss=0.8624 acc=0.7658
+epoch 53, train, loss=0.3252 acc=0.8800
+epoch 53, val, loss=0.5450 acc=0.8133
+epoch 54, train, loss=0.3329 acc=0.8617
+epoch 54, val, loss=0.7460 acc=0.7683
+epoch 55, train, loss=0.2648 acc=0.9133
+epoch 55, val, loss=7.3721 acc=0.7492
+epoch 56, train, loss=0.2953 acc=0.8883
+epoch 56, val, loss=1.4377 acc=0.7767
+epoch 57, train, loss=0.3235 acc=0.8817
+epoch 57, val, loss=0.5337 acc=0.8225
+epoch 58, train, loss=0.2807 acc=0.8900
+epoch 58, val, loss=0.4997 acc=0.8258
+epoch 59, train, loss=0.2775 acc=0.9017
+epoch 59, val, loss=0.5966 acc=0.7975
+epoch 60, train, loss=0.2987 acc=0.8950
+epoch 60, val, loss=0.6603 acc=0.8092
+epoch 61, train, loss=0.3201 acc=0.8683
+epoch 61, val, loss=0.5097 acc=0.8167
+epoch 62, train, loss=0.3360 acc=0.8650
+epoch 62, val, loss=0.7227 acc=0.8017
+epoch 63, train, loss=0.2859 acc=0.9000
+epoch 63, val, loss=0.6778 acc=0.7742
+epoch 64, train, loss=0.2584 acc=0.9000
+epoch 64, val, loss=0.8595 acc=0.7700
+epoch 65, train, loss=0.2777 acc=0.9000
+epoch 65, val, loss=0.7236 acc=0.7858
+epoch 66, train, loss=0.2768 acc=0.9000
+epoch 66, val, loss=0.6836 acc=0.7858
+epoch 67, train, loss=0.3221 acc=0.8950
+epoch 67, val, loss=0.7157 acc=0.7967
+epoch 68, train, loss=0.2959 acc=0.8700
+epoch 68, val, loss=0.6296 acc=0.7775
+epoch 69, train, loss=0.4224 acc=0.8650
+epoch 69, val, loss=0.5331 acc=0.7825
+epoch 70, train, loss=0.2584 acc=0.9033
+epoch 70, val, loss=0.5082 acc=0.7925
+epoch 71, train, loss=0.3035 acc=0.8800
+epoch 71, val, loss=0.4846 acc=0.7975
+epoch 72, train, loss=0.2798 acc=0.8967
+epoch 72, val, loss=0.5484 acc=0.7758
+epoch 73, train, loss=0.2788 acc=0.8917
+epoch 73, val, loss=0.5344 acc=0.7983
+epoch 74, train, loss=0.2589 acc=0.9000
+epoch 74, val, loss=0.6481 acc=0.7842
+epoch 75, train, loss=0.3056 acc=0.8833
+epoch 75, val, loss=0.4628 acc=0.7967
+epoch 76, train, loss=0.2315 acc=0.9067
+epoch 76, val, loss=0.4616 acc=0.8150
+epoch 77, train, loss=0.3355 acc=0.8967
+epoch 77, val, loss=0.5023 acc=0.7975
+epoch 78, train, loss=0.2659 acc=0.8933
+epoch 78, val, loss=0.4730 acc=0.8208
+epoch 79, train, loss=0.2493 acc=0.9117
+epoch 79, val, loss=0.5059 acc=0.7933
+epoch 80, train, loss=0.2911 acc=0.8883
+epoch 80, val, loss=0.5257 acc=0.7983
+epoch 81, train, loss=0.3470 acc=0.8817
+epoch 81, val, loss=0.4596 acc=0.8233
+epoch 82, train, loss=0.2765 acc=0.8967
+epoch 82, val, loss=0.4545 acc=0.8217
+epoch 83, train, loss=0.2753 acc=0.8900
+epoch 83, val, loss=0.7373 acc=0.7500
+epoch 84, train, loss=0.2698 acc=0.9000
+epoch 84, val, loss=1.1237 acc=0.7975
+epoch 85, train, loss=0.2969 acc=0.8917
+epoch 85, val, loss=0.5359 acc=0.8133
+epoch 86, train, loss=0.3161 acc=0.8883
+epoch 86, val, loss=0.5206 acc=0.8075
+epoch 87, train, loss=0.2782 acc=0.8950
+epoch 87, val, loss=0.5115 acc=0.8092
+epoch 88, train, loss=0.2530 acc=0.9117
+epoch 88, val, loss=0.5188 acc=0.8192
+epoch 89, train, loss=0.2420 acc=0.9117
+epoch 89, val, loss=0.4841 acc=0.8258
+epoch 90, train, loss=0.2789 acc=0.8983
+epoch 90, val, loss=0.7849 acc=0.7625
+epoch 91, train, loss=0.2763 acc=0.8933
+epoch 91, val, loss=0.5087 acc=0.8075
+epoch 92, train, loss=0.3033 acc=0.8817
+epoch 92, val, loss=0.4652 acc=0.8358
+epoch 93, train, loss=0.3463 acc=0.8900
+epoch 93, val, loss=0.5964 acc=0.8192
+epoch 94, train, loss=0.2935 acc=0.8950
+epoch 94, val, loss=1.0589 acc=0.8292
+epoch 95, train, loss=0.2861 acc=0.9000
+epoch 95, val, loss=0.6099 acc=0.7783
+epoch 96, train, loss=0.2313 acc=0.9217
+epoch 96, val, loss=2.0279 acc=0.8183
+epoch 97, train, loss=0.2998 acc=0.8883
+epoch 97, val, loss=0.5331 acc=0.8017
+epoch 98, train, loss=0.3185 acc=0.8950
+epoch 98, val, loss=0.5006 acc=0.8175
+epoch 99, train, loss=0.2745 acc=0.8983
+epoch 99, val, loss=0.4210 acc=0.8408
+epoch 100, train, loss=0.2444 acc=0.9033
+epoch 100, val, loss=0.8575 acc=0.8225
+epoch 101, train, loss=0.3507 acc=0.8850
+epoch 101, val, loss=0.4998 acc=0.8300
+epoch 102, train, loss=0.3130 acc=0.9017
+epoch 102, val, loss=0.4737 acc=0.8133
+epoch 103, train, loss=0.2775 acc=0.8917
+epoch 103, val, loss=0.4848 acc=0.8092
+epoch 104, train, loss=0.2967 acc=0.8900
+epoch 104, val, loss=0.5670 acc=0.7958
+epoch 105, train, loss=0.2786 acc=0.8933
+epoch 105, val, loss=0.6441 acc=0.7692
+epoch 106, train, loss=0.2436 acc=0.9050
+epoch 106, val, loss=0.5483 acc=0.7958
+epoch 107, train, loss=0.2754 acc=0.9000
+epoch 107, val, loss=0.5016 acc=0.7942
+epoch 108, train, loss=0.2604 acc=0.9000
+epoch 108, val, loss=0.5281 acc=0.7875
+epoch 109, train, loss=0.3187 acc=0.8850
+epoch 109, val, loss=0.8898 acc=0.7783
+epoch 110, train, loss=0.2987 acc=0.9050
+epoch 110, val, loss=0.5389 acc=0.7950
+epoch 111, train, loss=0.2092 acc=0.9283
+epoch 111, val, loss=0.4787 acc=0.8008
+epoch 112, train, loss=0.1968 acc=0.9367
+epoch 112, val, loss=0.6224 acc=0.7642
+epoch 113, train, loss=0.2671 acc=0.9033
+epoch 113, val, loss=0.6386 acc=0.7742
+epoch 114, train, loss=0.2869 acc=0.8883
+epoch 114, val, loss=0.7602 acc=0.7425
+epoch 115, train, loss=0.2704 acc=0.8967
+epoch 115, val, loss=0.6018 acc=0.8017
+epoch 116, train, loss=0.2517 acc=0.9183
+epoch 116, val, loss=0.5996 acc=0.7708
+epoch 117, train, loss=0.2807 acc=0.9000
+epoch 117, val, loss=0.5510 acc=0.7883
+epoch 118, train, loss=0.3284 acc=0.8817
+epoch 118, val, loss=0.5565 acc=0.7925
+epoch 119, train, loss=0.3463 acc=0.8717
+epoch 119, val, loss=0.4909 acc=0.8250
+epoch 120, train, loss=0.2729 acc=0.8933
+epoch 120, val, loss=6.0779 acc=0.7717
+epoch 121, train, loss=0.3182 acc=0.8950
+epoch 121, val, loss=0.4810 acc=0.8242
+epoch 122, train, loss=0.2982 acc=0.8650
+epoch 122, val, loss=0.6692 acc=0.7608
+epoch 123, train, loss=0.2796 acc=0.9050
+epoch 123, val, loss=0.5015 acc=0.8125
+epoch 124, train, loss=0.3141 acc=0.8850
+epoch 124, val, loss=0.4553 acc=0.8392
+epoch 125, train, loss=0.2735 acc=0.9067
+epoch 125, val, loss=0.6656 acc=0.7750
+epoch 126, train, loss=0.2906 acc=0.8933
+epoch 126, val, loss=0.5230 acc=0.8142
+epoch 127, train, loss=0.3473 acc=0.8550
+epoch 127, val, loss=3.5638 acc=0.7883
+epoch 128, train, loss=0.3140 acc=0.8783
+epoch 128, val, loss=0.5237 acc=0.8108
+epoch 129, train, loss=0.2441 acc=0.8950
+epoch 129, val, loss=0.5677 acc=0.7908
+epoch 130, train, loss=0.2681 acc=0.9033
+epoch 130, val, loss=0.9028 acc=0.7367
+epoch 131, train, loss=0.2676 acc=0.9017
+epoch 131, val, loss=0.5811 acc=0.7725
+epoch 132, train, loss=0.3135 acc=0.8700
+epoch 132, val, loss=0.6234 acc=0.7658
+epoch 133, train, loss=0.2939 acc=0.9100
+epoch 133, val, loss=0.7628 acc=0.7633
+epoch 134, train, loss=0.4166 acc=0.8467
+epoch 134, val, loss=0.4686 acc=0.8350
+epoch 135, train, loss=0.2700 acc=0.9000
+epoch 135, val, loss=0.5524 acc=0.8083
+epoch 136, train, loss=0.2697 acc=0.8833
+epoch 136, val, loss=0.7646 acc=0.7483
+epoch 137, train, loss=0.3031 acc=0.8900
+epoch 137, val, loss=0.6090 acc=0.8050
+epoch 138, train, loss=0.2537 acc=0.9183
+epoch 138, val, loss=0.5851 acc=0.7942
+epoch 139, train, loss=0.2873 acc=0.8967
+epoch 139, val, loss=0.5638 acc=0.7775
+epoch 140, train, loss=0.2932 acc=0.8833
+epoch 140, val, loss=0.8400 acc=0.7742
+epoch 141, train, loss=0.2983 acc=0.8817
+epoch 141, val, loss=0.5926 acc=0.7825
+epoch 142, train, loss=0.2335 acc=0.9133
+epoch 142, val, loss=0.6173 acc=0.7783
+epoch 143, train, loss=0.3028 acc=0.8883
+epoch 143, val, loss=0.6678 acc=0.7433
+epoch 144, train, loss=0.2593 acc=0.9000
+epoch 144, val, loss=0.6226 acc=0.7575
+epoch 145, train, loss=0.1811 acc=0.9367
+epoch 145, val, loss=0.6404 acc=0.7575
+epoch 146, train, loss=0.2650 acc=0.9000
+epoch 146, val, loss=0.4898 acc=0.8133
+epoch 147, train, loss=0.2709 acc=0.8767
+epoch 147, val, loss=0.7033 acc=0.7675
+epoch 148, train, loss=0.2543 acc=0.9017
+epoch 148, val, loss=0.6448 acc=0.7592
+epoch 149, train, loss=0.3418 acc=0.8717
+epoch 149, val, loss=0.5011 acc=0.8017
+epoch 150, train, loss=0.2625 acc=0.9000
+epoch 150, val, loss=0.4697 acc=0.8158
+level  3
+epoch 1, train, loss=0.2503 acc=0.9067
+epoch 1, val, loss=0.3698 acc=0.8700
+epoch 2, train, loss=0.2822 acc=0.8883
+epoch 2, val, loss=0.5615 acc=0.7983
+epoch 3, train, loss=0.2513 acc=0.8950
+epoch 3, val, loss=0.4920 acc=0.8158
+epoch 4, train, loss=0.2870 acc=0.8850
+epoch 4, val, loss=0.7869 acc=0.7775
+epoch 5, train, loss=0.2995 acc=0.8867
+epoch 5, val, loss=0.5294 acc=0.8108
+epoch 6, train, loss=0.3276 acc=0.8783
+epoch 6, val, loss=0.4942 acc=0.8158
+epoch 7, train, loss=0.3339 acc=0.8600
+epoch 7, val, loss=0.3980 acc=0.8425
+epoch 8, train, loss=0.2403 acc=0.9050
+epoch 8, val, loss=0.4780 acc=0.8242
+epoch 9, train, loss=0.2863 acc=0.8750
+epoch 9, val, loss=0.4463 acc=0.8242
+epoch 10, train, loss=0.2646 acc=0.9000
+epoch 10, val, loss=0.8347 acc=0.7700
+epoch 11, train, loss=0.2936 acc=0.8900
+epoch 11, val, loss=0.4321 acc=0.8333
+epoch 12, train, loss=0.3125 acc=0.8950
+epoch 12, val, loss=0.8333 acc=0.7483
+epoch 13, train, loss=0.2904 acc=0.8950
+epoch 13, val, loss=0.4818 acc=0.8200
+epoch 14, train, loss=0.2633 acc=0.9033
+epoch 14, val, loss=0.5016 acc=0.8167
+epoch 15, train, loss=0.2428 acc=0.9017
+epoch 15, val, loss=0.4879 acc=0.8283
+epoch 16, train, loss=0.2479 acc=0.9033
+epoch 16, val, loss=0.6867 acc=0.8025
+epoch 17, train, loss=0.2506 acc=0.9067
+epoch 17, val, loss=0.4508 acc=0.8383
+epoch 18, train, loss=0.2376 acc=0.9183
+epoch 18, val, loss=0.6955 acc=0.7792
+epoch 19, train, loss=0.2533 acc=0.8883
+epoch 19, val, loss=0.4382 acc=0.8342
+epoch 20, train, loss=0.2536 acc=0.9133
+epoch 20, val, loss=0.4632 acc=0.8175
+epoch 21, train, loss=0.2960 acc=0.8883
+epoch 21, val, loss=0.5078 acc=0.8100
+epoch 22, train, loss=0.3001 acc=0.8883
+epoch 22, val, loss=0.4840 acc=0.8292
+epoch 23, train, loss=0.2801 acc=0.8933
+epoch 23, val, loss=0.6420 acc=0.7583
+epoch 24, train, loss=0.2455 acc=0.9167
+epoch 24, val, loss=0.3996 acc=0.8575
+epoch 25, train, loss=0.2663 acc=0.8983
+epoch 25, val, loss=0.3825 acc=0.8583
+epoch 26, train, loss=0.2960 acc=0.8683
+epoch 26, val, loss=0.3886 acc=0.8625
+epoch 27, train, loss=0.3343 acc=0.8700
+epoch 27, val, loss=36.9583 acc=0.8092
+epoch 28, train, loss=0.2548 acc=0.9083
+epoch 28, val, loss=0.4635 acc=0.8192
+epoch 29, train, loss=0.2823 acc=0.8833
+epoch 29, val, loss=0.9584 acc=0.7700
+epoch 30, train, loss=0.3010 acc=0.8933
+epoch 30, val, loss=11.8486 acc=0.8175
+epoch 31, train, loss=0.2977 acc=0.8767
+epoch 31, val, loss=0.4327 acc=0.8292
+epoch 32, train, loss=0.3208 acc=0.8750
+epoch 32, val, loss=3.0570 acc=0.8183
+epoch 33, train, loss=0.2985 acc=0.8833
+epoch 33, val, loss=0.4694 acc=0.8233
+epoch 34, train, loss=0.2736 acc=0.8967
+epoch 34, val, loss=1.9713 acc=0.7942
+epoch 35, train, loss=0.2771 acc=0.9017
+epoch 35, val, loss=0.4940 acc=0.8233
+epoch 36, train, loss=0.2554 acc=0.9117
+epoch 36, val, loss=0.4999 acc=0.8275
+epoch 37, train, loss=0.2532 acc=0.8867
+epoch 37, val, loss=0.4387 acc=0.8392
+epoch 38, train, loss=0.2745 acc=0.9100
+epoch 38, val, loss=0.4903 acc=0.8200
+epoch 39, train, loss=0.2432 acc=0.9150
+epoch 39, val, loss=0.5984 acc=0.7975
+epoch 40, train, loss=0.2959 acc=0.8833
+epoch 40, val, loss=0.4992 acc=0.8250
+epoch 41, train, loss=0.2849 acc=0.8933
+epoch 41, val, loss=0.5591 acc=0.8042
+epoch 42, train, loss=0.2511 acc=0.9000
+epoch 42, val, loss=0.4868 acc=0.8333
+epoch 43, train, loss=0.2242 acc=0.9133
+epoch 43, val, loss=0.5913 acc=0.8625
+epoch 44, train, loss=0.2808 acc=0.8983
+epoch 44, val, loss=0.4052 acc=0.8492
+epoch 45, train, loss=0.2683 acc=0.8917
+epoch 45, val, loss=0.3937 acc=0.8525
+epoch 46, train, loss=0.2764 acc=0.8933
+epoch 46, val, loss=0.4330 acc=0.8433
+epoch 47, train, loss=0.2681 acc=0.9000
+epoch 47, val, loss=0.3530 acc=0.8750
+epoch 48, train, loss=0.2517 acc=0.9050
+epoch 48, val, loss=0.3961 acc=0.8683
+epoch 49, train, loss=0.2588 acc=0.9100
+epoch 49, val, loss=0.4720 acc=0.8333
+epoch 50, train, loss=0.2848 acc=0.8883
+epoch 50, val, loss=0.4125 acc=0.8550
+epoch 51, train, loss=0.2520 acc=0.8850
+epoch 51, val, loss=0.4453 acc=0.8400
+epoch 52, train, loss=0.2783 acc=0.8933
+epoch 52, val, loss=0.4201 acc=0.8542
+epoch 53, train, loss=0.3271 acc=0.8700
+epoch 53, val, loss=0.4277 acc=0.8508
+epoch 54, train, loss=0.2944 acc=0.8967
+epoch 54, val, loss=0.3273 acc=0.8875
+epoch 55, train, loss=0.2673 acc=0.9117
+epoch 55, val, loss=0.3376 acc=0.8750
+epoch 56, train, loss=0.2757 acc=0.9033
+epoch 56, val, loss=0.3952 acc=0.8608
+epoch 57, train, loss=0.2029 acc=0.9300
+epoch 57, val, loss=0.3692 acc=0.8758
+epoch 58, train, loss=0.2835 acc=0.8867
+epoch 58, val, loss=0.4590 acc=0.8525
+epoch 59, train, loss=0.2257 acc=0.9167
+epoch 59, val, loss=0.3409 acc=0.8792
+epoch 60, train, loss=0.2056 acc=0.9350
+epoch 60, val, loss=0.3350 acc=0.8883
+epoch 61, train, loss=0.2347 acc=0.9150
+epoch 61, val, loss=0.3805 acc=0.8533
+epoch 62, train, loss=0.2402 acc=0.9050
+epoch 62, val, loss=0.3479 acc=0.8692
+epoch 63, train, loss=0.3059 acc=0.8833
+epoch 63, val, loss=0.3794 acc=0.8617
+epoch 64, train, loss=0.3251 acc=0.8733
+epoch 64, val, loss=0.3672 acc=0.8508
+epoch 65, train, loss=0.2536 acc=0.8983
+epoch 65, val, loss=0.5253 acc=0.8058
+epoch 66, train, loss=0.2884 acc=0.8733
+epoch 66, val, loss=0.7451 acc=0.8517
+epoch 67, train, loss=0.3008 acc=0.8967
+epoch 67, val, loss=0.5358 acc=0.8575
+epoch 68, train, loss=0.2236 acc=0.9217
+epoch 68, val, loss=0.3640 acc=0.8750
+epoch 69, train, loss=0.2782 acc=0.8867
+epoch 69, val, loss=0.3748 acc=0.8500
+epoch 70, train, loss=0.2406 acc=0.9100
+epoch 70, val, loss=0.4216 acc=0.8425
+epoch 71, train, loss=0.2641 acc=0.8900
+epoch 71, val, loss=0.4654 acc=0.8308
+epoch 72, train, loss=0.1945 acc=0.9333
+epoch 72, val, loss=0.4205 acc=0.8533
+epoch 73, train, loss=0.2195 acc=0.9083
+epoch 73, val, loss=0.4441 acc=0.8417
+epoch 74, train, loss=0.2018 acc=0.9267
+epoch 74, val, loss=0.3557 acc=0.8758
+epoch 75, train, loss=0.2678 acc=0.9000
+epoch 75, val, loss=0.3759 acc=0.8583
+epoch 76, train, loss=0.2209 acc=0.9067
+epoch 76, val, loss=0.3718 acc=0.8633
+epoch 77, train, loss=0.2290 acc=0.9133
+epoch 77, val, loss=0.3929 acc=0.8600
+epoch 78, train, loss=0.2605 acc=0.9150
+epoch 78, val, loss=0.3959 acc=0.8358
+epoch 79, train, loss=0.2657 acc=0.8933
+epoch 79, val, loss=0.3451 acc=0.8667
+epoch 80, train, loss=0.2826 acc=0.8867
+epoch 80, val, loss=0.3463 acc=0.8617
+epoch 81, train, loss=0.2218 acc=0.9267
+epoch 81, val, loss=0.3281 acc=0.8758
+epoch 82, train, loss=0.2883 acc=0.8883
+epoch 82, val, loss=0.3838 acc=0.8500
+epoch 83, train, loss=0.2812 acc=0.8900
+epoch 83, val, loss=0.4288 acc=0.8425
+epoch 84, train, loss=0.1875 acc=0.9317
+epoch 84, val, loss=0.3884 acc=0.8575
+epoch 85, train, loss=0.2350 acc=0.9200
+epoch 85, val, loss=0.3578 acc=0.8617
+epoch 86, train, loss=0.2042 acc=0.9200
+epoch 86, val, loss=0.7733 acc=0.8017
+epoch 87, train, loss=0.2035 acc=0.9233
+epoch 87, val, loss=0.3682 acc=0.8650
+epoch 88, train, loss=0.2362 acc=0.9017
+epoch 88, val, loss=0.4867 acc=0.8267
+epoch 89, train, loss=0.2630 acc=0.8983
+epoch 89, val, loss=0.4104 acc=0.8508
+epoch 90, train, loss=0.2108 acc=0.9350
+epoch 90, val, loss=0.3857 acc=0.8525
+epoch 91, train, loss=0.1903 acc=0.9133
+epoch 91, val, loss=0.4232 acc=0.8475
+epoch 92, train, loss=0.2373 acc=0.9133
+epoch 92, val, loss=0.4574 acc=0.8208
+epoch 93, train, loss=0.2650 acc=0.9000
+epoch 93, val, loss=0.4600 acc=0.8175
+epoch 94, train, loss=0.2163 acc=0.9233
+epoch 94, val, loss=0.3708 acc=0.8500
+epoch 95, train, loss=0.2606 acc=0.8983
+epoch 95, val, loss=0.4519 acc=0.8342
+epoch 96, train, loss=0.2092 acc=0.9117
+epoch 96, val, loss=0.5345 acc=0.7942
+epoch 97, train, loss=0.2516 acc=0.9133
+epoch 97, val, loss=0.3516 acc=0.8667
+epoch 98, train, loss=0.2709 acc=0.9133
+epoch 98, val, loss=0.4038 acc=0.8550
+epoch 99, train, loss=0.2301 acc=0.9000
+epoch 99, val, loss=0.5668 acc=0.8108
+epoch 100, train, loss=0.2021 acc=0.9300
+epoch 100, val, loss=0.4498 acc=0.8367
+epoch 101, train, loss=0.2243 acc=0.9050
+epoch 101, val, loss=0.4256 acc=0.8475
+epoch 102, train, loss=0.1990 acc=0.9100
+epoch 102, val, loss=0.4986 acc=0.8192
+epoch 103, train, loss=0.2468 acc=0.9117
+epoch 103, val, loss=0.4984 acc=0.8075
+epoch 104, train, loss=0.2263 acc=0.9150
+epoch 104, val, loss=0.3441 acc=0.8692
+epoch 105, train, loss=0.2796 acc=0.9033
+epoch 105, val, loss=0.3950 acc=0.8575
+epoch 106, train, loss=0.2023 acc=0.9183
+epoch 106, val, loss=0.3512 acc=0.8625
+epoch 107, train, loss=0.2941 acc=0.8917
+epoch 107, val, loss=0.3454 acc=0.8817
+epoch 108, train, loss=0.2260 acc=0.9283
+epoch 108, val, loss=0.6023 acc=0.8142
+epoch 109, train, loss=0.2171 acc=0.9233
+epoch 109, val, loss=0.5402 acc=0.8117
+epoch 110, train, loss=0.2310 acc=0.9117
+epoch 110, val, loss=0.7581 acc=0.7875
+epoch 111, train, loss=0.2335 acc=0.9050
+epoch 111, val, loss=0.3827 acc=0.8692
+epoch 112, train, loss=0.2367 acc=0.9083
+epoch 112, val, loss=0.3891 acc=0.8542
+epoch 113, train, loss=0.2182 acc=0.9333
+epoch 113, val, loss=0.3681 acc=0.8683
+epoch 114, train, loss=0.2640 acc=0.8817
+epoch 114, val, loss=0.4798 acc=0.8183
+epoch 115, train, loss=0.2570 acc=0.9050
+epoch 115, val, loss=0.4504 acc=0.8342
+epoch 116, train, loss=0.2831 acc=0.8667
+epoch 116, val, loss=0.3803 acc=0.8633
+epoch 117, train, loss=0.2054 acc=0.9150
+epoch 117, val, loss=0.4125 acc=0.8433
+epoch 118, train, loss=0.2457 acc=0.9050
+epoch 118, val, loss=0.6367 acc=0.7858
+epoch 119, train, loss=0.2364 acc=0.9150
+epoch 119, val, loss=0.5287 acc=0.8233
+epoch 120, train, loss=0.1788 acc=0.9317
+epoch 120, val, loss=0.4243 acc=0.8342
+epoch 121, train, loss=0.2072 acc=0.9200
+epoch 121, val, loss=0.4580 acc=0.8242
+epoch 122, train, loss=0.2101 acc=0.9217
+epoch 122, val, loss=0.7232 acc=0.8033
+epoch 123, train, loss=0.2431 acc=0.9117
+epoch 123, val, loss=0.5057 acc=0.8308
+epoch 124, train, loss=0.2518 acc=0.9167
+epoch 124, val, loss=0.7751 acc=0.7933
+epoch 125, train, loss=0.3187 acc=0.8917
+epoch 125, val, loss=0.4003 acc=0.8583
+epoch 126, train, loss=0.2721 acc=0.8917
+epoch 126, val, loss=0.4153 acc=0.8575
+epoch 127, train, loss=0.2506 acc=0.9050
+epoch 127, val, loss=0.3544 acc=0.8775
+epoch 128, train, loss=0.2353 acc=0.9100
+epoch 128, val, loss=0.3673 acc=0.8692
+epoch 129, train, loss=0.2207 acc=0.9150
+epoch 129, val, loss=0.3458 acc=0.8842
+epoch 130, train, loss=0.2293 acc=0.9150
+epoch 130, val, loss=0.3859 acc=0.8692
+epoch 131, train, loss=0.1872 acc=0.9233
+epoch 131, val, loss=0.5811 acc=0.8300
+epoch 132, train, loss=0.2616 acc=0.8967
+epoch 132, val, loss=0.5291 acc=0.8258
+epoch 133, train, loss=0.2388 acc=0.9000
+epoch 133, val, loss=0.3939 acc=0.8550
+epoch 134, train, loss=0.2315 acc=0.9183
+epoch 134, val, loss=0.5374 acc=0.8217
+epoch 135, train, loss=0.2046 acc=0.9283
+epoch 135, val, loss=0.5891 acc=0.8108
+epoch 136, train, loss=0.1707 acc=0.9433
+epoch 136, val, loss=0.3844 acc=0.8700
+epoch 137, train, loss=0.2713 acc=0.9017
+epoch 137, val, loss=0.7723 acc=0.7950
+epoch 138, train, loss=0.3042 acc=0.8933
+epoch 138, val, loss=0.3275 acc=0.8750
+epoch 139, train, loss=0.2271 acc=0.9200
+epoch 139, val, loss=0.3270 acc=0.8833
+epoch 140, train, loss=0.2032 acc=0.9167
+epoch 140, val, loss=0.3557 acc=0.8750
+epoch 141, train, loss=0.2638 acc=0.8883
+epoch 141, val, loss=0.3673 acc=0.8658
+epoch 142, train, loss=0.2406 acc=0.9183
+epoch 142, val, loss=0.3134 acc=0.8908
+epoch 143, train, loss=0.1904 acc=0.9317
+epoch 143, val, loss=0.3486 acc=0.8742
+epoch 144, train, loss=0.2778 acc=0.8967
+epoch 144, val, loss=0.3176 acc=0.8950
+epoch 145, train, loss=0.2510 acc=0.9050
+epoch 145, val, loss=0.4060 acc=0.8525
+epoch 146, train, loss=0.2904 acc=0.8883
+epoch 146, val, loss=0.4665 acc=0.8467
+epoch 147, train, loss=0.2444 acc=0.9017
+epoch 147, val, loss=0.3074 acc=0.8900
+epoch 148, train, loss=0.2500 acc=0.9050
+epoch 148, val, loss=0.4004 acc=0.8517
+epoch 149, train, loss=0.2185 acc=0.9183
+epoch 149, val, loss=0.3786 acc=0.8750
+epoch 150, train, loss=0.2209 acc=0.9100
+epoch 150, val, loss=0.3083 acc=0.8892
+level  4
+epoch 1, train, loss=0.2426 acc=0.9100
+epoch 1, val, loss=2.2113 acc=0.7308
+epoch 2, train, loss=0.2663 acc=0.8933
+epoch 2, val, loss=0.7234 acc=0.8033
+epoch 3, train, loss=0.2243 acc=0.9117
+epoch 3, val, loss=0.9077 acc=0.7717
+epoch 4, train, loss=0.2640 acc=0.9183
+epoch 4, val, loss=0.8240 acc=0.7858
+epoch 5, train, loss=0.2477 acc=0.9050
+epoch 5, val, loss=0.5094 acc=0.8192
+epoch 6, train, loss=0.2446 acc=0.9100
+epoch 6, val, loss=0.7049 acc=0.8067
+epoch 7, train, loss=0.2811 acc=0.8917
+epoch 7, val, loss=0.5147 acc=0.8208
+epoch 8, train, loss=0.3562 acc=0.8917
+epoch 8, val, loss=0.5496 acc=0.8192
+epoch 9, train, loss=0.2810 acc=0.8817
+epoch 9, val, loss=0.6540 acc=0.8017
+epoch 10, train, loss=0.2566 acc=0.9050
+epoch 10, val, loss=0.6987 acc=0.8008
+epoch 11, train, loss=0.2804 acc=0.8867
+epoch 11, val, loss=0.5067 acc=0.8275
+epoch 12, train, loss=0.2425 acc=0.9117
+epoch 12, val, loss=0.8238 acc=0.7808
+epoch 13, train, loss=0.2307 acc=0.9150
+epoch 13, val, loss=0.6175 acc=0.8250
+epoch 14, train, loss=0.2384 acc=0.9133
+epoch 14, val, loss=0.5425 acc=0.8383
+epoch 15, train, loss=0.2896 acc=0.8983
+epoch 15, val, loss=0.5528 acc=0.8317
+epoch 16, train, loss=0.3262 acc=0.8767
+epoch 16, val, loss=0.5014 acc=0.8242
+epoch 17, train, loss=0.2920 acc=0.8917
+epoch 17, val, loss=0.4818 acc=0.8383
+epoch 18, train, loss=0.2637 acc=0.8933
+epoch 18, val, loss=0.7813 acc=0.7958
+epoch 19, train, loss=0.2507 acc=0.8983
+epoch 19, val, loss=0.4209 acc=0.8458
+epoch 20, train, loss=0.2972 acc=0.8683
+epoch 20, val, loss=0.5179 acc=0.8208
+epoch 21, train, loss=0.2542 acc=0.9050
+epoch 21, val, loss=0.5161 acc=0.8108
+epoch 22, train, loss=0.2494 acc=0.9000
+epoch 22, val, loss=0.7760 acc=0.7950
+epoch 23, train, loss=0.2542 acc=0.9083
+epoch 23, val, loss=0.5445 acc=0.8042
+epoch 24, train, loss=0.2384 acc=0.9050
+epoch 24, val, loss=0.8651 acc=0.7742
+epoch 25, train, loss=0.2232 acc=0.9267
+epoch 25, val, loss=0.8704 acc=0.7875
+epoch 26, train, loss=0.2361 acc=0.9167
+epoch 26, val, loss=0.5442 acc=0.8083
+epoch 27, train, loss=0.3017 acc=0.8917
+epoch 27, val, loss=0.6003 acc=0.8033
+epoch 28, train, loss=0.2979 acc=0.8867
+epoch 28, val, loss=0.5062 acc=0.8275
+epoch 29, train, loss=0.2577 acc=0.9000
+epoch 29, val, loss=0.6184 acc=0.8017
+epoch 30, train, loss=0.2614 acc=0.9050
+epoch 30, val, loss=0.6807 acc=0.8067
+epoch 31, train, loss=0.2641 acc=0.9067
+epoch 31, val, loss=0.7642 acc=0.7908
+epoch 32, train, loss=0.2840 acc=0.8883
+epoch 32, val, loss=0.4957 acc=0.8242
+epoch 33, train, loss=0.2745 acc=0.8900
+epoch 33, val, loss=0.5489 acc=0.8167
+epoch 34, train, loss=0.2753 acc=0.9050
+epoch 34, val, loss=0.5050 acc=0.8258
+epoch 35, train, loss=0.2725 acc=0.8933
+epoch 35, val, loss=0.4093 acc=0.8525
+epoch 36, train, loss=0.2917 acc=0.8783
+epoch 36, val, loss=0.5520 acc=0.8200
+epoch 37, train, loss=0.2585 acc=0.8983
+epoch 37, val, loss=0.4222 acc=0.8517
+epoch 38, train, loss=0.2376 acc=0.9117
+epoch 38, val, loss=0.4009 acc=0.8592
+epoch 39, train, loss=0.2202 acc=0.9183
+epoch 39, val, loss=0.3975 acc=0.8558
+epoch 40, train, loss=0.2444 acc=0.9033
+epoch 40, val, loss=0.3957 acc=0.8525
+epoch 41, train, loss=0.2516 acc=0.9017
+epoch 41, val, loss=0.3998 acc=0.8650
+epoch 42, train, loss=0.2985 acc=0.9000
+epoch 42, val, loss=0.3720 acc=0.8708
+epoch 43, train, loss=0.2685 acc=0.8950
+epoch 43, val, loss=0.4898 acc=0.8333
+epoch 44, train, loss=0.2662 acc=0.8900
+epoch 44, val, loss=0.5154 acc=0.8358
+epoch 45, train, loss=0.2495 acc=0.9067
+epoch 45, val, loss=0.4073 acc=0.8492
+epoch 46, train, loss=0.2394 acc=0.9017
+epoch 46, val, loss=0.3919 acc=0.8667
+epoch 47, train, loss=0.2654 acc=0.8950
+epoch 47, val, loss=0.4816 acc=0.8325
+epoch 48, train, loss=0.2050 acc=0.9233
+epoch 48, val, loss=3.5657 acc=0.8358
+epoch 49, train, loss=0.3235 acc=0.8783
+epoch 49, val, loss=0.4077 acc=0.8542
+epoch 50, train, loss=0.2819 acc=0.8917
+epoch 50, val, loss=0.4025 acc=0.8592
+epoch 51, train, loss=0.2829 acc=0.8983
+epoch 51, val, loss=0.4007 acc=0.8617
+epoch 52, train, loss=0.2490 acc=0.8917
+epoch 52, val, loss=0.4123 acc=0.8475
+epoch 53, train, loss=0.2719 acc=0.8967
+epoch 53, val, loss=0.4039 acc=0.8625
+epoch 54, train, loss=0.2507 acc=0.8983
+epoch 54, val, loss=1.4842 acc=0.8442
+epoch 55, train, loss=0.2588 acc=0.8983
+epoch 55, val, loss=0.4073 acc=0.8558
+epoch 56, train, loss=0.3301 acc=0.8767
+epoch 56, val, loss=0.3648 acc=0.8792
+epoch 57, train, loss=0.3250 acc=0.8783
+epoch 57, val, loss=0.3896 acc=0.8625
+epoch 58, train, loss=0.2811 acc=0.8867
+epoch 58, val, loss=0.3815 acc=0.8683
+epoch 59, train, loss=0.2595 acc=0.9017
+epoch 59, val, loss=0.3490 acc=0.8717
+epoch 60, train, loss=0.2718 acc=0.9083
+epoch 60, val, loss=0.4594 acc=0.8308
+epoch 61, train, loss=0.2343 acc=0.8967
+epoch 61, val, loss=0.4322 acc=0.8375
+epoch 62, train, loss=0.2704 acc=0.8900
+epoch 62, val, loss=0.4257 acc=0.8442
+epoch 63, train, loss=0.2230 acc=0.9167
+epoch 63, val, loss=0.4454 acc=0.8283
+epoch 64, train, loss=0.2235 acc=0.9133
+epoch 64, val, loss=0.3952 acc=0.8583
+epoch 65, train, loss=0.2360 acc=0.8967
+epoch 65, val, loss=0.4615 acc=0.8417
+epoch 66, train, loss=0.2645 acc=0.8983
+epoch 66, val, loss=0.4150 acc=0.8375
+epoch 67, train, loss=0.2332 acc=0.9100
+epoch 67, val, loss=0.5080 acc=0.8350
+epoch 68, train, loss=0.2876 acc=0.8867
+epoch 68, val, loss=0.4121 acc=0.8475
+epoch 69, train, loss=0.2812 acc=0.8883
+epoch 69, val, loss=0.3945 acc=0.8500
+epoch 70, train, loss=0.2389 acc=0.9017
+epoch 70, val, loss=0.4943 acc=0.8233
+epoch 71, train, loss=0.2898 acc=0.9017
+epoch 71, val, loss=0.4675 acc=0.8325
+epoch 72, train, loss=0.2264 acc=0.9117
+epoch 72, val, loss=0.4540 acc=0.8433
+epoch 73, train, loss=0.2346 acc=0.8983
+epoch 73, val, loss=0.4537 acc=0.8417
+epoch 74, train, loss=0.2745 acc=0.8967
+epoch 74, val, loss=0.4425 acc=0.8442
+epoch 75, train, loss=0.2486 acc=0.9033
+epoch 75, val, loss=0.4578 acc=0.8400
+epoch 76, train, loss=0.3134 acc=0.8667
+epoch 76, val, loss=0.4559 acc=0.8408
+epoch 77, train, loss=0.2736 acc=0.9017
+epoch 77, val, loss=0.4616 acc=0.8508
+epoch 78, train, loss=0.2375 acc=0.8983
+epoch 78, val, loss=0.4616 acc=0.8417
+epoch 79, train, loss=0.2675 acc=0.8950
+epoch 79, val, loss=0.7566 acc=0.8158
+epoch 80, train, loss=0.2466 acc=0.9183
+epoch 80, val, loss=0.5350 acc=0.8425
+epoch 81, train, loss=0.2628 acc=0.9133
+epoch 81, val, loss=0.5185 acc=0.8158
+epoch 82, train, loss=0.2667 acc=0.9000
+epoch 82, val, loss=0.5030 acc=0.8375
+epoch 83, train, loss=0.2593 acc=0.8850
+epoch 83, val, loss=0.5583 acc=0.8058
+epoch 84, train, loss=0.2647 acc=0.9017
+epoch 84, val, loss=0.6652 acc=0.7933
+epoch 85, train, loss=0.2817 acc=0.8967
+epoch 85, val, loss=0.6692 acc=0.8050
+epoch 86, train, loss=0.2530 acc=0.9017
+epoch 86, val, loss=0.4555 acc=0.8517
+epoch 87, train, loss=0.2894 acc=0.9050
+epoch 87, val, loss=0.4309 acc=0.8492
+epoch 88, train, loss=0.2447 acc=0.9033
+epoch 88, val, loss=0.4938 acc=0.8450
+epoch 89, train, loss=0.2339 acc=0.9100
+epoch 89, val, loss=0.5095 acc=0.8292
+epoch 90, train, loss=0.2441 acc=0.9100
+epoch 90, val, loss=0.5061 acc=0.8150
+epoch 91, train, loss=0.2303 acc=0.9133
+epoch 91, val, loss=0.5550 acc=0.8183
+epoch 92, train, loss=0.2873 acc=0.8817
+epoch 92, val, loss=0.5204 acc=0.8300
+epoch 93, train, loss=0.2575 acc=0.9000
+epoch 93, val, loss=0.4886 acc=0.8317
+epoch 94, train, loss=0.2529 acc=0.9050
+epoch 94, val, loss=0.5412 acc=0.8217
+epoch 95, train, loss=0.2141 acc=0.9217
+epoch 95, val, loss=0.6081 acc=0.8158
+epoch 96, train, loss=0.2158 acc=0.9233
+epoch 96, val, loss=0.5443 acc=0.8175
+epoch 97, train, loss=0.2055 acc=0.9183
+epoch 97, val, loss=0.5006 acc=0.8258
+epoch 98, train, loss=0.2065 acc=0.9167
+epoch 98, val, loss=0.5969 acc=0.8192
+epoch 99, train, loss=0.2404 acc=0.9250
+epoch 99, val, loss=0.4529 acc=0.8342
+epoch 100, train, loss=0.2497 acc=0.9083
+epoch 100, val, loss=0.9674 acc=0.7517
+epoch 101, train, loss=0.2710 acc=0.9000
+epoch 101, val, loss=0.5283 acc=0.8258
+epoch 102, train, loss=0.2155 acc=0.9300
+epoch 102, val, loss=0.5984 acc=0.8192
+epoch 103, train, loss=0.3005 acc=0.8967
+epoch 103, val, loss=0.5273 acc=0.8167
+epoch 104, train, loss=0.2109 acc=0.9200
+epoch 104, val, loss=0.5152 acc=0.8100
+epoch 105, train, loss=0.2464 acc=0.9000
+epoch 105, val, loss=0.4645 acc=0.8325
+epoch 106, train, loss=0.2626 acc=0.9000
+epoch 106, val, loss=1.8800 acc=0.7217
+epoch 107, train, loss=0.2573 acc=0.9233
+epoch 107, val, loss=0.9106 acc=0.7600
+epoch 108, train, loss=0.2833 acc=0.8917
+epoch 108, val, loss=0.5892 acc=0.7850
+epoch 109, train, loss=0.2689 acc=0.9000
+epoch 109, val, loss=0.4626 acc=0.8442
+epoch 110, train, loss=0.2179 acc=0.9217
+epoch 110, val, loss=0.7842 acc=0.7758
+epoch 111, train, loss=0.3023 acc=0.8867
+epoch 111, val, loss=0.7341 acc=0.7942
+epoch 112, train, loss=0.2870 acc=0.8800
+epoch 112, val, loss=0.9877 acc=0.7967
+epoch 113, train, loss=0.2695 acc=0.9083
+epoch 113, val, loss=0.6877 acc=0.7983
+epoch 114, train, loss=0.2981 acc=0.8800
+epoch 114, val, loss=0.6705 acc=0.7975
+epoch 115, train, loss=0.3006 acc=0.8850
+epoch 115, val, loss=0.6839 acc=0.7858
+epoch 116, train, loss=0.2915 acc=0.8867
+epoch 116, val, loss=21.0028 acc=0.7633
+epoch 117, train, loss=0.2690 acc=0.8817
+epoch 117, val, loss=4.9254 acc=0.7633
+epoch 118, train, loss=0.2260 acc=0.9167
+epoch 118, val, loss=0.8879 acc=0.8083
+epoch 119, train, loss=0.2627 acc=0.8850
+epoch 119, val, loss=42.9605 acc=0.7633
+epoch 120, train, loss=0.2300 acc=0.9083
+epoch 120, val, loss=0.8966 acc=0.7700
+epoch 121, train, loss=0.3063 acc=0.8867
+epoch 121, val, loss=1.4583 acc=0.7992
+epoch 122, train, loss=0.3222 acc=0.8700
+epoch 122, val, loss=1.9601 acc=0.7667
+epoch 123, train, loss=0.3125 acc=0.8767
+epoch 123, val, loss=0.7622 acc=0.7925
+epoch 124, train, loss=0.2764 acc=0.8883
+epoch 124, val, loss=1.1018 acc=0.7675
+epoch 125, train, loss=0.3096 acc=0.8767
+epoch 125, val, loss=0.6095 acc=0.8092
+epoch 126, train, loss=0.2376 acc=0.9017
+epoch 126, val, loss=0.7209 acc=0.7867
+epoch 127, train, loss=0.3091 acc=0.8783
+epoch 127, val, loss=1.4250 acc=0.8217
+epoch 128, train, loss=0.2913 acc=0.8950
+epoch 128, val, loss=0.6592 acc=0.7925
+epoch 129, train, loss=0.2769 acc=0.8850
+epoch 129, val, loss=0.8345 acc=0.7858
+epoch 130, train, loss=0.3263 acc=0.8733
+epoch 130, val, loss=0.7423 acc=0.7592
+epoch 131, train, loss=0.2619 acc=0.9000
+epoch 131, val, loss=0.7342 acc=0.7842
+epoch 132, train, loss=0.2370 acc=0.9033
+epoch 132, val, loss=0.7842 acc=0.7817
+epoch 133, train, loss=0.2898 acc=0.8883
+epoch 133, val, loss=0.5314 acc=0.8158
+epoch 134, train, loss=0.2072 acc=0.9233
+epoch 134, val, loss=0.5904 acc=0.8125
+epoch 135, train, loss=0.2417 acc=0.9167
+epoch 135, val, loss=0.9679 acc=0.7700
+epoch 136, train, loss=0.2337 acc=0.9100
+epoch 136, val, loss=0.6888 acc=0.7892
+epoch 137, train, loss=0.2659 acc=0.9100
+epoch 137, val, loss=0.5866 acc=0.7883
+epoch 138, train, loss=0.2514 acc=0.9050
+epoch 138, val, loss=0.6377 acc=0.7892
+epoch 139, train, loss=0.2386 acc=0.9017
+epoch 139, val, loss=1.0070 acc=0.7775
+epoch 140, train, loss=0.2348 acc=0.9167
+epoch 140, val, loss=0.9690 acc=0.7842
+epoch 141, train, loss=0.2287 acc=0.9150
+epoch 141, val, loss=0.9967 acc=0.7650
+epoch 142, train, loss=0.2751 acc=0.9050
+epoch 142, val, loss=1.3107 acc=0.8017
+epoch 143, train, loss=0.3009 acc=0.8967
+epoch 143, val, loss=0.5633 acc=0.8050
+epoch 144, train, loss=0.2311 acc=0.9183
+epoch 144, val, loss=0.7177 acc=0.8025
+epoch 145, train, loss=0.2127 acc=0.9233
+epoch 145, val, loss=0.6235 acc=0.7850
+epoch 146, train, loss=0.2433 acc=0.9167
+epoch 146, val, loss=1.1571 acc=0.7558
+epoch 147, train, loss=0.2386 acc=0.9117
+epoch 147, val, loss=0.7455 acc=0.7942
+epoch 148, train, loss=0.2430 acc=0.9133
+epoch 148, val, loss=0.7357 acc=0.8008
+epoch 149, train, loss=0.2479 acc=0.9133
+epoch 149, val, loss=0.5499 acc=0.8192
+epoch 150, train, loss=0.1971 acc=0.9217
+epoch 150, val, loss=0.6204 acc=0.8058
+batch 1: 33.33(33.33)
+batch 2: 50.00(66.67)
+batch 3: 61.11(83.33)
+batch 4: 58.33(50.00)
+batch 5: 63.33(83.33)
+batch 6: 66.67(83.33)
+batch 7: 71.43(100.00)
+batch 8: 72.92(83.33)
+batch 9: 74.07(83.33)
+batch 10: 73.33(66.67)
+batch 11: 74.24(83.33)
+batch 12: 73.61(66.67)
+batch 13: 75.64(100.00)
+batch 14: 75.00(66.67)
+batch 15: 74.44(66.67)
+batch 16: 76.04(100.00)
+batch 17: 74.51(50.00)
+batch 18: 75.00(83.33)
+batch 19: 75.44(83.33)
+batch 20: 76.67(100.00)
+batch 21: 76.19(66.67)
+batch 22: 75.76(66.67)
+batch 23: 76.09(83.33)
+batch 24: 77.08(100.00)
+batch 25: 77.33(83.33)
+batch 26: 78.21(100.00)
+batch 27: 77.78(66.67)
+batch 28: 77.98(83.33)
+batch 29: 77.59(66.67)
+batch 30: 78.33(100.00)
+batch 31: 77.96(66.67)
+batch 32: 77.08(50.00)
+batch 33: 76.26(50.00)
+batch 34: 76.96(100.00)
+batch 35: 76.19(50.00)
+batch 36: 76.85(100.00)
+batch 37: 77.03(83.33)
+batch 38: 77.63(100.00)
+batch 39: 78.21(100.00)
+batch 40: 77.50(50.00)
+batch 41: 78.05(100.00)
+batch 42: 78.17(83.33)
+batch 43: 78.29(83.33)
+batch 44: 78.41(83.33)
+batch 45: 78.52(83.33)
+batch 46: 78.26(66.67)
+batch 47: 78.72(100.00)
+batch 48: 79.17(100.00)
+batch 49: 78.91(66.67)
+batch 50: 78.67(66.67)
+batch 51: 78.76(83.33)
+batch 52: 77.88(33.33)
+batch 53: 78.30(100.00)
+batch 54: 77.78(50.00)
+batch 55: 76.97(33.33)
+batch 56: 76.79(66.67)
+batch 57: 76.90(83.33)
+batch 58: 77.01(83.33)
+batch 59: 76.84(66.67)
+batch 60: 76.94(83.33)
+batch 61: 77.32(100.00)
+batch 62: 77.42(83.33)
+batch 63: 76.72(33.33)
+batch 64: 76.82(83.33)
+batch 65: 76.67(66.67)
+batch 66: 76.77(83.33)
+batch 67: 76.87(83.33)
+batch 68: 77.21(100.00)
+batch 69: 77.54(100.00)
+batch 70: 76.90(33.33)
+batch 71: 77.23(100.00)
+batch 72: 77.31(83.33)
+batch 73: 77.40(83.33)
+batch 74: 77.70(100.00)
+batch 75: 77.78(83.33)
+batch 76: 77.63(66.67)
+batch 77: 77.71(83.33)
+batch 78: 77.56(66.67)
+batch 79: 77.64(83.33)
+batch 80: 77.92(100.00)
+batch 81: 78.19(100.00)
+batch 82: 78.05(66.67)
+batch 83: 78.31(100.00)
+batch 84: 78.37(83.33)
+batch 85: 78.63(100.00)
+batch 86: 78.49(66.67)
+batch 87: 78.35(66.67)
+batch 88: 78.60(100.00)
+batch 89: 78.46(66.67)
+batch 90: 78.33(66.67)
+batch 91: 78.02(50.00)
+batch 92: 78.08(83.33)
+batch 93: 78.14(83.33)
+batch 94: 78.01(66.67)
+batch 95: 78.25(100.00)
+batch 96: 78.30(83.33)
+batch 97: 78.52(100.00)
+batch 98: 78.74(100.00)
+batch 99: 78.79(83.33)
+batch 100: 78.67(66.67)
+batch 101: 78.88(100.00)
+batch 102: 78.76(66.67)
+batch 103: 78.48(50.00)
+batch 104: 78.37(66.67)
+batch 105: 78.25(66.67)
+batch 106: 78.46(100.00)
+batch 107: 78.50(83.33)
+batch 108: 78.70(100.00)
+batch 109: 78.59(66.67)
+batch 110: 78.48(66.67)
+batch 111: 78.53(83.33)
+batch 112: 78.57(83.33)
+batch 113: 78.32(50.00)
+batch 114: 78.36(83.33)
+batch 115: 78.55(100.00)
+batch 116: 78.59(83.33)
+batch 117: 78.77(100.00)
+batch 118: 78.53(50.00)
+batch 119: 78.43(66.67)
+batch 120: 78.61(100.00)
+batch 121: 78.79(100.00)
+batch 122: 78.69(66.67)
+batch 123: 78.86(100.00)
+batch 124: 78.76(66.67)
+batch 125: 78.67(66.67)
+batch 126: 78.84(100.00)
+batch 127: 78.74(66.67)
+batch 128: 78.52(50.00)
+batch 129: 78.68(100.00)
+batch 130: 78.59(66.67)
+batch 131: 78.63(83.33)
+batch 132: 78.54(66.67)
+batch 133: 78.57(83.33)
+batch 134: 78.48(66.67)
+batch 135: 78.40(66.67)
+batch 136: 78.31(66.67)
+batch 137: 78.35(83.33)
+batch 138: 78.02(33.33)
+batch 139: 77.94(66.67)
+batch 140: 77.74(50.00)
+batch 141: 77.78(83.33)
+batch 142: 77.93(100.00)
+batch 143: 77.97(83.33)
+batch 144: 77.89(66.67)
+batch 145: 77.82(66.67)
+batch 146: 77.74(66.67)
+batch 147: 77.55(50.00)
+batch 148: 77.59(83.33)
+batch 149: 77.40(50.00)
+batch 150: 77.44(83.33)
+batch 151: 77.48(83.33)
+batch 152: 77.52(83.33)
+batch 153: 77.56(83.33)
+batch 154: 77.71(100.00)
+batch 155: 77.85(100.00)
+batch 156: 77.99(100.00)
+batch 157: 77.81(50.00)
+batch 158: 77.85(83.33)
+batch 159: 77.99(100.00)
+batch 160: 78.02(83.33)
+batch 161: 77.85(50.00)
+batch 162: 77.98(100.00)
+batch 163: 77.81(50.00)
+batch 164: 77.85(83.33)
+batch 165: 77.98(100.00)
+batch 166: 77.91(66.67)
+batch 167: 77.84(66.67)
+batch 168: 77.88(83.33)
+batch 169: 77.91(83.33)
+batch 170: 78.04(100.00)
+batch 171: 77.88(50.00)
+batch 172: 77.81(66.67)
+batch 173: 77.94(100.00)
+batch 174: 77.87(66.67)
+batch 175: 77.71(50.00)
+batch 176: 77.65(66.67)
+batch 177: 77.68(83.33)
+batch 178: 77.53(50.00)
+batch 179: 77.47(66.67)
+batch 180: 77.59(100.00)
+batch 181: 77.35(33.33)
+batch 182: 77.47(100.00)
+batch 183: 77.50(83.33)
+batch 184: 77.26(33.33)
+batch 185: 77.30(83.33)
+batch 186: 77.33(83.33)
+batch 187: 77.27(66.67)
+batch 188: 77.30(83.33)
+batch 189: 77.34(83.33)
+batch 190: 77.19(50.00)
+batch 191: 77.05(50.00)
+batch 192: 77.08(83.33)
+batch 193: 77.20(100.00)
+batch 194: 77.32(100.00)
+batch 195: 77.35(83.33)
+batch 196: 77.47(100.00)
+batch 197: 77.50(83.33)
+batch 198: 77.36(50.00)
+batch 199: 77.39(83.33)
+batch 200: 77.42(83.33)
+batch 201: 77.53(100.00)
+batch 202: 77.39(50.00)
+batch 203: 77.34(66.67)
+batch 204: 77.29(66.67)
+batch 205: 77.40(100.00)
+batch 206: 77.27(50.00)
+batch 207: 77.13(50.00)
+batch 208: 77.08(66.67)
+batch 209: 76.95(50.00)
+batch 210: 76.98(83.33)
+batch 211: 76.86(50.00)
+batch 212: 76.73(50.00)
+batch 213: 76.68(66.67)
+batch 214: 76.40(16.67)
+batch 215: 76.36(66.67)
+batch 216: 76.31(66.67)
+batch 217: 76.27(66.67)
+batch 218: 76.30(83.33)
+batch 219: 76.41(100.00)
+batch 220: 76.36(66.67)
+batch 221: 76.32(66.67)
+batch 222: 76.43(100.00)
+batch 223: 76.23(33.33)
+batch 224: 76.26(83.33)
+batch 225: 76.15(50.00)
+batch 226: 76.11(66.67)
+batch 227: 75.92(33.33)
+batch 228: 75.88(66.67)
+batch 229: 75.91(83.33)
+batch 230: 75.94(83.33)
+batch 231: 76.05(100.00)
+batch 232: 76.15(100.00)
+batch 233: 76.25(100.00)
+batch 234: 76.28(83.33)
+batch 235: 76.38(100.00)
+batch 236: 76.41(83.33)
+batch 237: 76.44(83.33)
+batch 238: 76.40(66.67)
+batch 239: 76.36(66.67)
+batch 240: 76.25(50.00)
+batch 241: 76.28(83.33)
+batch 242: 76.24(66.67)
+batch 243: 76.27(83.33)
+batch 244: 76.30(83.33)
+batch 245: 76.33(83.33)
+batch 246: 76.29(66.67)
+batch 247: 76.32(83.33)
+batch 248: 76.28(66.67)
+batch 249: 76.17(50.00)
+batch 250: 76.20(83.33)
+batch 251: 76.23(83.33)
+batch 252: 76.32(100.00)
+batch 253: 76.42(100.00)
+batch 254: 76.38(66.67)
+batch 255: 76.47(100.00)
+batch 256: 76.43(66.67)
+batch 257: 76.52(100.00)
+batch 258: 76.42(50.00)
+batch 259: 76.45(83.33)
+batch 260: 76.41(66.67)
+batch 261: 76.44(83.33)
+batch 262: 76.53(100.00)
+batch 263: 76.55(83.33)
+batch 264: 76.52(66.67)
+batch 265: 76.48(66.67)
+batch 266: 76.50(83.33)
+batch 267: 76.47(66.67)
+batch 268: 76.49(83.33)
+batch 269: 76.58(100.00)
+batch 270: 76.54(66.67)
+batch 271: 76.57(83.33)
+batch 272: 76.47(50.00)
+batch 273: 76.43(66.67)
+batch 274: 76.40(66.67)
+batch 275: 76.30(50.00)
+batch 276: 76.33(83.33)
+batch 277: 76.41(100.00)
+batch 278: 76.44(83.33)
+batch 279: 76.52(100.00)
+batch 280: 76.43(50.00)
+batch 281: 76.45(83.33)
+batch 282: 76.54(100.00)
+batch 283: 76.50(66.67)
+batch 284: 76.58(100.00)
+batch 285: 76.55(66.67)
+batch 286: 76.63(100.00)
+batch 287: 76.71(100.00)
+batch 288: 76.79(100.00)
+batch 289: 76.82(83.33)
+batch 290: 76.90(100.00)
+batch 291: 76.86(66.67)
+batch 292: 76.94(100.00)
+batch 293: 76.96(83.33)
+batch 294: 76.93(66.67)
+batch 295: 76.89(66.67)
+batch 296: 76.91(83.33)
+batch 297: 76.99(100.00)
+batch 298: 77.07(100.00)
+batch 299: 76.98(50.00)
+batch 300: 76.94(66.67)
+batch 301: 76.91(66.67)
+batch 302: 76.93(83.33)
+batch 303: 77.01(100.00)
+batch 304: 77.08(100.00)
+batch 305: 76.99(50.00)
+batch 306: 77.02(83.33)
+batch 307: 77.04(83.33)
+batch 308: 77.00(66.67)
+batch 309: 76.97(66.67)
+batch 310: 77.04(100.00)
+batch 311: 77.06(83.33)
+batch 312: 77.14(100.00)
+batch 313: 77.00(33.33)
+batch 314: 77.02(83.33)
+batch 315: 76.88(33.33)
+batch 316: 76.95(100.00)
+batch 317: 76.87(50.00)
+batch 318: 76.83(66.67)
+batch 319: 76.85(83.33)
+batch 320: 76.82(66.67)
+batch 321: 76.79(66.67)
+batch 322: 76.86(100.00)
+batch 323: 76.88(83.33)
+batch 324: 76.95(100.00)
+batch 325: 76.92(66.67)
+batch 326: 76.99(100.00)
+batch 327: 77.01(83.33)
+batch 328: 77.03(83.33)
+batch 329: 77.00(66.67)
+batch 330: 77.02(83.33)
+batch 331: 76.99(66.67)
+batch 332: 77.01(83.33)
+batch 333: 77.08(100.00)
+batch 334: 77.10(83.33)
+batch 335: 77.11(83.33)
+batch 336: 76.98(33.33)
+batch 337: 76.95(66.67)
+batch 338: 76.97(83.33)
+batch 339: 76.89(50.00)
+batch 340: 76.81(50.00)
+batch 341: 76.83(83.33)
+batch 342: 76.90(100.00)
+batch 343: 76.97(100.00)
+batch 344: 77.03(100.00)
+batch 345: 77.10(100.00)
+batch 346: 77.17(100.00)
+batch 347: 77.09(50.00)
+batch 348: 77.16(100.00)
+batch 349: 77.22(100.00)
+batch 350: 77.24(83.33)
+batch 351: 77.30(100.00)
+batch 352: 77.32(83.33)
+batch 353: 77.24(50.00)
+batch 354: 77.26(83.33)
+batch 355: 77.23(66.67)
+batch 356: 77.20(66.67)
+batch 357: 77.17(66.67)
+batch 358: 77.14(66.67)
+batch 359: 77.02(33.33)
+batch 360: 76.94(50.00)
+batch 361: 76.96(83.33)
+batch 362: 76.98(83.33)
+batch 363: 76.95(66.67)
+batch 364: 76.92(66.67)
+batch 365: 76.85(50.00)
+batch 366: 76.87(83.33)
+batch 367: 76.93(100.00)
+batch 368: 76.99(100.00)
+batch 369: 76.92(50.00)
+batch 370: 76.94(83.33)
+batch 371: 77.00(100.00)
+batch 372: 76.93(50.00)
+batch 373: 76.90(66.67)
+batch 374: 76.92(83.33)
+batch 375: 76.98(100.00)
+batch 376: 76.95(66.67)
+batch 377: 76.97(83.33)
+batch 378: 76.94(66.67)
+batch 379: 76.96(83.33)
+batch 380: 76.93(66.67)
+batch 381: 76.86(50.00)
+batch 382: 76.83(66.67)
+batch 383: 76.85(83.33)
+batch 384: 76.91(100.00)
+batch 385: 76.93(83.33)
+batch 386: 76.94(83.33)
+batch 387: 76.96(83.33)
+batch 388: 76.93(66.67)
+batch 389: 76.99(100.00)
+batch 390: 76.97(66.67)
+batch 391: 77.02(100.00)
+batch 392: 76.96(50.00)
+batch 393: 76.93(66.67)
+batch 394: 76.82(33.33)
+batch 395: 76.84(83.33)
+batch 396: 76.81(66.67)
+batch 397: 76.83(83.33)
+batch 398: 76.88(100.00)
+batch 399: 76.90(83.33)
+batch 400: 76.96(100.00)
+batch 401: 76.93(66.67)
+batch 402: 76.91(66.67)
+batch 403: 76.96(100.00)
+batch 404: 77.02(100.00)
+batch 405: 77.00(66.67)
+batch 406: 77.05(100.00)
+batch 407: 77.07(83.33)
+batch 408: 77.12(100.00)
+batch 409: 77.02(33.33)
+batch 410: 77.07(100.00)
+batch 411: 77.09(83.33)
+batch 412: 77.14(100.00)
+batch 413: 77.16(83.33)
+batch 414: 77.21(100.00)
+batch 415: 77.15(50.00)
+batch 416: 77.20(100.00)
+batch 417: 77.26(100.00)
+batch 418: 77.27(83.33)
+batch 419: 77.29(83.33)
+batch 420: 77.26(66.67)
+batch 421: 77.24(66.67)
+batch 422: 77.21(66.67)
+batch 423: 77.19(66.67)
+batch 424: 77.16(66.67)
+batch 425: 77.14(66.67)
+batch 426: 77.11(66.67)
+batch 427: 77.17(100.00)
+batch 428: 77.14(66.67)
+batch 429: 77.08(50.00)
+batch 430: 77.05(66.67)
+batch 431: 76.99(50.00)
+batch 432: 76.97(66.67)
+batch 433: 77.02(100.00)
+batch 434: 77.07(100.00)
+batch 435: 77.05(66.67)
+batch 436: 77.03(66.67)
+batch 437: 77.04(83.33)
+batch 438: 77.02(66.67)
+batch 439: 77.07(100.00)
+batch 440: 77.08(83.33)
+batch 441: 77.10(83.33)
+batch 442: 77.07(66.67)
+batch 443: 77.05(66.67)
+batch 444: 77.06(83.33)
+batch 445: 77.08(83.33)
+batch 446: 77.13(100.00)
+batch 447: 77.14(83.33)
+batch 448: 77.12(66.67)
+batch 449: 77.17(100.00)
+batch 450: 77.07(33.33)
+batch 451: 77.05(66.67)
+batch 452: 77.10(100.00)
+batch 453: 77.04(50.00)
+batch 454: 77.06(83.33)
+batch 455: 77.11(100.00)
+batch 456: 77.01(33.33)
+batch 457: 77.02(83.33)
+batch 458: 77.07(100.00)
+batch 459: 77.12(100.00)
+batch 460: 77.10(66.67)
+batch 461: 77.08(66.67)
+batch 462: 77.13(100.00)
+batch 463: 77.11(66.67)
+batch 464: 77.16(100.00)
+batch 465: 77.13(66.67)
+batch 466: 77.11(66.67)
+batch 467: 77.09(66.67)
+batch 468: 77.07(66.67)
+batch 469: 77.08(83.33)
+batch 470: 77.09(83.33)
+batch 471: 77.14(100.00)
+batch 472: 77.08(50.00)
+batch 473: 77.10(83.33)
+batch 474: 77.04(50.00)
+batch 475: 77.05(83.33)
+batch 476: 77.03(66.67)
+batch 477: 77.08(100.00)
+batch 478: 77.02(50.00)
+batch 479: 77.00(66.67)
+batch 480: 76.98(66.67)
+batch 481: 77.03(100.00)
+batch 482: 77.04(83.33)
+batch 483: 77.05(83.33)
+batch 484: 77.07(83.33)
+batch 485: 77.04(66.67)
+batch 486: 77.02(66.67)
+batch 487: 77.07(100.00)
+batch 488: 77.12(100.00)
+batch 489: 77.16(100.00)
+batch 490: 77.18(83.33)
+batch 491: 77.19(83.33)
+batch 492: 77.24(100.00)
+batch 493: 77.28(100.00)
+batch 494: 77.29(83.33)
+batch 495: 77.27(66.67)
+batch 496: 77.22(50.00)
+batch 497: 77.20(66.67)
+batch 498: 77.18(66.67)
+batch 499: 77.12(50.00)
+batch 500: 77.07(50.00)
+batch 501: 77.08(83.33)
+batch 502: 77.06(66.67)
+batch 503: 77.04(66.67)
+batch 504: 77.02(66.67)
+batch 505: 77.06(100.00)
+batch 506: 77.01(50.00)
+batch 507: 76.96(50.00)
+batch 508: 76.97(83.33)
+batch 509: 76.95(66.67)
+batch 510: 76.86(33.33)
+batch 511: 76.91(100.00)
+batch 512: 76.89(66.67)
+batch 513: 76.84(50.00)
+batch 514: 76.88(100.00)
+batch 515: 76.93(100.00)
+batch 516: 76.84(33.33)
+batch 517: 76.82(66.67)
+batch 518: 76.80(66.67)
+batch 519: 76.81(83.33)
+batch 520: 76.86(100.00)
+batch 521: 76.84(66.67)
+batch 522: 76.85(83.33)
+batch 523: 76.83(66.67)
+batch 524: 76.84(83.33)
+batch 525: 76.86(83.33)
+batch 526: 76.81(50.00)
+batch 527: 76.79(66.67)
+batch 528: 76.80(83.33)
+batch 529: 76.81(83.33)
+batch 530: 76.86(100.00)
+batch 531: 76.90(100.00)
+batch 532: 76.82(33.33)
+batch 533: 76.80(66.67)
+batch 534: 76.84(100.00)
+batch 535: 76.88(100.00)
+batch 536: 76.93(100.00)
+batch 537: 76.91(66.67)
+batch 538: 76.92(83.33)
+batch 539: 76.87(50.00)
+batch 540: 76.88(83.33)
+batch 541: 76.80(33.33)
+batch 542: 76.75(50.00)
+batch 543: 76.76(83.33)
+batch 544: 76.78(83.33)
+batch 545: 76.73(50.00)
+batch 546: 76.68(50.00)
+batch 547: 76.72(100.00)
+batch 548: 76.76(100.00)
+batch 549: 76.72(50.00)
+batch 550: 76.76(100.00)
+batch 551: 76.80(100.00)
+batch 552: 76.81(83.33)
+batch 553: 76.85(100.00)
+batch 554: 76.84(66.67)
+batch 555: 76.85(83.33)
+batch 556: 76.83(66.67)
+batch 557: 76.84(83.33)
+batch 558: 76.88(100.00)
+batch 559: 76.89(83.33)
+batch 560: 76.88(66.67)
+batch 561: 76.92(100.00)
+batch 562: 76.90(66.67)
+batch 563: 76.94(100.00)
+batch 564: 76.98(100.00)
+batch 565: 77.02(100.00)
+batch 566: 76.94(33.33)
+batch 567: 76.98(100.00)
+batch 568: 76.97(66.67)
+batch 569: 76.98(83.33)
+batch 570: 76.93(50.00)
+batch 571: 76.97(100.00)
+batch 572: 76.95(66.67)
+batch 573: 76.96(83.33)
+batch 574: 76.89(33.33)
+batch 575: 76.93(100.00)
+batch 576: 76.97(100.00)
+batch 577: 77.01(100.00)
+batch 578: 77.05(100.00)
+batch 579: 77.03(66.67)
+batch 580: 77.07(100.00)
+batch 581: 77.11(100.00)
+batch 582: 77.12(83.33)
+batch 583: 77.10(66.67)
+batch 584: 77.08(66.67)
+batch 585: 77.09(83.33)
+batch 586: 77.13(100.00)
+batch 587: 77.12(66.67)
+batch 588: 77.13(83.33)
+batch 589: 77.16(100.00)
+batch 590: 77.12(50.00)
+batch 591: 77.16(100.00)
+batch 592: 77.17(83.33)
+batch 593: 77.21(100.00)
+batch 594: 77.19(66.67)
+batch 595: 77.14(50.00)
+batch 596: 77.18(100.00)
+batch 597: 77.19(83.33)
+batch 598: 77.15(50.00)
+batch 599: 77.13(66.67)
+batch 600: 77.14(83.33)
+batch 601: 77.18(100.00)
+batch 602: 77.19(83.33)
+batch 603: 77.22(100.00)
+batch 604: 77.18(50.00)
+batch 605: 77.19(83.33)
+batch 606: 77.23(100.00)
+batch 607: 77.27(100.00)
+batch 608: 77.30(100.00)
+batch 609: 77.29(66.67)
+batch 610: 77.27(66.67)
+batch 611: 77.28(83.33)
+batch 612: 77.26(66.67)
+batch 613: 77.24(66.67)
+batch 614: 77.28(100.00)
+batch 615: 77.29(83.33)
+batch 616: 77.33(100.00)
+batch 617: 77.36(100.00)
+batch 618: 77.29(33.33)
+batch 619: 77.33(100.00)
+batch 620: 77.34(83.33)
+batch 621: 77.27(33.33)
+batch 622: 77.25(66.67)
+batch 623: 77.21(50.00)
+batch 624: 77.24(100.00)
+batch 625: 77.28(100.00)
+batch 626: 77.26(66.67)
+batch 627: 77.30(100.00)
+batch 628: 77.28(66.67)
+batch 629: 77.24(50.00)
+batch 630: 77.28(100.00)
+batch 631: 77.28(83.33)
+batch 632: 77.22(33.33)
+batch 633: 77.20(66.67)
+batch 634: 77.23(100.00)
+batch 635: 77.22(66.67)
+batch 636: 77.25(100.00)
+batch 637: 77.26(83.33)
+batch 638: 77.30(100.00)
+batch 639: 77.33(100.00)
+batch 640: 77.29(50.00)
+batch 641: 77.33(100.00)
+batch 642: 77.28(50.00)
+batch 643: 77.27(66.67)
+batch 644: 77.30(100.00)
+batch 645: 77.26(50.00)
+batch 646: 77.30(100.00)
+batch 647: 77.33(100.00)
+batch 648: 77.34(83.33)
+batch 649: 77.35(83.33)
+batch 650: 77.38(100.00)
+batch 651: 77.37(66.67)
+batch 652: 77.38(83.33)
+batch 653: 77.36(66.67)
+batch 654: 77.37(83.33)
+batch 655: 77.35(66.67)
+batch 656: 77.36(83.33)
+batch 657: 77.40(100.00)
+batch 658: 77.41(83.33)
+batch 659: 77.42(83.33)
+batch 660: 77.40(66.67)
+batch 661: 77.43(100.00)
+batch 662: 77.39(50.00)
+batch 663: 77.40(83.33)
+batch 664: 77.38(66.67)
+batch 665: 77.37(66.67)
+batch 666: 77.35(66.67)
+batch 667: 77.39(100.00)
+batch 668: 77.37(66.67)
+batch 669: 77.38(83.33)
+batch 670: 77.39(83.33)
+batch 671: 77.42(100.00)
+batch 672: 77.43(83.33)
+batch 673: 77.41(66.67)
+batch 674: 77.42(83.33)
+batch 675: 77.43(83.33)
+batch 676: 77.42(66.67)
+batch 677: 77.45(100.00)
+batch 678: 77.48(100.00)
+batch 679: 77.44(50.00)
+batch 680: 77.45(83.33)
+batch 681: 77.44(66.67)
+batch 682: 77.35(16.67)
+batch 683: 77.33(66.67)
+batch 684: 77.31(66.67)
+batch 685: 77.32(83.33)
+batch 686: 77.31(66.67)
+batch 687: 77.24(33.33)
+batch 688: 77.28(100.00)
+batch 689: 77.21(33.33)
+batch 690: 77.20(66.67)
+batch 691: 77.18(66.67)
+batch 692: 77.22(100.00)
+batch 693: 77.18(50.00)
+batch 694: 77.19(83.33)
+batch 695: 77.17(66.67)
+batch 696: 77.18(83.33)
+batch 697: 77.16(66.67)
+batch 698: 77.20(100.00)
+batch 699: 77.21(83.33)
+batch 700: 77.21(83.33)
+batch 701: 77.20(66.67)
+batch 702: 77.23(100.00)
+batch 703: 77.22(66.67)
+batch 704: 77.23(83.33)
+batch 705: 77.26(100.00)
+batch 706: 77.24(66.67)
+batch 707: 77.20(50.00)
+batch 708: 77.24(100.00)
+batch 709: 77.24(83.33)
+batch 710: 77.21(50.00)
+batch 711: 77.19(66.67)
+batch 712: 77.22(100.00)
+batch 713: 77.23(83.33)
+batch 714: 77.26(100.00)
+batch 715: 77.30(100.00)
+batch 716: 77.33(100.00)
+batch 717: 77.36(100.00)
+batch 718: 77.37(83.33)
+batch 719: 77.35(66.67)
+batch 720: 77.34(66.67)
+batch 721: 77.35(83.33)
+batch 722: 77.31(50.00)
+batch 723: 77.29(66.67)
+batch 724: 77.23(33.33)
+batch 725: 77.26(100.00)
+batch 726: 77.30(100.00)
+batch 727: 77.33(100.00)
+batch 728: 77.34(83.33)
+batch 729: 77.37(100.00)
+batch 730: 77.37(83.33)
+batch 731: 77.41(100.00)
+batch 732: 77.41(83.33)
+batch 733: 77.44(100.00)
+batch 734: 77.48(100.00)
+batch 735: 77.51(100.00)
+batch 736: 77.47(50.00)
+batch 737: 77.45(66.67)
+batch 738: 77.46(83.33)
+batch 739: 77.45(66.67)
+batch 740: 77.45(83.33)
+batch 741: 77.44(66.67)
+batch 742: 77.45(83.33)
+batch 743: 77.46(83.33)
+batch 744: 77.46(83.33)
+batch 745: 77.47(83.33)
+batch 746: 77.48(83.33)
+batch 747: 77.47(66.67)
+batch 748: 77.45(66.67)
+batch 749: 77.44(66.67)
+batch 750: 77.42(66.67)
+batch 751: 77.41(66.67)
+batch 752: 77.37(50.00)
+batch 753: 77.36(66.67)
+batch 754: 77.37(83.33)
+batch 755: 77.37(83.33)
+batch 756: 77.36(66.67)
+batch 757: 77.34(66.67)
+batch 758: 77.29(33.33)
+batch 759: 77.32(100.00)
+batch 760: 77.30(66.67)
+batch 761: 77.31(83.33)
+batch 762: 77.30(66.67)
+batch 763: 77.33(100.00)
+batch 764: 77.33(83.33)
+batch 765: 77.30(50.00)
+batch 766: 77.33(100.00)
+batch 767: 77.31(66.67)
+batch 768: 77.30(66.67)
+batch 769: 77.29(66.67)
+batch 770: 77.27(66.67)
+batch 771: 77.28(83.33)
+batch 772: 77.29(83.33)
+batch 773: 77.27(66.67)
+batch 774: 77.26(66.67)
+batch 775: 77.25(66.67)
+batch 776: 77.28(100.00)
+batch 777: 77.26(66.67)
+batch 778: 77.27(83.33)
+batch 779: 77.26(66.67)
+batch 780: 77.26(83.33)
+batch 781: 77.27(83.33)
+batch 782: 77.26(66.67)
+batch 783: 77.25(66.67)
+batch 784: 77.25(83.33)
+batch 785: 77.24(66.67)
+batch 786: 77.27(100.00)
+batch 787: 77.26(66.67)
+batch 788: 77.26(83.33)
+batch 789: 77.25(66.67)
+batch 790: 77.28(100.00)
+batch 791: 77.27(66.67)
+batch 792: 77.29(100.00)
+batch 793: 77.26(50.00)
+batch 794: 77.29(100.00)
+batch 795: 77.27(66.67)
+batch 796: 77.26(66.67)
+batch 797: 77.27(83.33)
+batch 798: 77.28(83.33)
+batch 799: 77.26(66.67)
+batch 800: 77.27(83.33)
+batch 801: 77.28(83.33)
+batch 802: 77.31(100.00)
+batch 803: 77.29(66.67)
+batch 804: 77.30(83.33)
+batch 805: 77.29(66.67)
+batch 806: 77.27(66.67)
+batch 807: 77.26(66.67)
+batch 808: 77.25(66.67)
+batch 809: 77.24(66.67)
+batch 810: 77.24(83.33)
+batch 811: 77.27(100.00)
+batch 812: 77.30(100.00)
+batch 813: 77.33(100.00)
+batch 814: 77.35(100.00)
+batch 815: 77.38(100.00)
+batch 816: 77.37(66.67)
+batch 817: 77.34(50.00)
+batch 818: 77.32(66.67)
+batch 819: 77.31(66.67)
+batch 820: 77.32(83.33)
+batch 821: 77.26(33.33)
+batch 822: 77.29(100.00)
+batch 823: 77.32(100.00)
+batch 824: 77.31(66.67)
+batch 825: 77.31(83.33)
+batch 826: 77.32(83.33)
+batch 827: 77.33(83.33)
+batch 828: 77.33(83.33)
+batch 829: 77.32(66.67)
+batch 830: 77.31(66.67)
+batch 831: 77.30(66.67)
+batch 832: 77.28(66.67)
+batch 833: 77.27(66.67)
+batch 834: 77.24(50.00)
+batch 835: 77.25(83.33)
+batch 836: 77.21(50.00)
+batch 837: 77.22(83.33)
+batch 838: 77.25(100.00)
+batch 839: 77.27(100.00)
+batch 840: 77.30(100.00)
+batch 841: 77.31(83.33)
+batch 842: 77.30(66.67)
+batch 843: 77.32(100.00)
+batch 844: 77.31(66.67)
+batch 845: 77.32(83.33)
+batch 846: 77.34(100.00)
+batch 847: 77.37(100.00)
+batch 848: 77.40(100.00)
+batch 849: 77.37(50.00)
+batch 850: 77.33(50.00)
+batch 851: 77.34(83.33)
+batch 852: 77.35(83.33)
+batch 853: 77.37(100.00)
+batch 854: 77.36(66.67)
+batch 855: 77.35(66.67)
+batch 856: 77.36(83.33)
+batch 857: 77.36(83.33)
+batch 858: 77.35(66.67)
+batch 859: 77.34(66.67)
+batch 860: 77.34(83.33)
+batch 861: 77.31(50.00)
+batch 862: 77.26(33.33)
+batch 863: 77.25(66.67)
+batch 864: 77.26(83.33)
+batch 865: 77.26(83.33)
+batch 866: 77.27(83.33)
+batch 867: 77.26(66.67)
+batch 868: 77.25(66.67)
+batch 869: 77.25(83.33)
+batch 870: 77.26(83.33)
+batch 871: 77.23(50.00)
+batch 872: 77.22(66.67)
+batch 873: 77.19(50.00)
+batch 874: 77.15(50.00)
+batch 875: 77.16(83.33)
+batch 876: 77.15(66.67)
+batch 877: 77.14(66.67)
+batch 878: 77.15(83.33)
+batch 879: 77.11(50.00)
+batch 880: 77.14(100.00)
+batch 881: 77.17(100.00)
+batch 882: 77.19(100.00)
+batch 883: 77.16(50.00)
+batch 884: 77.17(83.33)
+batch 885: 77.16(66.67)
+batch 886: 77.18(100.00)
+batch 887: 77.19(83.33)
+batch 888: 77.21(100.00)
+batch 889: 77.20(66.67)
+batch 890: 77.21(83.33)
+batch 891: 77.24(100.00)
+batch 892: 77.24(83.33)
+batch 893: 77.27(100.00)
+batch 894: 77.29(100.00)
+batch 895: 77.32(100.00)
+batch 896: 77.34(100.00)
+batch 897: 77.33(66.67)
+batch 898: 77.32(66.67)
+batch 899: 77.33(83.33)
+batch 900: 77.28(33.33)
+batch 901: 77.28(83.33)
+batch 902: 77.27(66.67)
+batch 903: 77.28(83.33)
+batch 904: 77.25(50.00)
+batch 905: 77.24(66.67)
+batch 906: 77.23(66.67)
+batch 907: 77.25(100.00)
+batch 908: 77.26(83.33)
+batch 909: 77.28(100.00)
+batch 910: 77.23(33.33)
+batch 911: 77.24(83.33)
+batch 912: 77.23(66.67)
+batch 913: 77.20(50.00)
+batch 914: 77.21(83.33)
+batch 915: 77.19(66.67)
+batch 916: 77.18(66.67)
+batch 917: 77.19(83.33)
+batch 918: 77.18(66.67)
+batch 919: 77.17(66.67)
+batch 920: 77.17(83.33)
+batch 921: 77.18(83.33)
+batch 922: 77.19(83.33)
+batch 923: 77.18(66.67)
+batch 924: 77.16(66.67)
+batch 925: 77.15(66.67)
+batch 926: 77.14(66.67)
+batch 927: 77.13(66.67)
+batch 928: 77.14(83.33)
+batch 929: 77.11(50.00)
+batch 930: 77.11(83.33)
+batch 931: 77.10(66.67)
+batch 932: 77.11(83.33)
+batch 933: 77.08(50.00)
+batch 934: 77.07(66.67)
+batch 935: 77.08(83.33)
+batch 936: 77.03(33.33)
+batch 937: 77.04(83.33)
+batch 938: 77.04(83.33)
+batch 939: 77.07(100.00)
+batch 940: 77.09(100.00)
+batch 941: 77.08(66.67)
+batch 942: 77.07(66.67)
+batch 943: 77.08(83.33)
+batch 944: 77.07(66.67)
+batch 945: 77.05(66.67)
+batch 946: 77.08(100.00)
+batch 947: 77.07(66.67)
+batch 948: 77.09(100.00)
+batch 949: 77.10(83.33)
+batch 950: 77.07(50.00)
+batch 951: 77.08(83.33)
+batch 952: 77.05(50.00)
+batch 953: 77.07(100.00)
+batch 954: 77.10(100.00)
+batch 955: 77.05(33.33)
+batch 956: 77.04(66.67)
+batch 957: 77.03(66.67)
+batch 958: 77.02(66.67)
+batch 959: 77.02(83.33)
+batch 960: 77.03(83.33)
+batch 961: 77.06(100.00)
+batch 962: 77.06(83.33)
+batch 963: 77.09(100.00)
+batch 964: 77.09(83.33)
+batch 965: 77.10(83.33)
+batch 966: 77.12(100.00)
+batch 967: 77.13(83.33)
+batch 968: 77.13(83.33)
+batch 969: 77.16(100.00)
+batch 970: 77.18(100.00)
+batch 971: 77.17(66.67)
+batch 972: 77.18(83.33)
+batch 973: 77.18(83.33)
+batch 974: 77.19(83.33)
+batch 975: 77.16(50.00)
+batch 976: 77.19(100.00)
+batch 977: 77.18(66.67)
+batch 978: 77.13(33.33)
+batch 979: 77.15(100.00)
+batch 980: 77.18(100.00)
+batch 981: 77.20(100.00)
+batch 982: 77.22(100.00)
+batch 983: 77.25(100.00)
+batch 984: 77.27(100.00)
+batch 985: 77.29(100.00)
+batch 986: 77.30(83.33)
+batch 987: 77.29(66.67)
+batch 988: 77.28(66.67)
+batch 989: 77.27(66.67)
+batch 990: 77.24(50.00)
+batch 991: 77.23(66.67)
+batch 992: 77.23(83.33)
+batch 993: 77.24(83.33)
+batch 994: 77.25(83.33)
+batch 995: 77.25(83.33)
+batch 996: 77.24(66.67)
+batch 997: 77.23(66.67)
+batch 998: 77.22(66.67)
+batch 999: 77.23(83.33)
+batch 1000: 77.25(100.00)
+batch 1001: 77.24(66.67)
+batch 1002: 77.26(100.00)
+batch 1003: 77.27(83.33)
+batch 1004: 77.29(100.00)
+batch 1005: 77.28(66.67)
+batch 1006: 77.29(83.33)
+batch 1007: 77.28(66.67)
+batch 1008: 77.27(66.67)
+batch 1009: 77.27(83.33)
+batch 1010: 77.28(83.33)
+batch 1011: 77.27(66.67)
+batch 1012: 77.27(83.33)
+batch 1013: 77.26(66.67)
+batch 1014: 77.28(100.00)
+batch 1015: 77.27(66.67)
+batch 1016: 77.26(66.67)
+batch 1017: 77.27(83.33)
+batch 1018: 77.28(83.33)
+batch 1019: 77.27(66.67)
+batch 1020: 77.29(100.00)
+batch 1021: 77.28(66.67)
+batch 1022: 77.28(83.33)
+batch 1023: 77.29(83.33)
+batch 1024: 77.31(100.00)
+batch 1025: 77.30(66.67)
+batch 1026: 77.27(50.00)
+batch 1027: 77.30(100.00)
+batch 1028: 77.32(100.00)
+batch 1029: 77.34(100.00)
+batch 1030: 77.31(50.00)
+batch 1031: 77.30(66.67)
+batch 1032: 77.29(66.67)
+batch 1033: 77.30(83.33)
+batch 1034: 77.29(66.67)
+batch 1035: 77.28(66.67)
+batch 1036: 77.27(66.67)
+batch 1037: 77.29(100.00)
+batch 1038: 77.31(100.00)
+batch 1039: 77.33(100.00)
+batch 1040: 77.31(50.00)
+batch 1041: 77.30(66.67)
+batch 1042: 77.29(66.67)
+batch 1043: 77.28(66.67)
+batch 1044: 77.27(66.67)
+batch 1045: 77.27(83.33)
+batch 1046: 77.28(83.33)
+batch 1047: 77.28(83.33)
+batch 1048: 77.29(83.33)
+batch 1049: 77.30(83.33)
+batch 1050: 77.27(50.00)
+batch 1051: 77.28(83.33)
+batch 1052: 77.27(66.67)
+batch 1053: 77.24(50.00)
+batch 1054: 77.23(66.67)
+batch 1055: 77.20(50.00)
+batch 1056: 77.19(66.67)
+batch 1057: 77.20(83.33)
+batch 1058: 77.21(83.33)
+batch 1059: 77.20(66.67)
+batch 1060: 77.20(83.33)
+batch 1061: 77.19(66.67)
+batch 1062: 77.17(50.00)
+batch 1063: 77.17(83.33)
+batch 1064: 77.18(83.33)
+batch 1065: 77.20(100.00)
+batch 1066: 77.20(83.33)
+batch 1067: 77.19(66.67)
+batch 1068: 77.22(100.00)
+batch 1069: 77.22(83.33)
+batch 1070: 77.24(100.00)
+batch 1071: 77.22(50.00)
+batch 1072: 77.21(66.67)
+batch 1073: 77.21(83.33)
+batch 1074: 77.19(50.00)
+batch 1075: 77.18(66.67)
+batch 1076: 77.20(100.00)
+batch 1077: 77.21(83.33)
+batch 1078: 77.20(66.67)
+batch 1079: 77.19(66.67)
+batch 1080: 77.19(83.33)
+batch 1081: 77.18(66.67)
+batch 1082: 77.19(83.33)
+batch 1083: 77.19(83.33)
+batch 1084: 77.20(83.33)
+batch 1085: 77.22(100.00)
+batch 1086: 77.21(66.67)
+batch 1087: 77.22(83.33)
+batch 1088: 77.22(83.33)
+batch 1089: 77.23(83.33)
+batch 1090: 77.25(100.00)
+batch 1091: 77.27(100.00)
+batch 1092: 77.29(100.00)
+batch 1093: 77.26(50.00)
+batch 1094: 77.24(50.00)
+batch 1095: 77.23(66.67)
+batch 1096: 77.24(83.33)
+batch 1097: 77.24(83.33)
+batch 1098: 77.26(100.00)
+batch 1099: 77.24(50.00)
+batch 1100: 77.23(66.67)
+batch 1101: 77.23(83.33)
+batch 1102: 77.25(100.00)
+batch 1103: 77.27(100.00)
+batch 1104: 77.26(66.67)
+batch 1105: 77.29(100.00)
+batch 1106: 77.28(66.67)
+batch 1107: 77.25(50.00)
+batch 1108: 77.23(50.00)
+batch 1109: 77.20(50.00)
+batch 1110: 77.21(83.33)
+batch 1111: 77.20(66.67)
+batch 1112: 77.20(83.33)
+batch 1113: 77.21(83.33)
+batch 1114: 77.21(83.33)
+batch 1115: 77.22(83.33)
+batch 1116: 77.21(66.67)
+batch 1117: 77.20(66.67)
+batch 1118: 77.18(50.00)
+batch 1119: 77.18(83.33)
+batch 1120: 77.19(83.33)
+batch 1121: 77.18(66.67)
+batch 1122: 77.17(66.67)
+batch 1123: 77.16(66.67)
+batch 1124: 77.14(50.00)
+batch 1125: 77.13(66.67)
+batch 1126: 77.12(66.67)
+batch 1127: 77.12(83.33)
+batch 1128: 77.08(33.33)
+batch 1129: 77.10(100.00)
+batch 1130: 77.09(66.67)
+batch 1131: 77.09(66.67)
+batch 1132: 77.11(100.00)
+batch 1133: 77.13(100.00)
+batch 1134: 77.13(83.33)
+batch 1135: 77.11(50.00)
+batch 1136: 77.08(50.00)
+batch 1137: 77.10(100.00)
+batch 1138: 77.12(100.00)
+batch 1139: 77.11(66.67)
+batch 1140: 77.13(100.00)
+batch 1141: 77.14(83.33)
+batch 1142: 77.16(100.00)
+batch 1143: 77.17(83.33)
+batch 1144: 77.19(100.00)
+batch 1145: 77.19(83.33)
+batch 1146: 77.17(50.00)
+batch 1147: 77.14(50.00)
+batch 1148: 77.12(50.00)
+batch 1149: 77.13(83.33)
+batch 1150: 77.12(66.67)
+batch 1151: 77.14(100.00)
+batch 1152: 77.16(100.00)
+batch 1153: 77.15(66.67)
+batch 1154: 77.15(83.33)
+batch 1155: 77.16(83.33)
+batch 1156: 77.16(83.33)
+batch 1157: 77.18(100.00)
+batch 1158: 77.20(100.00)
+batch 1159: 77.22(100.00)
+batch 1160: 77.23(83.33)
+batch 1161: 77.25(100.00)
+batch 1162: 77.24(66.67)
+batch 1163: 77.26(100.00)
+batch 1164: 77.22(33.33)
+batch 1165: 77.22(83.33)
+batch 1166: 77.24(100.00)
+batch 1167: 77.24(66.67)
+batch 1168: 77.23(66.67)
+batch 1169: 77.25(100.00)
+batch 1170: 77.24(66.67)
+batch 1171: 77.26(100.00)
+batch 1172: 77.28(100.00)
+batch 1173: 77.27(66.67)
+batch 1174: 77.29(100.00)
+batch 1175: 77.28(66.67)
+batch 1176: 77.30(100.00)
+batch 1177: 77.29(66.67)
+batch 1178: 77.29(83.33)
+batch 1179: 77.30(83.33)
+batch 1180: 77.32(100.00)
+batch 1181: 77.34(100.00)
+batch 1182: 77.33(66.67)
+batch 1183: 77.33(83.33)
+batch 1184: 77.35(100.00)
+batch 1185: 77.36(83.33)
+batch 1186: 77.36(83.33)
+batch 1187: 77.35(66.67)
+batch 1188: 77.36(83.33)
+batch 1189: 77.35(66.67)
+batch 1190: 77.32(50.00)
+batch 1191: 77.30(50.00)
+batch 1192: 77.27(33.33)
+batch 1193: 77.28(100.00)
+batch 1194: 77.29(83.33)
+batch 1195: 77.29(83.33)
+batch 1196: 77.30(83.33)
+batch 1197: 77.30(83.33)
+batch 1198: 77.32(100.00)
+batch 1199: 77.31(66.67)
+batch 1200: 77.29(50.00)
+batch 1201: 77.28(66.67)
+batch 1202: 77.27(66.67)
+batch 1203: 77.28(83.33)
+batch 1204: 77.28(83.33)
+batch 1205: 77.29(83.33)
+batch 1206: 77.31(100.00)
+batch 1207: 77.33(100.00)
+batch 1208: 77.33(83.33)
+batch 1209: 77.34(83.33)
+batch 1210: 77.36(100.00)
+batch 1211: 77.36(83.33)
+batch 1212: 77.38(100.00)
+batch 1213: 77.40(100.00)
+batch 1214: 77.40(83.33)
+batch 1215: 77.41(83.33)
+batch 1216: 77.43(100.00)
+batch 1217: 77.42(66.67)
+batch 1218: 77.44(100.00)
+batch 1219: 77.41(50.00)
+batch 1220: 77.42(83.33)
+batch 1221: 77.41(66.67)
+batch 1222: 77.43(100.00)
+batch 1223: 77.41(50.00)
+batch 1224: 77.40(66.67)
+batch 1225: 77.41(100.00)
+batch 1226: 77.42(83.33)
+batch 1227: 77.40(50.00)
+batch 1228: 77.39(66.67)
+batch 1229: 77.39(83.33)
+batch 1230: 77.41(100.00)
+batch 1231: 77.43(100.00)
+batch 1232: 77.42(66.67)
+batch 1233: 77.43(83.33)
+batch 1234: 77.44(100.00)
+batch 1235: 77.46(100.00)
+batch 1236: 77.47(83.33)
+batch 1237: 77.47(83.33)
+batch 1238: 77.46(66.67)
+batch 1239: 77.47(83.33)
+batch 1240: 77.47(83.33)
+batch 1241: 77.48(83.33)
+batch 1242: 77.50(100.00)
+batch 1243: 77.50(83.33)
+batch 1244: 77.51(83.33)
+batch 1245: 77.51(83.33)
+batch 1246: 77.50(66.67)
+batch 1247: 77.52(100.00)
+batch 1248: 77.52(83.33)
+batch 1249: 77.52(66.67)
+batch 1250: 77.51(66.67)
+batch 1251: 77.51(83.33)
+batch 1252: 77.50(66.67)
+batch 1253: 77.51(83.33)
+batch 1254: 77.49(50.00)
+batch 1255: 77.50(100.00)
+batch 1256: 77.52(100.00)
+batch 1257: 77.51(66.67)
+batch 1258: 77.53(100.00)
+batch 1259: 77.55(100.00)
+batch 1260: 77.57(100.00)
+batch 1261: 77.58(100.00)
+batch 1262: 77.56(50.00)
+batch 1263: 77.58(100.00)
+batch 1264: 77.60(100.00)
+batch 1265: 77.60(83.33)
+batch 1266: 77.61(83.33)
+batch 1267: 77.60(66.67)
+batch 1268: 77.60(83.33)
+batch 1269: 77.61(83.33)
+batch 1270: 77.62(100.00)
+batch 1271: 77.60(50.00)
+batch 1272: 77.62(100.00)
+batch 1273: 77.61(66.67)
+batch 1274: 77.62(83.33)
+batch 1275: 77.62(83.33)
+batch 1276: 77.64(100.00)
+batch 1277: 77.62(50.00)
+batch 1278: 77.61(66.67)
+batch 1279: 77.60(66.67)
+batch 1280: 77.62(100.00)
+batch 1281: 77.62(83.33)
+batch 1282: 77.61(66.67)
+batch 1283: 77.63(100.00)
+batch 1284: 77.65(100.00)
+batch 1285: 77.67(100.00)
+batch 1286: 77.67(83.33)
+batch 1287: 77.66(66.67)
+batch 1288: 77.67(83.33)
+batch 1289: 77.68(100.00)
+batch 1290: 77.65(33.33)
+batch 1291: 77.65(83.33)
+batch 1292: 77.66(83.33)
+batch 1293: 77.66(83.33)
+batch 1294: 77.68(100.00)
+batch 1295: 77.68(83.33)
+batch 1296: 77.67(66.67)
+batch 1297: 77.68(83.33)
+batch 1298: 77.70(100.00)
+batch 1299: 77.69(66.67)
+batch 1300: 77.67(50.00)
+batch 1301: 77.65(50.00)
+batch 1302: 77.65(83.33)
+batch 1303: 77.65(83.33)
+batch 1304: 77.65(66.67)
+batch 1305: 77.65(83.33)
+batch 1306: 77.64(66.67)
+batch 1307: 77.63(66.67)
+batch 1308: 77.64(83.33)
+batch 1309: 77.64(83.33)
+batch 1310: 77.65(83.33)
+batch 1311: 77.66(100.00)
+batch 1312: 77.65(66.67)
+batch 1313: 77.67(100.00)
+batch 1314: 77.68(83.33)
+batch 1315: 77.68(83.33)
+batch 1316: 77.68(83.33)
+batch 1317: 77.68(66.67)
+batch 1318: 77.67(66.67)
+batch 1319: 77.65(50.00)
+batch 1320: 77.61(33.33)
+batch 1321: 77.61(66.67)
+batch 1322: 77.62(100.00)
+batch 1323: 77.64(100.00)
+batch 1324: 77.64(83.33)
+batch 1325: 77.66(100.00)
+batch 1326: 77.65(66.67)
+batch 1327: 77.67(100.00)
+batch 1328: 77.67(83.33)
+batch 1329: 77.65(50.00)
+batch 1330: 77.66(83.33)
+batch 1331: 77.67(100.00)
+batch 1332: 77.67(66.67)
+batch 1333: 77.64(50.00)
+batch 1334: 77.64(66.67)
+batch 1335: 77.62(50.00)
+batch 1336: 77.63(100.00)
+batch 1337: 77.64(83.33)
+batch 1338: 77.65(100.00)
+batch 1339: 77.63(50.00)
+batch 1340: 77.61(50.00)
+batch 1341: 77.63(100.00)
+batch 1342: 77.57(0.00)
+batch 1343: 77.56(66.67)
+batch 1344: 77.55(66.67)
+batch 1345: 77.57(100.00)
+batch 1346: 77.59(100.00)
+batch 1347: 77.58(66.67)
+batch 1348: 77.56(50.00)
+batch 1349: 77.54(50.00)
+batch 1350: 77.52(50.00)
+batch 1351: 77.54(100.00)
+batch 1352: 77.54(83.33)
+batch 1353: 77.54(83.33)
+batch 1354: 77.52(50.00)
+batch 1355: 77.52(66.67)
+batch 1356: 77.48(33.33)
+batch 1357: 77.50(100.00)
+batch 1358: 77.47(33.33)
+batch 1359: 77.47(83.33)
+batch 1360: 77.48(83.33)
+batch 1361: 77.47(66.67)
+batch 1362: 77.48(100.00)
+batch 1363: 77.50(100.00)
+batch 1364: 77.52(100.00)
+batch 1365: 77.52(83.33)
+batch 1366: 77.54(100.00)
+batch 1367: 77.51(33.33)
+batch 1368: 77.51(83.33)
+batch 1369: 77.53(100.00)
+batch 1370: 77.53(83.33)
+batch 1371: 77.52(66.67)
+batch 1372: 77.54(100.00)
+batch 1373: 77.53(66.67)
+batch 1374: 77.52(66.67)
+batch 1375: 77.54(100.00)
+batch 1376: 77.56(100.00)
+batch 1377: 77.57(100.00)
+batch 1378: 77.58(83.33)
+batch 1379: 77.56(50.00)
+batch 1380: 77.57(100.00)
+batch 1381: 77.59(100.00)
+batch 1382: 77.59(83.33)
+batch 1383: 77.60(83.33)
+batch 1384: 77.61(100.00)
+batch 1385: 77.62(83.33)
+batch 1386: 77.61(66.67)
+batch 1387: 77.60(66.67)
+batch 1388: 77.57(33.33)
+batch 1389: 77.57(83.33)
+batch 1390: 77.57(66.67)
+batch 1391: 77.56(66.67)
+batch 1392: 77.56(83.33)
+batch 1393: 77.55(66.67)
+batch 1394: 77.56(83.33)
+batch 1395: 77.55(66.67)
+batch 1396: 77.53(50.00)
+batch 1397: 77.55(100.00)
+batch 1398: 77.52(33.33)
+batch 1399: 77.53(100.00)
+batch 1400: 77.54(83.33)
+batch 1401: 77.55(100.00)
+batch 1402: 77.57(100.00)
+batch 1403: 77.55(50.00)
+batch 1404: 77.54(66.67)
+batch 1405: 77.53(66.67)
+batch 1406: 77.55(100.00)
+batch 1407: 77.53(50.00)
+batch 1408: 77.52(66.67)
+batch 1409: 77.54(100.00)
+batch 1410: 77.55(100.00)
+batch 1411: 77.55(66.67)
+batch 1412: 77.55(83.33)
+batch 1413: 77.57(100.00)
+batch 1414: 77.56(66.67)
+batch 1415: 77.56(83.33)
+batch 1416: 77.58(100.00)
+batch 1417: 77.57(66.67)
+batch 1418: 77.56(66.67)
+batch 1419: 77.57(83.33)
+batch 1420: 77.57(83.33)
+batch 1421: 77.57(83.33)
+batch 1422: 77.57(66.67)
+batch 1423: 77.57(83.33)
+batch 1424: 77.56(66.67)
+batch 1425: 77.54(50.00)
+batch 1426: 77.56(100.00)
+batch 1427: 77.56(83.33)
+batch 1428: 77.57(83.33)
+batch 1429: 77.58(100.00)
+batch 1430: 77.60(100.00)
+batch 1431: 77.61(100.00)
+batch 1432: 77.63(100.00)
+batch 1433: 77.63(83.33)
+batch 1434: 77.65(100.00)
+batch 1435: 77.64(66.67)
+batch 1436: 77.63(66.67)
+batch 1437: 77.65(100.00)
+batch 1438: 77.65(83.33)
+batch 1439: 77.66(83.33)
+batch 1440: 77.66(83.33)
+batch 1441: 77.67(83.33)
+batch 1442: 77.67(83.33)
+batch 1443: 77.67(83.33)
+batch 1444: 77.67(66.67)
+batch 1445: 77.66(66.67)
+batch 1446: 77.66(83.33)
+batch 1447: 77.65(66.67)
+batch 1448: 77.65(66.67)
+batch 1449: 77.63(50.00)
+batch 1450: 77.62(66.67)
+batch 1451: 77.62(83.33)
+batch 1452: 77.62(66.67)
+batch 1453: 77.62(83.33)
+batch 1454: 77.64(100.00)
+batch 1455: 77.64(83.33)
+batch 1456: 77.64(83.33)
+batch 1457: 77.65(83.33)
+batch 1458: 77.66(100.00)
+batch 1459: 77.67(83.33)
+batch 1460: 77.67(83.33)
+batch 1461: 77.69(100.00)
+batch 1462: 77.69(83.33)
+batch 1463: 77.67(50.00)
+batch 1464: 77.66(66.67)
+batch 1465: 77.65(50.00)
+batch 1466: 77.65(83.33)
+batch 1467: 77.63(50.00)
+batch 1468: 77.65(100.00)
+batch 1469: 77.65(83.33)
+batch 1470: 77.65(83.33)
+batch 1471: 77.66(83.33)
+batch 1472: 77.66(83.33)
+batch 1473: 77.65(66.67)
+batch 1474: 77.66(83.33)
+batch 1475: 77.66(83.33)
+batch 1476: 77.66(83.33)
+batch 1477: 77.67(83.33)
+batch 1478: 77.65(50.00)
+batch 1479: 77.65(83.33)
+batch 1480: 77.65(66.67)
+batch 1481: 77.64(66.67)
+batch 1482: 77.64(83.33)
+batch 1483: 77.66(100.00)
+batch 1484: 77.67(100.00)
+batch 1485: 77.68(83.33)
+batch 1486: 77.67(66.67)
+batch 1487: 77.67(83.33)
+batch 1488: 77.68(83.33)
+batch 1489: 77.66(50.00)
+batch 1490: 77.67(100.00)
+batch 1491: 77.68(83.33)
+batch 1492: 77.68(83.33)
+batch 1493: 77.65(33.33)
+batch 1494: 77.66(83.33)
+batch 1495: 77.66(83.33)
+batch 1496: 77.66(83.33)
+batch 1497: 77.67(83.33)
+batch 1498: 77.66(66.67)
+batch 1499: 77.64(50.00)
+batch 1500: 77.64(83.33)
+batch 1501: 77.66(100.00)
+batch 1502: 77.65(66.67)
+batch 1503: 77.66(83.33)
+batch 1504: 77.64(50.00)
+batch 1505: 77.62(50.00)
+batch 1506: 77.63(100.00)
+batch 1507: 77.62(50.00)
+batch 1508: 77.62(83.33)
+batch 1509: 77.63(100.00)
+batch 1510: 77.63(66.67)
+batch 1511: 77.63(83.33)
+batch 1512: 77.60(33.33)
+batch 1513: 77.62(100.00)
+batch 1514: 77.62(83.33)
+batch 1515: 77.63(100.00)
+batch 1516: 77.63(66.67)
+batch 1517: 77.62(66.67)
+batch 1518: 77.62(83.33)
+batch 1519: 77.61(50.00)
+batch 1520: 77.61(83.33)
+batch 1521: 77.60(66.67)
+batch 1522: 77.61(83.33)
+batch 1523: 77.59(50.00)
+batch 1524: 77.60(100.00)
+batch 1525: 77.61(83.33)
+batch 1526: 77.61(83.33)
+batch 1527: 77.60(66.67)
+batch 1528: 77.60(66.67)
+batch 1529: 77.58(50.00)
+batch 1530: 77.58(83.33)
+batch 1531: 77.59(83.33)
+batch 1532: 77.55(16.67)
+batch 1533: 77.56(100.00)
+batch 1534: 77.54(50.00)
+batch 1535: 77.55(83.33)
+batch 1536: 77.56(100.00)
+batch 1537: 77.54(50.00)
+batch 1538: 77.54(66.67)
+batch 1539: 77.53(66.67)
+batch 1540: 77.53(83.33)
+batch 1541: 77.54(83.33)
+batch 1542: 77.53(66.67)
+batch 1543: 77.54(100.00)
+batch 1544: 77.56(100.00)
+batch 1545: 77.57(100.00)
+batch 1546: 77.56(50.00)
+batch 1547: 77.57(100.00)
+batch 1548: 77.54(33.33)
+batch 1549: 77.56(100.00)
+batch 1550: 77.56(83.33)
+batch 1551: 77.54(50.00)
+batch 1552: 77.52(50.00)
+batch 1553: 77.51(50.00)
+batch 1554: 77.51(83.33)
+batch 1555: 77.52(100.00)
+batch 1556: 77.54(100.00)
+batch 1557: 77.53(66.67)
+batch 1558: 77.54(83.33)
+batch 1559: 77.53(66.67)
+batch 1560: 77.53(83.33)
+batch 1561: 77.54(83.33)
+batch 1562: 77.53(66.67)
+batch 1563: 77.52(66.67)
+batch 1564: 77.49(33.33)
+batch 1565: 77.51(100.00)
+batch 1566: 77.50(66.67)
+batch 1567: 77.50(83.33)
+batch 1568: 77.51(83.33)
+batch 1569: 77.52(100.00)
+batch 1570: 77.54(100.00)
+batch 1571: 77.54(83.33)
+batch 1572: 77.52(50.00)
+batch 1573: 77.54(100.00)
+batch 1574: 77.55(100.00)
+batch 1575: 77.55(66.67)
+batch 1576: 77.54(66.67)
+batch 1577: 77.54(83.33)
+batch 1578: 77.56(100.00)
+batch 1579: 77.55(66.67)
+batch 1580: 77.56(100.00)
+batch 1581: 77.58(100.00)
+batch 1582: 77.58(83.33)
+batch 1583: 77.60(100.00)
+batch 1584: 77.61(100.00)
+batch 1585: 77.60(66.67)
+batch 1586: 77.59(50.00)
+batch 1587: 77.60(100.00)
+batch 1588: 77.61(100.00)
+batch 1589: 77.62(83.33)
+batch 1590: 77.61(66.67)
+batch 1591: 77.60(66.67)
+batch 1592: 77.62(100.00)
+batch 1593: 77.62(83.33)
+batch 1594: 77.63(100.00)
+batch 1595: 77.65(100.00)
+batch 1596: 77.65(83.33)
+batch 1597: 77.66(83.33)
+batch 1598: 77.66(83.33)
+batch 1599: 77.66(83.33)
+batch 1600: 77.66(66.67)
+batch 1601: 77.67(100.00)
+batch 1602: 77.66(66.67)
+batch 1603: 77.65(50.00)
+batch 1604: 77.64(66.67)
+batch 1605: 77.64(83.33)
+batch 1606: 77.65(83.33)
+batch 1607: 77.65(83.33)
+batch 1608: 77.66(100.00)
+batch 1609: 77.68(100.00)
+batch 1610: 77.64(16.67)
+batch 1611: 77.62(50.00)
+batch 1612: 77.63(83.33)
+batch 1613: 77.62(66.67)
+batch 1614: 77.63(100.00)
+batch 1615: 77.65(100.00)
+batch 1616: 77.66(100.00)
+batch 1617: 77.63(33.33)
+batch 1618: 77.62(50.00)
+batch 1619: 77.61(66.67)
+batch 1620: 77.62(100.00)
+batch 1621: 77.64(100.00)
+batch 1622: 77.64(83.33)
+batch 1623: 77.64(83.33)
+batch 1624: 77.65(83.33)
+batch 1625: 77.65(83.33)
+batch 1626: 77.64(66.67)
+batch 1627: 77.65(83.33)
+batch 1628: 77.64(66.67)
+batch 1629: 77.64(83.33)
+batch 1630: 77.64(66.67)
+batch 1631: 77.61(33.33)
+batch 1632: 77.59(50.00)
+batch 1633: 77.57(33.33)
+batch 1634: 77.56(66.67)
+batch 1635: 77.55(66.67)
+batch 1636: 77.55(66.67)
+batch 1637: 77.55(83.33)
+batch 1638: 77.54(66.67)
+batch 1639: 77.52(33.33)
+batch 1640: 77.53(100.00)
+batch 1641: 77.52(66.67)
+batch 1642: 77.53(83.33)
+batch 1643: 77.50(33.33)
+batch 1644: 77.51(100.00)
+batch 1645: 77.53(100.00)
+batch 1646: 77.52(66.67)
+batch 1647: 77.52(83.33)
+batch 1648: 77.53(83.33)
+batch 1649: 77.54(100.00)
+batch 1650: 77.56(100.00)
+batch 1651: 77.55(66.67)
+batch 1652: 77.53(50.00)
+batch 1653: 77.55(100.00)
+batch 1654: 77.53(50.00)
+batch 1655: 77.53(83.33)
+batch 1656: 77.53(66.67)
+batch 1657: 77.52(66.67)
+batch 1658: 77.50(50.00)
+batch 1659: 77.51(83.33)
+batch 1660: 77.51(83.33)
+batch 1661: 77.50(66.67)
+batch 1662: 77.52(100.00)
+batch 1663: 77.53(100.00)
+batch 1664: 77.52(66.67)
+batch 1665: 77.52(66.67)
+batch 1666: 77.53(100.00)
+batch 1667: 77.52(66.67)
+batch 1668: 77.53(83.33)
+batch 1669: 77.53(83.33)
+batch 1670: 77.52(50.00)
+batch 1671: 77.53(100.00)
+batch 1672: 77.54(100.00)
+batch 1673: 77.54(66.67)
+batch 1674: 77.54(83.33)
+batch 1675: 77.53(66.67)
+batch 1676: 77.54(83.33)
+batch 1677: 77.54(83.33)
+batch 1678: 77.53(66.67)
+batch 1679: 77.55(100.00)
+batch 1680: 77.55(83.33)
+batch 1681: 77.56(100.00)
+batch 1682: 77.57(83.33)
+batch 1683: 77.58(100.00)
+batch 1684: 77.57(66.67)
+batch 1685: 77.58(83.33)
+batch 1686: 77.58(83.33)
+batch 1687: 77.57(66.67)
+batch 1688: 77.58(83.33)
+batch 1689: 77.58(83.33)
+batch 1690: 77.57(66.67)
+batch 1691: 77.59(100.00)
+batch 1692: 77.60(100.00)
+batch 1693: 77.61(100.00)
+batch 1694: 77.62(83.33)
+batch 1695: 77.63(100.00)
+batch 1696: 77.61(50.00)
+batch 1697: 77.62(83.33)
+batch 1698: 77.62(83.33)
+batch 1699: 77.63(100.00)
+batch 1700: 77.63(66.67)
+batch 1701: 77.62(66.67)
+batch 1702: 77.62(83.33)
+batch 1703: 77.64(100.00)
+batch 1704: 77.62(50.00)
+batch 1705: 77.63(100.00)
+batch 1706: 77.65(100.00)
+batch 1707: 77.65(83.33)
+batch 1708: 77.66(100.00)
+batch 1709: 77.66(66.67)
+batch 1710: 77.64(50.00)
+batch 1711: 77.63(50.00)
+batch 1712: 77.61(50.00)
+batch 1713: 77.61(83.33)
+batch 1714: 77.60(50.00)
+batch 1715: 77.61(100.00)
+batch 1716: 77.62(100.00)
+batch 1717: 77.64(100.00)
+batch 1718: 77.64(83.33)
+batch 1719: 77.64(83.33)
+batch 1720: 77.64(66.67)
+batch 1721: 77.64(83.33)
+batch 1722: 77.62(50.00)
+batch 1723: 77.64(100.00)
+batch 1724: 77.62(50.00)
+batch 1725: 77.61(66.67)
+batch 1726: 77.63(100.00)
+batch 1727: 77.61(50.00)
+batch 1728: 77.61(83.33)
+batch 1729: 77.62(83.33)
+batch 1730: 77.62(83.33)
+batch 1731: 77.61(66.67)
+batch 1732: 77.63(100.00)
+batch 1733: 77.61(50.00)
+batch 1734: 77.62(100.00)
+batch 1735: 77.64(100.00)
+batch 1736: 77.63(66.67)
+batch 1737: 77.63(83.33)
+batch 1738: 77.65(100.00)
+batch 1739: 77.65(83.33)
+batch 1740: 77.65(83.33)
+batch 1741: 77.66(83.33)
+batch 1742: 77.65(66.67)
+batch 1743: 77.65(83.33)
+batch 1744: 77.65(66.67)
+batch 1745: 77.62(33.33)
+batch 1746: 77.62(66.67)
+batch 1747: 77.61(66.67)
+batch 1748: 77.60(66.67)
+batch 1749: 77.62(100.00)
+batch 1750: 77.61(66.67)
+batch 1751: 77.62(100.00)
+batch 1752: 77.61(50.00)
+batch 1753: 77.60(66.67)
+batch 1754: 77.60(83.33)
+batch 1755: 77.61(83.33)
+batch 1756: 77.62(100.00)
+batch 1757: 77.62(83.33)
+batch 1758: 77.62(66.67)
+batch 1759: 77.62(83.33)
+batch 1760: 77.62(83.33)
+batch 1761: 77.61(50.00)
+batch 1762: 77.61(83.33)
+batch 1763: 77.61(83.33)
+batch 1764: 77.61(66.67)
+batch 1765: 77.60(66.67)
+batch 1766: 77.59(50.00)
+batch 1767: 77.58(66.67)
+batch 1768: 77.59(100.00)
+batch 1769: 77.58(50.00)
+batch 1770: 77.57(66.67)
+batch 1771: 77.57(83.33)
+batch 1772: 77.57(66.67)
+batch 1773: 77.58(100.00)
+batch 1774: 77.59(100.00)
+batch 1775: 77.59(66.67)
+batch 1776: 77.58(66.67)
+batch 1777: 77.57(66.67)
+batch 1778: 77.56(50.00)
+batch 1779: 77.55(66.67)
+batch 1780: 77.55(66.67)
+batch 1781: 77.53(50.00)
+batch 1782: 77.53(83.33)
+batch 1783: 77.55(100.00)
+batch 1784: 77.54(66.67)
+batch 1785: 77.55(100.00)
+batch 1786: 77.56(83.33)
+batch 1787: 77.55(66.67)
+batch 1788: 77.55(83.33)
+batch 1789: 77.55(66.67)
+batch 1790: 77.55(83.33)
+batch 1791: 77.55(66.67)
+batch 1792: 77.54(66.67)
+batch 1793: 77.53(66.67)
+batch 1794: 77.54(83.33)
+batch 1795: 77.55(100.00)
+batch 1796: 77.56(100.00)
+batch 1797: 77.56(83.33)
+batch 1798: 77.58(100.00)
+batch 1799: 77.58(83.33)
+batch 1800: 77.59(100.00)
+batch 1801: 77.61(100.00)
+batch 1802: 77.60(66.67)
+batch 1803: 77.60(83.33)
+batch 1804: 77.61(83.33)
+batch 1805: 77.62(100.00)
+batch 1806: 77.61(66.67)
+batch 1807: 77.61(83.33)
+batch 1808: 77.61(66.67)
+batch 1809: 77.59(50.00)
+batch 1810: 77.58(50.00)
+batch 1811: 77.57(66.67)
+batch 1812: 77.57(66.67)
+batch 1813: 77.55(50.00)
+batch 1814: 77.55(83.33)
+batch 1815: 77.57(100.00)
+batch 1816: 77.57(83.33)
+batch 1817: 77.57(83.33)
+batch 1818: 77.56(50.00)
+batch 1819: 77.53(33.33)
+batch 1820: 77.51(33.33)
+batch 1821: 77.52(100.00)
+batch 1822: 77.51(50.00)
+batch 1823: 77.49(50.00)
+batch 1824: 77.49(83.33)
+batch 1825: 77.50(83.33)
+batch 1826: 77.49(66.67)
+batch 1827: 77.49(66.67)
+batch 1828: 77.47(50.00)
+batch 1829: 77.46(50.00)
+batch 1830: 77.43(33.33)
+batch 1831: 77.43(66.67)
+batch 1832: 77.42(66.67)
+batch 1833: 77.41(66.67)
+batch 1834: 77.43(100.00)
+batch 1835: 77.42(66.67)
+batch 1836: 77.41(50.00)
+batch 1837: 77.40(66.67)
+batch 1838: 77.39(66.67)
+batch 1839: 77.39(66.67)
+batch 1840: 77.40(100.00)
+batch 1841: 77.39(50.00)
+batch 1842: 77.40(100.00)
+batch 1843: 77.41(100.00)
+batch 1844: 77.39(33.33)
+batch 1845: 77.39(83.33)
+batch 1846: 77.38(66.67)
+batch 1847: 77.40(100.00)
+batch 1848: 77.40(83.33)
+batch 1849: 77.41(100.00)
+batch 1850: 77.41(83.33)
+batch 1851: 77.40(50.00)
+batch 1852: 77.40(83.33)
+batch 1853: 77.41(83.33)
+batch 1854: 77.42(100.00)
+batch 1855: 77.43(100.00)
+batch 1856: 77.42(66.67)
+batch 1857: 77.43(83.33)
+batch 1858: 77.43(83.33)
+batch 1859: 77.43(83.33)
+batch 1860: 77.44(83.33)
+batch 1861: 77.45(100.00)
+batch 1862: 77.44(66.67)
+batch 1863: 77.46(100.00)
+batch 1864: 77.46(83.33)
+batch 1865: 77.46(83.33)
+batch 1866: 77.46(66.67)
+batch 1867: 77.45(66.67)
+batch 1868: 77.46(100.00)
+batch 1869: 77.47(83.33)
+batch 1870: 77.46(66.67)
+batch 1871: 77.45(66.67)
+batch 1872: 77.46(83.33)
+batch 1873: 77.46(83.33)
+batch 1874: 77.45(66.67)
+batch 1875: 77.44(50.00)
+batch 1876: 77.44(83.33)
+batch 1877: 77.44(66.67)
+batch 1878: 77.45(100.00)
+batch 1879: 77.45(83.33)
+batch 1880: 77.45(66.67)
+batch 1881: 77.46(100.00)
+batch 1882: 77.46(83.33)
+batch 1883: 77.47(83.33)
+batch 1884: 77.46(66.67)
+batch 1885: 77.46(83.33)
+batch 1886: 77.45(50.00)
+batch 1887: 77.44(66.67)
+batch 1888: 77.44(66.67)
+batch 1889: 77.45(100.00)
+batch 1890: 77.45(83.33)
+batch 1891: 77.45(83.33)
+batch 1892: 77.45(66.67)
+batch 1893: 77.43(50.00)
+batch 1894: 77.43(66.67)
+batch 1895: 77.43(83.33)
+batch 1896: 77.44(100.00)
+batch 1897: 77.44(66.67)
+batch 1898: 77.44(83.33)
+batch 1899: 77.44(83.33)
+batch 1900: 77.45(83.33)
+batch 1901: 77.46(100.00)
+batch 1902: 77.44(50.00)
+batch 1903: 77.45(83.33)
+batch 1904: 77.46(100.00)
+batch 1905: 77.46(83.33)
+batch 1906: 77.46(66.67)
+batch 1907: 77.45(66.67)
+batch 1908: 77.45(66.67)
+batch 1909: 77.46(100.00)
+batch 1910: 77.46(83.33)
+batch 1911: 77.46(66.67)
+batch 1912: 77.45(66.67)
+batch 1913: 77.45(83.33)
+batch 1914: 77.46(83.33)
+batch 1915: 77.46(83.33)
+batch 1916: 77.47(100.00)
+batch 1917: 77.47(83.33)
+batch 1918: 77.48(83.33)
+batch 1919: 77.49(100.00)
+batch 1920: 77.49(83.33)
+batch 1921: 77.49(83.33)
+batch 1922: 77.49(66.67)
+batch 1923: 77.48(66.67)
+batch 1924: 77.49(83.33)
+batch 1925: 77.50(100.00)
+batch 1926: 77.50(83.33)
+batch 1927: 77.51(100.00)
+batch 1928: 77.50(50.00)
+batch 1929: 77.50(83.33)
+batch 1930: 77.50(83.33)
+batch 1931: 77.50(66.67)
+batch 1932: 77.48(33.33)
+batch 1933: 77.47(66.67)
+batch 1934: 77.47(83.33)
+batch 1935: 77.47(66.67)
+batch 1936: 77.46(66.67)
+batch 1937: 77.45(50.00)
+batch 1938: 77.46(100.00)
+batch 1939: 77.45(66.67)
+batch 1940: 77.46(83.33)
+batch 1941: 77.45(66.67)
+batch 1942: 77.44(50.00)
+batch 1943: 77.44(83.33)
+batch 1944: 77.43(50.00)
+batch 1945: 77.43(83.33)
+batch 1946: 77.42(66.67)
+batch 1947: 77.41(50.00)
+batch 1948: 77.40(66.67)
+batch 1949: 77.41(83.33)
+batch 1950: 77.41(83.33)
+batch 1951: 77.41(83.33)
+batch 1952: 77.42(83.33)
+batch 1953: 77.43(100.00)
+batch 1954: 77.42(66.67)
+batch 1955: 77.43(100.00)
+batch 1956: 77.45(100.00)
+batch 1957: 77.46(100.00)
+batch 1958: 77.46(83.33)
+batch 1959: 77.45(66.67)
+batch 1960: 77.46(83.33)
+batch 1961: 77.45(66.67)
+batch 1962: 77.46(100.00)
+batch 1963: 77.45(50.00)
+batch 1964: 77.44(66.67)
+batch 1965: 77.45(83.33)
+batch 1966: 77.43(50.00)
+batch 1967: 77.44(100.00)
+batch 1968: 77.45(83.33)
+batch 1969: 77.44(66.67)
+batch 1970: 77.43(50.00)
+batch 1971: 77.42(66.67)
+batch 1972: 77.43(83.33)
+batch 1973: 77.44(100.00)
+batch 1974: 77.43(66.67)
+batch 1975: 77.43(83.33)
+batch 1976: 77.41(33.33)
+batch 1977: 77.42(83.33)
+batch 1978: 77.41(66.67)
+batch 1979: 77.41(83.33)
+batch 1980: 77.42(83.33)
+batch 1981: 77.40(50.00)
+batch 1982: 77.39(50.00)
+batch 1983: 77.39(83.33)
+batch 1984: 77.39(66.67)
+batch 1985: 77.38(66.67)
+batch 1986: 77.38(83.33)
+batch 1987: 77.37(50.00)
+batch 1988: 77.38(100.00)
+batch 1989: 77.37(50.00)
+batch 1990: 77.36(66.67)
+batch 1991: 77.36(83.33)
+batch 1992: 77.35(50.00)
+batch 1993: 77.35(66.67)
+batch 1994: 77.34(66.67)
+batch 1995: 77.35(100.00)
+batch 1996: 77.36(100.00)
+batch 1997: 77.34(33.33)
+batch 1998: 77.34(66.67)
+batch 1999: 77.34(83.33)
+batch 2000: 77.33(50.00)

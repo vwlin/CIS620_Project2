@@ -1,0 +1,2696 @@
+Namespace(gpu='0', max_epoch=150, model='resnet18', shot=1, test_query=1, test_shot=1, test_way=5, train_query=1, train_way=5)
+Using gpu
+ResNet(
+  (conv1): Conv2d(3, 64, kernel_size=(7, 7), stride=(2, 2), padding=(3, 3), bias=False)
+  (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  (relu): ReLU(inplace=True)
+  (maxpool): MaxPool2d(kernel_size=3, stride=2, padding=1, dilation=1, ceil_mode=False)
+  (layer1): Sequential(
+    (0): BasicBlock(
+      (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+    (1): BasicBlock(
+      (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (layer2): Sequential(
+    (0): BasicBlock(
+      (conv1): Conv2d(64, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (downsample): Sequential(
+        (0): Conv2d(64, 128, kernel_size=(1, 1), stride=(2, 2), bias=False)
+        (1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1): BasicBlock(
+      (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (layer3): Sequential(
+    (0): BasicBlock(
+      (conv1): Conv2d(128, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (downsample): Sequential(
+        (0): Conv2d(128, 256, kernel_size=(1, 1), stride=(2, 2), bias=False)
+        (1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1): BasicBlock(
+      (conv1): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (layer4): Sequential(
+    (0): BasicBlock(
+      (conv1): Conv2d(256, 512, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (downsample): Sequential(
+        (0): Conv2d(256, 512, kernel_size=(1, 1), stride=(2, 2), bias=False)
+        (1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1): BasicBlock(
+      (conv1): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (avgpool): AdaptiveAvgPool2d(output_size=(1, 1))
+  (fc): Identity()
+)
+meta-training on level 0
+
+epoch 1, train, loss=91.0274 acc=0.6140
+epoch 1, val, loss=2.1741 acc=0.6290
+epoch 2, train, loss=73.7697 acc=0.5520
+epoch 2, val, loss=202.3830 acc=0.3610
+epoch 3, train, loss=36.6120 acc=0.5340
+epoch 3, val, loss=121.0695 acc=0.4050
+epoch 4, train, loss=33.5782 acc=0.5420
+epoch 4, val, loss=4.1968 acc=0.4120
+epoch 5, train, loss=44.9164 acc=0.3440
+epoch 5, val, loss=12.9058 acc=0.3680
+epoch 6, train, loss=40.0666 acc=0.3420
+epoch 6, val, loss=10.3349 acc=0.3590
+epoch 7, train, loss=40.2652 acc=0.3820
+epoch 7, val, loss=73.9784 acc=0.4610
+epoch 8, train, loss=35.2431 acc=0.4500
+epoch 8, val, loss=59.3439 acc=0.4240
+epoch 9, train, loss=22.9649 acc=0.4500
+epoch 9, val, loss=116.3452 acc=0.3860
+epoch 10, train, loss=20.4799 acc=0.5020
+epoch 10, val, loss=7.6798 acc=0.4250
+epoch 11, train, loss=7.5630 acc=0.5960
+epoch 11, val, loss=21.9967 acc=0.3720
+epoch 12, train, loss=11.0047 acc=0.5620
+epoch 12, val, loss=8.6458 acc=0.4300
+epoch 13, train, loss=6.6591 acc=0.6240
+epoch 13, val, loss=1.6226 acc=0.4140
+epoch 14, train, loss=7.3700 acc=0.6500
+epoch 14, val, loss=5.0609 acc=0.5360
+epoch 15, train, loss=3.1999 acc=0.6820
+epoch 15, val, loss=1.5059 acc=0.4710
+epoch 16, train, loss=3.0161 acc=0.6740
+epoch 16, val, loss=2.0347 acc=0.5000
+epoch 17, train, loss=3.5493 acc=0.6780
+epoch 17, val, loss=2.0351 acc=0.4330
+epoch 18, train, loss=3.5243 acc=0.6880
+epoch 18, val, loss=3.6374 acc=0.4180
+epoch 19, train, loss=3.7449 acc=0.6740
+epoch 19, val, loss=1.6333 acc=0.4600
+epoch 20, train, loss=4.0451 acc=0.6900
+epoch 20, val, loss=1.8661 acc=0.4320
+epoch 21, train, loss=3.3130 acc=0.6840
+epoch 21, val, loss=2.0205 acc=0.4720
+epoch 22, train, loss=4.0453 acc=0.7160
+epoch 22, val, loss=1.7411 acc=0.4220
+epoch 23, train, loss=2.5471 acc=0.6720
+epoch 23, val, loss=5.4229 acc=0.4180
+epoch 24, train, loss=1.4987 acc=0.6820
+epoch 24, val, loss=2.0763 acc=0.4420
+epoch 25, train, loss=1.2278 acc=0.7160
+epoch 25, val, loss=2.2245 acc=0.4470
+epoch 26, train, loss=1.4030 acc=0.7300
+epoch 26, val, loss=5.9719 acc=0.4730
+epoch 27, train, loss=1.5274 acc=0.7380
+epoch 27, val, loss=4.7435 acc=0.4940
+epoch 28, train, loss=2.8098 acc=0.7100
+epoch 28, val, loss=1.6974 acc=0.4370
+epoch 29, train, loss=1.7697 acc=0.7020
+epoch 29, val, loss=1.4620 acc=0.5220
+epoch 30, train, loss=1.5383 acc=0.7100
+epoch 30, val, loss=2.3839 acc=0.5130
+epoch 31, train, loss=0.9091 acc=0.7480
+epoch 31, val, loss=1.3059 acc=0.5470
+epoch 32, train, loss=1.2194 acc=0.7320
+epoch 32, val, loss=1.3884 acc=0.5120
+epoch 33, train, loss=0.8513 acc=0.7460
+epoch 33, val, loss=1.3225 acc=0.5350
+epoch 34, train, loss=1.5295 acc=0.7300
+epoch 34, val, loss=3.7265 acc=0.4570
+epoch 35, train, loss=1.2602 acc=0.7580
+epoch 35, val, loss=11.0369 acc=0.4920
+epoch 36, train, loss=2.1520 acc=0.7100
+epoch 36, val, loss=1.3336 acc=0.5440
+epoch 37, train, loss=1.3580 acc=0.7480
+epoch 37, val, loss=1.3245 acc=0.5400
+epoch 38, train, loss=0.8229 acc=0.7740
+epoch 38, val, loss=1.7908 acc=0.4880
+epoch 39, train, loss=0.9243 acc=0.7820
+epoch 39, val, loss=1.3000 acc=0.5270
+epoch 40, train, loss=3.6059 acc=0.6600
+epoch 40, val, loss=1.4342 acc=0.4650
+epoch 41, train, loss=2.7255 acc=0.6740
+epoch 41, val, loss=2.8232 acc=0.4550
+epoch 42, train, loss=11.2970 acc=0.4620
+epoch 42, val, loss=24.6173 acc=0.3180
+epoch 43, train, loss=8.2498 acc=0.4100
+epoch 43, val, loss=5.0677 acc=0.3460
+epoch 44, train, loss=6.3716 acc=0.4260
+epoch 44, val, loss=12.8879 acc=0.3230
+epoch 45, train, loss=5.0979 acc=0.4280
+epoch 45, val, loss=39.1815 acc=0.3110
+epoch 46, train, loss=4.2152 acc=0.4720
+epoch 46, val, loss=20.2958 acc=0.3290
+epoch 47, train, loss=5.2185 acc=0.4380
+epoch 47, val, loss=40.3730 acc=0.3380
+epoch 48, train, loss=3.4864 acc=0.4320
+epoch 48, val, loss=1.6021 acc=0.3690
+epoch 49, train, loss=3.0534 acc=0.4440
+epoch 49, val, loss=2.2046 acc=0.3660
+epoch 50, train, loss=3.5010 acc=0.4560
+epoch 50, val, loss=4.6713 acc=0.3790
+epoch 51, train, loss=3.7474 acc=0.3980
+epoch 51, val, loss=2.7137 acc=0.3600
+epoch 52, train, loss=2.5916 acc=0.4240
+epoch 52, val, loss=3.2633 acc=0.3580
+epoch 53, train, loss=2.2595 acc=0.4400
+epoch 53, val, loss=12.1759 acc=0.3730
+epoch 54, train, loss=2.4984 acc=0.4700
+epoch 54, val, loss=50.6723 acc=0.3790
+epoch 55, train, loss=2.1126 acc=0.5060
+epoch 55, val, loss=50.4641 acc=0.3860
+epoch 56, train, loss=1.7461 acc=0.5380
+epoch 56, val, loss=6.4146 acc=0.3950
+epoch 57, train, loss=1.7191 acc=0.4900
+epoch 57, val, loss=1.7692 acc=0.3870
+epoch 58, train, loss=1.6193 acc=0.5460
+epoch 58, val, loss=6.2270 acc=0.3790
+epoch 59, train, loss=1.8362 acc=0.4820
+epoch 59, val, loss=1.3613 acc=0.4200
+epoch 60, train, loss=1.6869 acc=0.4880
+epoch 60, val, loss=2.8274 acc=0.3930
+epoch 61, train, loss=1.3526 acc=0.5140
+epoch 61, val, loss=3.2399 acc=0.3980
+epoch 62, train, loss=1.4476 acc=0.4760
+epoch 62, val, loss=2.3117 acc=0.4130
+epoch 63, train, loss=1.4094 acc=0.4880
+epoch 63, val, loss=3.7449 acc=0.4070
+epoch 64, train, loss=1.4023 acc=0.4900
+epoch 64, val, loss=2.4620 acc=0.4120
+epoch 65, train, loss=1.5071 acc=0.5260
+epoch 65, val, loss=2.2889 acc=0.3790
+epoch 66, train, loss=1.3581 acc=0.5340
+epoch 66, val, loss=2.6323 acc=0.4100
+epoch 67, train, loss=1.2961 acc=0.5760
+epoch 67, val, loss=1.9806 acc=0.4310
+epoch 68, train, loss=1.1273 acc=0.5900
+epoch 68, val, loss=1.8157 acc=0.4390
+epoch 69, train, loss=1.2266 acc=0.5900
+epoch 69, val, loss=1.7602 acc=0.4140
+epoch 70, train, loss=1.1804 acc=0.6020
+epoch 70, val, loss=1.5539 acc=0.4390
+epoch 71, train, loss=2.2362 acc=0.5660
+epoch 71, val, loss=2.3932 acc=0.4360
+epoch 72, train, loss=1.4807 acc=0.5260
+epoch 72, val, loss=1.9158 acc=0.4100
+epoch 73, train, loss=2.5871 acc=0.5920
+epoch 73, val, loss=1.5830 acc=0.4310
+epoch 74, train, loss=2.3361 acc=0.5700
+epoch 74, val, loss=2.4743 acc=0.4440
+epoch 75, train, loss=2.3607 acc=0.5700
+epoch 75, val, loss=3.0897 acc=0.4470
+epoch 76, train, loss=1.9007 acc=0.5940
+epoch 76, val, loss=2.0655 acc=0.4180
+epoch 77, train, loss=1.1213 acc=0.6020
+epoch 77, val, loss=3.4603 acc=0.4120
+epoch 78, train, loss=1.0074 acc=0.6500
+epoch 78, val, loss=2.6680 acc=0.4280
+epoch 79, train, loss=0.9579 acc=0.6480
+epoch 79, val, loss=3.6361 acc=0.4290
+epoch 80, train, loss=1.0155 acc=0.6420
+epoch 80, val, loss=7.9545 acc=0.4390
+epoch 81, train, loss=0.9554 acc=0.6740
+epoch 81, val, loss=3.9400 acc=0.4300
+epoch 82, train, loss=0.9523 acc=0.6560
+epoch 82, val, loss=2.9434 acc=0.4440
+epoch 83, train, loss=0.8997 acc=0.6660
+epoch 83, val, loss=2.8101 acc=0.4200
+epoch 84, train, loss=0.9121 acc=0.6920
+epoch 84, val, loss=3.1337 acc=0.4410
+epoch 85, train, loss=0.8947 acc=0.6880
+epoch 85, val, loss=2.6471 acc=0.4010
+epoch 86, train, loss=0.8461 acc=0.6860
+epoch 86, val, loss=2.2000 acc=0.4380
+epoch 87, train, loss=0.8520 acc=0.7000
+epoch 87, val, loss=2.7946 acc=0.4340
+epoch 88, train, loss=0.7783 acc=0.7200
+epoch 88, val, loss=2.5484 acc=0.4310
+epoch 89, train, loss=0.7919 acc=0.7200
+epoch 89, val, loss=1.9847 acc=0.4400
+epoch 90, train, loss=0.8468 acc=0.6920
+epoch 90, val, loss=3.0453 acc=0.4330
+epoch 91, train, loss=0.7362 acc=0.7460
+epoch 91, val, loss=4.9555 acc=0.4010
+epoch 92, train, loss=0.7484 acc=0.7020
+epoch 92, val, loss=2.4524 acc=0.4060
+epoch 93, train, loss=0.7843 acc=0.7360
+epoch 93, val, loss=2.6535 acc=0.4420
+epoch 94, train, loss=0.6946 acc=0.7560
+epoch 94, val, loss=2.1857 acc=0.4450
+epoch 95, train, loss=0.6156 acc=0.7700
+epoch 95, val, loss=3.2271 acc=0.4220
+epoch 96, train, loss=0.6676 acc=0.7420
+epoch 96, val, loss=5.1215 acc=0.4370
+epoch 97, train, loss=0.6432 acc=0.7640
+epoch 97, val, loss=2.0989 acc=0.4790
+epoch 98, train, loss=0.6798 acc=0.7820
+epoch 98, val, loss=2.5585 acc=0.4480
+epoch 99, train, loss=0.6875 acc=0.7760
+epoch 99, val, loss=3.0236 acc=0.4910
+epoch 100, train, loss=0.7196 acc=0.7380
+epoch 100, val, loss=2.7372 acc=0.4540
+epoch 101, train, loss=0.6025 acc=0.7880
+epoch 101, val, loss=2.3048 acc=0.4520
+epoch 102, train, loss=0.5816 acc=0.7920
+epoch 102, val, loss=3.5335 acc=0.4270
+epoch 103, train, loss=0.5958 acc=0.7640
+epoch 103, val, loss=1.8656 acc=0.4310
+epoch 104, train, loss=0.7096 acc=0.7480
+epoch 104, val, loss=11.0089 acc=0.4530
+epoch 105, train, loss=0.6946 acc=0.7480
+epoch 105, val, loss=2.4527 acc=0.4420
+epoch 106, train, loss=0.6233 acc=0.7680
+epoch 106, val, loss=2.1492 acc=0.4420
+epoch 107, train, loss=0.6604 acc=0.7980
+epoch 107, val, loss=2.3385 acc=0.4490
+epoch 108, train, loss=0.6194 acc=0.7960
+epoch 108, val, loss=2.7441 acc=0.4890
+epoch 109, train, loss=0.5328 acc=0.8040
+epoch 109, val, loss=2.3401 acc=0.4470
+epoch 110, train, loss=0.5563 acc=0.8000
+epoch 110, val, loss=2.8888 acc=0.4240
+epoch 111, train, loss=0.5607 acc=0.8220
+epoch 111, val, loss=3.3859 acc=0.4440
+epoch 112, train, loss=0.5353 acc=0.7960
+epoch 112, val, loss=2.1464 acc=0.4530
+epoch 113, train, loss=0.5238 acc=0.8040
+epoch 113, val, loss=2.3416 acc=0.4920
+epoch 114, train, loss=0.5209 acc=0.8260
+epoch 114, val, loss=3.5077 acc=0.4480
+epoch 115, train, loss=0.5520 acc=0.8200
+epoch 115, val, loss=2.4230 acc=0.4860
+epoch 116, train, loss=0.5306 acc=0.7920
+epoch 116, val, loss=2.1983 acc=0.4460
+epoch 117, train, loss=0.6341 acc=0.7800
+epoch 117, val, loss=2.2594 acc=0.4430
+epoch 118, train, loss=0.5223 acc=0.7980
+epoch 118, val, loss=2.1128 acc=0.4300
+epoch 119, train, loss=0.5248 acc=0.8080
+epoch 119, val, loss=4.1912 acc=0.4290
+epoch 120, train, loss=0.5664 acc=0.8120
+epoch 120, val, loss=2.0530 acc=0.4550
+epoch 121, train, loss=0.6381 acc=0.7880
+epoch 121, val, loss=2.4229 acc=0.4700
+epoch 122, train, loss=0.5189 acc=0.7960
+epoch 122, val, loss=2.2753 acc=0.4820
+epoch 123, train, loss=0.6254 acc=0.8220
+epoch 123, val, loss=2.2422 acc=0.4740
+epoch 124, train, loss=0.5614 acc=0.7820
+epoch 124, val, loss=2.0260 acc=0.4830
+epoch 125, train, loss=0.5367 acc=0.8080
+epoch 125, val, loss=2.3544 acc=0.4680
+epoch 126, train, loss=0.4677 acc=0.8100
+epoch 126, val, loss=1.7062 acc=0.4710
+epoch 127, train, loss=0.5299 acc=0.7940
+epoch 127, val, loss=2.2719 acc=0.4750
+epoch 128, train, loss=0.4916 acc=0.8260
+epoch 128, val, loss=2.4029 acc=0.4140
+epoch 129, train, loss=0.5135 acc=0.8280
+epoch 129, val, loss=2.2132 acc=0.4750
+epoch 130, train, loss=0.5043 acc=0.8180
+epoch 130, val, loss=2.1343 acc=0.4710
+epoch 131, train, loss=0.4227 acc=0.8260
+epoch 131, val, loss=1.7110 acc=0.4770
+epoch 132, train, loss=0.3949 acc=0.8560
+epoch 132, val, loss=2.0510 acc=0.4810
+epoch 133, train, loss=0.5474 acc=0.8260
+epoch 133, val, loss=1.7798 acc=0.4730
+epoch 134, train, loss=0.4827 acc=0.8180
+epoch 134, val, loss=1.9941 acc=0.5070
+epoch 135, train, loss=0.5853 acc=0.7980
+epoch 135, val, loss=1.8226 acc=0.4400
+epoch 136, train, loss=0.5312 acc=0.8120
+epoch 136, val, loss=1.9353 acc=0.4740
+epoch 137, train, loss=0.5189 acc=0.8180
+epoch 137, val, loss=3.0292 acc=0.4410
+epoch 138, train, loss=0.4384 acc=0.8380
+epoch 138, val, loss=1.8993 acc=0.4910
+epoch 139, train, loss=0.4542 acc=0.8120
+epoch 139, val, loss=2.4404 acc=0.4770
+epoch 140, train, loss=0.5056 acc=0.8020
+epoch 140, val, loss=2.4768 acc=0.4560
+epoch 141, train, loss=0.4558 acc=0.8300
+epoch 141, val, loss=1.7323 acc=0.4880
+epoch 142, train, loss=0.4522 acc=0.8400
+epoch 142, val, loss=1.9587 acc=0.4780
+epoch 143, train, loss=0.4777 acc=0.8200
+epoch 143, val, loss=1.9557 acc=0.4680
+epoch 144, train, loss=0.5673 acc=0.8400
+epoch 144, val, loss=2.6334 acc=0.4920
+epoch 145, train, loss=0.4691 acc=0.8340
+epoch 145, val, loss=2.1860 acc=0.5080
+epoch 146, train, loss=0.4964 acc=0.8020
+epoch 146, val, loss=1.7793 acc=0.4930
+epoch 147, train, loss=0.4843 acc=0.8380
+epoch 147, val, loss=6.0046 acc=0.4540
+epoch 148, train, loss=0.4221 acc=0.8140
+epoch 148, val, loss=1.6001 acc=0.4900
+epoch 149, train, loss=0.5166 acc=0.8180
+epoch 149, val, loss=2.0224 acc=0.4880
+epoch 150, train, loss=0.5069 acc=0.8240
+epoch 150, val, loss=2.5891 acc=0.5180
+
+
+meta-training level 0 model on level 4 data and pseudolabels
+epoch 1, train, loss=0.5299 acc=0.8240
+epoch 1, val, loss=1.7251 acc=0.4960
+epoch 2, train, loss=0.6278 acc=0.7800
+epoch 2, val, loss=3.4444 acc=0.4920
+epoch 3, train, loss=0.5510 acc=0.7900
+epoch 3, val, loss=1.7577 acc=0.5150
+epoch 4, train, loss=0.5347 acc=0.7840
+epoch 4, val, loss=2.0319 acc=0.4910
+epoch 5, train, loss=0.5272 acc=0.8060
+epoch 5, val, loss=1.6683 acc=0.5260
+epoch 6, train, loss=0.6291 acc=0.7580
+epoch 6, val, loss=1.6796 acc=0.5140
+epoch 7, train, loss=0.5836 acc=0.7780
+epoch 7, val, loss=1.7351 acc=0.4960
+epoch 8, train, loss=0.6223 acc=0.7760
+epoch 8, val, loss=1.9817 acc=0.4820
+epoch 9, train, loss=0.5838 acc=0.7860
+epoch 9, val, loss=1.7148 acc=0.5010
+epoch 10, train, loss=0.5755 acc=0.8140
+epoch 10, val, loss=1.6436 acc=0.5080
+epoch 11, train, loss=0.5661 acc=0.7900
+epoch 11, val, loss=1.5053 acc=0.5150
+epoch 12, train, loss=0.5570 acc=0.7900
+epoch 12, val, loss=1.8382 acc=0.5100
+epoch 13, train, loss=0.5916 acc=0.7940
+epoch 13, val, loss=1.6577 acc=0.5030
+epoch 14, train, loss=0.5405 acc=0.8140
+epoch 14, val, loss=1.7465 acc=0.5250
+epoch 15, train, loss=0.5884 acc=0.7880
+epoch 15, val, loss=2.8028 acc=0.5130
+epoch 16, train, loss=0.5498 acc=0.7960
+epoch 16, val, loss=1.6788 acc=0.5480
+epoch 17, train, loss=0.4869 acc=0.8220
+epoch 17, val, loss=4.9737 acc=0.4990
+epoch 18, train, loss=0.5927 acc=0.7760
+epoch 18, val, loss=1.5076 acc=0.5370
+epoch 19, train, loss=0.5633 acc=0.8140
+epoch 19, val, loss=2.3422 acc=0.5250
+epoch 20, train, loss=0.5270 acc=0.8220
+epoch 20, val, loss=1.7057 acc=0.5070
+epoch 21, train, loss=0.4595 acc=0.8500
+epoch 21, val, loss=1.5461 acc=0.5200
+epoch 22, train, loss=0.5672 acc=0.7960
+epoch 22, val, loss=1.8440 acc=0.5310
+epoch 23, train, loss=0.5591 acc=0.8060
+epoch 23, val, loss=1.5461 acc=0.5100
+epoch 24, train, loss=0.5300 acc=0.8180
+epoch 24, val, loss=1.5848 acc=0.5160
+epoch 25, train, loss=0.4845 acc=0.8300
+epoch 25, val, loss=1.8298 acc=0.5230
+epoch 26, train, loss=0.5349 acc=0.8120
+epoch 26, val, loss=1.8482 acc=0.5020
+epoch 27, train, loss=0.5251 acc=0.8500
+epoch 27, val, loss=1.4905 acc=0.5100
+epoch 28, train, loss=0.6015 acc=0.7740
+epoch 28, val, loss=2.1334 acc=0.5020
+epoch 29, train, loss=0.5386 acc=0.8060
+epoch 29, val, loss=1.6046 acc=0.5200
+epoch 30, train, loss=0.5067 acc=0.8100
+epoch 30, val, loss=1.5921 acc=0.5260
+epoch 31, train, loss=0.5565 acc=0.8000
+epoch 31, val, loss=1.5909 acc=0.5200
+epoch 32, train, loss=0.6141 acc=0.7700
+epoch 32, val, loss=1.5874 acc=0.5140
+epoch 33, train, loss=0.5233 acc=0.8220
+epoch 33, val, loss=1.8567 acc=0.4880
+epoch 34, train, loss=0.6710 acc=0.8040
+epoch 34, val, loss=1.7992 acc=0.4970
+epoch 35, train, loss=0.5682 acc=0.7900
+epoch 35, val, loss=2.6417 acc=0.4870
+epoch 36, train, loss=0.4911 acc=0.8360
+epoch 36, val, loss=1.8161 acc=0.5030
+epoch 37, train, loss=0.5886 acc=0.7940
+epoch 37, val, loss=2.0768 acc=0.4920
+epoch 38, train, loss=0.5404 acc=0.8120
+epoch 38, val, loss=1.6971 acc=0.5190
+epoch 39, train, loss=0.5024 acc=0.8020
+epoch 39, val, loss=2.1168 acc=0.5030
+epoch 40, train, loss=0.5520 acc=0.8020
+epoch 40, val, loss=1.7538 acc=0.5080
+epoch 41, train, loss=0.5485 acc=0.7720
+epoch 41, val, loss=1.6111 acc=0.5070
+epoch 42, train, loss=0.5651 acc=0.7900
+epoch 42, val, loss=2.0240 acc=0.5050
+epoch 43, train, loss=0.5144 acc=0.8100
+epoch 43, val, loss=2.0369 acc=0.4910
+epoch 44, train, loss=0.5420 acc=0.7920
+epoch 44, val, loss=1.9018 acc=0.5120
+epoch 45, train, loss=0.5736 acc=0.7820
+epoch 45, val, loss=5.4288 acc=0.4840
+epoch 46, train, loss=0.4869 acc=0.8020
+epoch 46, val, loss=1.4918 acc=0.5120
+epoch 47, train, loss=0.5161 acc=0.8140
+epoch 47, val, loss=1.8502 acc=0.5160
+epoch 48, train, loss=0.5944 acc=0.7660
+epoch 48, val, loss=1.7687 acc=0.4910
+epoch 49, train, loss=0.5298 acc=0.8160
+epoch 49, val, loss=3.6764 acc=0.4950
+epoch 50, train, loss=0.5520 acc=0.7980
+epoch 50, val, loss=1.7399 acc=0.5000
+epoch 51, train, loss=0.4978 acc=0.8320
+epoch 51, val, loss=1.4966 acc=0.5290
+epoch 52, train, loss=0.5576 acc=0.7920
+epoch 52, val, loss=2.3547 acc=0.4850
+epoch 53, train, loss=0.6783 acc=0.7820
+epoch 53, val, loss=1.6259 acc=0.5070
+epoch 54, train, loss=0.5880 acc=0.7580
+epoch 54, val, loss=1.7188 acc=0.5180
+epoch 55, train, loss=0.5696 acc=0.7980
+epoch 55, val, loss=1.7017 acc=0.5180
+epoch 56, train, loss=0.5287 acc=0.8060
+epoch 56, val, loss=3.0341 acc=0.4840
+epoch 57, train, loss=0.5366 acc=0.8200
+epoch 57, val, loss=1.7677 acc=0.5130
+epoch 58, train, loss=0.5916 acc=0.7680
+epoch 58, val, loss=1.8637 acc=0.5190
+epoch 59, train, loss=0.5028 acc=0.8080
+epoch 59, val, loss=3.4227 acc=0.4810
+epoch 60, train, loss=0.5151 acc=0.7920
+epoch 60, val, loss=1.9308 acc=0.5030
+epoch 61, train, loss=0.5768 acc=0.7940
+epoch 61, val, loss=1.9635 acc=0.5270
+epoch 62, train, loss=0.5158 acc=0.8180
+epoch 62, val, loss=1.8301 acc=0.5180
+epoch 63, train, loss=0.5021 acc=0.8100
+epoch 63, val, loss=1.7954 acc=0.5110
+epoch 64, train, loss=0.5188 acc=0.8120
+epoch 64, val, loss=2.2545 acc=0.4930
+epoch 65, train, loss=0.5156 acc=0.7840
+epoch 65, val, loss=1.6330 acc=0.4870
+epoch 66, train, loss=0.5720 acc=0.8060
+epoch 66, val, loss=1.8218 acc=0.4690
+epoch 67, train, loss=0.5166 acc=0.8140
+epoch 67, val, loss=2.3499 acc=0.4720
+epoch 68, train, loss=0.4744 acc=0.8060
+epoch 68, val, loss=1.6963 acc=0.5090
+epoch 69, train, loss=0.5076 acc=0.7900
+epoch 69, val, loss=1.5641 acc=0.5060
+epoch 70, train, loss=0.4790 acc=0.8100
+epoch 70, val, loss=1.5922 acc=0.5040
+epoch 71, train, loss=0.4505 acc=0.8380
+epoch 71, val, loss=1.8606 acc=0.5120
+epoch 72, train, loss=0.4931 acc=0.8260
+epoch 72, val, loss=1.7501 acc=0.4950
+epoch 73, train, loss=0.5505 acc=0.7960
+epoch 73, val, loss=1.7234 acc=0.5080
+epoch 74, train, loss=0.5179 acc=0.8100
+epoch 74, val, loss=1.6739 acc=0.4920
+epoch 75, train, loss=0.5582 acc=0.8000
+epoch 75, val, loss=1.7938 acc=0.5150
+epoch 76, train, loss=0.4717 acc=0.8300
+epoch 76, val, loss=2.4846 acc=0.4980
+epoch 77, train, loss=0.4459 acc=0.8320
+epoch 77, val, loss=2.0969 acc=0.5010
+epoch 78, train, loss=0.4531 acc=0.8300
+epoch 78, val, loss=1.7835 acc=0.4850
+epoch 79, train, loss=0.4921 acc=0.8300
+epoch 79, val, loss=1.6897 acc=0.5020
+epoch 80, train, loss=0.5211 acc=0.8060
+epoch 80, val, loss=2.1618 acc=0.5050
+epoch 81, train, loss=0.5113 acc=0.8040
+epoch 81, val, loss=2.0701 acc=0.5130
+epoch 82, train, loss=0.4738 acc=0.8280
+epoch 82, val, loss=1.6238 acc=0.5050
+epoch 83, train, loss=0.4691 acc=0.8120
+epoch 83, val, loss=1.7168 acc=0.4910
+epoch 84, train, loss=0.5264 acc=0.8120
+epoch 84, val, loss=1.6816 acc=0.5080
+epoch 85, train, loss=0.4319 acc=0.8340
+epoch 85, val, loss=3.8191 acc=0.4670
+epoch 86, train, loss=0.4457 acc=0.8380
+epoch 86, val, loss=1.9872 acc=0.5120
+epoch 87, train, loss=0.5786 acc=0.8120
+epoch 87, val, loss=2.5342 acc=0.5000
+epoch 88, train, loss=0.4757 acc=0.8140
+epoch 88, val, loss=1.7972 acc=0.5080
+epoch 89, train, loss=0.4308 acc=0.8400
+epoch 89, val, loss=2.2432 acc=0.4970
+epoch 90, train, loss=0.4948 acc=0.8220
+epoch 90, val, loss=2.5310 acc=0.4940
+epoch 91, train, loss=0.4255 acc=0.8380
+epoch 91, val, loss=1.9207 acc=0.5150
+epoch 92, train, loss=0.5855 acc=0.8440
+epoch 92, val, loss=2.2361 acc=0.4920
+epoch 93, train, loss=0.5226 acc=0.8200
+epoch 93, val, loss=3.2873 acc=0.4680
+epoch 94, train, loss=0.5266 acc=0.8040
+epoch 94, val, loss=1.8042 acc=0.5040
+epoch 95, train, loss=0.4587 acc=0.8280
+epoch 95, val, loss=1.9034 acc=0.4820
+epoch 96, train, loss=0.4801 acc=0.8420
+epoch 96, val, loss=2.0753 acc=0.4770
+epoch 97, train, loss=0.4566 acc=0.8240
+epoch 97, val, loss=3.1717 acc=0.4720
+epoch 98, train, loss=0.4340 acc=0.8320
+epoch 98, val, loss=1.9220 acc=0.4960
+epoch 99, train, loss=0.5180 acc=0.8360
+epoch 99, val, loss=3.0710 acc=0.4610
+epoch 100, train, loss=0.4859 acc=0.8060
+epoch 100, val, loss=2.3470 acc=0.5010
+epoch 101, train, loss=0.5015 acc=0.8000
+epoch 101, val, loss=2.2585 acc=0.4800
+epoch 102, train, loss=0.4658 acc=0.8060
+epoch 102, val, loss=1.9056 acc=0.4730
+epoch 103, train, loss=0.4510 acc=0.8280
+epoch 103, val, loss=1.7885 acc=0.4700
+epoch 104, train, loss=0.4935 acc=0.8140
+epoch 104, val, loss=1.6400 acc=0.5050
+epoch 105, train, loss=0.4166 acc=0.8460
+epoch 105, val, loss=2.7520 acc=0.5010
+epoch 106, train, loss=0.5790 acc=0.8240
+epoch 106, val, loss=1.8221 acc=0.4920
+epoch 107, train, loss=0.5304 acc=0.8180
+epoch 107, val, loss=9.4088 acc=0.4590
+epoch 108, train, loss=0.4672 acc=0.8320
+epoch 108, val, loss=1.8451 acc=0.4880
+epoch 109, train, loss=0.4544 acc=0.8300
+epoch 109, val, loss=1.9466 acc=0.4750
+epoch 110, train, loss=0.4066 acc=0.8460
+epoch 110, val, loss=2.1104 acc=0.4690
+epoch 111, train, loss=0.4740 acc=0.8340
+epoch 111, val, loss=1.8708 acc=0.4890
+epoch 112, train, loss=0.4532 acc=0.8220
+epoch 112, val, loss=2.0234 acc=0.4860
+epoch 113, train, loss=0.4517 acc=0.8140
+epoch 113, val, loss=3.5112 acc=0.4950
+epoch 114, train, loss=0.4449 acc=0.8260
+epoch 114, val, loss=3.6583 acc=0.4730
+epoch 115, train, loss=0.4492 acc=0.8340
+epoch 115, val, loss=6.1929 acc=0.4640
+epoch 116, train, loss=0.5126 acc=0.8160
+epoch 116, val, loss=1.8540 acc=0.5060
+epoch 117, train, loss=0.4124 acc=0.8460
+epoch 117, val, loss=1.7423 acc=0.5300
+epoch 118, train, loss=0.4667 acc=0.8140
+epoch 118, val, loss=2.0283 acc=0.5020
+epoch 119, train, loss=0.4194 acc=0.8380
+epoch 119, val, loss=1.9418 acc=0.4970
+epoch 120, train, loss=0.4967 acc=0.8320
+epoch 120, val, loss=1.8760 acc=0.5010
+epoch 121, train, loss=0.4336 acc=0.8340
+epoch 121, val, loss=1.9654 acc=0.4910
+epoch 122, train, loss=0.4806 acc=0.8160
+epoch 122, val, loss=2.6749 acc=0.4900
+epoch 123, train, loss=0.5465 acc=0.7920
+epoch 123, val, loss=3.0511 acc=0.4700
+epoch 124, train, loss=0.4553 acc=0.8220
+epoch 124, val, loss=1.7567 acc=0.4950
+epoch 125, train, loss=0.4096 acc=0.8660
+epoch 125, val, loss=2.4392 acc=0.4760
+epoch 126, train, loss=0.5064 acc=0.7920
+epoch 126, val, loss=2.4704 acc=0.4740
+epoch 127, train, loss=0.5296 acc=0.7900
+epoch 127, val, loss=1.8017 acc=0.4870
+epoch 128, train, loss=0.4600 acc=0.8180
+epoch 128, val, loss=2.6940 acc=0.4910
+epoch 129, train, loss=0.4698 acc=0.7960
+epoch 129, val, loss=1.8441 acc=0.4870
+epoch 130, train, loss=0.4327 acc=0.8380
+epoch 130, val, loss=1.9865 acc=0.5010
+epoch 131, train, loss=0.4726 acc=0.8260
+epoch 131, val, loss=1.9526 acc=0.5130
+epoch 132, train, loss=0.4840 acc=0.8420
+epoch 132, val, loss=2.0733 acc=0.4930
+epoch 133, train, loss=0.4947 acc=0.8500
+epoch 133, val, loss=2.3494 acc=0.4910
+epoch 134, train, loss=0.4191 acc=0.8400
+epoch 134, val, loss=1.9072 acc=0.4990
+epoch 135, train, loss=0.4292 acc=0.8440
+epoch 135, val, loss=1.8238 acc=0.4840
+epoch 136, train, loss=0.7211 acc=0.8160
+epoch 136, val, loss=2.2595 acc=0.4820
+epoch 137, train, loss=0.4425 acc=0.8300
+epoch 137, val, loss=1.8260 acc=0.4820
+epoch 138, train, loss=0.5343 acc=0.8140
+epoch 138, val, loss=1.8667 acc=0.4810
+epoch 139, train, loss=0.4637 acc=0.8260
+epoch 139, val, loss=1.8742 acc=0.4850
+epoch 140, train, loss=0.5335 acc=0.8200
+epoch 140, val, loss=1.8064 acc=0.4990
+epoch 141, train, loss=0.4765 acc=0.8280
+epoch 141, val, loss=1.7458 acc=0.4720
+epoch 142, train, loss=0.5006 acc=0.8160
+epoch 142, val, loss=1.6726 acc=0.4910
+epoch 143, train, loss=0.4301 acc=0.8340
+epoch 143, val, loss=1.8137 acc=0.4820
+epoch 144, train, loss=0.4421 acc=0.8300
+epoch 144, val, loss=1.7283 acc=0.4810
+epoch 145, train, loss=0.4425 acc=0.8300
+epoch 145, val, loss=1.8656 acc=0.4740
+epoch 146, train, loss=0.4683 acc=0.8220
+epoch 146, val, loss=3.2666 acc=0.4730
+epoch 147, train, loss=0.4594 acc=0.8180
+epoch 147, val, loss=1.9683 acc=0.4780
+epoch 148, train, loss=0.5274 acc=0.7880
+epoch 148, val, loss=1.7375 acc=0.4800
+epoch 149, train, loss=0.4809 acc=0.8240
+epoch 149, val, loss=1.5884 acc=0.4980
+epoch 150, train, loss=0.5240 acc=0.8160
+epoch 150, val, loss=1.9957 acc=0.5060
+
+
+meta-testing on level 5
+
+
+batch 1: 60.00(60.00)
+batch 2: 60.00(60.00)
+batch 3: 60.00(60.00)
+batch 4: 50.00(20.00)
+batch 5: 56.00(80.00)
+batch 6: 53.33(40.00)
+batch 7: 48.57(20.00)
+batch 8: 50.00(60.00)
+batch 9: 51.11(60.00)
+batch 10: 48.00(20.00)
+batch 11: 49.09(60.00)
+batch 12: 50.00(60.00)
+batch 13: 52.31(80.00)
+batch 14: 48.57(0.00)
+batch 15: 48.00(40.00)
+batch 16: 47.50(40.00)
+batch 17: 45.88(20.00)
+batch 18: 45.56(40.00)
+batch 19: 44.21(20.00)
+batch 20: 43.00(20.00)
+batch 21: 42.86(40.00)
+batch 22: 42.73(40.00)
+batch 23: 43.48(60.00)
+batch 24: 44.17(60.00)
+batch 25: 44.00(40.00)
+batch 26: 44.62(60.00)
+batch 27: 44.44(40.00)
+batch 28: 44.29(40.00)
+batch 29: 44.14(40.00)
+batch 30: 45.33(80.00)
+batch 31: 44.52(20.00)
+batch 32: 45.00(60.00)
+batch 33: 44.24(20.00)
+batch 34: 44.12(40.00)
+batch 35: 44.00(40.00)
+batch 36: 44.44(60.00)
+batch 37: 45.41(80.00)
+batch 38: 45.79(60.00)
+batch 39: 45.64(40.00)
+batch 40: 46.00(60.00)
+batch 41: 45.37(20.00)
+batch 42: 45.24(40.00)
+batch 43: 45.58(60.00)
+batch 44: 46.36(80.00)
+batch 45: 46.67(60.00)
+batch 46: 46.52(40.00)
+batch 47: 45.96(20.00)
+batch 48: 45.00(0.00)
+batch 49: 45.31(60.00)
+batch 50: 45.20(40.00)
+batch 51: 45.10(40.00)
+batch 52: 45.00(40.00)
+batch 53: 44.91(40.00)
+batch 54: 44.81(40.00)
+batch 55: 45.09(60.00)
+batch 56: 45.00(40.00)
+batch 57: 44.91(40.00)
+batch 58: 45.17(60.00)
+batch 59: 45.08(40.00)
+batch 60: 45.33(60.00)
+batch 61: 45.90(80.00)
+batch 62: 45.81(40.00)
+batch 63: 45.40(20.00)
+batch 64: 45.94(80.00)
+batch 65: 45.54(20.00)
+batch 66: 45.45(40.00)
+batch 67: 45.67(60.00)
+batch 68: 45.59(40.00)
+batch 69: 45.51(40.00)
+batch 70: 45.43(40.00)
+batch 71: 45.07(20.00)
+batch 72: 45.56(80.00)
+batch 73: 45.21(20.00)
+batch 74: 45.41(60.00)
+batch 75: 45.33(40.00)
+batch 76: 45.26(40.00)
+batch 77: 45.19(40.00)
+batch 78: 45.13(40.00)
+batch 79: 44.56(0.00)
+batch 80: 44.75(60.00)
+batch 81: 44.69(40.00)
+batch 82: 44.88(60.00)
+batch 83: 44.82(40.00)
+batch 84: 45.00(60.00)
+batch 85: 44.94(40.00)
+batch 86: 44.88(40.00)
+batch 87: 44.83(40.00)
+batch 88: 45.00(60.00)
+batch 89: 45.17(60.00)
+batch 90: 44.89(20.00)
+batch 91: 44.84(40.00)
+batch 92: 45.22(80.00)
+batch 93: 45.38(60.00)
+batch 94: 45.32(40.00)
+batch 95: 45.05(20.00)
+batch 96: 45.00(40.00)
+batch 97: 44.74(20.00)
+batch 98: 44.69(40.00)
+batch 99: 44.44(20.00)
+batch 100: 44.20(20.00)
+batch 101: 44.16(40.00)
+batch 102: 44.12(40.00)
+batch 103: 44.27(60.00)
+batch 104: 44.62(80.00)
+batch 105: 44.76(60.00)
+batch 106: 44.53(20.00)
+batch 107: 44.11(0.00)
+batch 108: 44.26(60.00)
+batch 109: 44.40(60.00)
+batch 110: 44.18(20.00)
+batch 111: 43.96(20.00)
+batch 112: 43.93(40.00)
+batch 113: 43.72(20.00)
+batch 114: 44.04(80.00)
+batch 115: 44.17(60.00)
+batch 116: 44.31(60.00)
+batch 117: 44.27(40.00)
+batch 118: 43.90(0.00)
+batch 119: 44.37(100.00)
+batch 120: 44.33(40.00)
+batch 121: 44.30(40.00)
+batch 122: 44.26(40.00)
+batch 123: 44.07(20.00)
+batch 124: 43.71(0.00)
+batch 125: 44.00(80.00)
+batch 126: 44.13(60.00)
+batch 127: 44.25(60.00)
+batch 128: 44.22(40.00)
+batch 129: 44.50(80.00)
+batch 130: 44.77(80.00)
+batch 131: 44.43(0.00)
+batch 132: 44.55(60.00)
+batch 133: 44.66(60.00)
+batch 134: 44.93(80.00)
+batch 135: 44.74(20.00)
+batch 136: 44.56(20.00)
+batch 137: 44.38(20.00)
+batch 138: 44.35(40.00)
+batch 139: 44.60(80.00)
+batch 140: 44.43(20.00)
+batch 141: 44.54(60.00)
+batch 142: 44.37(20.00)
+batch 143: 44.20(20.00)
+batch 144: 44.17(40.00)
+batch 145: 44.00(20.00)
+batch 146: 43.97(40.00)
+batch 147: 43.95(40.00)
+batch 148: 44.19(80.00)
+batch 149: 44.16(40.00)
+batch 150: 44.13(40.00)
+batch 151: 43.97(20.00)
+batch 152: 44.08(60.00)
+batch 153: 44.44(100.00)
+batch 154: 44.42(40.00)
+batch 155: 44.39(40.00)
+batch 156: 44.36(40.00)
+batch 157: 44.20(20.00)
+batch 158: 44.43(80.00)
+batch 159: 44.65(80.00)
+batch 160: 44.63(40.00)
+batch 161: 44.35(0.00)
+batch 162: 44.32(40.00)
+batch 163: 44.42(60.00)
+batch 164: 44.51(60.00)
+batch 165: 44.85(100.00)
+batch 166: 44.70(20.00)
+batch 167: 44.67(40.00)
+batch 168: 44.52(20.00)
+batch 169: 44.73(80.00)
+batch 170: 44.71(40.00)
+batch 171: 44.56(20.00)
+batch 172: 44.53(40.00)
+batch 173: 44.51(40.00)
+batch 174: 44.60(60.00)
+batch 175: 44.57(40.00)
+batch 176: 44.55(40.00)
+batch 177: 44.63(60.00)
+batch 178: 44.61(40.00)
+batch 179: 44.47(20.00)
+batch 180: 44.56(60.00)
+batch 181: 44.53(40.00)
+batch 182: 44.62(60.00)
+batch 183: 44.81(80.00)
+batch 184: 45.00(80.00)
+batch 185: 45.08(60.00)
+batch 186: 45.16(60.00)
+batch 187: 45.13(40.00)
+batch 188: 45.21(60.00)
+batch 189: 45.40(80.00)
+batch 190: 45.26(20.00)
+batch 191: 45.34(60.00)
+batch 192: 45.42(60.00)
+batch 193: 45.18(0.00)
+batch 194: 45.15(40.00)
+batch 195: 45.23(60.00)
+batch 196: 45.20(40.00)
+batch 197: 45.28(60.00)
+batch 198: 45.15(20.00)
+batch 199: 45.33(80.00)
+batch 200: 45.40(60.00)
+batch 201: 45.57(80.00)
+batch 202: 45.35(0.00)
+batch 203: 45.42(60.00)
+batch 204: 45.39(40.00)
+batch 205: 45.37(40.00)
+batch 206: 45.44(60.00)
+batch 207: 45.51(60.00)
+batch 208: 45.48(40.00)
+batch 209: 45.45(40.00)
+batch 210: 45.43(40.00)
+batch 211: 45.40(40.00)
+batch 212: 45.47(60.00)
+batch 213: 45.35(20.00)
+batch 214: 45.33(40.00)
+batch 215: 45.49(80.00)
+batch 216: 45.46(40.00)
+batch 217: 45.35(20.00)
+batch 218: 45.14(0.00)
+batch 219: 45.21(60.00)
+batch 220: 45.18(40.00)
+batch 221: 45.07(20.00)
+batch 222: 45.23(80.00)
+batch 223: 45.29(60.00)
+batch 224: 45.27(40.00)
+batch 225: 45.24(40.00)
+batch 226: 45.31(60.00)
+batch 227: 45.20(20.00)
+batch 228: 45.35(80.00)
+batch 229: 45.41(60.00)
+batch 230: 45.48(60.00)
+batch 231: 45.54(60.00)
+batch 232: 45.43(20.00)
+batch 233: 45.41(40.00)
+batch 234: 45.38(40.00)
+batch 235: 45.45(60.00)
+batch 236: 45.34(20.00)
+batch 237: 45.32(40.00)
+batch 238: 45.46(80.00)
+batch 239: 45.52(60.00)
+batch 240: 45.42(20.00)
+batch 241: 45.48(60.00)
+batch 242: 45.37(20.00)
+batch 243: 45.27(20.00)
+batch 244: 45.25(40.00)
+batch 245: 45.22(40.00)
+batch 246: 45.28(60.00)
+batch 247: 45.18(20.00)
+batch 248: 45.16(40.00)
+batch 249: 45.14(40.00)
+batch 250: 45.20(60.00)
+batch 251: 45.34(80.00)
+batch 252: 45.24(20.00)
+batch 253: 45.22(40.00)
+batch 254: 45.20(40.00)
+batch 255: 45.25(60.00)
+batch 256: 45.39(80.00)
+batch 257: 45.37(40.00)
+batch 258: 45.43(60.00)
+batch 259: 45.48(60.00)
+batch 260: 45.54(60.00)
+batch 261: 45.44(20.00)
+batch 262: 45.34(20.00)
+batch 263: 45.40(60.00)
+batch 264: 45.45(60.00)
+batch 265: 45.36(20.00)
+batch 266: 45.34(40.00)
+batch 267: 45.47(80.00)
+batch 268: 45.52(60.00)
+batch 269: 45.50(40.00)
+batch 270: 45.56(60.00)
+batch 271: 45.54(40.00)
+batch 272: 45.66(80.00)
+batch 273: 45.57(20.00)
+batch 274: 45.62(60.00)
+batch 275: 45.67(60.00)
+batch 276: 45.72(60.00)
+batch 277: 45.70(40.00)
+batch 278: 45.61(20.00)
+batch 279: 45.52(20.00)
+batch 280: 45.57(60.00)
+batch 281: 45.69(80.00)
+batch 282: 45.74(60.00)
+batch 283: 45.80(60.00)
+batch 284: 45.77(40.00)
+batch 285: 45.82(60.00)
+batch 286: 45.73(20.00)
+batch 287: 45.64(20.00)
+batch 288: 45.62(40.00)
+batch 289: 45.67(60.00)
+batch 290: 45.59(20.00)
+batch 291: 45.64(60.00)
+batch 292: 45.62(40.00)
+batch 293: 45.60(40.00)
+batch 294: 45.58(40.00)
+batch 295: 45.63(60.00)
+batch 296: 45.54(20.00)
+batch 297: 45.59(60.00)
+batch 298: 45.70(80.00)
+batch 299: 45.69(40.00)
+batch 300: 45.60(20.00)
+batch 301: 45.51(20.00)
+batch 302: 45.56(60.00)
+batch 303: 45.48(20.00)
+batch 304: 45.59(80.00)
+batch 305: 45.64(60.00)
+batch 306: 45.62(40.00)
+batch 307: 45.60(40.00)
+batch 308: 45.65(60.00)
+batch 309: 45.63(40.00)
+batch 310: 45.68(60.00)
+batch 311: 45.59(20.00)
+batch 312: 45.58(40.00)
+batch 313: 45.50(20.00)
+batch 314: 45.54(60.00)
+batch 315: 45.46(20.00)
+batch 316: 45.51(60.00)
+batch 317: 45.55(60.00)
+batch 318: 45.53(40.00)
+batch 319: 45.58(60.00)
+batch 320: 45.56(40.00)
+batch 321: 45.61(60.00)
+batch 322: 45.65(60.00)
+batch 323: 45.70(60.00)
+batch 324: 45.68(40.00)
+batch 325: 45.66(40.00)
+batch 326: 45.64(40.00)
+batch 327: 45.75(80.00)
+batch 328: 45.73(40.00)
+batch 329: 45.65(20.00)
+batch 330: 45.64(40.00)
+batch 331: 45.50(0.00)
+batch 332: 45.48(40.00)
+batch 333: 45.47(40.00)
+batch 334: 45.51(60.00)
+batch 335: 45.49(40.00)
+batch 336: 45.42(20.00)
+batch 337: 45.40(40.00)
+batch 338: 45.33(20.00)
+batch 339: 45.25(20.00)
+batch 340: 45.29(60.00)
+batch 341: 45.28(40.00)
+batch 342: 45.20(20.00)
+batch 343: 45.13(20.00)
+batch 344: 45.06(20.00)
+batch 345: 45.16(80.00)
+batch 346: 45.09(20.00)
+batch 347: 45.19(80.00)
+batch 348: 45.17(40.00)
+batch 349: 45.16(40.00)
+batch 350: 45.20(60.00)
+batch 351: 45.19(40.00)
+batch 352: 45.17(40.00)
+batch 353: 45.16(40.00)
+batch 354: 45.20(60.00)
+batch 355: 45.18(40.00)
+batch 356: 45.11(20.00)
+batch 357: 45.04(20.00)
+batch 358: 45.08(60.00)
+batch 359: 45.13(60.00)
+batch 360: 45.22(80.00)
+batch 361: 45.15(20.00)
+batch 362: 45.25(80.00)
+batch 363: 45.34(80.00)
+batch 364: 45.33(40.00)
+batch 365: 45.32(40.00)
+batch 366: 45.41(80.00)
+batch 367: 45.45(60.00)
+batch 368: 45.43(40.00)
+batch 369: 45.47(60.00)
+batch 370: 45.46(40.00)
+batch 371: 45.44(40.00)
+batch 372: 45.48(60.00)
+batch 373: 45.36(0.00)
+batch 374: 45.29(20.00)
+batch 375: 45.28(40.00)
+batch 376: 45.27(40.00)
+batch 377: 45.25(40.00)
+batch 378: 45.24(40.00)
+batch 379: 45.28(60.00)
+batch 380: 45.26(40.00)
+batch 381: 45.30(60.00)
+batch 382: 45.34(60.00)
+batch 383: 45.38(60.00)
+batch 384: 45.47(80.00)
+batch 385: 45.51(60.00)
+batch 386: 45.49(40.00)
+batch 387: 45.43(20.00)
+batch 388: 45.46(60.00)
+batch 389: 45.45(40.00)
+batch 390: 45.44(40.00)
+batch 391: 45.47(60.00)
+batch 392: 45.46(40.00)
+batch 393: 45.50(60.00)
+batch 394: 45.48(40.00)
+batch 395: 45.52(60.00)
+batch 396: 45.45(20.00)
+batch 397: 45.39(20.00)
+batch 398: 45.38(40.00)
+batch 399: 45.41(60.00)
+batch 400: 45.45(60.00)
+batch 401: 45.44(40.00)
+batch 402: 45.37(20.00)
+batch 403: 45.46(80.00)
+batch 404: 45.45(40.00)
+batch 405: 45.53(80.00)
+batch 406: 45.57(60.00)
+batch 407: 45.55(40.00)
+batch 408: 45.49(20.00)
+batch 409: 45.53(60.00)
+batch 410: 45.56(60.00)
+batch 411: 45.45(0.00)
+batch 412: 45.44(40.00)
+batch 413: 45.42(40.00)
+batch 414: 45.41(40.00)
+batch 415: 45.49(80.00)
+batch 416: 45.48(40.00)
+batch 417: 45.42(20.00)
+batch 418: 45.31(0.00)
+batch 419: 45.25(20.00)
+batch 420: 45.29(60.00)
+batch 421: 45.27(40.00)
+batch 422: 45.31(60.00)
+batch 423: 45.39(80.00)
+batch 424: 45.38(40.00)
+batch 425: 45.36(40.00)
+batch 426: 45.45(80.00)
+batch 427: 45.43(40.00)
+batch 428: 45.37(20.00)
+batch 429: 45.41(60.00)
+batch 430: 45.44(60.00)
+batch 431: 45.38(20.00)
+batch 432: 45.42(60.00)
+batch 433: 45.50(80.00)
+batch 434: 45.53(60.00)
+batch 435: 45.56(60.00)
+batch 436: 45.50(20.00)
+batch 437: 45.45(20.00)
+batch 438: 45.48(60.00)
+batch 439: 45.51(60.00)
+batch 440: 45.55(60.00)
+batch 441: 45.62(80.00)
+batch 442: 45.70(80.00)
+batch 443: 45.78(80.00)
+batch 444: 45.72(20.00)
+batch 445: 45.71(40.00)
+batch 446: 45.70(40.00)
+batch 447: 45.68(40.00)
+batch 448: 45.71(60.00)
+batch 449: 45.79(80.00)
+batch 450: 45.78(40.00)
+batch 451: 45.68(0.00)
+batch 452: 45.62(20.00)
+batch 453: 45.70(80.00)
+batch 454: 45.68(40.00)
+batch 455: 45.63(20.00)
+batch 456: 45.66(60.00)
+batch 457: 45.69(60.00)
+batch 458: 45.63(20.00)
+batch 459: 45.66(60.00)
+batch 460: 45.74(80.00)
+batch 461: 45.77(60.00)
+batch 462: 45.76(40.00)
+batch 463: 45.75(40.00)
+batch 464: 45.73(40.00)
+batch 465: 45.72(40.00)
+batch 466: 45.75(60.00)
+batch 467: 45.74(40.00)
+batch 468: 45.77(60.00)
+batch 469: 45.80(60.00)
+batch 470: 45.79(40.00)
+batch 471: 45.73(20.00)
+batch 472: 45.68(20.00)
+batch 473: 45.71(60.00)
+batch 474: 45.74(60.00)
+batch 475: 45.64(0.00)
+batch 476: 45.63(40.00)
+batch 477: 45.66(60.00)
+batch 478: 45.69(60.00)
+batch 479: 45.76(80.00)
+batch 480: 45.71(20.00)
+batch 481: 45.70(40.00)
+batch 482: 45.73(60.00)
+batch 483: 45.63(0.00)
+batch 484: 45.70(80.00)
+batch 485: 45.69(40.00)
+batch 486: 45.64(20.00)
+batch 487: 45.67(60.00)
+batch 488: 45.70(60.00)
+batch 489: 45.69(40.00)
+batch 490: 45.71(60.00)
+batch 491: 45.70(40.00)
+batch 492: 45.65(20.00)
+batch 493: 45.72(80.00)
+batch 494: 45.79(80.00)
+batch 495: 45.82(60.00)
+batch 496: 45.85(60.00)
+batch 497: 45.88(60.00)
+batch 498: 45.78(0.00)
+batch 499: 45.77(40.00)
+batch 500: 45.88(100.00)
+batch 501: 45.87(40.00)
+batch 502: 45.86(40.00)
+batch 503: 45.88(60.00)
+batch 504: 45.99(100.00)
+batch 505: 45.98(40.00)
+batch 506: 46.01(60.00)
+batch 507: 46.07(80.00)
+batch 508: 46.10(60.00)
+batch 509: 46.17(80.00)
+batch 510: 46.12(20.00)
+batch 511: 46.11(40.00)
+batch 512: 46.09(40.00)
+batch 513: 46.12(60.00)
+batch 514: 46.07(20.00)
+batch 515: 46.14(80.00)
+batch 516: 46.20(80.00)
+batch 517: 46.15(20.00)
+batch 518: 46.18(60.00)
+batch 519: 46.20(60.00)
+batch 520: 46.19(40.00)
+batch 521: 46.22(60.00)
+batch 522: 46.21(40.00)
+batch 523: 46.16(20.00)
+batch 524: 46.18(60.00)
+batch 525: 46.17(40.00)
+batch 526: 46.16(40.00)
+batch 527: 46.19(60.00)
+batch 528: 46.21(60.00)
+batch 529: 46.24(60.00)
+batch 530: 46.26(60.00)
+batch 531: 46.33(80.00)
+batch 532: 46.28(20.00)
+batch 533: 46.27(40.00)
+batch 534: 46.25(40.00)
+batch 535: 46.24(40.00)
+batch 536: 46.19(20.00)
+batch 537: 46.18(40.00)
+batch 538: 46.21(60.00)
+batch 539: 46.23(60.00)
+batch 540: 46.22(40.00)
+batch 541: 46.21(40.00)
+batch 542: 46.20(40.00)
+batch 543: 46.22(60.00)
+batch 544: 46.18(20.00)
+batch 545: 46.20(60.00)
+batch 546: 46.12(0.00)
+batch 547: 46.07(20.00)
+batch 548: 46.02(20.00)
+batch 549: 46.01(40.00)
+batch 550: 46.04(60.00)
+batch 551: 45.99(20.00)
+batch 552: 46.01(60.00)
+batch 553: 46.04(60.00)
+batch 554: 46.10(80.00)
+batch 555: 46.09(40.00)
+batch 556: 46.12(60.00)
+batch 557: 46.10(40.00)
+batch 558: 46.13(60.00)
+batch 559: 46.08(20.00)
+batch 560: 46.14(80.00)
+batch 561: 46.20(80.00)
+batch 562: 46.19(40.00)
+batch 563: 46.18(40.00)
+batch 564: 46.21(60.00)
+batch 565: 46.19(40.00)
+batch 566: 46.22(60.00)
+batch 567: 46.17(20.00)
+batch 568: 46.23(80.00)
+batch 569: 46.29(80.00)
+batch 570: 46.32(60.00)
+batch 571: 46.30(40.00)
+batch 572: 46.26(20.00)
+batch 573: 46.28(60.00)
+batch 574: 46.27(40.00)
+batch 575: 46.23(20.00)
+batch 576: 46.18(20.00)
+batch 577: 46.17(40.00)
+batch 578: 46.19(60.00)
+batch 579: 46.25(80.00)
+batch 580: 46.24(40.00)
+batch 581: 46.23(40.00)
+batch 582: 46.25(60.00)
+batch 583: 46.24(40.00)
+batch 584: 46.20(20.00)
+batch 585: 46.22(60.00)
+batch 586: 46.21(40.00)
+batch 587: 46.20(40.00)
+batch 588: 46.19(40.00)
+batch 589: 46.21(60.00)
+batch 590: 46.14(0.00)
+batch 591: 46.13(40.00)
+batch 592: 46.05(0.00)
+batch 593: 46.00(20.00)
+batch 594: 46.03(60.00)
+batch 595: 46.12(100.00)
+batch 596: 46.11(40.00)
+batch 597: 46.10(40.00)
+batch 598: 46.12(60.00)
+batch 599: 46.08(20.00)
+batch 600: 46.03(20.00)
+batch 601: 46.06(60.00)
+batch 602: 46.11(80.00)
+batch 603: 46.14(60.00)
+batch 604: 46.13(40.00)
+batch 605: 46.15(60.00)
+batch 606: 46.14(40.00)
+batch 607: 46.10(20.00)
+batch 608: 46.05(20.00)
+batch 609: 46.04(40.00)
+batch 610: 46.03(40.00)
+batch 611: 46.02(40.00)
+batch 612: 45.98(20.00)
+batch 613: 46.00(60.00)
+batch 614: 45.99(40.00)
+batch 615: 45.92(0.00)
+batch 616: 45.91(40.00)
+batch 617: 45.90(40.00)
+batch 618: 45.92(60.00)
+batch 619: 45.91(40.00)
+batch 620: 45.94(60.00)
+batch 621: 45.93(40.00)
+batch 622: 45.92(40.00)
+batch 623: 45.94(60.00)
+batch 624: 45.93(40.00)
+batch 625: 45.95(60.00)
+batch 626: 45.94(40.00)
+batch 627: 46.03(100.00)
+batch 628: 45.99(20.00)
+batch 629: 45.98(40.00)
+batch 630: 46.06(100.00)
+batch 631: 46.09(60.00)
+batch 632: 46.11(60.00)
+batch 633: 46.13(60.00)
+batch 634: 46.15(60.00)
+batch 635: 46.17(60.00)
+batch 636: 46.19(60.00)
+batch 637: 46.22(60.00)
+batch 638: 46.14(0.00)
+batch 639: 46.13(40.00)
+batch 640: 46.09(20.00)
+batch 641: 46.05(20.00)
+batch 642: 46.04(40.00)
+batch 643: 46.03(40.00)
+batch 644: 45.99(20.00)
+batch 645: 45.98(40.00)
+batch 646: 45.94(20.00)
+batch 647: 45.94(40.00)
+batch 648: 45.93(40.00)
+batch 649: 45.95(60.00)
+batch 650: 45.91(20.00)
+batch 651: 45.96(80.00)
+batch 652: 45.98(60.00)
+batch 653: 46.00(60.00)
+batch 654: 46.02(60.00)
+batch 655: 45.98(20.00)
+batch 656: 46.01(60.00)
+batch 657: 45.97(20.00)
+batch 658: 45.93(20.00)
+batch 659: 45.92(40.00)
+batch 660: 45.97(80.00)
+batch 661: 45.99(60.00)
+batch 662: 46.04(80.00)
+batch 663: 46.03(40.00)
+batch 664: 46.05(60.00)
+batch 665: 45.98(0.00)
+batch 666: 45.98(40.00)
+batch 667: 46.00(60.00)
+batch 668: 46.02(60.00)
+batch 669: 45.98(20.00)
+batch 670: 45.94(20.00)
+batch 671: 45.93(40.00)
+batch 672: 45.95(60.00)
+batch 673: 45.97(60.00)
+batch 674: 45.99(60.00)
+batch 675: 45.99(40.00)
+batch 676: 46.01(60.00)
+batch 677: 46.06(80.00)
+batch 678: 46.05(40.00)
+batch 679: 46.07(60.00)
+batch 680: 46.06(40.00)
+batch 681: 46.05(40.00)
+batch 682: 46.04(40.00)
+batch 683: 46.09(80.00)
+batch 684: 46.08(40.00)
+batch 685: 46.07(40.00)
+batch 686: 46.09(60.00)
+batch 687: 46.06(20.00)
+batch 688: 46.08(60.00)
+batch 689: 46.07(40.00)
+batch 690: 46.09(60.00)
+batch 691: 46.05(20.00)
+batch 692: 46.04(40.00)
+batch 693: 46.03(40.00)
+batch 694: 46.08(80.00)
+batch 695: 46.10(60.00)
+batch 696: 46.12(60.00)
+batch 697: 46.14(60.00)
+batch 698: 46.13(40.00)
+batch 699: 46.15(60.00)
+batch 700: 46.11(20.00)
+batch 701: 46.11(40.00)
+batch 702: 46.15(80.00)
+batch 703: 46.17(60.00)
+batch 704: 46.22(80.00)
+batch 705: 46.24(60.00)
+batch 706: 46.23(40.00)
+batch 707: 46.20(20.00)
+batch 708: 46.19(40.00)
+batch 709: 46.21(60.00)
+batch 710: 46.25(80.00)
+batch 711: 46.27(60.00)
+batch 712: 46.29(60.00)
+batch 713: 46.26(20.00)
+batch 714: 46.22(20.00)
+batch 715: 46.21(40.00)
+batch 716: 46.17(20.00)
+batch 717: 46.19(60.00)
+batch 718: 46.18(40.00)
+batch 719: 46.23(80.00)
+batch 720: 46.25(60.00)
+batch 721: 46.27(60.00)
+batch 722: 46.26(40.00)
+batch 723: 46.31(80.00)
+batch 724: 46.30(40.00)
+batch 725: 46.29(40.00)
+batch 726: 46.28(40.00)
+batch 727: 46.30(60.00)
+batch 728: 46.29(40.00)
+batch 729: 46.31(60.00)
+batch 730: 46.36(80.00)
+batch 731: 46.35(40.00)
+batch 732: 46.31(20.00)
+batch 733: 46.33(60.00)
+batch 734: 46.32(40.00)
+batch 735: 46.34(60.00)
+batch 736: 46.33(40.00)
+batch 737: 46.35(60.00)
+batch 738: 46.40(80.00)
+batch 739: 46.39(40.00)
+batch 740: 46.35(20.00)
+batch 741: 46.29(0.00)
+batch 742: 46.33(80.00)
+batch 743: 46.35(60.00)
+batch 744: 46.34(40.00)
+batch 745: 46.34(40.00)
+batch 746: 46.38(80.00)
+batch 747: 46.40(60.00)
+batch 748: 46.36(20.00)
+batch 749: 46.33(20.00)
+batch 750: 46.32(40.00)
+batch 751: 46.34(60.00)
+batch 752: 46.36(60.00)
+batch 753: 46.43(100.00)
+batch 754: 46.45(60.00)
+batch 755: 46.46(60.00)
+batch 756: 46.46(40.00)
+batch 757: 46.45(40.00)
+batch 758: 46.46(60.00)
+batch 759: 46.48(60.00)
+batch 760: 46.45(20.00)
+batch 761: 46.47(60.00)
+batch 762: 46.46(40.00)
+batch 763: 46.50(80.00)
+batch 764: 46.52(60.00)
+batch 765: 46.48(20.00)
+batch 766: 46.48(40.00)
+batch 767: 46.49(60.00)
+batch 768: 46.48(40.00)
+batch 769: 46.48(40.00)
+batch 770: 46.47(40.00)
+batch 771: 46.49(60.00)
+batch 772: 46.50(60.00)
+batch 773: 46.47(20.00)
+batch 774: 46.49(60.00)
+batch 775: 46.48(40.00)
+batch 776: 46.44(20.00)
+batch 777: 46.46(60.00)
+batch 778: 46.43(20.00)
+batch 779: 46.42(40.00)
+batch 780: 46.38(20.00)
+batch 781: 46.35(20.00)
+batch 782: 46.34(40.00)
+batch 783: 46.33(40.00)
+batch 784: 46.38(80.00)
+batch 785: 46.45(100.00)
+batch 786: 46.46(60.00)
+batch 787: 46.48(60.00)
+batch 788: 46.47(40.00)
+batch 789: 46.44(20.00)
+batch 790: 46.43(40.00)
+batch 791: 46.45(60.00)
+batch 792: 46.41(20.00)
+batch 793: 46.41(40.00)
+batch 794: 46.47(100.00)
+batch 795: 46.49(60.00)
+batch 796: 46.46(20.00)
+batch 797: 46.47(60.00)
+batch 798: 46.47(40.00)
+batch 799: 46.48(60.00)
+batch 800: 46.45(20.00)
+batch 801: 46.44(40.00)
+batch 802: 46.48(80.00)
+batch 803: 46.48(40.00)
+batch 804: 46.44(20.00)
+batch 805: 46.46(60.00)
+batch 806: 46.48(60.00)
+batch 807: 46.44(20.00)
+batch 808: 46.44(40.00)
+batch 809: 46.48(80.00)
+batch 810: 46.49(60.00)
+batch 811: 46.49(40.00)
+batch 812: 46.48(40.00)
+batch 813: 46.45(20.00)
+batch 814: 46.41(20.00)
+batch 815: 46.38(20.00)
+batch 816: 46.45(100.00)
+batch 817: 46.46(60.00)
+batch 818: 46.45(40.00)
+batch 819: 46.45(40.00)
+batch 820: 46.46(60.00)
+batch 821: 46.48(60.00)
+batch 822: 46.52(80.00)
+batch 823: 46.51(40.00)
+batch 824: 46.53(60.00)
+batch 825: 46.55(60.00)
+batch 826: 46.51(20.00)
+batch 827: 46.58(100.00)
+batch 828: 46.52(0.00)
+batch 829: 46.54(60.00)
+batch 830: 46.53(40.00)
+batch 831: 46.52(40.00)
+batch 832: 46.51(40.00)
+batch 833: 46.48(20.00)
+batch 834: 46.47(40.00)
+batch 835: 46.47(40.00)
+batch 836: 46.46(40.00)
+batch 837: 46.45(40.00)
+batch 838: 46.47(60.00)
+batch 839: 46.51(80.00)
+batch 840: 46.50(40.00)
+batch 841: 46.47(20.00)
+batch 842: 46.44(20.00)
+batch 843: 46.45(60.00)
+batch 844: 46.42(20.00)
+batch 845: 46.39(20.00)
+batch 846: 46.38(40.00)
+batch 847: 46.40(60.00)
+batch 848: 46.42(60.00)
+batch 849: 46.41(40.00)
+batch 850: 46.38(20.00)
+batch 851: 46.37(40.00)
+batch 852: 46.34(20.00)
+batch 853: 46.33(40.00)
+batch 854: 46.37(80.00)
+batch 855: 46.36(40.00)
+batch 856: 46.38(60.00)
+batch 857: 46.39(60.00)
+batch 858: 46.41(60.00)
+batch 859: 46.38(20.00)
+batch 860: 46.37(40.00)
+batch 861: 46.36(40.00)
+batch 862: 46.38(60.00)
+batch 863: 46.37(40.00)
+batch 864: 46.34(20.00)
+batch 865: 46.34(40.00)
+batch 866: 46.33(40.00)
+batch 867: 46.34(60.00)
+batch 868: 46.36(60.00)
+batch 869: 46.35(40.00)
+batch 870: 46.32(20.00)
+batch 871: 46.34(60.00)
+batch 872: 46.31(20.00)
+batch 873: 46.30(40.00)
+batch 874: 46.29(40.00)
+batch 875: 46.29(40.00)
+batch 876: 46.28(40.00)
+batch 877: 46.32(80.00)
+batch 878: 46.33(60.00)
+batch 879: 46.37(80.00)
+batch 880: 46.36(40.00)
+batch 881: 46.33(20.00)
+batch 882: 46.35(60.00)
+batch 883: 46.32(20.00)
+batch 884: 46.33(60.00)
+batch 885: 46.37(80.00)
+batch 886: 46.39(60.00)
+batch 887: 46.38(40.00)
+batch 888: 46.37(40.00)
+batch 889: 46.34(20.00)
+batch 890: 46.36(60.00)
+batch 891: 46.35(40.00)
+batch 892: 46.35(40.00)
+batch 893: 46.36(60.00)
+batch 894: 46.35(40.00)
+batch 895: 46.37(60.00)
+batch 896: 46.34(20.00)
+batch 897: 46.35(60.00)
+batch 898: 46.35(40.00)
+batch 899: 46.34(40.00)
+batch 900: 46.36(60.00)
+batch 901: 46.35(40.00)
+batch 902: 46.34(40.00)
+batch 903: 46.31(20.00)
+batch 904: 46.33(60.00)
+batch 905: 46.32(40.00)
+batch 906: 46.31(40.00)
+batch 907: 46.33(60.00)
+batch 908: 46.32(40.00)
+batch 909: 46.31(40.00)
+batch 910: 46.31(40.00)
+batch 911: 46.32(60.00)
+batch 912: 46.34(60.00)
+batch 913: 46.29(0.00)
+batch 914: 46.28(40.00)
+batch 915: 46.30(60.00)
+batch 916: 46.31(60.00)
+batch 917: 46.33(60.00)
+batch 918: 46.34(60.00)
+batch 919: 46.33(40.00)
+batch 920: 46.30(20.00)
+batch 921: 46.34(80.00)
+batch 922: 46.36(60.00)
+batch 923: 46.37(60.00)
+batch 924: 46.36(40.00)
+batch 925: 46.34(20.00)
+batch 926: 46.35(60.00)
+batch 927: 46.34(40.00)
+batch 928: 46.36(60.00)
+batch 929: 46.33(20.00)
+batch 930: 46.32(40.00)
+batch 931: 46.34(60.00)
+batch 932: 46.31(20.00)
+batch 933: 46.32(60.00)
+batch 934: 46.32(40.00)
+batch 935: 46.35(80.00)
+batch 936: 46.35(40.00)
+batch 937: 46.34(40.00)
+batch 938: 46.31(20.00)
+batch 939: 46.28(20.00)
+batch 940: 46.30(60.00)
+batch 941: 46.35(100.00)
+batch 942: 46.33(20.00)
+batch 943: 46.36(80.00)
+batch 944: 46.38(60.00)
+batch 945: 46.39(60.00)
+batch 946: 46.43(80.00)
+batch 947: 46.42(40.00)
+batch 948: 46.46(80.00)
+batch 949: 46.45(40.00)
+batch 950: 46.40(0.00)
+batch 951: 46.41(60.00)
+batch 952: 46.43(60.00)
+batch 953: 46.42(40.00)
+batch 954: 46.39(20.00)
+batch 955: 46.41(60.00)
+batch 956: 46.42(60.00)
+batch 957: 46.44(60.00)
+batch 958: 46.43(40.00)
+batch 959: 46.42(40.00)
+batch 960: 46.44(60.00)
+batch 961: 46.43(40.00)
+batch 962: 46.44(60.00)
+batch 963: 46.46(60.00)
+batch 964: 46.43(20.00)
+batch 965: 46.42(40.00)
+batch 966: 46.44(60.00)
+batch 967: 46.45(60.00)
+batch 968: 46.43(20.00)
+batch 969: 46.40(20.00)
+batch 970: 46.39(40.00)
+batch 971: 46.41(60.00)
+batch 972: 46.42(60.00)
+batch 973: 46.39(20.00)
+batch 974: 46.39(40.00)
+batch 975: 46.40(60.00)
+batch 976: 46.43(80.00)
+batch 977: 46.41(20.00)
+batch 978: 46.42(60.00)
+batch 979: 46.41(40.00)
+batch 980: 46.41(40.00)
+batch 981: 46.38(20.00)
+batch 982: 46.37(40.00)
+batch 983: 46.37(40.00)
+batch 984: 46.36(40.00)
+batch 985: 46.38(60.00)
+batch 986: 46.37(40.00)
+batch 987: 46.36(40.00)
+batch 988: 46.32(0.00)
+batch 989: 46.31(40.00)
+batch 990: 46.30(40.00)
+batch 991: 46.32(60.00)
+batch 992: 46.33(60.00)
+batch 993: 46.30(20.00)
+batch 994: 46.30(40.00)
+batch 995: 46.29(40.00)
+batch 996: 46.29(40.00)
+batch 997: 46.26(20.00)
+batch 998: 46.25(40.00)
+batch 999: 46.27(60.00)
+batch 1000: 46.26(40.00)
+batch 1001: 46.23(20.00)
+batch 1002: 46.21(20.00)
+batch 1003: 46.18(20.00)
+batch 1004: 46.20(60.00)
+batch 1005: 46.21(60.00)
+batch 1006: 46.20(40.00)
+batch 1007: 46.24(80.00)
+batch 1008: 46.19(0.00)
+batch 1009: 46.18(40.00)
+batch 1010: 46.18(40.00)
+batch 1011: 46.17(40.00)
+batch 1012: 46.13(0.00)
+batch 1013: 46.12(40.00)
+batch 1014: 46.07(0.00)
+batch 1015: 46.09(60.00)
+batch 1016: 46.08(40.00)
+batch 1017: 46.06(20.00)
+batch 1018: 46.05(40.00)
+batch 1019: 46.03(20.00)
+batch 1020: 46.04(60.00)
+batch 1021: 46.05(60.00)
+batch 1022: 46.05(40.00)
+batch 1023: 46.04(40.00)
+batch 1024: 46.04(40.00)
+batch 1025: 46.03(40.00)
+batch 1026: 46.00(20.00)
+batch 1027: 46.02(60.00)
+batch 1028: 46.01(40.00)
+batch 1029: 46.04(80.00)
+batch 1030: 46.04(40.00)
+batch 1031: 46.01(20.00)
+batch 1032: 46.01(40.00)
+batch 1033: 46.02(60.00)
+batch 1034: 46.02(40.00)
+batch 1035: 46.01(40.00)
+batch 1036: 46.02(60.00)
+batch 1037: 46.06(80.00)
+batch 1038: 46.05(40.00)
+batch 1039: 46.04(40.00)
+batch 1040: 46.04(40.00)
+batch 1041: 46.05(60.00)
+batch 1042: 46.07(60.00)
+batch 1043: 46.04(20.00)
+batch 1044: 46.03(40.00)
+batch 1045: 46.03(40.00)
+batch 1046: 46.06(80.00)
+batch 1047: 46.04(20.00)
+batch 1048: 46.07(80.00)
+batch 1049: 46.04(20.00)
+batch 1050: 46.06(60.00)
+batch 1051: 46.07(60.00)
+batch 1052: 46.06(40.00)
+batch 1053: 46.06(40.00)
+batch 1054: 46.07(60.00)
+batch 1055: 46.07(40.00)
+batch 1056: 46.10(80.00)
+batch 1057: 46.11(60.00)
+batch 1058: 46.11(40.00)
+batch 1059: 46.10(40.00)
+batch 1060: 46.08(20.00)
+batch 1061: 46.07(40.00)
+batch 1062: 46.05(20.00)
+batch 1063: 46.04(40.00)
+batch 1064: 46.05(60.00)
+batch 1065: 46.08(80.00)
+batch 1066: 46.10(60.00)
+batch 1067: 46.09(40.00)
+batch 1068: 46.10(60.00)
+batch 1069: 46.10(40.00)
+batch 1070: 46.11(60.00)
+batch 1071: 46.14(80.00)
+batch 1072: 46.14(40.00)
+batch 1073: 46.15(60.00)
+batch 1074: 46.16(60.00)
+batch 1075: 46.12(0.00)
+batch 1076: 46.13(60.00)
+batch 1077: 46.11(20.00)
+batch 1078: 46.09(20.00)
+batch 1079: 46.10(60.00)
+batch 1080: 46.13(80.00)
+batch 1081: 46.16(80.00)
+batch 1082: 46.14(20.00)
+batch 1083: 46.17(80.00)
+batch 1084: 46.14(20.00)
+batch 1085: 46.14(40.00)
+batch 1086: 46.11(20.00)
+batch 1087: 46.09(20.00)
+batch 1088: 46.10(60.00)
+batch 1089: 46.13(80.00)
+batch 1090: 46.13(40.00)
+batch 1091: 46.14(60.00)
+batch 1092: 46.14(40.00)
+batch 1093: 46.13(40.00)
+batch 1094: 46.09(0.00)
+batch 1095: 46.08(40.00)
+batch 1096: 46.06(20.00)
+batch 1097: 46.07(60.00)
+batch 1098: 46.05(20.00)
+batch 1099: 46.02(20.00)
+batch 1100: 46.02(40.00)
+batch 1101: 46.05(80.00)
+batch 1102: 46.06(60.00)
+batch 1103: 46.07(60.00)
+batch 1104: 46.05(20.00)
+batch 1105: 46.06(60.00)
+batch 1106: 46.02(0.00)
+batch 1107: 46.03(60.00)
+batch 1108: 46.01(20.00)
+batch 1109: 46.01(40.00)
+batch 1110: 45.98(20.00)
+batch 1111: 45.98(40.00)
+batch 1112: 45.99(60.00)
+batch 1113: 46.04(100.00)
+batch 1114: 46.09(100.00)
+batch 1115: 46.04(0.00)
+batch 1116: 46.02(20.00)
+batch 1117: 46.03(60.00)
+batch 1118: 46.01(20.00)
+batch 1119: 46.01(40.00)
+batch 1120: 46.00(40.00)
+batch 1121: 46.01(60.00)
+batch 1122: 45.99(20.00)
+batch 1123: 46.00(60.00)
+batch 1124: 46.01(60.00)
+batch 1125: 46.01(40.00)
+batch 1126: 46.04(80.00)
+batch 1127: 46.07(80.00)
+batch 1128: 46.05(20.00)
+batch 1129: 46.02(20.00)
+batch 1130: 46.02(40.00)
+batch 1131: 46.01(40.00)
+batch 1132: 46.01(40.00)
+batch 1133: 46.00(40.00)
+batch 1134: 46.01(60.00)
+batch 1135: 46.01(40.00)
+batch 1136: 46.02(60.00)
+batch 1137: 46.03(60.00)
+batch 1138: 46.01(20.00)
+batch 1139: 45.99(20.00)
+batch 1140: 45.96(20.00)
+batch 1141: 45.98(60.00)
+batch 1142: 45.95(20.00)
+batch 1143: 45.97(60.00)
+batch 1144: 46.01(100.00)
+batch 1145: 45.99(20.00)
+batch 1146: 46.00(60.00)
+batch 1147: 46.02(60.00)
+batch 1148: 46.05(80.00)
+batch 1149: 46.02(20.00)
+batch 1150: 46.00(20.00)
+batch 1151: 46.01(60.00)
+batch 1152: 46.02(60.00)
+batch 1153: 46.04(60.00)
+batch 1154: 46.05(60.00)
+batch 1155: 46.04(40.00)
+batch 1156: 46.07(80.00)
+batch 1157: 46.07(40.00)
+batch 1158: 46.06(40.00)
+batch 1159: 46.02(0.00)
+batch 1160: 46.05(80.00)
+batch 1161: 46.06(60.00)
+batch 1162: 46.06(40.00)
+batch 1163: 46.07(60.00)
+batch 1164: 46.05(20.00)
+batch 1165: 46.03(20.00)
+batch 1166: 46.04(60.00)
+batch 1167: 46.05(60.00)
+batch 1168: 46.04(40.00)
+batch 1169: 46.04(40.00)
+batch 1170: 46.03(40.00)
+batch 1171: 46.03(40.00)
+batch 1172: 46.02(40.00)
+batch 1173: 46.02(40.00)
+batch 1174: 46.03(60.00)
+batch 1175: 46.06(80.00)
+batch 1176: 46.07(60.00)
+batch 1177: 46.07(40.00)
+batch 1178: 46.08(60.00)
+batch 1179: 46.06(20.00)
+batch 1180: 46.05(40.00)
+batch 1181: 46.05(40.00)
+batch 1182: 46.06(60.00)
+batch 1183: 46.07(60.00)
+batch 1184: 46.08(60.00)
+batch 1185: 46.09(60.00)
+batch 1186: 46.09(40.00)
+batch 1187: 46.07(20.00)
+batch 1188: 46.04(20.00)
+batch 1189: 46.04(40.00)
+batch 1190: 46.02(20.00)
+batch 1191: 46.01(40.00)
+batch 1192: 46.01(40.00)
+batch 1193: 46.02(60.00)
+batch 1194: 46.00(20.00)
+batch 1195: 46.01(60.00)
+batch 1196: 45.99(20.00)
+batch 1197: 45.95(0.00)
+batch 1198: 45.94(40.00)
+batch 1199: 45.96(60.00)
+batch 1200: 45.98(80.00)
+batch 1201: 45.96(20.00)
+batch 1202: 45.94(20.00)
+batch 1203: 45.95(60.00)
+batch 1204: 45.93(20.00)
+batch 1205: 45.91(20.00)
+batch 1206: 45.87(0.00)
+batch 1207: 45.85(20.00)
+batch 1208: 45.86(60.00)
+batch 1209: 45.87(60.00)
+batch 1210: 45.90(80.00)
+batch 1211: 45.91(60.00)
+batch 1212: 45.87(0.00)
+batch 1213: 45.87(40.00)
+batch 1214: 45.86(40.00)
+batch 1215: 45.86(40.00)
+batch 1216: 45.86(40.00)
+batch 1217: 45.87(60.00)
+batch 1218: 45.88(60.00)
+batch 1219: 45.92(100.00)
+batch 1220: 45.93(60.00)
+batch 1221: 45.95(60.00)
+batch 1222: 45.92(20.00)
+batch 1223: 45.94(60.00)
+batch 1224: 45.95(60.00)
+batch 1225: 45.93(20.00)
+batch 1226: 45.92(40.00)
+batch 1227: 45.93(60.00)
+batch 1228: 45.93(40.00)
+batch 1229: 45.92(40.00)
+batch 1230: 45.92(40.00)
+batch 1231: 45.93(60.00)
+batch 1232: 45.94(60.00)
+batch 1233: 45.92(20.00)
+batch 1234: 45.92(40.00)
+batch 1235: 45.89(20.00)
+batch 1236: 45.87(20.00)
+batch 1237: 45.89(60.00)
+batch 1238: 45.90(60.00)
+batch 1239: 45.92(80.00)
+batch 1240: 45.90(20.00)
+batch 1241: 45.88(20.00)
+batch 1242: 45.88(40.00)
+batch 1243: 45.89(60.00)
+batch 1244: 45.90(60.00)
+batch 1245: 45.93(80.00)
+batch 1246: 45.94(60.00)
+batch 1247: 45.93(40.00)
+batch 1248: 45.91(20.00)
+batch 1249: 45.92(60.00)
+batch 1250: 45.94(60.00)
+batch 1251: 45.95(60.00)
+batch 1252: 45.94(40.00)
+batch 1253: 45.94(40.00)
+batch 1254: 45.93(40.00)
+batch 1255: 45.91(20.00)
+batch 1256: 45.92(60.00)
+batch 1257: 45.93(60.00)
+batch 1258: 45.93(40.00)
+batch 1259: 45.94(60.00)
+batch 1260: 45.97(80.00)
+batch 1261: 45.98(60.00)
+batch 1262: 45.97(40.00)
+batch 1263: 45.97(40.00)
+batch 1264: 46.00(80.00)
+batch 1265: 45.98(20.00)
+batch 1266: 45.96(20.00)
+batch 1267: 45.95(40.00)
+batch 1268: 45.96(60.00)
+batch 1269: 45.96(40.00)
+batch 1270: 45.95(40.00)
+batch 1271: 45.98(80.00)
+batch 1272: 46.01(80.00)
+batch 1273: 46.00(40.00)
+batch 1274: 45.97(0.00)
+batch 1275: 45.98(60.00)
+batch 1276: 45.97(40.00)
+batch 1277: 45.97(40.00)
+batch 1278: 45.96(40.00)
+batch 1279: 45.97(60.00)
+batch 1280: 45.97(40.00)
+batch 1281: 45.95(20.00)
+batch 1282: 45.96(60.00)
+batch 1283: 45.94(20.00)
+batch 1284: 45.92(20.00)
+batch 1285: 45.93(60.00)
+batch 1286: 45.89(0.00)
+batch 1287: 45.91(60.00)
+batch 1288: 45.95(100.00)
+batch 1289: 45.93(20.00)
+batch 1290: 45.94(60.00)
+batch 1291: 45.92(20.00)
+batch 1292: 45.91(40.00)
+batch 1293: 45.91(40.00)
+batch 1294: 45.95(100.00)
+batch 1295: 45.96(60.00)
+batch 1296: 45.97(60.00)
+batch 1297: 46.00(80.00)
+batch 1298: 45.99(40.00)
+batch 1299: 46.02(80.00)
+batch 1300: 46.02(40.00)
+batch 1301: 46.00(20.00)
+batch 1302: 45.99(40.00)
+batch 1303: 46.00(60.00)
+batch 1304: 46.03(80.00)
+batch 1305: 46.04(60.00)
+batch 1306: 46.05(60.00)
+batch 1307: 46.04(40.00)
+batch 1308: 46.09(100.00)
+batch 1309: 46.10(60.00)
+batch 1310: 46.06(0.00)
+batch 1311: 46.04(20.00)
+batch 1312: 46.04(40.00)
+batch 1313: 46.03(40.00)
+batch 1314: 46.03(40.00)
+batch 1315: 46.02(40.00)
+batch 1316: 46.03(60.00)
+batch 1317: 46.04(60.00)
+batch 1318: 46.05(60.00)
+batch 1319: 46.05(40.00)
+batch 1320: 46.03(20.00)
+batch 1321: 46.06(80.00)
+batch 1322: 46.05(40.00)
+batch 1323: 46.05(40.00)
+batch 1324: 46.07(80.00)
+batch 1325: 46.07(40.00)
+batch 1326: 46.08(60.00)
+batch 1327: 46.10(80.00)
+batch 1328: 46.11(60.00)
+batch 1329: 46.11(40.00)
+batch 1330: 46.12(60.00)
+batch 1331: 46.15(80.00)
+batch 1332: 46.17(80.00)
+batch 1333: 46.17(40.00)
+batch 1334: 46.18(60.00)
+batch 1335: 46.17(40.00)
+batch 1336: 46.20(80.00)
+batch 1337: 46.22(80.00)
+batch 1338: 46.20(20.00)
+batch 1339: 46.20(40.00)
+batch 1340: 46.21(60.00)
+batch 1341: 46.20(40.00)
+batch 1342: 46.23(80.00)
+batch 1343: 46.22(40.00)
+batch 1344: 46.21(20.00)
+batch 1345: 46.23(80.00)
+batch 1346: 46.23(40.00)
+batch 1347: 46.22(40.00)
+batch 1348: 46.22(40.00)
+batch 1349: 46.23(60.00)
+batch 1350: 46.25(80.00)
+batch 1351: 46.28(80.00)
+batch 1352: 46.29(60.00)
+batch 1353: 46.27(20.00)
+batch 1354: 46.28(60.00)
+batch 1355: 46.27(40.00)
+batch 1356: 46.24(0.00)
+batch 1357: 46.22(20.00)
+batch 1358: 46.20(20.00)
+batch 1359: 46.17(0.00)
+batch 1360: 46.16(40.00)
+batch 1361: 46.19(80.00)
+batch 1362: 46.18(40.00)
+batch 1363: 46.19(60.00)
+batch 1364: 46.20(60.00)
+batch 1365: 46.21(60.00)
+batch 1366: 46.22(60.00)
+batch 1367: 46.22(40.00)
+batch 1368: 46.24(80.00)
+batch 1369: 46.24(40.00)
+batch 1370: 46.26(80.00)
+batch 1371: 46.26(40.00)
+batch 1372: 46.28(80.00)
+batch 1373: 46.29(60.00)
+batch 1374: 46.27(20.00)
+batch 1375: 46.27(40.00)
+batch 1376: 46.26(40.00)
+batch 1377: 46.27(60.00)
+batch 1378: 46.28(60.00)
+batch 1379: 46.31(80.00)
+batch 1380: 46.29(20.00)
+batch 1381: 46.26(0.00)
+batch 1382: 46.24(20.00)
+batch 1383: 46.25(60.00)
+batch 1384: 46.26(60.00)
+batch 1385: 46.28(80.00)
+batch 1386: 46.29(60.00)
+batch 1387: 46.29(40.00)
+batch 1388: 46.30(60.00)
+batch 1389: 46.31(60.00)
+batch 1390: 46.30(40.00)
+batch 1391: 46.31(60.00)
+batch 1392: 46.32(60.00)
+batch 1393: 46.33(60.00)
+batch 1394: 46.33(40.00)
+batch 1395: 46.35(80.00)
+batch 1396: 46.36(60.00)
+batch 1397: 46.36(40.00)
+batch 1398: 46.35(40.00)
+batch 1399: 46.35(40.00)
+batch 1400: 46.34(40.00)
+batch 1401: 46.35(60.00)
+batch 1402: 46.35(40.00)
+batch 1403: 46.36(60.00)
+batch 1404: 46.32(0.00)
+batch 1405: 46.31(20.00)
+batch 1406: 46.29(20.00)
+batch 1407: 46.28(40.00)
+batch 1408: 46.29(60.00)
+batch 1409: 46.29(40.00)
+batch 1410: 46.30(60.00)
+batch 1411: 46.31(60.00)
+batch 1412: 46.30(40.00)
+batch 1413: 46.31(60.00)
+batch 1414: 46.32(60.00)
+batch 1415: 46.32(40.00)
+batch 1416: 46.31(40.00)
+batch 1417: 46.31(40.00)
+batch 1418: 46.29(20.00)
+batch 1419: 46.29(40.00)
+batch 1420: 46.27(20.00)
+batch 1421: 46.26(40.00)
+batch 1422: 46.29(80.00)
+batch 1423: 46.30(60.00)
+batch 1424: 46.31(60.00)
+batch 1425: 46.32(60.00)
+batch 1426: 46.30(20.00)
+batch 1427: 46.29(40.00)
+batch 1428: 46.30(60.00)
+batch 1429: 46.31(60.00)
+batch 1430: 46.34(80.00)
+batch 1431: 46.33(40.00)
+batch 1432: 46.31(20.00)
+batch 1433: 46.31(40.00)
+batch 1434: 46.32(60.00)
+batch 1435: 46.33(60.00)
+batch 1436: 46.35(80.00)
+batch 1437: 46.37(80.00)
+batch 1438: 46.38(60.00)
+batch 1439: 46.38(40.00)
+batch 1440: 46.39(60.00)
+batch 1441: 46.40(60.00)
+batch 1442: 46.42(80.00)
+batch 1443: 46.43(60.00)
+batch 1444: 46.44(60.00)
+batch 1445: 46.45(60.00)
+batch 1446: 46.46(60.00)
+batch 1447: 46.44(20.00)
+batch 1448: 46.44(40.00)
+batch 1449: 46.43(40.00)
+batch 1450: 46.43(40.00)
+batch 1451: 46.42(40.00)
+batch 1452: 46.42(40.00)
+batch 1453: 46.43(60.00)
+batch 1454: 46.42(40.00)
+batch 1455: 46.41(20.00)
+batch 1456: 46.39(20.00)
+batch 1457: 46.38(40.00)
+batch 1458: 46.39(60.00)
+batch 1459: 46.39(40.00)
+batch 1460: 46.37(20.00)
+batch 1461: 46.37(40.00)
+batch 1462: 46.35(20.00)
+batch 1463: 46.37(80.00)
+batch 1464: 46.37(40.00)
+batch 1465: 46.36(40.00)
+batch 1466: 46.36(40.00)
+batch 1467: 46.35(40.00)
+batch 1468: 46.35(40.00)
+batch 1469: 46.36(60.00)
+batch 1470: 46.34(20.00)
+batch 1471: 46.34(40.00)
+batch 1472: 46.33(40.00)
+batch 1473: 46.35(80.00)
+batch 1474: 46.38(80.00)
+batch 1475: 46.39(60.00)
+batch 1476: 46.40(60.00)
+batch 1477: 46.39(40.00)
+batch 1478: 46.40(60.00)
+batch 1479: 46.40(40.00)
+batch 1480: 46.39(40.00)
+batch 1481: 46.40(60.00)
+batch 1482: 46.41(60.00)
+batch 1483: 46.41(40.00)
+batch 1484: 46.40(40.00)
+batch 1485: 46.41(60.00)
+batch 1486: 46.42(60.00)
+batch 1487: 46.42(40.00)
+batch 1488: 46.44(80.00)
+batch 1489: 46.45(60.00)
+batch 1490: 46.47(80.00)
+batch 1491: 46.49(80.00)
+batch 1492: 46.50(60.00)
+batch 1493: 46.50(40.00)
+batch 1494: 46.51(60.00)
+batch 1495: 46.52(60.00)
+batch 1496: 46.52(60.00)
+batch 1497: 46.52(40.00)
+batch 1498: 46.50(20.00)
+batch 1499: 46.51(60.00)
+batch 1500: 46.51(40.00)
+batch 1501: 46.50(40.00)
+batch 1502: 46.51(60.00)
+batch 1503: 46.51(40.00)
+batch 1504: 46.50(40.00)
+batch 1505: 46.49(20.00)
+batch 1506: 46.49(60.00)
+batch 1507: 46.50(60.00)
+batch 1508: 46.51(60.00)
+batch 1509: 46.51(40.00)
+batch 1510: 46.50(40.00)
+batch 1511: 46.50(40.00)
+batch 1512: 46.49(40.00)
+batch 1513: 46.49(40.00)
+batch 1514: 46.49(40.00)
+batch 1515: 46.48(40.00)
+batch 1516: 46.48(40.00)
+batch 1517: 46.49(60.00)
+batch 1518: 46.48(40.00)
+batch 1519: 46.49(60.00)
+batch 1520: 46.49(40.00)
+batch 1521: 46.48(40.00)
+batch 1522: 46.49(60.00)
+batch 1523: 46.46(0.00)
+batch 1524: 46.48(80.00)
+batch 1525: 46.47(20.00)
+batch 1526: 46.49(80.00)
+batch 1527: 46.50(60.00)
+batch 1528: 46.52(80.00)
+batch 1529: 46.51(40.00)
+batch 1530: 46.52(60.00)
+batch 1531: 46.52(40.00)
+batch 1532: 46.51(40.00)
+batch 1533: 46.50(20.00)
+batch 1534: 46.49(40.00)
+batch 1535: 46.48(20.00)
+batch 1536: 46.47(40.00)
+batch 1537: 46.47(40.00)
+batch 1538: 46.49(80.00)
+batch 1539: 46.51(80.00)
+batch 1540: 46.52(60.00)
+batch 1541: 46.50(20.00)
+batch 1542: 46.49(20.00)
+batch 1543: 46.49(60.00)
+batch 1544: 46.48(20.00)
+batch 1545: 46.47(40.00)
+batch 1546: 46.48(60.00)
+batch 1547: 46.48(40.00)
+batch 1548: 46.47(40.00)
+batch 1549: 46.48(60.00)
+batch 1550: 46.49(60.00)
+batch 1551: 46.47(20.00)
+batch 1552: 46.48(60.00)
+batch 1553: 46.48(40.00)
+batch 1554: 46.45(0.00)
+batch 1555: 46.47(80.00)
+batch 1556: 46.48(60.00)
+batch 1557: 46.49(60.00)
+batch 1558: 46.50(60.00)
+batch 1559: 46.50(60.00)
+batch 1560: 46.53(80.00)
+batch 1561: 46.53(60.00)
+batch 1562: 46.52(20.00)
+batch 1563: 46.51(40.00)
+batch 1564: 46.50(20.00)
+batch 1565: 46.50(60.00)
+batch 1566: 46.53(80.00)
+batch 1567: 46.55(80.00)
+batch 1568: 46.53(20.00)
+batch 1569: 46.53(40.00)
+batch 1570: 46.52(40.00)
+batch 1571: 46.52(40.00)
+batch 1572: 46.54(80.00)
+batch 1573: 46.54(40.00)
+batch 1574: 46.52(20.00)
+batch 1575: 46.50(20.00)
+batch 1576: 46.48(20.00)
+batch 1577: 46.48(40.00)
+batch 1578: 46.48(40.00)
+batch 1579: 46.46(20.00)
+batch 1580: 46.46(40.00)
+batch 1581: 46.45(40.00)
+batch 1582: 46.46(60.00)
+batch 1583: 46.46(40.00)
+batch 1584: 46.45(40.00)
+batch 1585: 46.45(40.00)
+batch 1586: 46.43(20.00)
+batch 1587: 46.45(80.00)
+batch 1588: 46.47(80.00)
+batch 1589: 46.51(100.00)
+batch 1590: 46.50(40.00)
+batch 1591: 46.51(60.00)
+batch 1592: 46.51(40.00)
+batch 1593: 46.48(0.00)
+batch 1594: 46.47(40.00)
+batch 1595: 46.50(80.00)
+batch 1596: 46.50(60.00)
+batch 1597: 46.51(60.00)
+batch 1598: 46.51(40.00)
+batch 1599: 46.49(20.00)
+batch 1600: 46.50(60.00)
+batch 1601: 46.51(60.00)
+batch 1602: 46.52(60.00)
+batch 1603: 46.53(60.00)
+batch 1604: 46.52(40.00)
+batch 1605: 46.54(80.00)
+batch 1606: 46.54(40.00)
+batch 1607: 46.56(80.00)
+batch 1608: 46.54(20.00)
+batch 1609: 46.54(40.00)
+batch 1610: 46.57(100.00)
+batch 1611: 46.56(20.00)
+batch 1612: 46.55(40.00)
+batch 1613: 46.55(40.00)
+batch 1614: 46.53(20.00)
+batch 1615: 46.53(40.00)
+batch 1616: 46.53(60.00)
+batch 1617: 46.54(60.00)
+batch 1618: 46.54(40.00)
+batch 1619: 46.52(20.00)
+batch 1620: 46.53(60.00)
+batch 1621: 46.55(80.00)
+batch 1622: 46.56(60.00)
+batch 1623: 46.54(20.00)
+batch 1624: 46.53(20.00)
+batch 1625: 46.52(40.00)
+batch 1626: 46.52(40.00)
+batch 1627: 46.52(40.00)
+batch 1628: 46.52(60.00)
+batch 1629: 46.54(80.00)
+batch 1630: 46.54(40.00)
+batch 1631: 46.54(40.00)
+batch 1632: 46.52(20.00)
+batch 1633: 46.53(60.00)
+batch 1634: 46.51(20.00)
+batch 1635: 46.52(60.00)
+batch 1636: 46.52(40.00)
+batch 1637: 46.50(20.00)
+batch 1638: 46.52(80.00)
+batch 1639: 46.53(60.00)
+batch 1640: 46.54(60.00)
+batch 1641: 46.53(40.00)
+batch 1642: 46.53(40.00)
+batch 1643: 46.51(20.00)
+batch 1644: 46.52(60.00)
+batch 1645: 46.53(60.00)
+batch 1646: 46.52(40.00)
+batch 1647: 46.51(20.00)
+batch 1648: 46.54(100.00)
+batch 1649: 46.54(40.00)
+batch 1650: 46.56(80.00)
+batch 1651: 46.54(20.00)
+batch 1652: 46.55(60.00)
+batch 1653: 46.55(40.00)
+batch 1654: 46.54(40.00)
+batch 1655: 46.54(40.00)
+batch 1656: 46.53(40.00)
+batch 1657: 46.54(60.00)
+batch 1658: 46.55(60.00)
+batch 1659: 46.53(20.00)
+batch 1660: 46.51(0.00)
+batch 1661: 46.50(40.00)
+batch 1662: 46.51(60.00)
+batch 1663: 46.52(60.00)
+batch 1664: 46.53(60.00)
+batch 1665: 46.52(40.00)
+batch 1666: 46.51(20.00)
+batch 1667: 46.50(40.00)
+batch 1668: 46.49(20.00)
+batch 1669: 46.48(40.00)
+batch 1670: 46.48(40.00)
+batch 1671: 46.46(20.00)
+batch 1672: 46.45(20.00)
+batch 1673: 46.43(20.00)
+batch 1674: 46.43(40.00)
+batch 1675: 46.44(60.00)
+batch 1676: 46.42(20.00)
+batch 1677: 46.42(40.00)
+batch 1678: 46.42(60.00)
+batch 1679: 46.42(40.00)
+batch 1680: 46.44(80.00)
+batch 1681: 46.45(60.00)
+batch 1682: 46.46(60.00)
+batch 1683: 46.45(40.00)
+batch 1684: 46.45(40.00)
+batch 1685: 46.45(40.00)
+batch 1686: 46.43(20.00)
+batch 1687: 46.44(60.00)
+batch 1688: 46.43(40.00)
+batch 1689: 46.44(60.00)
+batch 1690: 46.45(60.00)
+batch 1691: 46.46(60.00)
+batch 1692: 46.45(40.00)
+batch 1693: 46.45(40.00)
+batch 1694: 46.43(20.00)
+batch 1695: 46.42(20.00)
+batch 1696: 46.43(60.00)
+batch 1697: 46.42(40.00)
+batch 1698: 46.42(40.00)
+batch 1699: 46.40(20.00)
+batch 1700: 46.41(60.00)
+batch 1701: 46.42(60.00)
+batch 1702: 46.43(60.00)
+batch 1703: 46.42(40.00)
+batch 1704: 46.43(60.00)
+batch 1705: 46.44(60.00)
+batch 1706: 46.45(60.00)
+batch 1707: 46.44(40.00)
+batch 1708: 46.45(60.00)
+batch 1709: 46.46(60.00)
+batch 1710: 46.47(60.00)
+batch 1711: 46.45(20.00)
+batch 1712: 46.46(60.00)
+batch 1713: 46.46(40.00)
+batch 1714: 46.48(80.00)
+batch 1715: 46.48(60.00)
+batch 1716: 46.48(40.00)
+batch 1717: 46.49(60.00)
+batch 1718: 46.50(60.00)
+batch 1719: 46.49(40.00)
+batch 1720: 46.49(40.00)
+batch 1721: 46.48(40.00)
+batch 1722: 46.48(40.00)
+batch 1723: 46.48(40.00)
+batch 1724: 46.50(80.00)
+batch 1725: 46.49(40.00)
+batch 1726: 46.49(40.00)
+batch 1727: 46.49(40.00)
+batch 1728: 46.47(20.00)
+batch 1729: 46.47(40.00)
+batch 1730: 46.46(40.00)
+batch 1731: 46.48(80.00)
+batch 1732: 46.47(20.00)
+batch 1733: 46.45(20.00)
+batch 1734: 46.45(40.00)
+batch 1735: 46.48(100.00)
+batch 1736: 46.50(80.00)
+batch 1737: 46.51(60.00)
+batch 1738: 46.51(60.00)
+batch 1739: 46.50(20.00)
+batch 1740: 46.49(40.00)
+batch 1741: 46.51(80.00)
+batch 1742: 46.50(20.00)
+batch 1743: 46.51(60.00)
+batch 1744: 46.48(0.00)
+batch 1745: 46.48(40.00)
+batch 1746: 46.47(40.00)
+batch 1747: 46.48(60.00)
+batch 1748: 46.49(60.00)
+batch 1749: 46.50(60.00)
+batch 1750: 46.50(60.00)
+batch 1751: 46.50(40.00)
+batch 1752: 46.50(40.00)
+batch 1753: 46.50(60.00)
+batch 1754: 46.52(80.00)
+batch 1755: 46.52(40.00)
+batch 1756: 46.51(40.00)
+batch 1757: 46.51(40.00)
+batch 1758: 46.50(20.00)
+batch 1759: 46.52(80.00)
+batch 1760: 46.50(20.00)
+batch 1761: 46.51(60.00)
+batch 1762: 46.50(40.00)
+batch 1763: 46.51(60.00)
+batch 1764: 46.52(60.00)
+batch 1765: 46.53(60.00)
+batch 1766: 46.53(60.00)
+batch 1767: 46.53(40.00)
+batch 1768: 46.53(40.00)
+batch 1769: 46.52(40.00)
+batch 1770: 46.53(60.00)
+batch 1771: 46.54(60.00)
+batch 1772: 46.55(60.00)
+batch 1773: 46.53(20.00)
+batch 1774: 46.52(20.00)
+batch 1775: 46.54(80.00)
+batch 1776: 46.53(40.00)
+batch 1777: 46.53(40.00)
+batch 1778: 46.54(60.00)
+batch 1779: 46.53(40.00)
+batch 1780: 46.53(40.00)
+batch 1781: 46.54(60.00)
+batch 1782: 46.55(80.00)
+batch 1783: 46.54(20.00)
+batch 1784: 46.52(20.00)
+batch 1785: 46.53(60.00)
+batch 1786: 46.53(40.00)
+batch 1787: 46.52(40.00)
+batch 1788: 46.53(60.00)
+batch 1789: 46.54(60.00)
+batch 1790: 46.56(80.00)
+batch 1791: 46.56(40.00)
+batch 1792: 46.56(60.00)
+batch 1793: 46.56(40.00)
+batch 1794: 46.57(60.00)
+batch 1795: 46.55(20.00)
+batch 1796: 46.57(80.00)
+batch 1797: 46.57(40.00)
+batch 1798: 46.57(60.00)
+batch 1799: 46.55(0.00)
+batch 1800: 46.54(40.00)
+batch 1801: 46.54(40.00)
+batch 1802: 46.55(60.00)
+batch 1803: 46.54(40.00)
+batch 1804: 46.53(20.00)
+batch 1805: 46.55(80.00)
+batch 1806: 46.57(80.00)
+batch 1807: 46.60(100.00)
+batch 1808: 46.62(80.00)
+batch 1809: 46.60(20.00)
+batch 1810: 46.61(60.00)
+batch 1811: 46.58(0.00)
+batch 1812: 46.57(20.00)
+batch 1813: 46.57(60.00)
+batch 1814: 46.58(60.00)
+batch 1815: 46.57(20.00)
+batch 1816: 46.56(40.00)
+batch 1817: 46.56(40.00)
+batch 1818: 46.56(40.00)
+batch 1819: 46.54(20.00)
+batch 1820: 46.54(40.00)
+batch 1821: 46.56(80.00)
+batch 1822: 46.56(60.00)
+batch 1823: 46.58(80.00)
+batch 1824: 46.58(40.00)
+batch 1825: 46.60(80.00)
+batch 1826: 46.58(20.00)
+batch 1827: 46.58(40.00)
+batch 1828: 46.61(100.00)
+batch 1829: 46.60(40.00)
+batch 1830: 46.61(60.00)
+batch 1831: 46.63(80.00)
+batch 1832: 46.64(60.00)
+batch 1833: 46.62(20.00)
+batch 1834: 46.60(0.00)
+batch 1835: 46.62(80.00)
+batch 1836: 46.60(20.00)
+batch 1837: 46.60(40.00)
+batch 1838: 46.58(20.00)
+batch 1839: 46.58(40.00)
+batch 1840: 46.59(60.00)
+batch 1841: 46.59(60.00)
+batch 1842: 46.61(80.00)
+batch 1843: 46.61(40.00)
+batch 1844: 46.64(100.00)
+batch 1845: 46.62(20.00)
+batch 1846: 46.62(40.00)
+batch 1847: 46.63(60.00)
+batch 1848: 46.66(100.00)
+batch 1849: 46.67(80.00)
+batch 1850: 46.68(60.00)
+batch 1851: 46.67(20.00)
+batch 1852: 46.67(60.00)
+batch 1853: 46.67(40.00)
+batch 1854: 46.68(60.00)
+batch 1855: 46.68(60.00)
+batch 1856: 46.71(100.00)
+batch 1857: 46.71(40.00)
+batch 1858: 46.72(60.00)
+batch 1859: 46.72(60.00)
+batch 1860: 46.74(80.00)
+batch 1861: 46.75(60.00)
+batch 1862: 46.76(60.00)
+batch 1863: 46.75(40.00)
+batch 1864: 46.75(40.00)
+batch 1865: 46.73(20.00)
+batch 1866: 46.72(20.00)
+batch 1867: 46.75(100.00)
+batch 1868: 46.76(60.00)
+batch 1869: 46.75(40.00)
+batch 1870: 46.76(60.00)
+batch 1871: 46.76(40.00)
+batch 1872: 46.78(100.00)
+batch 1873: 46.78(40.00)
+batch 1874: 46.78(40.00)
+batch 1875: 46.78(60.00)
+batch 1876: 46.79(60.00)
+batch 1877: 46.79(40.00)
+batch 1878: 46.77(20.00)
+batch 1879: 46.78(60.00)
+batch 1880: 46.79(60.00)
+batch 1881: 46.78(40.00)
+batch 1882: 46.79(60.00)
+batch 1883: 46.82(100.00)
+batch 1884: 46.80(20.00)
+batch 1885: 46.79(20.00)
+batch 1886: 46.79(40.00)
+batch 1887: 46.79(60.00)
+batch 1888: 46.78(20.00)
+batch 1889: 46.75(0.00)
+batch 1890: 46.75(40.00)
+batch 1891: 46.76(60.00)
+batch 1892: 46.77(60.00)
+batch 1893: 46.76(40.00)
+batch 1894: 46.77(60.00)
+batch 1895: 46.79(80.00)
+batch 1896: 46.78(40.00)
+batch 1897: 46.79(60.00)
+batch 1898: 46.79(40.00)
+batch 1899: 46.78(40.00)
+batch 1900: 46.79(60.00)
+batch 1901: 46.78(20.00)
+batch 1902: 46.78(60.00)
+batch 1903: 46.78(40.00)
+batch 1904: 46.76(20.00)
+batch 1905: 46.77(60.00)
+batch 1906: 46.78(60.00)
+batch 1907: 46.76(20.00)
+batch 1908: 46.77(60.00)
+batch 1909: 46.77(40.00)
+batch 1910: 46.76(40.00)
+batch 1911: 46.75(20.00)
+batch 1912: 46.76(60.00)
+batch 1913: 46.76(60.00)
+batch 1914: 46.78(80.00)
+batch 1915: 46.77(20.00)
+batch 1916: 46.75(20.00)
+batch 1917: 46.75(40.00)
+batch 1918: 46.77(80.00)
+batch 1919: 46.77(60.00)
+batch 1920: 46.77(40.00)
+batch 1921: 46.79(80.00)
+batch 1922: 46.80(60.00)
+batch 1923: 46.80(60.00)
+batch 1924: 46.81(60.00)
+batch 1925: 46.82(60.00)
+batch 1926: 46.82(60.00)
+batch 1927: 46.83(60.00)
+batch 1928: 46.83(40.00)
+batch 1929: 46.82(40.00)
+batch 1930: 46.83(60.00)
+batch 1931: 46.83(40.00)
+batch 1932: 46.83(60.00)
+batch 1933: 46.83(40.00)
+batch 1934: 46.83(40.00)
+batch 1935: 46.82(40.00)
+batch 1936: 46.81(20.00)
+batch 1937: 46.84(100.00)
+batch 1938: 46.85(80.00)
+batch 1939: 46.85(40.00)
+batch 1940: 46.85(40.00)
+batch 1941: 46.86(80.00)
+batch 1942: 46.89(100.00)
+batch 1943: 46.89(40.00)
+batch 1944: 46.89(60.00)
+batch 1945: 46.88(20.00)
+batch 1946: 46.87(20.00)
+batch 1947: 46.86(40.00)
+batch 1948: 46.86(40.00)
+batch 1949: 46.85(40.00)
+batch 1950: 46.85(40.00)
+batch 1951: 46.84(20.00)
+batch 1952: 46.82(20.00)
+batch 1953: 46.82(40.00)
+batch 1954: 46.84(80.00)
+batch 1955: 46.83(40.00)
+batch 1956: 46.85(80.00)
+batch 1957: 46.86(60.00)
+batch 1958: 46.84(20.00)
+batch 1959: 46.83(20.00)
+batch 1960: 46.85(80.00)
+batch 1961: 46.84(40.00)
+batch 1962: 46.84(40.00)
+batch 1963: 46.83(20.00)
+batch 1964: 46.82(40.00)
+batch 1965: 46.82(40.00)
+batch 1966: 46.83(60.00)
+batch 1967: 46.83(60.00)
+batch 1968: 46.84(60.00)
+batch 1969: 46.84(40.00)
+batch 1970: 46.84(60.00)
+batch 1971: 46.84(40.00)
+batch 1972: 46.84(40.00)
+batch 1973: 46.83(40.00)
+batch 1974: 46.84(60.00)
+batch 1975: 46.84(40.00)
+batch 1976: 46.83(40.00)
+batch 1977: 46.82(20.00)
+batch 1978: 46.82(40.00)
+batch 1979: 46.82(60.00)
+batch 1980: 46.83(60.00)
+batch 1981: 46.82(40.00)
+batch 1982: 46.83(60.00)
+batch 1983: 46.83(40.00)
+batch 1984: 46.82(40.00)
+batch 1985: 46.82(40.00)
+batch 1986: 46.82(40.00)
+batch 1987: 46.79(0.00)
+batch 1988: 46.81(80.00)
+batch 1989: 46.82(60.00)
+batch 1990: 46.82(60.00)
+batch 1991: 46.83(60.00)
+batch 1992: 46.83(40.00)
+batch 1993: 46.84(80.00)
+batch 1994: 46.85(60.00)
+batch 1995: 46.86(60.00)
+batch 1996: 46.84(20.00)
+batch 1997: 46.84(40.00)
+batch 1998: 46.85(60.00)
+batch 1999: 46.86(80.00)
+batch 2000: 46.85(20.00)

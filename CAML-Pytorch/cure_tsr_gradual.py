@@ -12,7 +12,9 @@ Demonstrates how to:
 import argparse
 parser = argparse.ArgumentParser(description='CIS 620 Project')
 parser.add_argument('-m', '--model', default='densenet', type=str)
-parser.add_argument('-lr', default='0.1', type=float)
+parser.add_argument('-lr', default='0.5', type=float)
+parser.add_argument('--ways', default='3', type=int)
+parser.add_argument('--shots', default='2', type=int)
 parser.add_argument('--gpu', default=0, type=int)
 args = parser.parse_args()
 
@@ -174,7 +176,7 @@ def main(
                 dropRate=0,
             )
         print(model)
-    elif 'resnet' in args.model:
+    elif 'resnet18' in args.model:
         model = torchvision.models.resnet18(pretrained=True)
         num_ftrs = model.fc.in_features
         model.fc = nn.Linear(num_ftrs, 14) 
@@ -250,7 +252,7 @@ def main(
 
 
     for level in range(1,levels):
-        inter_dir = './CURE_TSR_Yahan_Shortcut/Real_Train/Snow-' + str(level)+'/'
+        inter_dir = './CURE_TSR_Yahan_Shortcut/Real_Train/LensBlur-' + str(level)+'/'
         print("level :", level, inter_dir)
         intermediate_tasksets = get_cure_tsr_inter_tasksets( inter_dir = inter_dir,
                                                   train_ways=ways,
@@ -336,4 +338,4 @@ def main(
 
 
 if __name__ == '__main__':
-    main(fast_lr=args.lr)
+    main(ways=args.ways,shots=args.shots,fast_lr=args.lr)
