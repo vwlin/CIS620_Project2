@@ -1,17 +1,17 @@
 We strongly suggest installing the requirements on a python virtual environment, to limit any dependency issues. Below are instructions to do so (for more info, see https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/)
-1. Install virtualenv
+1. Install virtualenv  
 python3 -m pip install --user virtualenv
 
-2. Create a virtual environment called env.
+2. Create a virtual environment called env.  
 python3 -m venv env
 
-1. Activate virtual environment. From the level above the env/ folder, run:
+1. Activate virtual environment. From the level above the env/ folder, run:  
 source env/bin/activate
 
-2. Perform installations (no need for sudo) and run code as usual. Installations located in env/lib/ directory. The packages and appropriate versions necessary for this project are located in the requirements.txt file. You can install them by running:
+2. Perform installations (no need for sudo) and run code as usual. Installations located in env/lib/ directory. The packages and appropriate versions necessary for this project are located in the requirements.txt file. You can install them by running:  
 python3 -m pip install -r requirements.txt
 
-3. To deactivate virtual environment, run:
+3. To deactivate virtual environment, run:  
 deactivate
 
 # How to get CURE-TSR dataset and setup in folder
@@ -41,82 +41,82 @@ In CURE_TSR_tasksets.py, change line 28 to " lvl5_test_dir = './CURE_TSR_OG/Real
 
 ## Source Model
 ### 5 way, 1 shot
-python cure_tsr_train.py --model resnet18 --gpu 0 --lr 0.5 --ways 5 --shots 1
-python cure_tsr_train.py --model resnet50 --gpu 0 --lr 0.1 --ways 5 --shots 1
-python cure_tsr_train.py --model densenet --gpu 0 --lr 0.5 --ways 5 --shots 1
+python cure_tsr_train.py --model resnet18 --gpu 0 --lr 0.5 --ways 5 --shots 1  
+python cure_tsr_train.py --model resnet50 --gpu 0 --lr 0.1 --ways 5 --shots 1  
+python cure_tsr_train.py --model densenet --gpu 0 --lr 0.5 --ways 5 --shots 1  
 ### 3 way, 2 shot
-python cure_tsr_train.py --model resnet18 --gpu 0 --lr 0.5 --ways 3 --shots 2
-python cure_tsr_train.py --model resnet50 --gpu 0 --lr 0.1 --ways 3 --shots 2
-python cure_tsr_train.py --model densenet --gpu 0 --lr 0.5 --ways 3 --shots 2
+python cure_tsr_train.py --model resnet18 --gpu 0 --lr 0.5 --ways 3 --shots 2  
+python cure_tsr_train.py --model resnet50 --gpu 0 --lr 0.1 --ways 3 --shots 2  
+python cure_tsr_train.py --model densenet --gpu 0 --lr 0.5 --ways 3 --shots 2  
 
 ## Target ST
 ### 5 way, 1 shot
-python cure_tsr_target.py --model resnet18 --gpu 0 --lr 0.5 --ways 5 --shots 1
-python cure_tsr_target.py --model resnet50 --gpu 0 --lr 0.1 --ways 5 --shots 1
-python cure_tsr_target.py --model densenet --gpu 0 --lr 0.5 --ways 5 --shots 1
+python cure_tsr_target.py --model resnet18 --gpu 0 --lr 0.5 --ways 5 --shots 1  
+python cure_tsr_target.py --model resnet50 --gpu 0 --lr 0.1 --ways 5 --shots 1  
+python cure_tsr_target.py --model densenet --gpu 0 --lr 0.5 --ways 5 --shots 1  
 ### 3 way, 2 shot
-python cure_tsr_target.py --model resnet18 --gpu 0 --lr 0.5 --ways 3 --shots 2
-python cure_tsr_target.py --model resnet50 --gpu 0 --lr 0.1 --ways 3 --shots 2
-python cure_tsr_target.py --model densenet --gpu 0 --lr 0.5 --ways 3 --shots 2
+python cure_tsr_target.py --model resnet18 --gpu 0 --lr 0.5 --ways 3 --shots 2  
+python cure_tsr_target.py --model resnet50 --gpu 0 --lr 0.1 --ways 3 --shots 2  
+python cure_tsr_target.py --model densenet --gpu 0 --lr 0.5 --ways 3 --shots 2  
 
 ## All ST
 ### 5 way, 1 shot
-python cure_tsr_all.py --model resnet18 --gpu 0 --lr 0.5 --ways 5 --shots 1
-python cure_tsr_all.py --model resnet50 --gpu 0 --lr 0.1 --ways 5 --shots 1
-python cure_tsr_all.py --model densenet --gpu 0 --lr 0.5 --ways 5 --shots 1
+python cure_tsr_all.py --model resnet18 --gpu 0 --lr 0.5 --ways 5 --shots 1  
+python cure_tsr_all.py --model resnet50 --gpu 0 --lr 0.1 --ways 5 --shots 1  
+python cure_tsr_all.py --model densenet --gpu 0 --lr 0.5 --ways 5 --shots 1  
 ### 3 way, 2 shot
-python cure_tsr_all.py --model resnet18 --gpu 0 --lr 0.5 --ways 3 --shots 2
-python cure_tsr_all.py --model resnet50 --gpu 0 --lr 0.1 --ways 3 --shots 2
-python cure_tsr_all.py --model densenet --gpu 0 --lr 0.5 --ways 3 --shots 2
+python cure_tsr_all.py --model resnet18 --gpu 0 --lr 0.5 --ways 3 --shots 2  
+python cure_tsr_all.py --model resnet50 --gpu 0 --lr 0.1 --ways 3 --shots 2  
+python cure_tsr_all.py --model densenet --gpu 0 --lr 0.5 --ways 3 --shots 2  
 
 ## Gradual ST (a.k.a CAML)
 ### 5 way, 1 shot
-python cure_tsr_gradual.py --model resnet18 --gpu 0 --lr 0.5 --ways 5 --shots 1
-python cure_tsr_gradual.py --model resnet50 --gpu 0 --lr 0.1 --ways 5 --shots 1
-python cure_tsr_gradual.py --model densenet --gpu 0 --lr 0.5 --ways 5 --shots 1
+python cure_tsr_gradual.py --model resnet18 --gpu 0 --lr 0.5 --ways 5 --shots 1  
+python cure_tsr_gradual.py --model resnet50 --gpu 0 --lr 0.1 --ways 5 --shots 1  
+python cure_tsr_gradual.py --model densenet --gpu 0 --lr 0.5 --ways 5 --shots 1  
 ### 3 way, 2 shot
-python cure_tsr_gradual.py --model resnet18 --gpu 0 --lr 0.5 --ways 3 --shots 2
-python cure_tsr_gradual.py --model resnet50 --gpu 0 --lr 0.1 --ways 3 --shots 2
-python cure_tsr_gradual.py --model densenet --gpu 0 --lr 0.5 --ways 3 --shots 2
+python cure_tsr_gradual.py --model resnet18 --gpu 0 --lr 0.5 --ways 3 --shots 2  
+python cure_tsr_gradual.py --model resnet50 --gpu 0 --lr 0.1 --ways 3 --shots 2  
+python cure_tsr_gradual.py --model densenet --gpu 0 --lr 0.5 --ways 3 --shots 2  
 
 
 # Protonets based CAML (Table 4 and 5)
 ## Source Model
 ### 5 way, 1 shot
-python cure_tsr_proto.py --gpu-id 1 --model resnet18 
-python cure_tsr_proto.py --gpu-id 1 --model resnet50
-python cure_tsr_proto.py --gpu-id 1 --model densenet 
+python cure_tsr_proto.py --gpu-id 1 --model resnet18   
+python cure_tsr_proto.py --gpu-id 1 --model resnet50  
+python cure_tsr_proto.py --gpu-id 1 --model densenet   
 ### 3 way, 2 shot
-python cure_tsr_proto.py --gpu-id 1 --model resnet18 --train-way 3 --shot 2 --train-query 2 --test-way 3 --test-shot 2 --test-query 2
-python cure_tsr_proto.py --gpu-id 1 --model resnet50 --train-way 3 --shot 2 --train-query 2 --test-way 3 --test-shot 2 --test-query 2
-python -cure_tsr_proto.py --gpu-id 1 --model densenet --train-way 3 --shot 2 --train-query 2 --test-way 3 --test-shot 2 --test-query 2
+python cure_tsr_proto.py --gpu-id 1 --model resnet18 --train-way 3 --shot 2 --train-query 2 --test-way 3 --test-shot 2 --test-query 2  
+python cure_tsr_proto.py --gpu-id 1 --model resnet50 --train-way 3 --shot 2 --train-query 2 --test-way 3 --test-shot 2 --test-query 2  
+python -cure_tsr_proto.py --gpu-id 1 --model densenet --train-way 3 --shot 2 --train-query 2 --test-way 3 --test-shot 2 --test-query 2  
 
 ## Target ST
 ### 5 way, 1 shot
-python cure_tsr_target_protonet.py --gpu-id 1 --model resnet18 
-python cure_tsr_target_protonet.py --gpu-id 1 --model resnet50
-python cure_tsr_target_protonet.py --gpu-id 1 --model densenet 
+python cure_tsr_target_protonet.py --gpu-id 1 --model resnet18   
+python cure_tsr_target_protonet.py --gpu-id 1 --model resnet50  
+python cure_tsr_target_protonet.py --gpu-id 1 --model densenet   
 ### 3 way, 2 shot
-python cure_tsr_target_protonet.py --gpu-id 1 --model resnet18 --train-way 3 --shot 2 --train-query 2 --test-way 3 --test-shot 2 --test-query 2
-python cure_tsr_target_protonet.py --gpu-id 1 --model resnet50 --train-way 3 --shot 2 --train-query 2 --test-way 3 --test-shot 2 --test-query 2
-python -cure_tsr_target_protonet.py --gpu-id 1 --model densenet --train-way 3 --shot 2 --train-query 2 --test-way 3 --test-shot 2 --test-query 2
+python cure_tsr_target_protonet.py --gpu-id 1 --model resnet18 --train-way 3 --shot 2 --train-query 2 --test-way 3 --test-shot 2 --test-query 2  
+python cure_tsr_target_protonet.py --gpu-id 1 --model resnet50 --train-way 3 --shot 2 --train-query 2 --test-way 3 --test-shot 2 --test-query 2  
+python -cure_tsr_target_protonet.py --gpu-id 1 --model densenet --train-way 3 --shot 2 --train-query 2 --test-way 3 --test-shot 2 --test-query 2  
 
 ## All ST
 ### 5 way, 1 shot
-python cure_tsr_all_protonet.py --gpu-id 1 --model resnet18 
-python cure_tsr_all_protonet.py --gpu-id 1 --model resnet50
-python cure_tsr_all_protonet.py --gpu-id 1 --model densenet 
+python cure_tsr_all_protonet.py --gpu-id 1 --model resnet18   
+python cure_tsr_all_protonet.py --gpu-id 1 --model resnet50  
+python cure_tsr_all_protonet.py --gpu-id 1 --model densenet   
 ### 3 way, 2 shot
-python cure_tsr_all_protonet.py --gpu-id 1 --model resnet18 --train-way 3 --shot 2 --train-query 2 --test-way 3 --test-shot 2 --test-query 2
-python cure_tsr_all_protonet.py --gpu-id 1 --model resnet50 --train-way 3 --shot 2 --train-query 2 --test-way 3 --test-shot 2 --test-query 2
-python -cure_tsr_all_protonet.py --gpu-id 1 --model densenet --train-way 3 --shot 2 --train-query 2 --test-way 3 --test-shot 2 --test-query 2
+python cure_tsr_all_protonet.py --gpu-id 1 --model resnet18 --train-way 3 --shot 2 --train-query 2 --test-way 3 --test-shot 2 --test-query 2  
+python cure_tsr_all_protonet.py --gpu-id 1 --model resnet50 --train-way 3 --shot 2 --train-query 2 --test-way 3 --test-shot 2 --test-query 2  
+python -cure_tsr_all_protonet.py --gpu-id 1 --model densenet --train-way 3 --shot 2 --train-query 2 --test-way 3 --test-shot 2 --test-query 2  
 
 ## Gradual ST (a.k.a CAML)
 ### 5 way, 1 shot
-python cure_tsr_gradual_protonet.py --gpu-id 1 --model resnet18 --train-way 5 --shot 1 --train-query 1 --test-way 5 --test-shot 1 --test-query 1
-python cure_tsr_gradual_protonet.py --gpu-id 1 --model resnet50 --train-way 5 --shot 1 --train-query 1 --test-way 5 --test-shot 1 --test-query 1
-python -cure_tsr_gradual_protonet.py --gpu-id 1 --model densenet --train-way 5 --shot 1 --train-query 1 --test-way 5 --test-shot 1 --test-query 1
+python cure_tsr_gradual_protonet.py --gpu-id 1 --model resnet18 --train-way 5 --shot 1 --train-query 1 --test-way 5 --test-shot 1 --test-query 1  
+python cure_tsr_gradual_protonet.py --gpu-id 1 --model resnet50 --train-way 5 --shot 1 --train-query 1 --test-way 5 --test-shot 1 --test-query 1  
+python -cure_tsr_gradual_protonet.py --gpu-id 1 --model densenet --train-way 5 --shot 1 --train-query 1 --test-way 5 --test-shot 1 --test-query 1  
 ### 3 way, 2 shot
-python cure_tsr_gradual_protonet.py --gpu-id 1 --model resnet18 --train-way 3 --shot 2 --train-query 2 --test-way 3 --test-shot 2 --test-query 2
-python cure_tsr_gradual_protonet.py --gpu-id 1 --model resnet50 --train-way 3 --shot 2 --train-query 2 --test-way 3 --test-shot 2 --test-query 2
-python cure_tsr_gradual_protonet.py --gpu-id 1 --model densenet --train-way 3 --shot 2 --train-query 2 --test-way 3 --test-shot 2 --test-query 2
+python cure_tsr_gradual_protonet.py --gpu-id 1 --model resnet18 --train-way 3 --shot 2 --train-query 2 --test-way 3 --test-shot 2 --test-query 2  
+python cure_tsr_gradual_protonet.py --gpu-id 1 --model resnet50 --train-way 3 --shot 2 --train-query 2 --test-way 3 --test-shot 2 --test-query 2  
+python cure_tsr_gradual_protonet.py --gpu-id 1 --model densenet --train-way 3 --shot 2 --train-query 2 --test-way 3 --test-shot 2 --test-query 2  
