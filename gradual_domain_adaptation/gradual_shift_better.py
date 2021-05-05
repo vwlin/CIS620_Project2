@@ -259,7 +259,7 @@ def cure_tsr_experiment():
 
 if __name__ == "__main__":
     cure_tsr_experiment()
-    print("Portraits conv experiment")
+    print("Cure TSR experiment")
     experiment_results('saved_files/cure_tsr.dat')
 
     # # Main paper experiments.
