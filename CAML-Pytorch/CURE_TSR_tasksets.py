@@ -25,7 +25,7 @@ def cure_tsr_tasksets(
     data_transforms = transforms.Compose([transforms.Resize([32, 32]), transforms.ToTensor()])#, utils.l2normalize, utils.standardization])
 
     lvl0_train_dir = './CURE_TSR_OG/Real_Train/ChallengeFree/'
-    lvl5_test_dir = './CURE_TSR_OG/Real_Train/LensBlur-5/'
+    lvl5_test_dir = './CURE_TSR_OG/Real_Train/Snow-5/'
     curetsr_lvl0 = utils.CURETSRDataset(lvl0_train_dir, data_transforms)
     curetsr_lvl5 = utils.CURETSRDataset(lvl5_test_dir, data_transforms)
 

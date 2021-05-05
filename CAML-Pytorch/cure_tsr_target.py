@@ -12,6 +12,9 @@ import argparse
 parser = argparse.ArgumentParser(description='CIS 620 Project')
 parser.add_argument('-m', '--model', default='vgg16', type=str)
 parser.add_argument('--gpu', default=0, type=int)
+parser.add_argument('--lr', default=0.5, type=float)
+parser.add_argument('--ways', default=5, type=int)
+parser.add_argument('--shots', default=1, type=int)
 args = parser.parse_args()
 
 import random
@@ -97,10 +100,10 @@ def fast_adapt_with_pseudo_label(batch, learner, loss, adaptation_steps, shots, 
     return valid_error, valid_accuracy
 
 def main(
-        ways=3,
-        shots=2,
+        ways=args.ways,
+        shots=args.shots,
         meta_lr=0.003,
-        fast_lr=0.5,
+        fast_lr=args.lr,
         meta_batch_size=32,
         adaptation_steps=1,
         num_iterations=101, # originally, 60000
